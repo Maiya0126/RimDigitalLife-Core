@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>Apparel_Rimdle</defName>
+		<label>Rimdle Paperwhite</label>
+		<description>一款专为阅读设计的电子墨水屏设备。它的屏幕像纸一样柔和，非常省电。\n\n功能：\n- 学习速度 +20% (知识就是力量)\n- 娱乐效率 +10% (看小说也很快乐)</description>
+		<techLevel>Industrial</techLevel>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Item/Rimdle</texPath>
+			<drawSize>0.9</drawSize>
+		</graphicData>
+
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>0.2</Mass>
+			<MarketValue>300</MarketValue>
+			<WorkToMake>4000</WorkToMake>
+			<Beauty>4</Beauty>
+		</statBases>
+
+		<apparel>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimPadLayer</li>
+			</layers>
+			<tags>
+				<li>DigitalStorage_TerminalAccess</li>
+			</tags>
+		</apparel>
+
+		<equippedStatOffsets>
+			<GlobalLearningFactor>0.20</GlobalLearningFactor>
+			<JoyGainFactor>0.10</JoyGainFactor>
+		</equippedStatOffsets>
+
+		<costList>
+			<Steel>20</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+
+		<comps>
+			<li Class="RimDigitalLife.CompProperties_TerminalLink" />
+			<li Class="RimDigitalLife.CompProperties_Slacker" />
+		</comps>
+		<tickerType>Rare</tickerType>
+
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers Inherit="False">
+				<li>TableMachining</li>
+				<li>FabricationBench</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+		</recipeMaker>
+	
+	</ThingDef>
+</Defs>

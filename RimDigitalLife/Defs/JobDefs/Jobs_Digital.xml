@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<JobDef>
+		<defName>Play_GamingDexterity</defName>
+		<driverClass>JobDriver_WatchBuilding</driverClass>
+		<reportString>playing game.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyKind>Gaming_Dexterity</joyKind>
+		<joySkill>Shooting</joySkill>
+
+		<joyXpPerTick>0.003</joyXpPerTick>
+
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+</Defs>

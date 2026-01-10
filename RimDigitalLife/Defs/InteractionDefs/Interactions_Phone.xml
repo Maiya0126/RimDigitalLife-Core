@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<InteractionDef>
+		<defName>RimDigital_PhoneCall</defName>
+		<label>phone chat</label>
+		<workerClass>RimDigitalLife.InteractionWorker_PhoneCall</workerClass>
+		<symbol>Things/Mote/SpeechSymbols/Speech</symbol>
+		<socialFightBaseChance>0.01</socialFightBaseChance>
+		<initiatorThought>RimDigital_PhoneChatMemory</initiatorThought>
+		<recipientThought>RimDigital_PhoneChatMemory</recipientThought>
+
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] called [RECIPIENT_nameDef] via RimTalk.</li>
+				<li>r_logentry->[INITIATOR_nameDef] chatted with [RECIPIENT_nameDef] about digital life.</li>
+				<li>r_logentry->[INITIATOR_nameDef] shared a meme with [RECIPIENT_nameDef].</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+</Defs>

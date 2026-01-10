@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Apparel_DigitalCommBase" ParentName="ApparelMakeableBase" Abstract="True">
+		<techLevel>Industrial</techLevel>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.9</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>2</Beauty>
+		</statBases>
+		<apparel>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<tags>
+				<li>RimPhone_Communication</li>
+				<li>DigitalStorage_TerminalAccess</li>
+			</tags>
+		</apparel>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<comps>
+			<li Class="RimDigitalLife.CompProperties_TerminalLink" />
+			<li Class="RimDigitalLife.CompProperties_Slacker" />
+		</comps>
+		<tickerType>Rare</tickerType>
+
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers Inherit="False">
+				<li>TableMachining</li>
+				<li>FabricationBench</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_DigitalCommBase">
+		<defName>Apparel_Nokirim</defName>
+		<label>Nokirim</label>
+		<description>Nokirim (诺基林) 生产的远古通讯神器。\n\n功能：\n- 基础通讯\n- 物理防御 (它真的很硬)</description>
+		<graphicData>
+			<texPath>Things/Item/Nokirim</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>2000</MaxHitPoints>
+			<Mass>0.8</Mass>
+			<MarketValue>80</MarketValue>
+			<ArmorRating_Blunt>0.50</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.30</ArmorRating_Sharp>
+			<WorkToMake>3000</WorkToMake>
+			<Beauty>2</Beauty>
+		</statBases>
+		<apparel>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimPhoneLayer</li>
+			</layers>
+		</apparel>
+		<costList>
+			<Steel>30</Steel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>Electricity</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_DigitalCommBase">
+		<defName>Apparel_iShen_Phone</defName>
+		<label>iShen Pro Max</label>
+		<description>iShen (肾果科技) 的年度旗舰手机。</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/iShenPhone</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>0.15</Mass>
+			<MarketValue>1200</MarketValue>
+			<WorkToMake>8000</WorkToMake>
+			<Beauty>8</Beauty>
+		</statBases>
+		<apparel>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimPhoneLayer</li>
+			</layers>
+		</apparel>
+		<equippedStatOffsets>
+			<SocialImpact>0.20</SocialImpact>
+			<TradePriceImprovement>0.05</TradePriceImprovement>
+		</equippedStatOffsets>
+		<costList>
+			<Steel>10</Steel>
+			<Plasteel>10</Plasteel>
+			<Gold>2</Gold>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_DigitalCommBase">
+		<defName>Apparel_iShen_Pad</defName>
+		<label>iShen Pad Pro</label>
+		<description>iShen (肾果科技) 出品的生产力工具。</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/iShenPad</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Mass>0.4</Mass>
+			<MarketValue>1000</MarketValue>
+			<WorkToMake>7000</WorkToMake>
+			<Beauty>6</Beauty>
+		</statBases>
+		<apparel>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimPadLayer</li>
+			</layers>
+		</apparel>
+		<equippedStatOffsets>
+			<ResearchSpeed>0.10</ResearchSpeed>
+		</equippedStatOffsets>
+		<costList>
+			<Steel>20</Steel>
+			<Plasteel>5</Plasteel>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_DigitalCommBase">
+		<defName>Apparel_iShen_Watch</defName>
+		<label>iShen Watch Ultra</label>
+		<description>iShen (肾果科技) 的旗舰智能手表。</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/iShenWatch</texPath>
+		</graphicData>
+		<apparel>
+			<bodyPartGroups>
+				<li>Arms</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimWristLayer</li>
+			</layers>
+		</apparel>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>0.1</Mass>
+			<MarketValue>800</MarketValue>
+			<WorkToMake>5000</WorkToMake>
+			<Beauty>5</Beauty>
+		</statBases>
+		<equippedStatOffsets>
+			<ImmunityGainSpeed>1.1</ImmunityGainSpeed>
+			<RestRateMultiplier>1.1</RestRateMultiplier>
+		</equippedStatOffsets>
+		<costList>
+			<Steel>5</Steel>
+			<Plasteel>5</Plasteel>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+</Defs>

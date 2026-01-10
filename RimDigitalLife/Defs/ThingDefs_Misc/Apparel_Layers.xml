@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ApparelLayerDef>
+		<defName>RimPhoneLayer</defName>
+		<label>digital device</label>
+		<drawOrder>250</drawOrder>
+	</ApparelLayerDef>
+
+	<ApparelLayerDef>
+		<defName>RimPadLayer</defName>
+		<label>tablet device</label>
+		<drawOrder>252</drawOrder>
+	</ApparelLayerDef>
+
+	<ApparelLayerDef>
+		<defName>RimGameLayer</defName>
+		<label>handheld console</label>
+		<drawOrder>254</drawOrder>
+	</ApparelLayerDef>
+
+	<ApparelLayerDef>
+		<defName>RimWristLayer</defName>
+		<label>wrist device</label>
+		<drawOrder>256</drawOrder>
+	</ApparelLayerDef>
+
+	<ApparelLayerDef>
+		<defName>RimVehicleLayer</defName>
+		<label>personal vehicle</label>
+		<drawOrder>240</drawOrder>
+	</ApparelLayerDef>
+
+</Defs>

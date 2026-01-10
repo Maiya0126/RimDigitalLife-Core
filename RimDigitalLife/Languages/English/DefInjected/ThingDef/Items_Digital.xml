@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <Apparel_Rimdle.label>Rimdle Paperwhite</Apparel_Rimdle.label>
+  <Apparel_Rimdle.description>An e-ink device designed specifically for reading. Its screen is as soft as paper and extremely power-efficient.\n\nFeatures:\n- Learning Speed +20% (Knowledge is power)\n- Recreation Efficiency +10% (Reading novels is fun too)</Apparel_Rimdle.description>
+
+
+  <Apparel_Rimtendo_RiDS.label>RiDS</Apparel_Rimtendo_RiDS.label>
+  <Apparel_Rimtendo_RiDS.description>An innovative dual-screen handheld console by Rimtendo. Although the resistive touch screen on the bottom isn't very sensitive, it pioneered the era of dual-screen gaming.</Apparel_Rimtendo_RiDS.description>
+
+  <Apparel_RONY_RSP.label>RSP</Apparel_RONY_RSP.label>
+  <Apparel_RONY_RSP.description>An era-defining portable entertainment terminal by RONY. With its streamlined black body, it is the first choice for hardcore gamers.</Apparel_RONY_RSP.description>
+
+  <Apparel_Rimtendo_SwitchI.label>Riwitch</Apparel_Rimtendo_SwitchI.label>
+  <Apparel_Rimtendo_SwitchI.description>Rimtendo's classic hybrid console. Features a signature red and blue controller color scheme.</Apparel_Rimtendo_SwitchI.description>
+
+  <Apparel_Rimtendo_SwitchII.label>Riwitch 2</Apparel_Rimtendo_SwitchII.label>
+  <Apparel_Rimtendo_SwitchII.description>Rimtendo's next-generation model. It boasts detailed 1080P graphics in handheld mode and outputs stunning 4K resolution when docked.</Apparel_Rimtendo_SwitchII.description>
+
+
+  <Building_Macrosoft_360Console.label>Rimbox 360</Building_Macrosoft_360Console.label>
+  <Building_Macrosoft_360Console.description>A previous-generation game console station by Macrosoft. Includes a console prone to the "Red Ring of Death" and a bulky spherical TV.</Building_Macrosoft_360Console.description>
+
+  <Building_Macrosoft_SeriesX.label>Rimbox Series X</Building_Macrosoft_SeriesX.label>
+  <Building_Macrosoft_SeriesX.description>Macrosoft's most powerful active game console station. A black monolith console paired with a minimalist widescreen monitor.</Building_Macrosoft_SeriesX.description>
+
+  <Building_RONY_Station.label>RimStation</Building_RONY_Station.label>
+  <Building_RONY_Station.description>RONY's best-selling game console station. The streamlined console complements the curved monitor perfectly.</Building_RONY_Station.description>
+
+  <Building_RONY_StationPro.label>RimStation Pro</Building_RONY_StationPro.label>
+  <Building_RONY_StationPro.description>RONY's ultimate game station. Equipped with holographic projection technology, allowing for ultimate visuals without a physical screen.</Building_RONY_StationPro.description>
+
+</LanguageData>

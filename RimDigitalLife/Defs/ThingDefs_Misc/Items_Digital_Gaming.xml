@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Apparel_HandheldConsoleBase" ParentName="ApparelMakeableBase" Abstract="True">
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>4</Beauty>
+		</statBases>
+		<apparel>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimGameLayer</li>
+			</layers>
+			<tags>
+				<li>DigitalStorage_TerminalAccess</li>
+			</tags>
+		</apparel>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<comps>
+			<li Class="RimDigitalLife.CompProperties_TerminalLink" />
+			<li Class="RimDigitalLife.CompProperties_Slacker" />
+		</comps>
+		<tickerType>Rare</tickerType>
+
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers Inherit="False">
+				<li>TableMachining</li>
+				<li>FabricationBench</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_HandheldConsoleBase">
+		<defName>Apparel_Rimtendo_RiDS</defName>
+		<label>RiDS</label>
+		<description>Rimtendo (任天缘) 公司极具创新力的双屏掌机。虽然下屏幕的电阻触控不太灵敏，但它开创了双屏游戏的先河。</description>
+		<techLevel>Industrial</techLevel>
+		<graphicData>
+			<texPath>Things/Item/RiDS</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>0.3</Mass>
+			<MarketValue>120</MarketValue>
+			<WorkToMake>3000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>20</Steel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>Electricity</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_HandheldConsoleBase">
+		<defName>Apparel_RONY_RSP</defName>
+		<label>RSP</label>
+		<description>RONY (缘尼) 公司定义时代的便携娱乐终端。黑色流线型机身，硬核玩家的首选。</description>
+		<techLevel>Industrial</techLevel>
+		<graphicData>
+			<texPath>Things/Item/RSP</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Mass>0.3</Mass>
+			<MarketValue>200</MarketValue>
+			<WorkToMake>4000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>25</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>Electricity</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_HandheldConsoleBase">
+		<defName>Apparel_Rimtendo_SwitchI</defName>
+		<label>Riwitch</label>
+		<description>Rimtendo (任天缘) 的经典混合主机。红蓝手柄配色。</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/Riwitch1</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Mass>0.4</Mass>
+			<MarketValue>400</MarketValue>
+			<WorkToMake>5000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>30</Steel>
+			<Plasteel>5</Plasteel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="Apparel_HandheldConsoleBase">
+		<defName>Apparel_Rimtendo_SwitchII</defName>
+		<label>Riwitch 2</label>
+		<description>Rimtendo (任天缘) 的次世代机型。掌机模式下拥有细腻的1080P画面，连接底座后更能输出惊人的4K分辨率。</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/Riwitch2</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Mass>0.45</Mass>
+			<MarketValue>800</MarketValue>
+			<Beauty>8</Beauty>
+			<WorkToMake>7000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>20</Steel>
+			<Plasteel>15</Plasteel>
+			<Gold>1</Gold>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+
+
+	<ThingDef Name="Building_ConsoleBase" ParentName="BuildingBase" Abstract="True">
+		<designationCategory>Joy</designationCategory>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsJoy</li>
+		</thingCategories>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2.5, 2.5)</drawSize>
+			<shadowData>
+				<volume>(0.3, 0.6, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<size>(2,1)</size>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
+		<statBases>
+			<Beauty>10</Beauty>
+		</statBases>
+		<researchPrerequisites>
+			<li>MicroelectronicsBasics</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>150</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+		</comps>
+		<building>
+			<joyKind>Gaming_Dexterity</joyKind>
+		</building>
+	</ThingDef>
+
+	<ThingDef ParentName="Building_ConsoleBase">
+		<defName>Building_Macrosoft_360Console</defName>
+		<label>Rimbox 360</label>
+		<description>Macrosoft (微硬) 出品的上一代主机游戏站。包含一台容易三红的主机和一台笨重的球形电视。</description>
+		<graphicData>
+			<texPath>Things/Building/Rimbox360</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>2000</WorkToBuild>
+			<JoyGainFactor>1.1</JoyGainFactor>
+			<MarketValue>200</MarketValue>
+			<Mass>20</Mass>
+		</statBases>
+		<costList>
+			<Steel>80</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<researchPrerequisites>
+			<li>Electricity</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="Building_ConsoleBase">
+		<defName>Building_Macrosoft_SeriesX</defName>
+		<label>Rimbox Series X</label>
+		<description>Macrosoft (微硬) 现役最强主机游戏站。黑色巨塔主机搭配极简的宽屏显示器。</description>
+		<graphicData>
+			<texPath>Things/Building/RimboxSeriesX</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>3500</WorkToBuild>
+			<JoyGainFactor>1.5</JoyGainFactor>
+			<Beauty>15</Beauty>
+			<MarketValue>600</MarketValue>
+			<Mass>25</Mass>
+		</statBases>
+		<costList>
+			<Steel>100</Steel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>2</glowRadius>
+				<glowColor>(0, 255, 0, 0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Building_ConsoleBase">
+		<defName>Building_RONY_Station</defName>
+		<label>RimStation</label>
+		<description>RONY (缘尼) 公司的畅销主机游戏站。流线型的主机与曲面显示器相得益彰。</description>
+		<graphicData>
+			<texPath>Things/Building/RimStation</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>3500</WorkToBuild>
+			<JoyGainFactor>1.5</JoyGainFactor>
+			<Beauty>20</Beauty>
+			<MarketValue>600</MarketValue>
+			<Mass>25</Mass>
+		</statBases>
+		<costList>
+			<Steel>80</Steel>
+			<Plasteel>10</Plasteel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>2</glowRadius>
+				<glowColor>(0, 100, 255, 0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Building_ConsoleBase">
+		<defName>Building_RONY_StationPro</defName>
+		<label>RimStation Pro</label>
+		<description>RONY (缘尼) 公司的终极游戏站。配备全息投影技术，无需物理屏幕即可享受极致画面。</description>
+		<graphicData>
+			<texPath>Things/Building/RimStationPro</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>5000</WorkToBuild>
+			<JoyGainFactor>1.7</JoyGainFactor>
+			<Beauty>50</Beauty>
+			<MarketValue>1200</MarketValue>
+			<Mass>25</Mass>
+		</statBases>
+		<costList>
+			<Steel>100</Steel>
+			<Plasteel>30</Plasteel>
+			<Gold>5</Gold>
+			<ComponentSpacer>2</ComponentSpacer>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(0, 50, 255, 0)</glowColor>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<JoyGiverDef>
+		<defName>Play_RimConsoles</defName>
+
+		<giverClass>JoyGiver_WatchBuilding</giverClass>
+
+		<baseChance>3</baseChance>
+		<thingDefs>
+			<li>Building_Macrosoft_360Console</li>
+			<li>Building_Macrosoft_SeriesX</li>
+			<li>Building_RONY_Station</li>
+			<li>Building_RONY_StationPro</li>
+		</thingDefs>
+		<jobDef>Play_GamingDexterity</jobDef>
+		<joyKind>Gaming_Dexterity</joyKind>
+
+		<canDoWhileInBed>true</canDoWhileInBed>
+		<requiredCapacities>
+			<li>Sight</li>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</JoyGiverDef>
+
+</Defs>
