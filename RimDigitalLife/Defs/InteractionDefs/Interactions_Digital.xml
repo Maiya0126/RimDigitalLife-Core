@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<InteractionDef>
+		<defName>SmartAssistant_Ask_Rimi</defName>
+		<label>activated Rimi. (SYSTEM INSTRUCTION: Roleplay as 'Rimi' (Cute AI). IMPORTANT: In the JSON output, the 'name' key MUST remain the colonist's name (e.g., Moe). DO NOT use "Rimi" as the name key. Text content starts with "[Rimi]: ")</label>
+		<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
+		<workerClass>InteractionWorker</workerClass>
+		<symbol>UI/Icons/Icon_Rimi</symbol>
+		<ignoreTimeSinceLastInteraction>true</ignoreTimeSinceLastInteraction>
+		<initiatorThought>RimDigital_ConsultedAI</initiatorThought>
+
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] 的耳机里传来了 Rimi 的声音：</li>
+				<li>r_logentry->Rimi 对 [INITIATOR_nameDef] 说道：</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+	<InteractionDef>
+		<defName>SmartAssistant_Rimi</defName>
+		<label>received a message. (INSTRUCTION: Rimi is speaking. Output ONLY the message content.)</label>
+		<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
+		<workerClass>InteractionWorker</workerClass>
+		<symbol>UI/Icons/Icon_Rimi</symbol>
+		<ignoreTimeSinceLastInteraction>true</ignoreTimeSinceLastInteraction>
+		<initiatorThought>RimDigital_ConsultedAI</initiatorThought>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Rimi 突然发来一条消息：</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+
+	<InteractionDef>
+		<defName>SmartAssistant_Ask_Sirim</defName>
+		<label>queried Sirim. (SYSTEM INSTRUCTION: Roleplay as 'Sirim' (Cold AI). IMPORTANT: In JSON output, 'name' key MUST be the colonist's name. DO NOT use "Sirim" as the name key. Text format: "[Sirim]: ")</label>
+		<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
+		<workerClass>InteractionWorker</workerClass>
+		<symbol>UI/Icons/Icon_Sirim</symbol>
+		<ignoreTimeSinceLastInteraction>true</ignoreTimeSinceLastInteraction>
+		<initiatorThought>RimDigital_ConsultedAI</initiatorThought>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Sirim 的分析报告显示：</li>
+				<li>r_logentry->Sirim 冰冷的声音回复道：</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+	<InteractionDef>
+		<defName>SmartAssistant_Sirim</defName>
+		<label>received a report. (INSTRUCTION: Sirim is reporting status.)</label>
+		<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
+		<workerClass>InteractionWorker</workerClass>
+		<symbol>UI/Icons/Icon_Sirim</symbol>
+		<ignoreTimeSinceLastInteraction>true</ignoreTimeSinceLastInteraction>
+		<initiatorThought>RimDigital_ConsultedAI</initiatorThought>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry->Sirim 自动播报：</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+</Defs>

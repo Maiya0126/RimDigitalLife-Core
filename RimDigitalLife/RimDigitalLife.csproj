@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4EF77025-DCC4-4515-9012-D63919894D44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RimDigitalLife</RootNamespace>
+    <AssemblyName>RimDigitalLife</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\Games\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Source\Comps\CompSmartAssistant.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Comps\CompSlacker.cs" />
+    <Compile Include="Source\Comps\CompTerminalLink.cs" />
+    <Compile Include="Source\Harmony\Patch_LogDisplay.cs" />
+    <Compile Include="Source\Harmony\Patch_WorkSpeedPenalty.cs" />
+    <Compile Include="Source\OdysseyCompatibility.cs" />
+    <Compile Include="Source\RimDigitalMod.cs" />
+    <Compile Include="Source\Settings\RimDigitalLifeSettings.cs" />
+    <Compile Include="Source\Thoughts\ThoughtWorker_DigitalComfort.cs" />
+    <Compile Include="Source\Workers\InteractionWorker_PhoneCall.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About\About.xml" />
+    <Content Include="About\Preview.png" />
+    <Content Include="Defs\InteractionDefs\Interactions_Phone.xml" />
+    <Content Include="Defs\InteractionDefs\Interactions_Digital.xml" />
+    <Content Include="Defs\JobDefs\Jobs_Digital.xml" />
+    <Content Include="Defs\ThingDefs_Misc\Apparel_Layers.xml" />
+    <Content Include="Defs\ThingDefs_Misc\Items_Digital_Comm.xml" />
+    <Content Include="Defs\ThingDefs_Misc\Items_Digital_Gaming.xml" />
+    <Content Include="Defs\ThingDefs_Misc\Items_Digital_Misc.xml" />
+    <Content Include="Defs\ThingDefs_Misc\Thoughts_Digital.xml" />
+    <Content Include="Defs\ThoughtDef.xml" />
+    <Content Include="Languages\ChineseSimplified\DefInjected\ThingDef\Items_Digital.xml" />
+    <Content Include="Languages\ChineseSimplified\DefInjected\JobDef\Jobs_Digital.xml" />
+    <Content Include="Languages\ChineseSimplified\Keyed\RimDigital_Keys.xml" />
+    <Content Include="Languages\English\DefInjected\JobDef\Jobs_Digital.xml" />
+    <Content Include="Languages\English\DefInjected\ThingDef\Items_Digital.xml" />
+    <Content Include="Languages\English\Keyed\RimDigital_Keys.xml" />
+    <Content Include="Textures\Things\Building\Rimbox360.png" />
+    <Content Include="Textures\Things\Building\RimboxSeriesX.png" />
+    <Content Include="Textures\Things\Building\RimStation.png" />
+    <Content Include="Textures\Things\Building\RimStationPro.png" />
+    <Content Include="Textures\Things\Item\iShenPad.png" />
+    <Content Include="Textures\Things\Item\iShenPhone.png" />
+    <Content Include="Textures\Things\Item\iShenWatch.png" />
+    <Content Include="Textures\Things\Item\RiDS.png" />
+    <Content Include="Textures\Things\Item\Rimdle.png" />
+    <Content Include="Textures\Things\Item\Nokirim.png" />
+    <Content Include="Textures\Things\Item\Riwitch1.png" />
+    <Content Include="Textures\Things\Item\Riwitch2.png" />
+    <Content Include="Textures\Things\Item\RSP.png" />
+    <Content Include="Textures\UI\Icons\Icon_Sirim.png" />
+    <Content Include="Textures\UI\Icons\Icon_Rimi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assemblies\" />
+    <Folder Include="Defs\HediffDefs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>@echo off
+:: 注意：这里使用了你的新文件夹名 "MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版"
+
+:: 1. 复制 DLL 到新路径
+copy /Y "$(TargetDir)$(TargetName).dll" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Assemblies\"
+
+:: 2. 暴力清空目标 Defs 文件夹 (防止旧文件残留)
+if exist "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Defs" rmdir /S /Q "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Defs"
+
+:: 3. 重新复制 Defs
+xcopy /E /I /Y "$(ProjectDir)Defs" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Defs"
+
+:: 4. 复制 Textures
+xcopy /E /I /Y "$(ProjectDir)Textures" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Textures"
+
+:: 5. 复制 About
+xcopy /E /I /Y "$(ProjectDir)About" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\About"
+
+:: 6. 复制 Languages
+xcopy /E /I /Y "$(ProjectDir)Languages" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Languages"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- ========================================================================
+     RimDigitalLife - Core Project
+     【Version: v1.1.0 | 2025-12-XX | 纯本地引用版】
+     @author Maiya0126 (麦丫)
+
+     修改说明：
+     - 完全移除 NuGet 依赖
+     - 使用纯本地 DLL 引用
+     - 不需要网络连接
+
+     Signature: 6Zt4562w5p2lTWFpeWEwMTI2
+     ======================================================================== -->
+  <PropertyGroup>
+    <Configuration>Release</Configuration>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>RimDigitalLife</AssemblyName>
+    <Description>RimWorld Digital Life Mod - v1.1.0 by Maiya0126</Description>
+    <Version>1.1.0</Version>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>embedded</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(SolutionDir)Assemblies\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- [v1.1.0] 完全移除 NuGet 依赖 - 改用本地引用 -->
+  <ItemGroup>
+    <!-- [MOD] 移除 NuGet 包，避免网络问题 -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- [v1.1.0] RimWorld 1.6 本地 DLL 引用 -->
+    <!-- [MOD] 用户路径：D:\Games\steamapps\common\RimWorld -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>D:\Games\steamapps\common\RimWorld\RimWorld_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Games\steamapps\common\RimWorld\RimWorld_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>D:\Games\steamapps\common\RimWorld\RimWorld_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- [v1.1.0] 添加 Harmony DLL 引用 -->
+  <!-- [MOD] 如果 RimWorld 自带 Harmony，取消下面注释 -->
+  <ItemGroup Condition="Exists('D:\Games\steamapps\common\RimWorld\RimWorld_Data\Managed\0Harmony.dll')">
+    <Reference Include="0Harmony">
+      <HintPath>D:\Games\steamapps\common\RimWorld\RimWorld_Data\Managed\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

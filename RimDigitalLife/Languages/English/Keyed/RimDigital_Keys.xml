@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<RDL_Current_Rimi>Current: Rimi (Emotional)</RDL_Current_Rimi>
+	<RDL_SwitchDesc_ToSirim>Click to switch to [Sirim Logic Mode].\n\nCurrent: [Rimi]\nStyle: Cheerful, cute, emotional.\nBest for: Chatting, comfort, emotional support.</RDL_SwitchDesc_ToSirim>
+
+	<RDL_Current_Sirim>Current: Sirim (Logical)</RDL_Current_Sirim>
+	<RDL_SwitchDesc_ToRimi>Click to switch to [Rimi Emotional Mode].\n\nCurrent: [Sirim]\nStyle: Cold, efficient, data-driven.\nBest for: Analysis, survival tips, combat tactics.</RDL_SwitchDesc_ToRimi>
+
+	<RDL_AskLabel_Rimi>Chat with Rimi</RDL_AskLabel_Rimi>
+	<RDL_AskDesc_Rimi>Ask Rimi for comfort or a chat.\n(e.g., Feeling lonely, bad mood, or just want a joke)</RDL_AskDesc_Rimi>
+
+	<RDL_AskLabel_Sirim>Query Sirim</RDL_AskLabel_Sirim>
+	<RDL_AskDesc_Sirim>Request a situational analysis from Sirim.\n(e.g., Temperature, health status, or tactical advice)</RDL_AskDesc_Sirim>
+
+	<RDL_Mote_ConnectingRimi>(Connecting to Rimi...)</RDL_Mote_ConnectingRimi>
+	<RDL_Mote_RimiPush>(Rimi sent a notification)</RDL_Mote_RimiPush>
+	<RDL_Mote_ConnectingSirim>(Accessing Sirim Database...)</RDL_Mote_ConnectingSirim>
+	<RDL_Mote_SirimRunning>(Sirim running in background)</RDL_Mote_SirimRunning>
+
+	<RDL_Settings_SlackerTitle>Slacker Mechanism Settings</RDL_Settings_SlackerTitle>
+	<RDL_Settings_Chance>Slack Chance: {0}</RDL_Settings_Chance>
+	<RDL_Settings_Radius>Detection Radius: {0} tiles</RDL_Settings_Radius>
+	<RDL_Settings_MoodBonus>Slack Mood Bonus: +{0}</RDL_Settings_MoodBonus>
+
+	<RDL_Settings_AllowedDevices>Allowed Device Types:</RDL_Settings_AllowedDevices>
+	<RDL_Settings_AllowComm>Allow Phones/Watches (Communication)</RDL_Settings_AllowComm>
+	<RDL_Settings_AllowGame>Allow Handhelds (Recreation)</RDL_Settings_AllowGame>
+
+	<RDL_Settings_PenaltyTitle>Penalties &amp; Difficulty:</RDL_Settings_PenaltyTitle>
+	<RDL_Settings_ShowBubbles>Show Overhead Bubbles</RDL_Settings_ShowBubbles>
+	<RDL_Settings_StrictMode>Strict Mode</RDL_Settings_StrictMode>
+	<RDL_Settings_StrictDesc>Work is forcibly interrupted and the pawn is stunned for 2s when caught.</RDL_Settings_StrictDesc>
+	<RDL_Settings_Penalty>Distraction Penalty</RDL_Settings_Penalty>
+	<RDL_Settings_PenaltyDesc>Global work speed reduced by 5% when carrying digital devices.</RDL_Settings_PenaltyDesc>
+
+	<RDL_Settings_AssistantTitle>Smart Assistant Settings</RDL_Settings_AssistantTitle>
+	<RDL_Settings_ChatOff>Auto-Chat Frequency: [Disabled]</RDL_Settings_ChatOff>
+	<RDL_Settings_ChatInterval>Auto-Chat Frequency: Once every {0} in-game hours</RDL_Settings_ChatInterval>
+	<RDL_Settings_TipHigh>Tip: Very frequent (Chatty Mode). Might be noisy.</RDL_Settings_TipHigh>
+	<RDL_Settings_TipLow>Tip: Very low frequency (Quiet Mode).</RDL_Settings_TipLow>
+	<RDL_Settings_TipNone>Tip: Assistant will not speak automatically, but the [Ask Button] is still available.</RDL_Settings_TipNone>
+</LanguageData>

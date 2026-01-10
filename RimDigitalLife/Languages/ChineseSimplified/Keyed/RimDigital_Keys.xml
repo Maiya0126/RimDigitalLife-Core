@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<RDL_Current_Rimi>当前: Rimi (感性)</RDL_Current_Rimi>
+	<RDL_SwitchDesc_ToSirim>点击切换到 [Sirim 理性模式]。\n\n当前模式: 【Rimi】\n风格: 活泼、可爱、充满感情。\n擅长: 闲聊、安慰心情、提供情绪价值。</RDL_SwitchDesc_ToSirim>
+
+	<RDL_Current_Sirim>当前: Sirim (理性)</RDL_Current_Sirim>
+	<RDL_SwitchDesc_ToRimi>点击切换到 [Rimi 感性模式]。\n\n当前模式: 【Sirim】\n风格: 冷酷、高效、数据驱动。\n擅长: 环境分析、生存建议、战斗辅助。</RDL_SwitchDesc_ToRimi>
+
+	<RDL_AskLabel_Rimi>找 Rimi 聊天</RDL_AskLabel_Rimi>
+	<RDL_AskDesc_Rimi>向 Rimi 寻求安慰或闲聊。\n(比如：觉得孤单、心情不好、或者只是想听个笑话)</RDL_AskDesc_Rimi>
+
+	<RDL_AskLabel_Sirim>向 Sirim 查询</RDL_AskLabel_Sirim>
+	<RDL_AskDesc_Sirim>要求 Sirim 分析当前状况。\n(比如：分析环境温度、健康状况、或者战斗建议)</RDL_AskDesc_Sirim>
+
+	<RDL_Mote_ConnectingRimi>(正在连接 Rimi...)</RDL_Mote_ConnectingRimi>
+	<RDL_Mote_RimiPush>(收到 Rimi 的推送)</RDL_Mote_RimiPush>
+	<RDL_Mote_ConnectingSirim>(正在访问 Sirim 数据库...)</RDL_Mote_ConnectingSirim>
+	<RDL_Mote_SirimRunning>(Sirim 后台运行中)</RDL_Mote_SirimRunning>
+
+	<RDL_Settings_SlackerTitle>摸鱼机制设置 (Slacker Settings)</RDL_Settings_SlackerTitle>
+	<RDL_Settings_Chance>摸鱼触发概率: {0}</RDL_Settings_Chance>
+	<RDL_Settings_Radius>抓包视线半径: {0} 格</RDL_Settings_Radius>
+	<RDL_Settings_MoodBonus>摸鱼心情加成: +{0}</RDL_Settings_MoodBonus>
+
+	<RDL_Settings_AllowedDevices>允许摸鱼的设备类型:</RDL_Settings_AllowedDevices>
+	<RDL_Settings_AllowComm>允许玩手机/手表 (通讯设备)</RDL_Settings_AllowComm>
+	<RDL_Settings_AllowGame>允许玩掌机 (娱乐设备)</RDL_Settings_AllowGame>
+
+	<RDL_Settings_PenaltyTitle>惩罚与难度:</RDL_Settings_PenaltyTitle>
+	<RDL_Settings_ShowBubbles>显示头顶气泡 (Show Bubbles)</RDL_Settings_ShowBubbles>
+	<RDL_Settings_StrictMode>严厉模式 (Strict Mode)</RDL_Settings_StrictMode>
+	<RDL_Settings_StrictDesc>被抓包时强制打断工作并击晕 2 秒。</RDL_Settings_StrictDesc>
+	<RDL_Settings_Penalty>分心惩罚 (Distracted)</RDL_Settings_Penalty>
+	<RDL_Settings_PenaltyDesc>只要身上带着数码设备，全局工作速度降低 5%。</RDL_Settings_PenaltyDesc>
+
+	<RDL_Settings_AssistantTitle>智能助手设置 (Smart Assistant)</RDL_Settings_AssistantTitle>
+	<RDL_Settings_ChatOff>自动对话频率: [已关闭]</RDL_Settings_ChatOff>
+	<RDL_Settings_ChatInterval>自动对话频率: 平均每 {0} 游戏小时一次</RDL_Settings_ChatInterval>
+	<RDL_Settings_TipHigh>提示: 频率很高 (话痨模式)，可能会有点吵。</RDL_Settings_TipHigh>
+	<RDL_Settings_TipLow>提示: 频率很低 (安静模式)。</RDL_Settings_TipLow>
+	<RDL_Settings_TipNone>提示: 助手不会主动说话，但【询问按钮】依然可用。</RDL_Settings_TipNone>
+</LanguageData>

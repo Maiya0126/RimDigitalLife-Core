@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <Apparel_Rimdle.label>Rimdle Paperwhite</Apparel_Rimdle.label>
+  <Apparel_Rimdle.description>一款专为阅读设计的电子墨水屏设备。它的屏幕像纸一样柔和，非常省电。\n\n功能：\n- 学习速度 +20% (知识就是力量)\n- 娱乐效率 +10% (看小说也很快乐)</Apparel_Rimdle.description>
+
+
+  <Apparel_Rimtendo_RiDS.label>RiDS</Apparel_Rimtendo_RiDS.label>
+  <Apparel_Rimtendo_RiDS.description>Rimtendo (任天缘) 公司极具创新力的双屏掌机。虽然下屏幕的电阻触控不太灵敏，但它开创了双屏游戏的先河。</Apparel_Rimtendo_RiDS.description>
+
+  <Apparel_RONY_RSP.label>RSP</Apparel_RONY_RSP.label>
+  <Apparel_RONY_RSP.description>RONY (缘尼) 公司定义时代的便携娱乐终端。黑色流线型机身，硬核玩家的首选。</Apparel_RONY_RSP.description>
+
+  <Apparel_Rimtendo_SwitchI.label>Riwitch</Apparel_Rimtendo_SwitchI.label>
+  <Apparel_Rimtendo_SwitchI.description>Rimtendo (任天缘) 的经典混合主机。红蓝手柄配色。</Apparel_Rimtendo_SwitchI.description>
+
+  <Apparel_Rimtendo_SwitchII.label>Riwitch 2</Apparel_Rimtendo_SwitchII.label>
+  <Apparel_Rimtendo_SwitchII.description>Rimtendo (任天缘) 的次世代机型。掌机模式下拥有细腻的1080P画面，连接底座后更能输出惊人的4K分辨率。</Apparel_Rimtendo_SwitchII.description>
+
+
+  <Building_Macrosoft_360Console.label>Rimbox 360</Building_Macrosoft_360Console.label>
+  <Building_Macrosoft_360Console.description>Macrosoft (微硬) 出品的上一代主机游戏站。包含一台容易三红的主机和一台笨重的球形电视。</Building_Macrosoft_360Console.description>
+
+  <Building_Macrosoft_SeriesX.label>Rimbox Series X</Building_Macrosoft_SeriesX.label>
+  <Building_Macrosoft_SeriesX.description>Macrosoft (微硬) 现役最强主机游戏站。黑色巨塔主机搭配极简的宽屏显示器。</Building_Macrosoft_SeriesX.description>
+
+  <Building_RONY_Station.label>RimStation</Building_RONY_Station.label>
+  <Building_RONY_Station.description>RONY (缘尼) 公司的畅销主机游戏站。流线型的主机与曲面显示器相得益彰。</Building_RONY_Station.description>
+
+  <Building_RONY_StationPro.label>RimStation Pro</Building_RONY_StationPro.label>
+  <Building_RONY_StationPro.description>RONY (缘尼) 公司的终极游戏站。配备全息投影技术，无需物理屏幕即可享受极致画面。</Building_RONY_StationPro.description>
+
+</LanguageData>

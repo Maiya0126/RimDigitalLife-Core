@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThoughtDef>
+		<defName>RimDigital_DigitalComfort</defName>
+		<workerClass>RimDigitalLife.ThoughtWorker_DigitalComfort</workerClass>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>数码生活</label>
+				<description>我随身带着智能设备。无论是随时查阅信息还是掌上娱乐，这种便利感让我很安心。</description>
+				<baseMoodEffect>3</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+	
+	<ThoughtDef>
+		<defName>RimDigital_PhoneChatMemory</defName>
+		<durationDays>0.5</durationDays>
+		<stackLimit>5</stackLimit>
+		<stages>
+			<li>
+				<label>电话热聊</label>
+				<description>我刚刚通过 RimTalk 和朋友聊了一会儿，感觉不再那么孤单了。</description>
+				<baseMoodEffect>2</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_SlackingOff</defName>
+		<durationDays>0.1</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>上班摸鱼</label>
+				<description>嘿嘿，老板不在，玩会儿手机。</description>
+				<baseMoodEffect>5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_CaughtSlacking</defName>
+		<durationDays>0.5</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>摸鱼被抓</label>
+				<description>太尴尬了！我正在玩游戏的时候被同事看见了。</description>
+				<baseMoodEffect>-10</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+</Defs>

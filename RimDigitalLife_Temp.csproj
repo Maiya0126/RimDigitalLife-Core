@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- ========================================================================
+     RimDigitalLife - Core Project (临时编译版)
+     【Version: v1.1.0 | 2025-12-XX | 临时修复版】
+     @author Maiya0126 (麦丫)
+
+     说明：这个版本使用 NuGet 包，不需要 RimWorld 路径
+     ======================================================================== -->
+  <PropertyGroup>
+    <Configuration>Release</Configuration>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>RimDigitalLife</AssemblyName>
+    <Description>RimWorld Digital Life Mod - v1.1.0 by Maiya0126</Description>
+    <Version>1.1.0</Version>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>embedded</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>$(SolutionDir)Assemblies\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- [v1.1.0] 使用 NuGet 包 - 不需要本地 RimWorld -->
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*" />
+    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
+  </ItemGroup>
+
+  <!-- [v1.1.0] 移除本地引用 - 改用 NuGet -->
+</Project>

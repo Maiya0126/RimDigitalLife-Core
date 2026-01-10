@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThoughtDef>
+		<defName>RimDigital_ConsultedAI</defName>
+		<showBubble>true</showBubble>
+		<durationDays>0.1</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>consulted AI</label>
+				<description>Consulted with the digital assistant.</description>
+				<baseMoodEffect>0</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+</Defs>
