@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <SongDef>
+    <defName>RO_Theme_Prontera</defName> <label>Theme of Prontera</label>  <clipPath>Music/Prontera</clipPath> <volume>1.0</volume> <commonality>1</commonality> <playOnMap>true</playOnMap> <tense>false</tense> <allowedSeasons> <li>Spring</li>
+      <li>Summer</li>
+    </allowedSeasons>
+    <allowedTimeOfDay>Day</allowedTimeOfDay> </SongDef>
+</Defs>
