@@ -6,7 +6,7 @@
 		<label>phone chat</label>
 		<workerClass>RimDigitalLife.InteractionWorker_PhoneCall</workerClass>
 		<symbol>Things/Mote/SpeechSymbols/Speech</symbol>
-		<socialFightBaseChance>0.01</socialFightBaseChance>
+		<socialFightBaseChance>0</socialFightBaseChance>
 		<initiatorThought>RimDigital_PhoneChatMemory</initiatorThought>
 		<recipientThought>RimDigital_PhoneChatMemory</recipientThought>
 
