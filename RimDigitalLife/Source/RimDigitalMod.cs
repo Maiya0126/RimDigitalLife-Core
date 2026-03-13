@@ -1,16 +1,24 @@
 ﻿using UnityEngine;
 using Verse;
 using RimWorld;
+using HarmonyLib;
 
 namespace RimDigitalLife
 {
     public class RimDigitalMod : Mod
     {
         public static RimDigitalLifeSettings settings;
+        private static Harmony harmony;
 
         public RimDigitalMod(ModContentPack content) : base(content)
         {
             settings = GetSettings<RimDigitalLifeSettings>();
+            
+            if (harmony == null)
+            {
+                harmony = new Harmony("com.rimdigitallife.mod");
+                harmony.PatchAll();
+            }
         }
 
         public override string SettingsCategory()

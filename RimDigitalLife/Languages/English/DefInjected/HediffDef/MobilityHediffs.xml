@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <RimDigital_Hediff_Skateboard.label>Electric Skateboard Boost</RimDigital_Hediff_Skateboard.label>
+  <RimDigital_Hediff_Skateboard.description>Speed boost from using an electric skateboard.</RimDigital_Hediff_Skateboard.description>
+
+  <RimDigital_Hediff_Hoverboard.label>Hoverboard Boost</RimDigital_Hediff_Hoverboard.label>
+  <RimDigital_Hediff_Hoverboard.description>Speed boost from using a hoverboard.</RimDigital_Hediff_Hoverboard.description>
+
+  <RimDigital_Hediff_PowerSuit.label>Power Suit Boost</RimDigital_Hediff_PowerSuit.label>
+  <RimDigital_Hediff_PowerSuit.description>Speed boost from using the Kangaroo Power Suit.</RimDigital_Hediff_PowerSuit.description>
+
+</LanguageData>

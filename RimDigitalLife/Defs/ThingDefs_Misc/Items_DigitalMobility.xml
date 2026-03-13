@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="ApparelBase">
+		<defName>Apparel_BoosDeadSkateboard</defName>
+		<label>BoosDead Boosted Skateboard</label>
+		<description>Young person's first cyber skateboard. A discontinued model from BoosDead before they went bankrupt, featuring a micro nuclear battery. Significantly improves commute efficiency, but please note that on muddy or wet terrain, its brake system may be as unreliable as its parent company.</description>
+		<graphicData>
+			<texPath>Things/Item/Skateboard</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>1.5</drawSize>
+		</graphicData>
+		<statBases>
+			<Mass>3.5</Mass>
+			<WorkToMake>8000</WorkToMake>
+			<MarketValue>350</MarketValue>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>16</MoveSpeed>
+			<CarryingCapacity>25</CarryingCapacity>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Feet</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimDigital_Mobility</li>
+			</layers>
+			<tags>
+				<li>IndustrialAdvanced</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Worker</li>
+			</defaultOutfitTags>
+		</apparel>
+		<comps>
+			<li Class="RimDigitalLife.CompProperties_ElectricSkateboard">
+				<fallChance>0.08</fallChance>
+			</li>
+		</comps>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+			<recipeUsers>
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<Steel>30</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+			<Plasteel>10</Plasteel>
+		</costList>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="ApparelBase">
+		<defName>Apparel_DaMiHoverboard</defName>
+		<label>DaMi 996 Hoverboard</label>
+		<description>A hardcore commuting device co-developed by DaMi Tech and NumberEight. To let workers rush from dorm to work station as fast as possible, all fancy entertainment features were cut and all points went into chassis stability and load capacity. "Are you OK?" - System prompt on startup.</description>
+		<graphicData>
+			<texPath>Things/Item/DaMiHoverboard</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.5</drawSize>
+		</graphicData>
+		<statBases>
+			<Mass>5.0</Mass>
+			<WorkToMake>15000</WorkToMake>
+			<MarketValue>800</MarketValue>
+			<EquipDelay>2.0</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>8</MoveSpeed>
+			<CarryingCapacity>50</CarryingCapacity>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Feet</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimDigital_Mobility</li>
+			</layers>
+			<tags>
+				<li>Spacer</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Worker</li>
+			</defaultOutfitTags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+			<recipeUsers>
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<Plasteel>40</Plasteel>
+			<ComponentSpacer>1</ComponentSpacer>
+			<Uranium>10</Uranium>
+		</costList>
+	</ThingDef>
+
+	<!-- Hidden: Kangaroo Power Suit (causes errors)
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>Apparel_KangarooPowerSuit</defName>
+		<label>Kangaroo Power Suit</label>
+		<description>Hardcore delivery battle robe from StarveMe Tech. When you wear it, you become the fastest running man in the colony - or man... it. Equipped with built-in warmer box and leg assist engines. The only downside is that your work efficiency slightly decreases due to "being too focused on running".</description>
+		<techLevel>Spacer</techLevel>
+		<graphicData>
+			<texPath>Things/Item/KangarooPowerSuit</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.5</drawSize>
+		</graphicData>
+		<statBases>
+			<Mass>8.0</Mass>
+			<WorkToMake>20000</WorkToMake>
+			<MarketValue>1200</MarketValue>
+			<EquipDelay>3.0</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>5</MoveSpeed>
+			<CarryingCapacity>75</CarryingCapacity>
+			<GlobalWorkSpeedFactor>-0.05</GlobalWorkSpeedFactor>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Feet</li>
+			</bodyPartGroups>
+			<layers>
+				<li>RimDigital_Mobility</li>
+			</layers>
+			<tags>
+				<li>Spacer</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Worker</li>
+			</defaultOutfitTags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+			<recipeUsers>
+				<li>FabricationBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<Plasteel>60</Plasteel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<Gold>5</Gold>
+		</costList>
+	</ThingDef>
+	-->
+
+</Defs>

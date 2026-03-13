@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <RimPhoneLayer.label>数码设备</RimPhoneLayer.label>
+  <RimPadLayer.label>平板设备</RimPadLayer.label>
+  <RimGameLayer.label>手持游戏机</RimGameLayer.label>
+  <RimWristLayer.label>腕部设备</RimWristLayer.label>
+  <RimVehicleLayer.label>个人载具</RimVehicleLayer.label>
+  <RimDigital_Mobility.label>出行设备</RimDigital_Mobility.label>
+
+</LanguageData>

@@ -26,6 +26,7 @@
 		<comps>
 			<li Class="RimDigitalLife.CompProperties_TerminalLink" />
 			<li Class="RimDigitalLife.CompProperties_Slacker" />
+			<li Class="RimDigitalLife.CompProperties_DigitalComms" />
 		</comps>
 		<tickerType>Rare</tickerType>
 

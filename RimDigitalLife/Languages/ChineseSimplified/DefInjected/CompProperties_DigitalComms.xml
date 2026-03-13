@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <NeedPoweredComms>需要有一个可用的通讯台</NeedPoweredComms>
+  <UseComms>使用数码通讯</UseComms>
+  <UseCommsDesc>打开通讯界面联系派系或呼叫贸易商队</UseCommsDesc>
+  <NoOneToComm>没有可联系的对象</NoOneToComm>
+  <CannotUseWhileDrafted>征召状态下无法使用</CannotUseWhileDrafted>
+
+</LanguageData>

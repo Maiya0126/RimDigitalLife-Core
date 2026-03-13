@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HediffDef>
+		<defName>RimDigital_Hediff_Skateboard</defName>
+		<label>Electric Skateboard Boost</label>
+		<description>Speed boost from using an electric skateboard.</description>
+		<defaultLabelColor>(100, 200, 255)</defaultLabelColor>
+		<makesSickThought>false</makesSickThought>
+		<isBad>false</isBad>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>16</MoveSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>RimDigital_Hediff_Hoverboard</defName>
+		<label>Hoverboard Boost</label>
+		<description>Speed boost from using a hoverboard.</description>
+		<defaultLabelColor>(100, 200, 255)</defaultLabelColor>
+		<makesSickThought>false</makesSickThought>
+		<isBad>false</isBad>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>8</MoveSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>RimDigital_Hediff_PowerSuit</defName>
+		<label>Power Suit Boost</label>
+		<description>Speed boost from using the Kangaroo Power Suit.</description>
+		<defaultLabelColor>(255, 200, 100)</defaultLabelColor>
+		<makesSickThought>false</makesSickThought>
+		<isBad>false</isBad>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
+		</comps>
+		<stages>
+			<li>
+				<statOffsets>
+					<MoveSpeed>5</MoveSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+	</HediffDef>
+
+</Defs>

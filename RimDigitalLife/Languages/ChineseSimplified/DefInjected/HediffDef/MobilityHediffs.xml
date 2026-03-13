@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <RimDigital_Hediff_Skateboard.label>电动滑板加速</RimDigital_Hediff_Skateboard.label>
+  <RimDigital_Hediff_Skateboard.description>使用电动滑板带来的速度加成。</RimDigital_Hediff_Skateboard.description>
+
+  <RimDigital_Hediff_Hoverboard.label>悬浮平衡车加速</RimDigital_Hediff_Hoverboard.label>
+  <RimDigital_Hediff_Hoverboard.description>使用悬浮平衡车带来的速度加成。</RimDigital_Hediff_Hoverboard.description>
+
+  <RimDigital_Hediff_PowerSuit.label>动力装甲加速</RimDigital_Hediff_PowerSuit.label>
+  <RimDigital_Hediff_PowerSuit.description>使用黄袋鼠动力装甲带来的速度加成。</RimDigital_Hediff_PowerSuit.description>
+
+</LanguageData>

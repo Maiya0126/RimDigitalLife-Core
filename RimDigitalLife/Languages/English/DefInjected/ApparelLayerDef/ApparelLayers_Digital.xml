@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <RimPhoneLayer.label>digital device</RimPhoneLayer.label>
+  <RimPadLayer.label>tablet device</RimPadLayer.label>
+  <RimGameLayer.label>handheld console</RimGameLayer.label>
+  <RimWristLayer.label>wrist device</RimWristLayer.label>
+  <RimVehicleLayer.label>personal vehicle</RimVehicleLayer.label>
+  <RimDigital_Mobility.label>mobility device</RimDigital_Mobility.label>
+
+</LanguageData>

@@ -31,4 +31,10 @@
 		<drawOrder>240</drawOrder>
 	</ApparelLayerDef>
 
+	<ApparelLayerDef>
+		<defName>RimDigital_Mobility</defName>
+		<label>mobility device</label>
+		<drawOrder>235</drawOrder>
+	</ApparelLayerDef>
+
 </Defs>

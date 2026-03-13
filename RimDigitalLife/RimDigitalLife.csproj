@@ -61,8 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Comps\CompDigitalComms.cs" />
+    <Compile Include="Source\Comps\CompElectricSkateboard.cs" />
     <Compile Include="Source\Comps\CompSlacker.cs" />
+    <Compile Include="Source\Comps\CompSpeedBoost.cs" />
     <Compile Include="Source\Comps\CompTerminalLink.cs" />
+    <Compile Include="Source\Harmony\Patch_DigitalCommsMenu.cs" />
     <Compile Include="Source\Harmony\Patch_LogDisplay.cs" />
     <Compile Include="Source\Harmony\Patch_WorkSpeedPenalty.cs" />
     <Compile Include="Source\OdysseyCompatibility.cs" />
@@ -77,6 +81,8 @@
     <Content Include="Defs\InteractionDefs\Interactions_Phone.xml" />
     <Content Include="Defs\JobDefs\Jobs_Digital.xml" />
     <Content Include="Defs\ThingDefs_Misc\Apparel_Layers.xml" />
+    <Content Include="Defs\ThingDefs_Misc\Items_DigitalMobility.xml" />
+    <Content Include="Defs\HediffDefs\Hediffs_Mobility.xml" />
     <Content Include="Defs\ThingDefs_Misc\Items_Digital_Comm.xml" />
     <Content Include="Defs\ThingDefs_Misc\Items_Digital_Gaming.xml" />
     <Content Include="Defs\ThingDefs_Misc\Items_Digital_Misc.xml" />
@@ -85,6 +91,14 @@
     <Content Include="Languages\ChineseSimplified\DefInjected\JobDef\Jobs_Digital.xml" />
     <Content Include="Languages\English\DefInjected\JobDef\Jobs_Digital.xml" />
     <Content Include="Languages\English\DefInjected\ThingDef\Items_Digital.xml" />
+    <Content Include="Languages\English\DefInjected\ThingDef\Items_DigitalMobility.xml" />
+    <Content Include="Languages\English\DefInjected\ApparelLayerDef\ApparelLayers_Digital.xml" />
+    <Content Include="Languages\ChineseSimplified\DefInjected\ThingDef\Items_DigitalMobility.xml" />
+    <Content Include="Languages\ChineseSimplified\DefInjected\ApparelLayerDef\ApparelLayers_Digital.xml" />
+    <Content Include="Languages\English\DefInjected\HediffDef\MobilityHediffs.xml" />
+    <Content Include="Languages\ChineseSimplified\DefInjected\HediffDef\MobilityHediffs.xml" />
+    <Content Include="Languages\English\DefInjected\CompProperties_DigitalComms.xml" />
+    <Content Include="Languages\ChineseSimplified\DefInjected\CompProperties_DigitalComms.xml" />
     <Content Include="Textures\Things\Building\Rimbox360.png" />
     <Content Include="Textures\Things\Building\RimboxSeriesX.png" />
     <Content Include="Textures\Things\Building\RimStation.png" />
@@ -94,14 +108,18 @@
     <Content Include="Textures\Things\Item\iShenWatch.png" />
     <Content Include="Textures\Things\Item\RiDS.png" />
     <Content Include="Textures\Things\Item\Rimdle.png" />
+    <Content Include="Textures\Things\Item\Skateboard_east.png" />
+    <Content Include="Textures\Things\Item\Skateboard_north.png" />
+    <Content Include="Textures\Things\Item\Skateboard_south.png" />
     <Content Include="Textures\Things\Item\Nokirim.png" />
     <Content Include="Textures\Things\Item\Riwitch1.png" />
     <Content Include="Textures\Things\Item\Riwitch2.png" />
     <Content Include="Textures\Things\Item\RSP.png" />
+    <Content Include="Textures\Things\Item\DaMiHoverboard.png" />
+    <Content Include="Textures\Things\Item\KangarooPowerSuit.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assemblies\" />
-    <Folder Include="Defs\HediffDefs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
