@@ -24,12 +24,31 @@ namespace RimDigitalLife
             if (pawn.apparel == null)
                 return;
 
+            // Check if pawn already has any digital comms device
+            bool hasCommsDevice = false;
             foreach (Apparel apparel in pawn.apparel.WornApparel)
             {
-                CompDigitalComms comp = apparel.TryGetComp<CompDigitalComms>();
-                if (comp != null)
+                if (apparel.TryGetComp<CompDigitalComms>() != null)
                 {
-                    var menuOptions = comp.GetFloatMenuOptionsForPawn(pawn);
+                    hasCommsDevice = true;
+                    break;
+                }
+            }
+
+            // Only add one "Use Comms" option if they have any comms device
+            if (hasCommsDevice)
+            {
+                CompDigitalComms dummyComp = null;
+                foreach (Apparel apparel in pawn.apparel.WornApparel)
+                {
+                    dummyComp = apparel.TryGetComp<CompDigitalComms>();
+                    if (dummyComp != null)
+                        break;
+                }
+
+                if (dummyComp != null)
+                {
+                    var menuOptions = dummyComp.GetFloatMenuOptionsForPawn(pawn);
                     if (menuOptions != null)
                     {
                         __result.AddRange(menuOptions);

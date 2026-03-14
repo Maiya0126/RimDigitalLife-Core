@@ -50,6 +50,12 @@
 			<ComponentIndustrial>3</ComponentIndustrial>
 			<Plasteel>10</Plasteel>
 		</costList>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
 		<tickerType>Rare</tickerType>
 	</ThingDef>
 
@@ -97,6 +103,12 @@
 			<ComponentSpacer>1</ComponentSpacer>
 			<Uranium>10</Uranium>
 		</costList>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<tradeTags>
+			<li>ExoticMisc</li>
+		</tradeTags>
 	</ThingDef>
 
 	<!-- Hidden: Kangaroo Power Suit (causes errors)

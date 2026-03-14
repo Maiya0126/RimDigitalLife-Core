@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <NeedPoweredComms>Need a powered comms console</NeedPoweredComms>
+  <UseComms>Use digital comms</UseComms>
+  <UseCommsDesc>Open communications to contact factions or call trade ships</UseCommsDesc>
+  <NoOneToComm>No one to contact</NoOneToComm>
+  <CannotUseWhileDrafted>Cannot use while drafted</CannotUseWhileDrafted>
+
+</LanguageData>
