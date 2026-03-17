@@ -17,6 +17,14 @@ namespace RimDigitalLife
         public bool allowGameSlacking = true;    // 允许玩掌机摸鱼
         public bool workSpeedPenalty = false;    // 分心惩罚 (全局工作速度 -5%)
 
+        // === 移动设备摔倒概率 ===
+        public float skateboardFallChance = 0.10f;    // 滑板摔倒概率 (10%)
+        public float hoverboardFallChance = 0.05f;    // 平衡车摔倒概率 (5%)
+
+        // === 移动设备移速加成 ===
+        public float skateboardSpeedBonus = 16f;      // 滑板移速加成 (+16)
+        public float hoverboardSpeedBonus = 8f;       // 平衡车移速加成 (+8)
+
         // === 保存与读取 ===
         public override void ExposeData()
         {
@@ -30,6 +38,12 @@ namespace RimDigitalLife
             Scribe_Values.Look(ref allowCommSlacking, "allowCommSlacking", true);
             Scribe_Values.Look(ref allowGameSlacking, "allowGameSlacking", true);
             Scribe_Values.Look(ref workSpeedPenalty, "workSpeedPenalty", false);
+
+            Scribe_Values.Look(ref skateboardFallChance, "skateboardFallChance", 0.10f);
+            Scribe_Values.Look(ref hoverboardFallChance, "hoverboardFallChance", 0.05f);
+
+            Scribe_Values.Look(ref skateboardSpeedBonus, "skateboardSpeedBonus", 16f);
+            Scribe_Values.Look(ref hoverboardSpeedBonus, "hoverboardSpeedBonus", 8f);
 
             base.ExposeData();
         }

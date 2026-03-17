@@ -56,14 +56,31 @@ namespace RimDigitalLife
                 if (currentWearer.IsHashIntervalTick(600))
                 {
                     CompProperties_ElectricSkateboard props = this.props as CompProperties_ElectricSkateboard;
-                    float fallChance = props.normalFallChance;
+                    
+                    // 从设置中读取基础概率
+                    float baseFallChance;
+                    float terrainMultiplier;
+                    string defName = this.parent.def.defName;
+                    if (defName == "Apparel_BoosDeadSkateboard")
+                    {
+                        baseFallChance = RimDigitalMod.settings.skateboardFallChance;
+                        terrainMultiplier = 2.5f; // 滑板难地形 2.5倍
+                    }
+                    else
+                    {
+                        baseFallChance = RimDigitalMod.settings.hoverboardFallChance;
+                        terrainMultiplier = 4f; // 平衡车难地形 4倍
+                    }
+
+                    float fallChance = baseFallChance;
 
                     if (props.affectedByTerrain)
                     {
                         TerrainDef terrain = currentWearer.Position.GetTerrain(currentWearer.Map);
                         if (terrain != null && terrain.pathCost > 20)
                         {
-                            fallChance = props.roughTerrainFallChance;
+                            fallChance = baseFallChance * terrainMultiplier;
+                            if (fallChance > 1f) fallChance = 1f;
                         }
                     }
 
