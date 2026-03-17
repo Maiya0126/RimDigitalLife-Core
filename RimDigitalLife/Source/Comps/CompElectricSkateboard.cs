@@ -6,7 +6,9 @@ namespace RimDigitalLife
 {
     public class CompProperties_ElectricSkateboard : CompProperties
     {
-        public float fallChance = 0.05f;
+        public float normalFallChance = 0.05f;
+        public float roughTerrainFallChance = 0.33f;
+        public bool affectedByTerrain = true;
         public string hediffDefName = "RimDigital_Hediff_Skateboard";
 
         public CompProperties_ElectricSkateboard()
@@ -51,19 +53,26 @@ namespace RimDigitalLife
 
             if (currentWearer.Spawned && !currentWearer.Downed && currentWearer.pather.Moving)
             {
-                if (currentWearer.IsHashIntervalTick(120))
+                if (currentWearer.IsHashIntervalTick(600))
                 {
-                    TerrainDef terrain = currentWearer.Position.GetTerrain(currentWearer.Map);
-                    if (terrain != null && terrain.pathCost > 20)
+                    CompProperties_ElectricSkateboard props = this.props as CompProperties_ElectricSkateboard;
+                    float fallChance = props.normalFallChance;
+
+                    if (props.affectedByTerrain)
                     {
-                        CompProperties_ElectricSkateboard props = this.props as CompProperties_ElectricSkateboard;
-                        if (Rand.Value < props.fallChance)
+                        TerrainDef terrain = currentWearer.Position.GetTerrain(currentWearer.Map);
+                        if (terrain != null && terrain.pathCost > 20)
                         {
-                            currentWearer.stances.stunner.StunFor(180, currentWearer, addBattleLog: false);
-                            MoteMaker.ThrowText(currentWearer.DrawPos + new Vector3(0, 0, 0.5f), currentWearer.Map, "路滑，摔了！", Color.red);
-                            DamageInfo dinfo = new DamageInfo(DamageDefOf.Crush, 2f, 0f, -1f, this.parent);
-                            currentWearer.TakeDamage(dinfo);
+                            fallChance = props.roughTerrainFallChance;
                         }
+                    }
+
+                    if (Rand.Value < fallChance)
+                    {
+                        currentWearer.stances.stunner.StunFor(180, currentWearer, addBattleLog: false);
+                        MoteMaker.ThrowText(currentWearer.DrawPos + new Vector3(0, 0, 0.5f), currentWearer.Map, "哎呀，摔倒了！", Color.red);
+                        DamageInfo dinfo = new DamageInfo(DamageDefOf.Crush, 2f, 0f, -1f, this.parent);
+                        currentWearer.TakeDamage(dinfo);
                     }
                 }
             }

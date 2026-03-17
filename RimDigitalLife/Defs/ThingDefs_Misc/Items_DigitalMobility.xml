@@ -30,13 +30,15 @@
 			<tags>
 				<li>IndustrialAdvanced</li>
 			</tags>
-			<defaultOutfitTags>
+<defaultOutfitTags>
 				<li>Worker</li>
 			</defaultOutfitTags>
 		</apparel>
 		<comps>
 			<li Class="RimDigitalLife.CompProperties_ElectricSkateboard">
-				<fallChance>0.08</fallChance>
+				<normalFallChance>0.10</normalFallChance>
+				<roughTerrainFallChance>0.25</roughTerrainFallChance>
+				<affectedByTerrain>true</affectedByTerrain>
 			</li>
 		</comps>
 		<recipeMaker>
@@ -92,6 +94,13 @@
 				<li>Worker</li>
 			</defaultOutfitTags>
 		</apparel>
+		<comps>
+			<li Class="RimDigitalLife.CompProperties_ElectricSkateboard">
+				<normalFallChance>0.05</normalFallChance>
+				<roughTerrainFallChance>0.20</roughTerrainFallChance>
+				<affectedByTerrain>true</affectedByTerrain>
+			</li>
+		</comps>
 		<recipeMaker>
 			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
 			<recipeUsers>
