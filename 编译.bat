@@ -1,103 +1,54 @@
 @echo off
 REM ============================================================================
-REM RimDigitalLife - æ‰‹åŠ¨ç¼–è¯‘è„šæœ¬ï¼ˆä¸ä½¿ç”¨ Visual Studioï¼‰
-REM ã€Version: v1.1.0 | ä¿®æ­£è·¯å¾„ç‰ˆã€‘
-REM @author Maiya0126 (éº¦ä¸«)
+REM RimDigitalLife - ±àÒë½Å±¾ (v2.0 | MSBuild °æ)
+REM @author Maiya0126 (ÂóÑ¾)
+REM ËµÃ÷: Ê¹ÓÃ Visual Studio ÏîÄ¿±àÒë Release£¬²ú³öµ½ RimDigitalLife\bin\Release
+REM       ²¢´¥·¢ csproj µÄ PostBuildEvent ×Ô¶¯²¿Êğµ½ÓÎÏ· Mods ÎÄ¼ş¼Ğ
 REM ============================================================================
 
 echo.
 echo ============================================================
-echo  RimDigitalLife - ç¦»çº¿ç¼–è¯‘å·¥å…·
-echo  ç‰ˆæœ¬: v1.1.0
-echo  ä½œè€…: Maiya0126 (éº¦ä¸«)
+echo  RimDigitalLife - ±àÒë¹¤¾ß (MSBuild)
 echo ============================================================
 echo.
 
-REM è®¾ç½® RimWorld è·¯å¾„ï¼ˆä¿®æ­£ä¸º RimWorldWin64_Dataï¼‰
-set RIMWORLD_DIR=D:\Games\steamapps\common\RimWorld
+REM Ê¹ÓÃ VS2022 MSBuild
+set MSBUILD="C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+set CSPROJ=D:\Visual Studio Code ALL\RimDigitalLife-Core\RimDigitalLife\RimDigitalLife.csproj
 
-REM è®¾ç½®è¾“å‡ºç›®å½•
-set OUTPUT_DIR=%~dp0Assemblies
-
-echo [ä¿¡æ¯] RimWorld è·¯å¾„: %RIMWORLD_DIR%
-echo [ä¿¡æ¯] è¾“å‡ºç›®å½•: %OUTPUT_DIR%
-echo [ä¿¡æ¯] Harmony è·¯å¾„: D:\games\steamapps\workshop\content\294100\2009463077\Current\Assemblies
-echo.
-
-REM æ£€æŸ¥ C# ç¼–è¯‘å™¨
-set CSC=C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe
-if not exist "%CSC%" (
-    echo [é”™è¯¯] æ‰¾ä¸åˆ° C# ç¼–è¯‘å™¨
-    echo.
-    echo æ­£åœ¨å°è¯•æŸ¥æ‰¾å…¶ä»–ç‰ˆæœ¬...
-
-    REM å°è¯•å…¶ä»–å¯èƒ½çš„ä½ç½®
-    for /d %%i in (C:\Windows\Microsoft.NET\Framework64\v4*) do (
-        if exist "%%i\csc.exe" (
-            set CSC=%%i\csc.exe
-            echo [ä¿¡æ¯] æ‰¾åˆ°ç¼–è¯‘å™¨: %%i\csc.exe
-            goto :found_compiler
-        )
-    )
-
-    echo [é”™è¯¯] æ— æ³•æ‰¾åˆ° C# ç¼–è¯‘å™¨
-    echo.
-    echo è¯·å®‰è£… .NET Framework 4.7.2 å¼€å‘å·¥å…·åŒ…
+if not exist %MSBUILD% (
+    echo [´íÎó] ÕÒ²»µ½ VS2022 MSBuild£¬ÇëÈ·ÈÏ°²×°ÁË Visual Studio 2022
     pause
     exit /b 1
 )
 
-:found_compiler
-echo [ä¿¡æ¯] ä½¿ç”¨ç¼–è¯‘å™¨: %CSC%
+if not exist "%CSPROJ%" (
+    echo [´íÎó] ÕÒ²»µ½ÏîÄ¿ÎÄ¼ş: %CSPROJ%
+    pause
+    exit /b 1
+)
+
+echo [ĞÅÏ¢] MSBuild: %MSBUILD%
+echo [ĞÅÏ¢] ÏîÄ¿: %CSPROJ%
+echo [ĞÅÏ¢] ¿ªÊ¼±àÒë Release ...
 echo.
 
-REM åˆ›å»ºè¾“å‡ºç›®å½•
-if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%"
-
-echo [ä¿¡æ¯] å¼€å§‹ç¼–è¯‘...
-echo.
-
-REM ç¼–è¯‘æ‰€æœ‰ C# æ–‡ä»¶ï¼ˆé€’å½’ Source æ–‡ä»¶å¤¹ï¼‰
-"%CSC%"^
- /target:library^
- /out:"%OUTPUT_DIR%\RimDigitalLife.dll"^
- /reference:"%RIMWORLD_DIR%\RimWorldWin64_Data\Managed\Assembly-CSharp.dll"^
- /reference:"%RIMWORLD_DIR%\RimWorldWin64_Data\Managed\UnityEngine.dll"^
- /reference:"%RIMWORLD_DIR%\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll"^
- /reference:"D:\games\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll"^
- /reference:System.dll^
- /reference:System.Core.dll^
- /reference:System.Xml.dll^
- /reference:System.Xml.Linq.dll^
- /nologo^
- /optimize^
- /unsafe^
- /langversion:latest^
- /recurse:Source\*.cs
+%MSBUILD% "%CSPROJ%" /p:Configuration=Release /t:Build /v:minimal
 
 if %errorlevel% equ 0 (
     echo.
     echo ============================================================
-    echo [æˆåŠŸ] ç¼–è¯‘å®Œæˆï¼
+    echo [³É¹¦] ±àÒë²¢²¿ÊğÍê³É£¡
     echo ============================================================
     echo.
-    echo è¾“å‡ºæ–‡ä»¶:
-    dir "%OUTPUT_DIR%\RimDigitalLife.dll"
-    echo.
-    echo ä¸‹ä¸€æ­¥:
-    echo   1. å¤åˆ¶æ•´ä¸ª RimDigitalLife æ–‡ä»¶å¤¹åˆ° RimWorld\Mods\
-    echo   2. å¯åŠ¨æ¸¸æˆæµ‹è¯•
+    echo Êä³ö DLL: D:\Visual Studio Code ALL\RimDigitalLife-Core\RimDigitalLife\bin\Release\RimDigitalLife.dll
+    echo ÒÑ×Ô¶¯¸´ÖÆµ½ÓÎÏ· Mods ÎÄ¼ş¼Ğ¡£
     echo.
 ) else (
     echo.
     echo ============================================================
-    echo [å¤±è´¥] ç¼–è¯‘å¤±è´¥ï¼Œè¯·æ£€æŸ¥é”™è¯¯ä¿¡æ¯
+    echo [Ê§°Ü] ±àÒëÊ§°Ü£¬Çë¼ì²éÉÏ·½´íÎóĞÅÏ¢
     echo ============================================================
-    echo.
-    echo å¸¸è§é—®é¢˜:
-    echo   - æ£€æŸ¥ RimWorld è·¯å¾„æ˜¯å¦æ­£ç¡®
-    echo   - æ£€æŸ¥ Harmony DLL æ˜¯å¦å­˜åœ¨
-    echo   - æ£€æŸ¥ Source\ æ–‡ä»¶å¤¹æ˜¯å¦å­˜åœ¨
     echo.
 )
 

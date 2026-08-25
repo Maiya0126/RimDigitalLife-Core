@@ -7,7 +7,10 @@ namespace RimDigitalLife
 {
     public static class OdysseyCompatibility
     {
-        public static bool HasOdysseyDLC => ModLister.GetActiveModWithIdentifier("Ludeon.RimWorld.Odyssey") != null;
+        public static bool HasOdysseyDLC
+        {
+            get { return ModLister.GetActiveModWithIdentifier("Ludeon.RimWorld.Odyssey") != null; }
+        }
 
         public static bool IsOnShip(Pawn pawn)
         {

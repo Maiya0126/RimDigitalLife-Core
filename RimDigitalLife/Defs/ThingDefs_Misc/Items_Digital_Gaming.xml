@@ -152,15 +152,24 @@
 			<li>BuildingsJoy</li>
 		</thingCategories>
 		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
+			<graphicClass>RimDigitalLife.Graphic_SingleNoRotate</graphicClass>
 			<drawSize>(2.5, 2.5)</drawSize>
 			<shadowData>
 				<volume>(0.3, 0.6, 0.3)</volume>
 			</shadowData>
 		</graphicData>
 		<size>(2,1)</size>
-		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<interactionCellOffset>(0,0,1)</interactionCellOffset>
 		<hasInteractionCell>true</hasInteractionCell>
+		<rotatable>true</rotatable>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<passability>PassThroughOnly</passability>
+		<pathCost>42</pathCost>
+		<fillPercent>0.4</fillPercent>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<placeWorkers>
+			<li>PlaceWorker_WatchArea</li>
+		</placeWorkers>
 		<statBases>
 			<Beauty>10</Beauty>
 		</statBases>
@@ -177,6 +186,10 @@
 		</comps>
 		<building>
 			<joyKind>Gaming_Dexterity</joyKind>
+			<watchBuildingStandDistanceRange>2~4</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+			<watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+			<effectWatching>WatchingTelevision</effectWatching>
 		</building>
 	</ThingDef>
 
@@ -286,7 +299,7 @@
 			</li>
 		</comps>
 	</ThingDef>
-	
+
 	<JoyGiverDef>
 		<defName>Play_RimConsoles</defName>
 

@@ -361,3 +361,29 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# ============================================================================
+# RimDigitalLife 项目自定义忽略规则 (2026-08-26)
+# ============================================================================
+
+# 根目录历史遗留的旧构建输出/源码备份（已迁移到 RimDigitalLife\RimDigitalLife.csproj）
+/Assemblies/
+/obj/
+/Source/
+
+# 旧的手写 csc 编译响应文件
+compile.rsp
+
+# Windows 保留设备名"nul"误生成的文件
+/nul
+
+# RimWorld 编译/部署产生或引用的文件
+RimDigitalLife/bin/
+RimDigitalLife/obj/
+RimDigitalLife_RimPay/bin/
+RimDigitalLife_RimPay/obj/
+RimDigitalLife_QuantumNet/bin/
+RimDigitalLife_QuantumNet/obj/
+
+# 临时打包备份文件（用户自行决定是否保留/提交）
+*_备份_*.zip

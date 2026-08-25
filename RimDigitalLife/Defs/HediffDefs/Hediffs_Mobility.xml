@@ -13,11 +13,7 @@
 			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
 		</comps>
 		<stages>
-			<li>
-				<statOffsets>
-					<MoveSpeed>16</MoveSpeed>
-				</statOffsets>
-			</li>
+			<li />
 		</stages>
 	</HediffDef>
 
@@ -33,11 +29,7 @@
 			<li Class="HediffCompProperties_RemoveIfApparelDropped"/>
 		</comps>
 		<stages>
-			<li>
-				<statOffsets>
-					<MoveSpeed>8</MoveSpeed>
-				</statOffsets>
-			</li>
+			<li />
 		</stages>
 	</HediffDef>
 

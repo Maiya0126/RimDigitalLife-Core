@@ -55,6 +55,14 @@
       <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\Games\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -63,22 +71,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Comps\CompDigitalComms.cs" />
     <Compile Include="Source\Comps\CompElectricSkateboard.cs" />
+    <Compile Include="Source\Comps\CompSmartAssistant.cs" />
+    <Compile Include="Source\Comps\RimTalkBridge.cs" />
     <Compile Include="Source\Comps\CompSlacker.cs" />
     <Compile Include="Source\Comps\CompSpeedBoost.cs" />
     <Compile Include="Source\Comps\CompTerminalLink.cs" />
     <Compile Include="Source\Harmony\Patch_DigitalCommsMenu.cs" />
     <Compile Include="Source\Harmony\Patch_LogDisplay.cs" />
     <Compile Include="Source\Harmony\Patch_WorkSpeedPenalty.cs" />
+    <Compile Include="Source\Harmony\Patch_RemoveEnemyMobility.cs" />
+    <Compile Include="Source\Harmony\Patch_PawnGenerator.cs" />
     <Compile Include="Source\OdysseyCompatibility.cs" />
     <Compile Include="Source\RimDigitalMod.cs" />
     <Compile Include="Source\Settings\RimDigitalLifeSettings.cs" />
     <Compile Include="Source\Thoughts\ThoughtWorker_DigitalComfort.cs" />
     <Compile Include="Source\Workers\InteractionWorker_PhoneCall.cs" />
+    <Compile Include="Source\Workers\InteractionWorker_SmartAssistant.cs" />
+    <Compile Include="Source\Reminder\RealTimeReminder.cs" />
+    <Compile Include="Source\Reminder\ReminderDialog.cs" />
+    <Compile Include="Source\Harmony\Patch_UIRootUpdate.cs" />
+    <Compile Include="Source\Harmony\Patch_BionicCompatibility.cs" />
+    <Compile Include="Source\Graphics\Graphic_SingleNoRotate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About\About.xml" />
     <Content Include="About\Preview.png" />
     <Content Include="Defs\InteractionDefs\Interactions_Phone.xml" />
+    <Content Include="Defs\InteractionDefs\Interactions_Digital.xml" />
     <Content Include="Defs\JobDefs\Jobs_Digital.xml" />
     <Content Include="Defs\ThingDefs_Misc\Apparel_Layers.xml" />
     <Content Include="Defs\ThingDefs_Misc\Items_DigitalMobility.xml" />
@@ -87,6 +106,7 @@
     <Content Include="Defs\ThingDefs_Misc\Items_Digital_Gaming.xml" />
     <Content Include="Defs\ThingDefs_Misc\Items_Digital_Misc.xml" />
     <Content Include="Defs\ThingDefs_Misc\Thoughts_Digital.xml" />
+    <Content Include="Defs\ThoughtDef.xml" />
     <Content Include="Languages\ChineseSimplified\DefInjected\ThingDef\Items_Digital.xml" />
     <Content Include="Languages\ChineseSimplified\DefInjected\JobDef\Jobs_Digital.xml" />
     <Content Include="Languages\English\DefInjected\JobDef\Jobs_Digital.xml" />
@@ -117,6 +137,8 @@
     <Content Include="Textures\Things\Item\RSP.png" />
     <Content Include="Textures\Things\Item\DaMiHoverboard.png" />
     <Content Include="Textures\Things\Item\KangarooPowerSuit.png" />
+    <Content Include="Textures\UI\Icons\Icon_Rimi.png" />
+    <Content Include="Textures\UI\Icons\Icon_Sirim.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assemblies\" />
@@ -124,24 +146,24 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@echo off
-:: 注意：这里使用了你的新文件夹名 "MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版"
+:: 注意：这里使用了你的新文件夹名 "MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版"
 
 :: 1. 复制 DLL 到新路径
-copy /Y "$(TargetDir)$(TargetName).dll" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Assemblies\"
+copy /Y "$(TargetDir)$(TargetName).dll" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\Assemblies\"
 
 :: 2. 暴力清空目标 Defs 文件夹 (防止旧文件残留)
-if exist "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Defs" rmdir /S /Q "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Defs"
+if exist "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\Defs" rmdir /S /Q "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\Defs"
 
 :: 3. 重新复制 Defs
-xcopy /E /I /Y "$(ProjectDir)Defs" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Defs"
+xcopy /E /I /Y "$(ProjectDir)Defs" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\Defs"
 
 :: 4. 复制 Textures
-xcopy /E /I /Y "$(ProjectDir)Textures" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Textures"
+xcopy /E /I /Y "$(ProjectDir)Textures" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\Textures"
 
 :: 5. 复制 About
-xcopy /E /I /Y "$(ProjectDir)About" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\About"
+xcopy /E /I /Y "$(ProjectDir)About" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\About"
 
 :: 6. 复制 Languages
-xcopy /E /I /Y "$(ProjectDir)Languages" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life：Core 边缘数码生活：核心版\Languages"</PostBuildEvent>
+xcopy /E /I /Y "$(ProjectDir)Languages" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02 Rim Digital Life Core 边缘数码生活核心版\Languages"</PostBuildEvent>
   </PropertyGroup>
 </Project>

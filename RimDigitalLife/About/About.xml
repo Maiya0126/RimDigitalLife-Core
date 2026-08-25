@@ -74,6 +74,7 @@
 		Harmony
 
 		(可选) Digital Storage (推荐安装可以获得更有趣的存储体验)
+		(可选) RimTalk (推荐安装可以启用智能助手 Rimi/Sirim 功能)
 
 		👥 制作人员 (Credits)
 		Code Art: Maiya0126 (麦丫Maiya)
@@ -86,4 +87,7 @@
 			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
 		</li>
 	</modDependencies>
+	<loadAfter>
+		<li>cj.rimtalk</li>
+	</loadAfter>
 </ModMetaData>

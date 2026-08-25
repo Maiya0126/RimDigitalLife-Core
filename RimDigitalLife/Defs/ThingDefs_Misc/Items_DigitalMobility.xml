@@ -12,7 +12,7 @@
 		</graphicData>
 		<statBases>
 			<Mass>3.5</Mass>
-			<WorkToMake>8000</WorkToMake>
+			<WorkToMake>1000</WorkToMake>
 			<MarketValue>350</MarketValue>
 			<EquipDelay>1.5</EquipDelay>
 		</statBases>
@@ -20,7 +20,7 @@
 			<MoveSpeed>16</MoveSpeed>
 			<CarryingCapacity>25</CarryingCapacity>
 		</equippedStatOffsets>
-		<apparel>
+<apparel>
 			<bodyPartGroups>
 				<li>Feet</li>
 			</bodyPartGroups>
@@ -29,8 +29,9 @@
 			</layers>
 			<tags>
 				<li>IndustrialAdvanced</li>
+				<li>RimDigital_MobilityItem</li>
 			</tags>
-<defaultOutfitTags>
+ <defaultOutfitTags>
 				<li>Worker</li>
 			</defaultOutfitTags>
 		</apparel>
@@ -43,6 +44,7 @@
 		</comps>
 		<recipeMaker>
 			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+			<workSkill>Crafting</workSkill>
 			<recipeUsers>
 				<li>FabricationBench</li>
 			</recipeUsers>
@@ -58,6 +60,9 @@
 		<tradeTags>
 			<li>ExoticMisc</li>
 		</tradeTags>
+		<thingSetMakerTags>
+			<li>PlayerSpawnable</li>
+		</thingSetMakerTags>
 		<tickerType>Rare</tickerType>
 	</ThingDef>
 
@@ -72,7 +77,7 @@
 		</graphicData>
 		<statBases>
 			<Mass>5.0</Mass>
-			<WorkToMake>15000</WorkToMake>
+			<WorkToMake>2000</WorkToMake>
 			<MarketValue>800</MarketValue>
 			<EquipDelay>2.0</EquipDelay>
 		</statBases>
@@ -89,6 +94,7 @@
 			</layers>
 			<tags>
 				<li>Spacer</li>
+				<li>RimDigital_MobilityItem</li>
 			</tags>
 			<defaultOutfitTags>
 				<li>Worker</li>
@@ -103,6 +109,7 @@
 		</comps>
 		<recipeMaker>
 			<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+			<workSkill>Crafting</workSkill>
 			<recipeUsers>
 				<li>FabricationBench</li>
 			</recipeUsers>
@@ -118,6 +125,9 @@
 		<tradeTags>
 			<li>ExoticMisc</li>
 		</tradeTags>
+		<thingSetMakerTags>
+			<li>PlayerSpawnable</li>
+		</thingSetMakerTags>
 	</ThingDef>
 
 	<!-- Hidden: Kangaroo Power Suit (causes errors)

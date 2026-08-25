@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《边缘数码生活》数码新时代与数字经济体系 - 详细开发计划书</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --accent: #818cf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --tag-bg: #0f766e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .meta-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 0.75rem;
+        }
+
+        /* 架构图组件 */
+        .arch-diagram {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .arch-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .arch-box {
+            background: #090d16;
+            border: 1px solid var(--primary);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+        }
+
+        .arch-box.core {
+            border-color: var(--warning);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.15);
+        }
+
+        .arch-sub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .arch-sub-box {
+            background: #111827;
+            border: 1px solid var(--card-border);
+            border-top: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+
+        .arch-sub-box h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .arch-sub-box p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* 模块卡片布局 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .badge-easy { background: rgba(52, 211, 153, 0.2); color: var(--success); }
+        .badge-med { background: rgba(251, 191, 36, 0.2); color: var(--warning); }
+        .badge-hard { background: rgba(248, 113, 113, 0.2); color: var(--danger); }
+
+        .card-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-body li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .card-body li strong {
+            color: var(--text-main);
+        }
+
+        .card-body li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* 规则与表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #0f172a;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-muted);
+        }
+
+        td strong {
+            color: var(--text-main);
+        }
+
+        /* 路线图 Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--card-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -2rem;
+            top: 0.2rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .timeline-time {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: #0f172a;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>《边缘数码生活》数码新时代与数字经济体系</h1>
+        <p>RimDigitalLife Ecosystem - Comprehensive Development Plan</p>
+        <div class="meta-bar">
+            <span class="meta-item">🎮 对应游戏版本: RimWorld 1.5+</span>
+            <span class="meta-item">⏱️ 预估开发周期: 18 - 21 天</span>
+            <span class="meta-item">📦 架构方案: 1 Core + 2 Expansions</span>
+        </div>
+    </header>
+
+    <!-- 第一部分：系统总架构 -->
+    <div class="section">
+        <h2 class="section-title">🏛️ 一、 模组发布架构 (Release Architecture)</h2>
+        <div class="arch-diagram">
+            <div class="arch-tree">
+                <div class="arch-box core">
+                    <h3>Rim Digital Life - Core 边缘数码生活：核心版</h3>
+                    <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 4px;">
+                        保持轻量普适：数码设备 (手机/手表/掌机/滑板)、离线/基础AI助手 (Rimi/Sirim)、摸鱼机制与健康提醒 (Rest/Water/LateNight)
+                    </p>
+                </div>
+                <div class="arch-sub-grid">
+                    <div class="arch-sub-box">
+                        <h4>Rim Digital Life - RimPay Expansion 边缘数码生活：数字经济拓展</h4>
+                        <p>数字国库 (避税防财富爆炸、自定义精准存取)、薪资发放、食宿/行为自动扣费、余额宝利息、红包/没收Gizmo、欠薪与救济粮机制。</p>
+                    </div>
+                    <div class="arch-sub-box">
+                        <h4>Rim Digital Life - Quantum Net Expansion 边缘数码生活：量子网络拓展</h4>
+                        <p>通讯台量子网络覆盖、三大流量套餐、RimSeek 智算办公/科研赋能、RimTuber 直播打赏回流国库、RimTalk 跨地图 Face-to-Face 通话。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二部分：核心模块设计 -->
+    <div class="section">
+        <h2 class="section-title">💡 二、 核心子系统详细设计规格 (System Specifications)</h2>
+        <div class="grid-2">
+            
+            <!-- 模块 A -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">模块 A：数字国库与防财富爆炸系统</span>
+                    <span class="badge badge-med">中等难度 | 3-4天</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>1:1 对标汇率</strong>：采用 1 物理白银 = 1 RimPay 数字币，完全贴合 RimWorld 原版物价体系。</li>
+                        <li><strong>数字国库 (Cloud Treasury)</strong>：玩家在原版通讯台界面，可将地图物理白银/黄金一键全额存入或**根据需要自定义存入/提取指定数量**（不超过殖民地实际拥有/国库当前储备上限）。</li>
+                        <li><strong>防财富爆炸 (Wealth Shield)</strong>：国库资金存在 C# 数据层，不占用地图空间，<strong>100% 排除在地图财产 (Map Wealth) 之外</strong>，大幅降低袭规模。</li>
+                        <li><strong>无缝交易 Patch (TradeSession & PayWith)</strong>：交易时可用资金 = 地面白银 + 数字国库。地面白银不足时，差额自动无缝从国库扣除，无报错丢包。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 模块 B -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">模块 B：薪资发放、食宿扣费与红利折扣</span>
+                    <span class="badge badge-hard">较高难度 | 5-6天</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>激活开关与防断粮机制</strong>：建通讯台前全员免费；建通讯台开启 RimPay 后触发。钱不够时开启“救济粮机制 (Welfare Food)”，小人绝不会饿死。</li>
+                        <li><strong>三层薪资发放 (每日00:00)</strong>：基础零花钱 (5-10币/天) + 岗位绩效 (工人20-30币，科学家50-80币) + 奴隶政策。</li>
+                        <li><strong>日常行为无缝扣费 (Harmony 注入)</strong>：小人吃饭 (8-15币)、住宿 (3-10币)、就医/娱乐自动扣费，<strong>100% 自动回流至【数字国库】</strong>。</li>
+                        <li><strong>设备立减折扣 & 外部流出</strong>：佩戴设备小人享 10-20% 食宿折扣。私有网购、流量月租、股市亏损等资金彻底流出殖民地。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 模块 C -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">模块 C：小人 Gizmo 互动 & 余额宝利息</span>
+                    <span class="badge badge-easy">简单 | 2天</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>底部 Gizmo 快捷按钮 (0 性能损耗)</strong>：
+                            <br>• <code>[💰 发放奖金]</code>：划拨国库资金给小人，获得 <code>额外奖金 (+6)</code> Mood。
+                            <br>• <code>[🚫 扣罚/没收]</code>：强行回收资金至国库，获得 <code>资金没收 (-8)</code> Mood。
+                        </li>
+                        <li><strong>“余额宝”利息机制 (Savings Yield)</strong>：星际数字基金每日自动发放 0.2% - 0.5% 日利息（系统额外生成，不扣国库），鼓励小人存钱买高阶掌机。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 模块 D -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">模块 D：量子网络与 RimSeek 智算办公</span>
+                    <span class="badge badge-med">中等难度 | 4天</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>量子网络全图覆盖</strong>：建造并通电原版通讯台 (Comms Console) 即实现当前地图 100% 量子网络覆盖。</li>
+                        <li><strong>RimSeek 智算办公赋能</strong>：替代繁琐物理家具！小人携带设备且开启套餐后，直接施加 RimSeek 算力辅助（工作/科研效率 Buff）。</li>
+                        <li><strong>三大流量套餐</strong>：
+                            <br>• <strong>本地包 (免费)</strong>：打字/看时间/基础问答，无工作 Buff。
+                            <br>• <strong>高速包 (60币/15天)</strong>：RimSeek 智算辅助 (全局工作+10%，科研+15%)，看直播打赏，私有网购。
+                            <br>• <strong>量子无限包 (180币/15天)</strong>：RimSeek 深度协作 (+20%效率且免疫分心)，跨地图通话，云端雷达。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 模块 E -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">模块 E：RimTuber 打赏 & RimTalk 跨地图通话</span>
+                    <span class="badge badge-hard">较高难度 | 4-5天</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>RimTuber 直播打赏创收</strong>：殖民者看玩家直播时自主打赏 1-50 币，<strong>打赏资金直接回流至【数字国库】</strong>，小人获得 <code>支持主播 (+6)</code> Mood。</li>
+                        <li><strong>RimTalk 跨地图 Face-to-Face 通话</strong>：远征队/异地小人使用量子包时，与主基地家属发起跨地图拟人对话。</li>
+                        <li><strong>地理与情感 Context 注入</strong>：自动将“距离基地XX公里”、“荒野扎营/遗迹探索”注入 RimTalk 提示词。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 模块 F -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">模块 F：赛博理财与黑客催收短信</span>
+                    <span class="badge badge-easy">简单 | 2天</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>摸鱼理财 (RimStocks & Crypto)</strong>：纯 C# GUI 窗口。高智力/贪婪小人摸鱼时买卖模拟股票，赚钱加心情，赔钱沮丧。</li>
+                        <li><strong>花呗透支与黑客催收</strong>：支持小人透支消费。逾期未还时触发红字警告气泡 + 联动 RimTalk 注入赛博催收短信 Prompt（如：“再不还钱远程锁死掌机！”）。</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 第三部分：流量与经济参考表 -->
+    <div class="section">
+        <h2 class="section-title">📊 三、 流量套餐与经济平衡参考表 (Economy Balance Table)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>套餐级别</th>
+                    <th>扣费周期 (1季度/15天)</th>
+                    <th>价格 (数码币)</th>
+                    <th>折合白银/天</th>
+                    <th>核心功能与人群匹配</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>基础离线包</strong></td>
+                    <td>永久免费</td>
+                    <td>0 币</td>
+                    <td>0 银币</td>
+                    <td>全员保底。看时间、打字、Rimi/Sirim 本地问答，无 Buff。</td>
+                </tr>
+                <tr>
+                    <td><strong>高速畅享包</strong></td>
+                    <td>每 15 天</td>
+                    <td>60 币</td>
+                    <td>4 银币/天</td>
+                    <td>普通工人 (日薪20-30币)。RimSeek 智算 (+10%工作/+15%科研)，看直播打赏，黑客破解。</td>
+                </tr>
+                <tr>
+                    <td><strong>量子无限包</strong></td>
+                    <td>每 15 天</td>
+                    <td>180 币</td>
+                    <td>12 银币/天</td>
+                    <td>精英/远征队长 (日薪50-80币)。RimSeek 深度协作 (+20%效率且防分心)，跨地图视频通话，天气/矿脉雷达。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 第四部分：开发路线图 -->
+    <div class="section">
+        <h2 class="section-title">🗺️ 四、 开发路线图与阶段里程碑 (Development Roadmap)</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-title">Phase 1: 数字国库、交易 Patch 与个人经济基础</span>
+                        <span class="timeline-time">预估工时: 6 天 (难度: ⭐⭐⭐⭐)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        • 实现数字国库白银/黄金打包存取与零财富计算 logic，支持自定义数量精准存取。<br>
+                        • Patch 拦截 TradeSession 与 PayWith，实现无缝扣款。<br>
+                        • 编写 00:00 薪资自动发放、Harmony 注入食宿/医疗无缝扣费与救济粮保底。<br>
+                        • 实现小人底部 Gizmo 红包/没收快捷按钮。
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-title">Phase 2: 直播打赏、私有消费与余额宝利息</span>
+                        <span class="timeline-time">预估工时: 4 天 (难度: ⭐⭐⭐)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        • 实现殖民者观看 RimTuber 直播自主打赏，资金 100% 回流数字国库。<br>
+                        • 实现设备 10-20% 食宿立减折扣逻辑。<br>
+                        • 编写私有网购逻辑 (掌机游戏卡带 APP、私有零食放入小人背包)。<br>
+                        • 编写星际基金自动生成“余额宝”利息代码。
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-title">Phase 3: 量子网络、三大套餐与 RimSeek 智算</span>
+                        <span class="timeline-time">预估工时: 4 天 (难度: ⭐⭐⭐)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        • 绑定原版通讯台实现 100% 量子网络全图覆盖。<br>
+                        • 编写三大流量套餐的自动选购与按月续费逻辑。<br>
+                        • 编写 RimSeek 智算办公/科研效率加成与免疫分心 Hediff/Comp 代码。
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-title">Phase 4: RimTalk 跨地图通话与赛博理财</span>
+                        <span class="timeline-time">预估工时: 5-6 天 (难度: ⭐⭐⭐⭐)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        • 扩展 RimTalkBridge，实现远征队跨地图 Face-to-Face 通信与地理/情感 Context 注入。<br>
+                        • 编写纯 C# GUI 模拟股市与 Crypto 摸鱼理财窗口。<br>
+                        • 编写花呗透支、逾期警告气泡与赛博黑客催收短信代码。
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 第五部分：QA 与验证策略 -->
+    <div class="section">
+        <h2 class="section-title">🛡️ 五、 质量保证与安全验证策略 (QA Strategy)</h2>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">1. 防财富爆炸与交易安全</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>开局打包 100,000 白银存入数字国库，检查历史财富曲线 (Wealth Graph) 是否骤降，验证袭击规模符合预期。</li>
+                        <li>测试地面白银为 0 时，使用数字国库余额与轨道商人完成大额交易，确保无空指针或物品丢包。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">2. 性能与帧率保障 (FPS Shield)</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>食宿扣费与流量套餐自动续费仅在低频 Tick (如每 250 帧 / 1000 帧) 中运行。</li>
+                        <li>小人 Gizmo 快捷按钮仅在选中小人时渲染，保证高帧率流畅运行。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>边缘数码生活 (RimDigitalLife) 项目组 | 📅 2026年08月24日</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
