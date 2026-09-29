@@ -394,3 +394,7 @@ RimDigitalLife_QuantumNet/obj/
 # 交接说明（私人笔记，不入库）
 开发记录/QuantumNet拓展交接说明.md
 开发记录/RimPay拓展交接说明.md
+
+# 本地工具脚本（不入库，仅本地保留）
+*.bat
+*.ps1
