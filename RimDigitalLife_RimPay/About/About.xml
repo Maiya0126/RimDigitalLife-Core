@@ -72,6 +72,5 @@
 	<loadAfter>
 		<li>brrainz.harmony</li>
 		<li>maiya.RimDigitalLife.Core</li>
-		<li>chezhou.Framework.RimSimManagementFramework</li>
 	</loadAfter>
 </ModMetaData>
