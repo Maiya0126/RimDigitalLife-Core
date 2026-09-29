@@ -55,7 +55,7 @@
 		8. 联动 (Compat)
 		- RimTalk：AI 财经头条由小人聊起；炒股盈亏触发小人吐槽。
 		- RimTuber：带货包邮订阅费用自动从数字国库补足扣款。
-		- RimSim 商店联动：经营模拟框架的商店接入 RimPay 数字支付——殖民地有佩戴 RimDigitalLife 数码设备/订阅量子网络套餐的殖民者时，顾客结账享数字支付折扣；店铺收入按可调比例自动转入数字国库（防财富爆炸体系全覆盖）。
+		- RimSimManagementFramework边缘模拟经营框架联动：框架的商店接入 RimPay 数字支付——殖民地有佩戴 RimDigitalLife 数码设备/订阅量子网络套餐的殖民者时，顾客结账享数字支付折扣；店铺收入按可调比例自动转入数字国库（防财富爆炸体系全覆盖）。
 	</description>
 	<modDependencies>
 		<li>
