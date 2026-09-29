@@ -90,6 +90,7 @@
     <Compile Include="Source\QuantumNetProviders.cs" />
     <Compile Include="Source\PrivateShoppingManager.cs" />
     <Compile Include="Source\NetworkEventManager.cs" />
+    <Compile Include="Source\HealthReminderManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About\About.xml" />

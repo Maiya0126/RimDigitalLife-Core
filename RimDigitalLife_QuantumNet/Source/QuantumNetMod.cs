@@ -39,7 +39,7 @@ namespace RimDigitalLife_QuantumNet
 
         public override string SettingsCategory()
         {
-            return "Rim Digital Life - Quantum Net 量子网络拓展 (v0.3.02)";
+            return "Rim Digital Life - Quantum Net 量子网络拓展 (v0.4.01)";
         }
 
         private int selectedConfigIdx = -1;
