@@ -108,7 +108,7 @@ namespace RimDigitalLife_QuantumNet
             listing.Label("<b>高速畅享包功能</b>");
             listing.GapLine();
             listing.CheckboxLabeled("RimSeek 智算辅助 (全局工作 +10%、科研 +15%)", ref settings.enableRimSeek);
-            listing.CheckboxLabeled("健康提醒 (需要 AI 网络智算)", ref settings.enableHealthReminder);
+            listing.CheckboxLabeled("RimSeek 健康提醒 (畅享/无限包，每天提醒小人注意健康)", ref settings.enableHealthReminder);
             listing.CheckboxLabeled("看直播打赏 (需 RimTuber 联动)", ref settings.enableLiveTip);
             listing.CheckboxLabeled("黑客破解敌人钱包 (+20% 收益)", ref settings.enableHackWallet);
             listing.CheckboxLabeled("私有网购 (虚拟产品)", ref settings.enablePrivateShopping);

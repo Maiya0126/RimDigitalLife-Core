@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Rim Digital Life：Core 边缘数码生活：核心版</name>
+	<name>Rim Digital Life - Core 边缘数码生活：核心版</name>
 	<author>Maiya0126</author>
 	<packageId>maiya.RimDigitalLife.Core</packageId>
 	<supportedVersions>
@@ -53,22 +53,20 @@
 
 		分心惩罚：开启后，携带电子设备会略微降低全局工作速度（硬核玩家专用）。
 
-		📅 未来拓展计划 (Roadmap)
-		目前的版本只是“边缘数码生活”的第一步，未来的更新计划包括：
+		📅 系列拓展包 (Expansions)
+		核心版是整个系列的基石！以下官方拓展包均可叠加安装，强烈推荐：
 
-		📡 运营商系统 (Carrier Expansion) 真正的远程通讯来了！建立信号基站，购买流量套餐。让您的小人随时随地掏出手机就能联络盟友、进行轨道交易，甚至在野外呼叫空中支援，不再受限于笨重的通讯台。
+		💳 Rim Digital Life - RimPay Expansion 边缘数码生活：数字经济拓展
+		数字国库防财富爆炸、殖民者工资与食宿扣费、余额宝利息、借贷中心、真实K线证券交易、AI 经济调控。让殖民地真正运转起一套"赛博经济"！
 
-		💺 智慧办公 (Smart Office)
-
-		人体工学椅、电动升降桌。
-
-		为长时间伏案工作的科研人员提供健康保障。
+		📡 Rim Digital Life - Quantum Net Expansion 边缘数码生活：量子网络拓展
+		量子网络全图覆盖、三大流量/算力套餐、RimSeek 智算办公赋能、RimTuber 直播打赏、跨地图视频通话。让数码生活接入星际网络！
 
 		🛹 个人出行 (E-Mobility)
 
 		电动平衡车、电动滑板。
 
-		解决基地内通勤“最后一公里”的问题。
+		解决基地内通勤"最后一公里"的问题。
 
 		⚠️ 前置需求 (Requirements)
 		Harmony

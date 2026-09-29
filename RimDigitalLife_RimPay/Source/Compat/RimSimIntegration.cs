@@ -43,7 +43,7 @@ namespace RimDigitalLife_RimPay
                 Type financeType = AccessTools.TypeByName("SimManagementLib.Api.SimShopFinanceApi");
                 if (modifyType == null || financeType == null)
                 {
-                    Verse.Log.Message("[RimPay] RimSim 程序集尚未加载，商店联动本次跳过。");
+                    Verse.Log.Message("[RimPay] RimSimManagementFramework 程序集尚未加载，商店联动本次跳过。");
                     return;
                 }
 
@@ -59,7 +59,7 @@ namespace RimDigitalLife_RimPay
                 }
 
                 initialized = true;
-                Verse.Log.Message("[RimPay] RimSim 商店联动已启用（结账折扣 + 收入入国库）。");
+                Verse.Log.Message("[RimPay] RimSimManagementFramework边缘模拟经营框架 商店联动已启用（结账折扣 + 收入入国库）。");
             }
             catch (Exception ex)
             {

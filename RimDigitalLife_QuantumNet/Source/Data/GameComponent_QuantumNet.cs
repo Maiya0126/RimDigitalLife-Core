@@ -187,6 +187,12 @@ namespace RimDigitalLife_QuantumNet
                 PrivateShoppingManager.Tick();
             }
 
+            // 健康提醒（每天 8 点/20 点各一次机会）
+            if (tick % 1000 == 0)
+            {
+                HealthReminderManager.Tick();
+            }
+
             // Phase 4：跨地图通话（每 2 天一次机会）
             if (tick % 120000 == 0)
             {

@@ -27,4 +27,17 @@
 		</stages>
 	</ThoughtDef>
 
+	<ThoughtDef>
+		<defName>QuantumNet_HealthReminder</defName>
+		<durationDays>0.5</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>RimSeek 健康提醒</label>
+				<description>RimSeek 通过数码设备发来了健康提醒，被 AI 关心的感觉真好。</description>
+				<baseMoodEffect>3</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
 </Defs>
