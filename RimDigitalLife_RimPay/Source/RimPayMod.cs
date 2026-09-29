@@ -222,12 +222,12 @@ namespace RimDigitalLife_RimPay
                 "小人/动物随身携带的武器、衣物、驮载物品不计入袭击威胁点；不影响小人本体与机械体价值。");
             listing.Gap(10f);
 
-            // ============ RimSim 商店联动 ============
-            listing.Label("<b>RimSim 商店联动 (Shop Integration)</b>");
+            // ============ RimSimManagementFramework边缘模拟经营框架联动 ============
+            listing.Label("<b>RimSimManagementFramework边缘模拟经营框架联动 (Shop Integration)</b>");
             listing.GapLine();
-            listing.Label("<i>需安装 RimSim Management Framework（边缘模拟经营框架）。未安装时以下功能自动休眠。</i>");
-            listing.CheckboxLabeled("启用 RimSim 商店联动", ref settings.enableRimSimIntegration,
-                "结账折扣 + 店铺收入自动入数字国库。需安装 RimSim Management Framework。");
+            listing.Label("<i>需安装 RimSimManagementFramework边缘模拟经营框架。未安装时以下功能自动休眠（与模组加载顺序无关）。</i>");
+            listing.CheckboxLabeled("启用边缘模拟经营框架商店联动", ref settings.enableRimSimIntegration,
+                "结账折扣 + 店铺收入自动入数字国库。需安装 RimSimManagementFramework边缘模拟经营框架。");
             listing.Label($"店铺收入入国库比例: {settings.rimSimTreasuryRatio * 100f:F0}%");
             settings.rimSimTreasuryRatio = listing.Slider(settings.rimSimTreasuryRatio, 0f, 1f);
             listing.Label($"数码生态折扣 (佩戴 RimDigitalLife 数码设备): 顾客实付 -{settings.rimSimDeviceDiscount * 100f:F0}%");
