@@ -8,7 +8,7 @@ namespace RimDigitalLife
         private string title;
         private string message;
         
-        public override Vector2 InitialSize => new Vector2(420f, 240f);
+        public override Vector2 InitialSize => new Vector2(440f, 260f);
         
         public ReminderDialog(string title, string message, bool pauseGame)
         {
@@ -24,32 +24,40 @@ namespace RimDigitalLife
         public override void DoWindowContents(Rect inRect)
         {
             float curY = 0f;
-            
+
+            // 标题
             Text.Font = GameFont.Medium;
             Text.Anchor = TextAnchor.MiddleCenter;
             Widgets.Label(new Rect(0f, curY, inRect.width, 40f), title);
             curY += 50f;
-            
+
+            // 正文（如"该补充水分了！"）
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleCenter;
             Widgets.Label(new Rect(0f, curY, inRect.width, 60f), message);
             curY += 80f;
-            
-            Text.Anchor = TextAnchor.UpperLeft;
-            
+
+            // 底部"该提示由..."小字（比正文更小）
+            // 注意：GenText.WordWrapAt 内部会把全局字体切到 Medium，必须在它之后重新设回 Tiny
+            string footer = "RDL_Reminder_Footer".Translate().ToString();
+            string wrappedFooter = GenText.WordWrapAt(footer, inRect.width - 20f);
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            float footerHeight = Text.CalcHeight(wrappedFooter, inRect.width - 20f);
+            Widgets.Label(new Rect(0f, curY, inRect.width, footerHeight), wrappedFooter);
+
+            // "知道了"按钮：显示在最底部
             float buttonWidth = 120f;
             float buttonHeight = 40f;
             float buttonX = (inRect.width - buttonWidth) / 2f;
-            
-            if (Widgets.ButtonText(new Rect(buttonX, curY, buttonWidth, buttonHeight), "RDL_Reminder_OK".Translate()))
+            float buttonY = inRect.height - buttonHeight - 12f;
+            if (Widgets.ButtonText(new Rect(buttonX, buttonY, buttonWidth, buttonHeight), "RDL_Reminder_OK".Translate()))
             {
                 Close();
             }
-            
-            Text.Font = GameFont.Tiny;
-            Text.Anchor = TextAnchor.LowerRight;
-            Widgets.Label(new Rect(0f, inRect.height - 20f, inRect.width - 10f, 20f), "@麦丫Maiya 大叔提醒");
+
             Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
         }
     }
 }

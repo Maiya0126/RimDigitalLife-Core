@@ -129,7 +129,7 @@ namespace RimDigitalLife
 
             if (_queueAvailable)
             {
-                return TriggerDialogueViaQueue(initiator, persona);
+                return TriggerDialogueViaQueue(initiator, userPrompt, persona);
             }
             else
             {
@@ -146,7 +146,7 @@ namespace RimDigitalLife
                 return isDirectQuestion ? "SmartAssistant_Ask_Sirim" : "SmartAssistant_Sirim";
         }
 
-        private static bool TriggerDialogueViaQueue(Pawn initiator, AssistantPersona persona)
+        private static bool TriggerDialogueViaQueue(Pawn initiator, string userPrompt, AssistantPersona persona)
         {
             try
             {
@@ -171,6 +171,12 @@ namespace RimDigitalLife
                                 $"现在{initiator.LabelShort}要说出自己收到【{assistantName}】消息后的反应。\n\n" +
                                 $"严格要求：对话中只能说\"{assistantName}\"这个名字，绝对不能说成{otherName}或iShen。\n" +
                                 $"示例：\"{exampleStyle}\"";
+
+                // 携带调用方传入的话题/背景（如炒股盈亏、AI财经头条），避免被丢弃
+                if (!string.IsNullOrEmpty(userPrompt))
+                {
+                    prompt += "\n\n本次对话话题/背景：" + userPrompt;
+                }
 
                 var pawnState = _cacheGetMethod.Invoke(null, new object[] { initiator });
                 if (pawnState == null)

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThoughtDef>
+		<defName>RimDigital_ReceivedBonus</defName>
+		<durationDays>5</durationDays>
+		<stackLimit>3</stackLimit>
+		<stages>
+			<li>
+				<label>received a bonus</label>
+				<label>获得了奖金！</label>
+				<description>长官今天居然给我发了数字白银奖金，还不少呢！赞美殖民地，赞美长官！我要拿去买好吃的！</description>
+				<baseMoodEffect>6</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_Fined</defName>
+		<durationDays>3</durationDays>
+		<stackLimit>3</stackLimit>
+		<stages>
+			<li>
+				<label>funds confiscated</label>
+				<label>资金被没收</label>
+				<description>我辛辛苦苦攒的数字白银居然被强制充公了！这简直是掠夺！气死我了！</description>
+				<baseMoodEffect>-8</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_UnpaidWage</defName>
+		<durationDays>2</durationDays>
+		<stackLimit>3</stackLimit>
+		<stages>
+			<li>
+				<label>unpaid wage</label>
+				<label>殖民地欠薪</label>
+				<description>长官居然发不出工资了！我的钱包空空如也，连网费都快交不起了！还想让我好好干活？门都没有！</description>
+				<baseMoodEffect>-6</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_InterestYield</defName>
+		<durationDays>2</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>interest yield</label>
+				<label>基金分红收益</label>
+				<description>看了眼我的数字钱包余额宝，今天居然又涨了利息！看着数字白银变多的感觉真好！</description>
+				<baseMoodEffect>3</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_Profit</defName>
+		<durationDays>3</durationDays>
+		<stackLimit>2</stackLimit>
+		<stages>
+			<li>
+				<label>stock profit</label>
+				<label>炒股盈利</label>
+				<description>今天买的股票涨了，赚了不少数字白银！感觉我就是股神！</description>
+				<baseMoodEffect>8</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>RimDigital_Loss</defName>
+		<durationDays>2</durationDays>
+		<stackLimit>2</stackLimit>
+		<stages>
+			<li>
+				<label>stock loss</label>
+				<label>炒股亏损</label>
+				<description>买的股票跌了...亏了不少数字白银，再也不碰了！（下次一定）</description>
+				<baseMoodEffect>-6</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+</Defs>

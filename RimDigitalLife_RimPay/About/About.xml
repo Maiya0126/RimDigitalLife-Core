@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Rim Digital Life - RimPay Expansion 边缘数码生活：数字经济拓展</name>
+	<author>Maiya0126</author>
+	<packageId>maiya.RimDigitalLife.RimPay</packageId>
+	<supportedVersions>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>
+		数字经济时代已降临边缘世界！ [v0.7.01]
+
+		⚠️ 前置需求 (必读)
+		本模组是《Rim Digital Life - Core 边缘数码生活：核心版》的拓展包！
+		必须先订阅并启用【边缘数码生活：核心版】才能使用本拓展。
+		可选联动：RimTalk、RimTuber、RimSimManagementFramework边缘模拟经营框架。
+
+		📱 核心功能 (Features)
+		1. 数字国库与防财富爆炸系统
+		- 1:1 对标汇率：1 物理白银 = 1 RimPay 数字币。
+		- 数字国库 (Cloud Treasury)：在原版通讯台将地图白银存入云端，不占用地图空间，100% 排除在地图财富 (Map Wealth) 之外，大幅降低袭击规模。
+		- 财富托管 (Wealth Escrow)：殖民地建筑财富与小人/动物随身装备可托管为 RimPay 数字资产，不计入袭击威胁点（可在 Mod 设置中开关）。
+		- 无缝交易扣款：原版及绝大多数模组的交易优先扣除地面白银，不足时自动无缝从国库扣除；另提供标准支付 API (TryPayFromTreasury / TryPayTotal) 供模组集成。
+
+		2. 薪资发放与食宿扣费
+		- 激活开关：建通讯台前全员免费；开启 RimPay 后，殖民地经济体系运转。
+		- 三层薪资发放：每日00:00发放基础零花钱、岗位绩效与奴隶安抚金。
+		- 日常行为扣费：吃饭、住宿自动扣费，100% 回流数字国库。
+		- 医疗扣费 (RimPay 医保)：医生治疗收取诊疗费，病人钱包优先支付，不足部分由数字国库医保报销，诊疗收入回流国库。
+		- 设备折扣：佩戴手机/手表的小人享食宿立减折扣。
+
+		3. 小人互动与余额宝
+		- Gizmo 快捷按钮：一键给小人发放奖金或没收罚款。
+		- 余额宝机制：星际数字基金每日自动发放利息，鼓励小人存钱。
+		- 殖民者财政名册：数字国库界面查看全员钱包、日薪与可支撑天数。
+
+		4. 赛博理财与证券交易
+		- 摸鱼理财：高智力小人摸鱼时自动买卖模拟股票，盈亏通过 RimTalk 吐槽。
+		- 证券交易中心：9 支固定股票 + 派系股票，15 天 K 线蜡烛图、持仓市值与盈亏（绿+红-）一目了然。
+
+		5. 借贷中心
+		- 向派系放贷/借款，利率随好感度浮动，到期自动结算利息，逾期坏账影响外交。
+
+		6. AI 经济中枢 (RimPay Economy AI) [可选]
+		- 多供应商配置：Google / OpenAI / DeepSeek / Grok / GLM / OpenRouter / SiliconFlow / Player2 (本地免费) / 本地 Ollama / 自定义，勾选启用、顺序 failover、一键测试连接。
+		- AI 每日掌控经济：工资/房租/余额宝利率/借贷利率/餐费/搜刮分成/交易价格倍率，全部实时可见于「AI 经济实时状态面板」。
+		- 市场情绪 (bull/bear/neutral) 驱动股市涨跌方向；AI 偶发宏观事件（市场崩盘/淘金热/物资短缺/科技繁荣）持续 3 天并弹「边缘财经快讯」。
+		- AI 刷新间隔可调 (2~72 小时)，支持「立即请求」即时验证；最近 10 次 AI 结果归档可回看。
+		- 全部失败自动回退本地随机，绝不卡死经济。
+
+		7. 边缘财经日报
+		- 每日 00:00 结算后发送「边缘财经日报」信封：国库收支、股市行情、借贷概览、薪酬发放，AI 开启时附「AI 财经头条」。
+		- 国库真实流水账：昨日国库收支按分类（发薪/房租/餐费/搜刮/贸易/借贷利息...）精确统计。
+
+		8. 联动 (Compat)
+		- RimTalk：AI 财经头条由小人聊起；炒股盈亏触发小人吐槽。
+		- RimTuber：带货包邮订阅费用自动从数字国库补足扣款。
+		- RimSim 商店联动：经营模拟框架的商店接入 RimPay 数字支付——殖民地有佩戴 RimDigitalLife 数码设备/订阅量子网络套餐的殖民者时，顾客结账享数字支付折扣；店铺收入按可调比例自动转入数字国库（防财富爆炸体系全覆盖）。
+	</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>maiya.RimDigitalLife.Core</packageId>
+			<displayName>Rim Digital Life - Core</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>maiya.RimDigitalLife.Core</li>
+		<li>chezhou.Framework.RimSimManagementFramework</li>
+	</loadAfter>
+</ModMetaData>

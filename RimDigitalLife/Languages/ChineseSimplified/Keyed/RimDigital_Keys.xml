@@ -50,4 +50,6 @@
 	<RDL_Reminder_LateNight_Message>现在已经 {0} 了，夜深了。\n注意身体，早点休息吧！明天还要继续建设殖民地呢。</RDL_Reminder_LateNight_Message>
 	
 	<RDL_Reminder_OK>知道了</RDL_Reminder_OK>
+
+	<RDL_Reminder_Footer>该提示由 @麦丫Maiya 大叔的《边缘数码生活》模组提醒，可在 Mod 设置里调整时间间隔与开关本功能。如体验不佳，向你道歉。</RDL_Reminder_Footer>
 </LanguageData>

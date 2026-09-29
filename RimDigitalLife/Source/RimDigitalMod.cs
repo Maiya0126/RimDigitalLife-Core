@@ -34,7 +34,7 @@ namespace RimDigitalLife
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 20f, 1200f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 20f, 1900f);
             
             Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
             Listing_Standard listing = new Listing_Standard();
@@ -147,6 +147,17 @@ namespace RimDigitalLife
             listing.CheckboxLabeled("提醒时暂停游戏", ref settings.reminderPauseGame, 
                 "弹出提醒时自动暂停游戏。");
             listing.Label($"<i>本次游戏已运行: {RealTimeReminder.GetPlayTimeFormatted()}</i>");
+
+            // 测试提示功能按钮（立即弹出一个提醒窗口预览效果，不用等间隔）
+            listing.Gap(6f);
+            if (listing.ButtonText("测试提示功能 (Test Reminder)"))
+            {
+                Find.WindowStack.Add(new ReminderDialog(
+                    "RDL_Reminder_Water_Title".Translate(),
+                    "RDL_Reminder_Water_Message".Translate(),
+                    settings.reminderPauseGame));
+            }
+            listing.Gap(4f);
 
             listing.End();
             Widgets.EndScrollView();

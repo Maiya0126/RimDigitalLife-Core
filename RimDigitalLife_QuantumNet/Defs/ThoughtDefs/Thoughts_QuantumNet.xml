@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThoughtDef>
+		<defName>QuantumNet_SupportStreamer</defName>
+		<durationDays>2</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>支持主播</label>
+				<description>我刚给喜欢的主播（玩家）打赏了数字白银，用实际行动支持一下！</description>
+				<baseMoodEffect>6</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>QuantumNet_OnlineShopping</defName>
+		<durationDays>1.5</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li>
+				<label>收到网购包裹</label>
+				<description>我用数字钱包网购的包裹到啦！拆快递的感觉太幸福了！</description>
+				<baseMoodEffect>5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+</Defs>

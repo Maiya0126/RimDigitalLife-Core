@@ -50,4 +50,6 @@
 	<RDL_Reminder_LateNight_Message>It's already {0} - pretty late!\nTake care of yourself and get some rest. The colony will still be here tomorrow!</RDL_Reminder_LateNight_Message>
 	
 	<RDL_Reminder_OK>Got it</RDL_Reminder_OK>
+
+	<RDL_Reminder_Footer>This reminder is brought to you by Uncle @MaiyaMaiya's Rim Digital Life mod. You can adjust the interval and toggle this feature in Mod Settings. Apologies for any inconvenience.</RDL_Reminder_Footer>
 </LanguageData>
