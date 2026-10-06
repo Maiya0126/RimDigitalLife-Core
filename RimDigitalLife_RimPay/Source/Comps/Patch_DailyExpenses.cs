@@ -8,19 +8,37 @@ namespace RimDigitalLife_RimPay
 {
     // ========================================================================
     // 补丁 1：拦截进食行为 (Eat Food)
+    //
+    // 注意：Toils_Ingest.FinalizeIngest 是"toil 工厂"（在 JobDriver 构建时调用一次，
+    // 返回 Toil），不是"吃完"的时刻——直接在 postfix 里扣费会导致：
+    //   1) 扣费发生在"开始去吃饭"而非"吃完"（中途取消也已扣钱）；
+    //   2) 工厂阶段 CurJob 状态不稳定，可能取不到食物而静默跳过（玩家反馈"没交钱"的根因）。
+    // 正确做法：postfix 给返回的 Toil 追加 AddFinishAction——1.6 中该 toil 的
+    // initAction 执行 thing.Ingested()（真正吃下去），finishActions 在其后执行。
     // ========================================================================
     [HarmonyPatch(typeof(Toils_Ingest), "FinalizeIngest")]
     public static class Patch_Toils_Ingest_FinalizeIngest
     {
         [HarmonyPostfix]
-        public static void Postfix(Pawn ingester, TargetIndex ingestibleInd)
+        public static void Postfix(Pawn ingester, TargetIndex ingestibleInd, Toil __result)
         {
-            if (ingester == null || !ingester.IsColonistPlayerControlled) return;
+            if (__result == null || ingester == null) return;
+            __result.AddFinishAction(delegate
+            {
+                ChargeMealFee(ingester, ingestibleInd);
+            });
+        }
+
+        // 真正"吃完"时执行扣费（此时食物已被消耗，CurJob 必然正确）
+        private static void ChargeMealFee(Pawn ingester, TargetIndex ingestibleInd)
+        {
+            if (ingester == null || ingester.Dead || !ingester.IsColonistPlayerControlled) return;
+            if (ingester.jobs?.curJob == null) return;
 
             GameComponent_RimPay comp = Current.Game.GetComponent<GameComponent_RimPay>();
             if (comp == null) return;
 
-            Thing food = ingester.CurJob?.GetTarget(ingestibleInd).Thing;
+            Thing food = ingester.CurJob.GetTarget(ingestibleInd).Thing;
             if (food == null || food.def == null || food.def.ingestible == null) return;
 
             var S = RimPayMod.settings;

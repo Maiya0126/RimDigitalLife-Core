@@ -27,7 +27,7 @@ namespace RimDigitalLife
 
         public override string SettingsCategory()
         {
-            return "RimDigital Life：Core 边缘数码生活:核心版";
+            return "Rim Digital Life - Core 边缘数码生活：核心版 (v1.2.2)";
         }
 
         private Vector2 scrollPosition = Vector2.zero;
@@ -158,6 +158,9 @@ namespace RimDigitalLife
                     settings.reminderPauseGame));
             }
             listing.Gap(4f);
+
+            listing.Gap(6f);
+            listing.Label("<b>当前模组版本: v1.2.2</b>");
 
             listing.End();
             Widgets.EndScrollView();

@@ -236,6 +236,9 @@ namespace RimDigitalLife_RimPay
             settings.rimSimQuantumDiscount = listing.Slider(settings.rimSimQuantumDiscount, 0f, 0.3f);
             listing.Gap(10f);
 
+            listing.Gap(6f);
+            listing.Label("<b>当前模组版本: v0.7.01</b>");
+
             listing.End();
             Widgets.EndScrollView();
         }

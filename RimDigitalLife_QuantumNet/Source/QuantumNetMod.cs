@@ -39,7 +39,7 @@ namespace RimDigitalLife_QuantumNet
 
         public override string SettingsCategory()
         {
-            return "Rim Digital Life - Quantum Net 量子网络拓展 (v0.4.01)";
+            return "Rim Digital Life - Quantum Net Expansion 边缘数码生活：量子网络拓展 (v0.4.01)";
         }
 
         private int selectedConfigIdx = -1;
@@ -238,6 +238,9 @@ namespace RimDigitalLife_QuantumNet
                 jsonBuffer = settings.networkJsonTemplate;
                 Messages.Message("[QuantumNet] 已还原默认 JSON 模板。", MessageTypeDefOf.NeutralEvent, false);
             }
+
+            listing.Gap(6f);
+            listing.Label("<b>当前模组版本: v0.4.01</b>");
 
             listing.End();
             Widgets.EndScrollView();
