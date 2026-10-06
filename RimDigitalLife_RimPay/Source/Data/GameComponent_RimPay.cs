@@ -174,6 +174,10 @@ namespace RimDigitalLife_RimPay
         // 上次发薪水的 Tick
         private int lastPaydayTick = 0;
 
+        // 上次发薪的游戏日期（基地 tile 经度基准，用于跨天补偿触发）
+        private int lastPaydayDayOfYear = -1;
+        private int lastPaydayYear = -1;
+
         // 宏观事件（多日持续，存读档）
         private string activeMacroEvent = "";
         private int macroEventDaysLeft = 0;
@@ -202,15 +206,21 @@ namespace RimDigitalLife_RimPay
 
         private void CheckAndProcessPayroll()
         {
-            // 无任何地图时（极端场景）跳过，避免 GenLocalDate 空引用
-            Map payrollMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
-            if (payrollMap == null) return;
+            // 日期基准统一用基地地图的 tile（经度）——
+            // GenLocalDate 的小时/日期按各地图经度计算，RPG 任务地图与基地经度不同，
+            // 用 CurrentMap 会导致"0 点窗口"与基地时间错位（跨图跨午夜 → 当天集体不发薪）。
+            Map baseMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
+            if (baseMap == null) return;
 
-            // 每天的 00:00 (0 tick) 到 01:00 之间触发
-            int currentHour = GenLocalDate.HourOfDay(payrollMap);
             int currentTick = Find.TickManager.TicksGame;
+            int today = GenLocalDate.DayOfYear(baseMap);
+            int thisYear = GenLocalDate.Year(baseMap);
 
-            if (currentHour == 0 && currentTick - lastPaydayTick > 30000) // 确保一天只发一次 (30000 tick 半天)
+            // 跨天补偿触发：基地日期与上次发薪日不同 → 立即补发（下一个 1000-tick 检查点），
+            // 不再依赖 hour==0 的 1 小时窗口——暂停、换图、时差、睡过头全部免疫。
+            // 00:00 后日期自然翻转即触发，30000 tick 防重保留，防止同一天内重复发薪。
+            bool dayChanged = today != lastPaydayDayOfYear || thisYear != lastPaydayYear;
+            if (dayChanged && currentTick - lastPaydayTick > 30000)
             {
                 ProcessDailyPayroll();
                 lastPaydayTick = currentTick;
@@ -239,9 +249,14 @@ namespace RimDigitalLife_RimPay
             int totalInterest = 0;
             int totalColonists = 0;
 
-            foreach (Pawn pawn in map.mapPawns.FreeColonists)
+            // 范围：全体玩家殖民者（所有地图 + 车队 + 运输舱 + 奴隶），
+            // 排除冷冻舱睡眠（Suspended）与任务借用小人（quest lodger）——
+            // RPG 远征/任务地图上的小人同样领工资、按基地房间收租。
+            List<Pawn> payrollPawns = PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists;
+
+            foreach (Pawn pawn in payrollPawns)
             {
-                if (pawn.Dead) continue;
+                if (pawn == null || pawn.Dead || pawn.Suspended || pawn.IsQuestLodger()) continue;
                 totalColonists++;
 
                 // 1. 发放工资
@@ -327,6 +342,10 @@ namespace RimDigitalLife_RimPay
 
             // 7. AI 财经事件 → RimTalk 播报 (让小人聊天提到今天的财经大事)
             BroadcastEconomyAiToRimTalk();
+
+            // 8. 记录本次发薪的基地日期（跨天补偿触发的基准）
+            lastPaydayDayOfYear = GenLocalDate.DayOfYear(map);
+            lastPaydayYear = GenLocalDate.Year(map);
         }
 
         // ---- AI 财经事件播报给 RimTalk（随机一名殖民者触发一段对话） ----
@@ -868,7 +887,9 @@ namespace RimDigitalLife_RimPay
             }
 
             var list = transactionLogs[key];
-            Map txMap = pawn.MapHeld ?? Find.CurrentMap ?? Find.AnyPlayerHomeMap;
+            // 日期统一按基地 tile 经度（任务地图与基地经度不同，各自"同一天"会错位，
+            // 统一基准后个人钱包流水与日报/国库流水账的日期判定完全一致）
+            Map txMap = Find.AnyPlayerHomeMap ?? pawn.MapHeld ?? Find.CurrentMap;
             if (txMap == null) return; // 无任何地图时无法记日期，跳过流水
             int currentDay = GenLocalDate.DayOfYear(txMap);
             int currentYear = GenLocalDate.Year(txMap);
@@ -1300,6 +1321,8 @@ namespace RimDigitalLife_RimPay
             base.ExposeData();
             Scribe_Values.Look(ref cloudTreasuryBalance, "cloudTreasuryBalance", 0);
             Scribe_Values.Look(ref lastPaydayTick, "lastPaydayTick", 0);
+            Scribe_Values.Look(ref lastPaydayDayOfYear, "lastPaydayDayOfYear", -1);
+            Scribe_Values.Look(ref lastPaydayYear, "lastPaydayYear", -1);
             Scribe_Values.Look(ref stocksInitialized, "stocksInitialized", false);
             Scribe_Values.Look(ref lastStockUpdateTick, "lastStockUpdateTick", 0);
             Scribe_Collections.Look(ref personalWallets, "personalWallets", LookMode.Value, LookMode.Value);
