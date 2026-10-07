@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using UnityEngine;
@@ -212,18 +212,19 @@ namespace RimDigitalLife_RimPay
             Map baseMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
             if (baseMap == null) return;
 
-            int currentTick = Find.TickManager.TicksGame;
             int today = GenLocalDate.DayOfYear(baseMap);
             int thisYear = GenLocalDate.Year(baseMap);
 
             // 跨天补偿触发：基地日期与上次发薪日不同 → 立即补发（下一个 1000-tick 检查点），
             // 不再依赖 hour==0 的 1 小时窗口——暂停、换图、时差、睡过头全部免疫。
-            // 00:00 后日期自然翻转即触发，30000 tick 防重保留，防止同一天内重复发薪。
+            // 注意：不能用 tick 差值做防重——补发后紧接着的跨天（tick 差 < 30000）会被挡住，
+            // 导致下一次发薪延迟约 8 游戏小时；dayChanged 本身已保证"一天只发一次"
+            // （发薪日期在 ProcessDailyPayroll 成功末尾才记录，中途异常会自动重试）。
             bool dayChanged = today != lastPaydayDayOfYear || thisYear != lastPaydayYear;
-            if (dayChanged && currentTick - lastPaydayTick > 30000)
+            if (dayChanged)
             {
                 ProcessDailyPayroll();
-                lastPaydayTick = currentTick;
+                lastPaydayTick = Find.TickManager.TicksGame; // 仅存档展示用途，不再参与触发判定
             }
         }
 
@@ -939,7 +940,7 @@ namespace RimDigitalLife_RimPay
         {
             var S = RimPayMod.settings;
             int period = (S != null && S.enableLoan && S.loanDefaultPeriod > 0) ? S.loanDefaultPeriod : 15;
-            Map dateMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
+            Map dateMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
             if (dateMap == null) return;
             int day = GenLocalDate.DayOfYear(dateMap);
             int year = GenLocalDate.Year(dateMap);
@@ -950,7 +951,7 @@ namespace RimDigitalLife_RimPay
         {
             var S = RimPayMod.settings;
             int period = (S != null && S.enableLoan && S.loanDefaultPeriod > 0) ? S.loanDefaultPeriod : 15;
-            Map dateMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
+            Map dateMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
             if (dateMap == null) return;
             int day = GenLocalDate.DayOfYear(dateMap);
             int year = GenLocalDate.Year(dateMap);
@@ -965,7 +966,7 @@ namespace RimDigitalLife_RimPay
         public void ProcessLoanInterest()
         {
             List<LoanRecord> toRemove = new List<LoanRecord>();
-            Map dateMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
+            Map dateMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
             if (dateMap == null) return;
             int currentDay = GenLocalDate.DayOfYear(dateMap);
             int currentYear = GenLocalDate.Year(dateMap);

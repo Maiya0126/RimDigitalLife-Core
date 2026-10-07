@@ -107,7 +107,8 @@ namespace RimDigitalLife_RimPay
             if (Time.time - lastRequestTime < minInterval) return;
 
             // 主菜单/无地图时（如从设置页"立即请求"）DayOfYear 不可用，记 -1 占位，请求照常发起
-            Map requestMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
+            // 日期基准统一基地 tile（与发薪/日报一致，避免任务地图经度导致"请求日"显示错位）
+            Map requestMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
             lastRequestDay = requestMap != null ? GenLocalDate.DayOfYear(requestMap) : -1;
             requestInFlight = true;
 
@@ -155,7 +156,7 @@ namespace RimDigitalLife_RimPay
                         // 归档本次结果（最新在前，最多保留 10 条）
                         try
                         {
-                            Map snapMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
+                            Map snapMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
                             var snap = new EconomySnapshot
                             {
                                 dayLabel = snapMap != null ? $"第{GenLocalDate.Year(snapMap)}.{GenLocalDate.DayOfYear(snapMap)}日" : "未知日期",
