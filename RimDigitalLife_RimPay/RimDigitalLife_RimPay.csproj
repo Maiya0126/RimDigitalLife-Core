@@ -79,6 +79,7 @@
     <Compile Include="Source\Comps\Patch_Wealth.cs" />
     <Compile Include="Source\Comps\Patch_PawnGizmos.cs" />
     <Compile Include="Source\Comps\Patch_PawnLoot.cs" />
+    <Compile Include="Source\Comps\Patch_DailyExpenses.cs" />
     <Compile Include="Source\Comps\Patch_MedicalFee.cs" />
     <Compile Include="Source\Compat\RimSimIntegration.cs" />
     <Compile Include="Source\UI\Window_PawnWallet.cs" />

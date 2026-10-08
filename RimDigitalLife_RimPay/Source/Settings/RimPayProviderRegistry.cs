@@ -5,6 +5,7 @@ namespace RimDigitalLife_RimPay
 {
     public enum RimPayProvider
     {
+        Player2,
         Google,
         OpenAI,
         DeepSeek,
@@ -12,7 +13,6 @@ namespace RimDigitalLife_RimPay
         GLM,
         OpenRouter,
         SiliconFlow,
-        Player2,
         Local,
         Custom,
         None

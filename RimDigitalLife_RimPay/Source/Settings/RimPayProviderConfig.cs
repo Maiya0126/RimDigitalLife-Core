@@ -6,7 +6,7 @@ namespace RimDigitalLife_RimPay
     public class RimPayProviderConfig : IExposable
     {
         public string label = "";
-        public RimPayProvider provider = RimPayProvider.SiliconFlow;
+        public RimPayProvider provider = RimPayProvider.Player2;
         public string endpointUrl = "";
         public string apiKey = "";
         public string model = "";
@@ -61,7 +61,7 @@ namespace RimDigitalLife_RimPay
         {
             Scribe_Values.Look(ref label, "label", "");
             string pStr = provider.ToString();
-            Scribe_Values.Look(ref pStr, "provider", "SiliconFlow");
+            Scribe_Values.Look(ref pStr, "provider", "Player2");
             provider = RimPayProviderRegistry.FromString(pStr);
             Scribe_Values.Look(ref endpointUrl, "endpointUrl", "");
             Scribe_Values.Look(ref apiKey, "apiKey", "");

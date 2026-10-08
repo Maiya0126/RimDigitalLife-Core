@@ -73,7 +73,7 @@ namespace RimDigitalLife_QuantumNet
             Widgets.Label(new Rect(inRect.x, y, inRect.width, 22f), "<b>殖民者套餐</b>");
             y += 28f;
 
-            Rect viewRect = new Rect(inRect.x, y, inRect.width, inRect.yMax - y - 10f);
+            Rect viewRect = new Rect(inRect.x, y, inRect.width, inRect.yMax - y - 32f);
             List<Pawn> colonists = map != null && map.mapPawns != null
                 ? map.mapPawns.FreeColonists
                 : new List<Pawn>();
@@ -102,6 +102,14 @@ namespace RimDigitalLife_QuantumNet
                 itemY += 34f;
             }
             Widgets.EndScrollView();
+
+            // 底部版本标注（参照 RimPay 国库终端）
+            Text.Font = GameFont.Tiny;
+            GUI.color = new Color(0.7f, 0.7f, 0.7f);
+            Widgets.Label(new Rect(inRect.x, inRect.yMax - 20f, inRect.width, 18f),
+                "<i>量子网络控制台  [" + QuantumNetMod.ModVersion + "]</i>");
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
         }
 
         private void DrawPlanButton(Rect rect, Pawn pawn, QuantumPlan target, QuantumPlan current)

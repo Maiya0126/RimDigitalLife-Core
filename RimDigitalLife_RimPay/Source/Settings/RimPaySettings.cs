@@ -11,7 +11,7 @@ namespace RimDigitalLife_RimPay
         public System.Collections.Generic.List<RimPayProviderConfig> apiConfigs = new System.Collections.Generic.List<RimPayProviderConfig>();
 
         // 旧版单配置字段（仅用于迁移：若 apiConfigs 为空且旧字段已被填写，则迁移到列表）
-        public RimPayProvider apiProvider = RimPayProvider.SiliconFlow;
+        public RimPayProvider apiProvider = RimPayProvider.Player2;
         public string apiEndpointUrl = "";
         public string apiKey = "";
         public string apiModel = "";
@@ -125,7 +125,7 @@ namespace RimDigitalLife_RimPay
         {
             Scribe_Values.Look(ref enableEconomyAI, "enableEconomyAI", false);
             string providerStr = apiProvider.ToString();
-            Scribe_Values.Look(ref providerStr, "apiProvider", "SiliconFlow");
+            Scribe_Values.Look(ref providerStr, "apiProvider", "Player2");
             apiProvider = RimPayProviderRegistry.FromString(providerStr);
             Scribe_Values.Look(ref apiEndpointUrl, "apiEndpointUrl", "");
             Scribe_Values.Look(ref apiKey, "apiKey", "");

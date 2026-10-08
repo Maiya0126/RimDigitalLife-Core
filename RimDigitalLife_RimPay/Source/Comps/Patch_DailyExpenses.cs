@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
+using Verse.AI;
 using HarmonyLib;
 
 namespace RimDigitalLife_RimPay
@@ -73,12 +75,20 @@ namespace RimDigitalLife_RimPay
                 // 扣费并回流国库
                 comp.ModifyBalance(ingester, -cost, "用餐费用");
                 comp.ModifyTreasury(cost, "餐费");
+                if (Prefs.DevMode)
+                {
+                    Verse.Log.Message($"[RimPay 餐费] {ingester.LabelShort} 用餐扣费 {cost} @银 ({food.LabelShort})，钱包余额 {balance - cost}。");
+                }
             }
             else
             {
                 // 钱包余额不足以支付餐费，吃上"救济粮"
                 comp.ModifyBalance(ingester, -balance, "救济粮");
                 comp.ModifyTreasury(balance, "餐费(救济)");
+                if (Prefs.DevMode)
+                {
+                    Verse.Log.Message($"[RimPay 餐费] {ingester.LabelShort} 钱包不足，吃救济粮 (支付 {balance} @银, 应付 {cost})。");
+                }
             }
         }
 
