@@ -12,6 +12,10 @@ namespace RimDigitalLife_QuantumNet
     {
         public static QuantumNetSettings settings;
         private static Harmony harmony;
+
+        // 模组版本（About.xml / 设置页 / 控制台 同步标注）
+        public const string ModVersion = "v0.4.01";
+
         private string jsonBuffer = "";
 
         // 设置页分页（顶部 Tab）

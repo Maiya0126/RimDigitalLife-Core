@@ -149,7 +149,7 @@ namespace RimDigitalLife_RimPay
             // 底部提示
             outer.Gap(4f);
             Text.Font = GameFont.Tiny;
-            outer.Label("<i>单位: @银 (1 数字白银 = 1 物理白银)  |  物理白银计入殖民地财富计算，数字国库不计入  |  可以将白银存入数字国库压低殖民地财富值，减轻袭击力度    [v0.6.01]</i>");
+            outer.Label("<i>单位: @银 (1 数字白银 = 1 物理白银)  |  物理白银计入殖民地财富计算，数字国库不计入  |  可以将白银存入数字国库压低殖民地财富值，减轻袭击力度    [v0.7.02]</i>");
             Text.Font = GameFont.Small;
 
             outer.End();
