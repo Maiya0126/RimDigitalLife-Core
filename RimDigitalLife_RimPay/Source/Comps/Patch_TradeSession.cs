@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace RimDigitalLife_RimPay
@@ -109,6 +110,21 @@ namespace RimDigitalLife_RimPay
             if (mult == 1f) return;
             __result *= mult;
             if (__result < 0f) __result = 0f;
+        }
+    }
+
+    // ========================================================================
+    // 补丁 4：记录与派系的大宗贸易，提振该派系股票商业景气
+    // ========================================================================
+    [HarmonyPatch(typeof(Faction), "Notify_PlayerTraded")]
+    public static class Patch_Faction_Notify_PlayerTraded
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Faction __instance, float marketValueSentByPlayer)
+        {
+            if (__instance == null || marketValueSentByPlayer < 500f) return;
+            var comp = Current.Game?.GetComponent<GameComponent_RimPay>();
+            comp?.NotifyBigTrade(__instance.loadID, Mathf.RoundToInt(marketValueSentByPlayer));
         }
     }
 }

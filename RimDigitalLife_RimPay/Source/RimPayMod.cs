@@ -31,7 +31,7 @@ namespace RimDigitalLife_RimPay
 
         public override string SettingsCategory()
         {
-            return "Rim Digital Life - RimPay 边缘数码生活：数字经济拓展 (v0.7.03)";
+            return "Rim Digital Life - RimPay 边缘数码生活：数字经济拓展 (v1.1.0)";
         }
 
         private int selectedConfigIdx = -1;
@@ -237,7 +237,7 @@ namespace RimDigitalLife_RimPay
             listing.Gap(10f);
 
             listing.Gap(6f);
-            listing.Label("<b>当前模组版本: v0.7.03</b>");
+            listing.Label("<b>当前模组版本: v1.1.0</b>");
 
             listing.End();
             Widgets.EndScrollView();

@@ -116,16 +116,24 @@ namespace RimDigitalLife_RimPay
         public double changePercent = 0.0;
         public double volatility = 0.1; // 波动率
         public List<StockBar> priceHistory = new List<StockBar>(); // 近30天价格K线历史
+        public int factionLoadID = -1; // 绑定的派系 loadID（>=0 表示派系股票）
+        public string category = "Tech"; // 行业分类 (Tech/Entertainment/Food/Agri/Ranch/ECom/Media/Sports/Medical/Arms/Mining/Finance/Quantum/Faction)
+        public string desc = ""; // 简要介绍
+
+        public bool IsFactionStock => factionLoadID >= 0;
 
         public StockData() { }
 
-        public StockData(string code, string name, double basePrice, double volatility)
+        public StockData(string code, string name, double basePrice, double volatility, string category = "Tech", int factionLoadID = -1, string desc = "")
         {
             this.code = code;
             this.name = name;
             this.price = basePrice;
             this.volatility = volatility;
             this.changePercent = 0.0;
+            this.category = category;
+            this.factionLoadID = factionLoadID;
+            this.desc = desc;
         }
 
         public void ExposeData()
@@ -135,6 +143,9 @@ namespace RimDigitalLife_RimPay
             Scribe_Values.Look(ref price, "price", 1.0);
             Scribe_Values.Look(ref changePercent, "changePercent", 0.0);
             Scribe_Values.Look(ref volatility, "volatility", 0.1);
+            Scribe_Values.Look(ref factionLoadID, "factionLoadID", -1);
+            Scribe_Values.Look(ref category, "category", "Tech");
+            Scribe_Values.Look(ref desc, "desc", "");
             Scribe_Collections.Look(ref priceHistory, "priceHistory", LookMode.Deep);
         }
     }
@@ -188,6 +199,11 @@ namespace RimDigitalLife_RimPay
         private int storeSalesToday = 0;
         private int storeSalesAccumulated = 0;
         private int storeSalesDayStamp = -1;
+
+        // 股市事件驱动系统（动态事件缓存，每日结算后衰减/清空）
+        private List<string> recentResearchTags = new List<string>();
+        private List<int> recentRaidFactionIDs = new List<int>();
+        private Dictionary<int, int> recentBigTradeFactions = new Dictionary<int, int>();
 
         public GameComponent_RimPay(Game game)
         {
@@ -428,6 +444,27 @@ namespace RimDigitalLife_RimPay
             Find.LetterStack.ReceiveLetter("边缘财经快讯：" + macroEventLabel,
                 macroEventDesc + "\n\n（该宏观事件将持续 " + macroEventDaysLeft + " 天，期间影响股市/交易/搜刮等经济环节。）",
                 LetterDefOf.PositiveEvent, (LookTargets)null);
+
+            // RimTuber 动态墙联动：大事件自动上墙
+            TryPostRimTuberFinanceFeed("🔥【宏观快讯】" + macroEventLabel, macroEventDesc, "市场头条");
+        }
+
+        private static void TryPostRimTuberFinanceFeed(string title, string body, string tag = "边缘财经")
+        {
+            if (!IsRimTuberActive()) return;
+            try
+            {
+                var asm = System.AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "RimTuber");
+                if (asm == null) return;
+                var apiType = asm.GetType("RimTuber.RimTuberAPI");
+                if (apiType == null) return;
+                var postMethod = apiType.GetMethod("PostFinanceFeed", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                if (postMethod != null)
+                {
+                    postMethod.Invoke(null, new object[] { title, body, tag });
+                }
+            }
+            catch { }
         }
 
         private static string GetMacroEventLabel(string key)
@@ -1008,44 +1045,146 @@ namespace RimDigitalLife_RimPay
             foreach (LoanRecord lr in toRemove) loans.Remove(lr);
         }
 
-        // ======== 股票系统 ========
+        // ======== 股票系统（全行业板块 + 动态派系 + 现实/气候/科研/直播事件驱动） ========
+
+        private struct StockTemplate
+        {
+            public string code;
+            public string name;
+            public double basePrice;
+            public double volatility;
+            public string category;
+            public string desc;
+
+            public StockTemplate(string code, string name, double basePrice, double volatility, string category, string desc)
+            {
+                this.code = code;
+                this.name = name;
+                this.basePrice = basePrice;
+                this.volatility = volatility;
+                this.category = category;
+                this.desc = desc;
+            }
+        }
+
+        private static readonly List<StockTemplate> CoreFixedStocks = new List<StockTemplate>
+        {
+            // --- 消费电子与数码科技 (Tech) ---
+            new StockTemplate("$ISHN", "iShen 集团", 12.5, 0.05, "Tech", "星系消费电子巨头，主营智能手机与移动终端"),
+            new StockTemplate("$MSFT", "Macrosoft 微硬", 15.0, 0.03, "Tech", "老牌软件与操作系统垄断服务商"),
+            new StockTemplate("$NOKI", "Nokirim 诺基林", 18.5, 0.02, "Tech", "工业级通信设备与军工防护外壳制造"),
+            new StockTemplate("$DAMI", "DaMi 科技", 4.5, 0.12, "Tech", "平价个人智能出行与电动平衡车研发"),
+            new StockTemplate("$BOOS", "BoosDead", 0.8, 0.25, "Tech", "低端山寨数码与劣质电子元件组装厂"),
+
+            // --- 文化娱乐与大众消费 (Entertainment & Food) ---
+            new StockTemplate("$RIMT", "Rimtendo 任天缘", 8.2, 0.08, "Entertainment", "风靡边缘世界的掌机与卡带娱乐开发商"),
+            new StockTemplate("$RONY", "RONY 缘尼", 7.8, 0.07, "Entertainment", "高端影音视听主机与影像传感器巨头"),
+            new StockTemplate("$STAR", "StarveMe 科技", 3.2, 0.18, "Food", "深空应急合成食品与长保压缩营养膏"),
+
+            // --- 现代现实主力行业 (Agri, Ranch, ECom, Media, Sports, Medical, Arms, Mining) ---
+            new StockTemplate("$AGRI", "GreenSprout 绿芽农业", 5.2, 0.10, "Agri", "大宗水培农作物与抗旱耐寒农产品种植"),
+            new StockTemplate("$MUFF", "MuffaloCorp 耗牛畜牧", 4.8, 0.11, "Ranch", "纯血耗牛繁育与保暖毛皮肉品联合体"),
+            new StockTemplate("$ECOM", "OrbitalBay 轨道淘客", 8.8, 0.08, "ECom", "星系轨道电商网购平台与货运直达"),
+            new StockTemplate("$TUBR", "TuberNet 块茎传媒", 6.5, 0.15, "Media", "流媒体与顶流自媒体孵化联盟"),
+            new StockTemplate("$NEWS", "RimTribune 边缘先驱报", 7.2, 0.06, "Media", "历史悠久的星系通讯社与中立财经新闻网"),
+            new StockTemplate("$GLAD", "ApexArena 巅峰竞技", 6.0, 0.12, "Sports", "星际极限滑板竞速赛与角斗联赛娱乐"),
+            new StockTemplate("$GLTR", "GlitterPharm 闪耀制药", 16.0, 0.06, "Medical", "闪耀世界高阶仿生体与全能抗生素研发"),
+            new StockTemplate("$MEDX", "MedEx 生物科技", 9.5, 0.10, "Medical", "异种基因重构与人造内脏培育工厂"),
+            new StockTemplate("$APEX", "ApexArms 顶峰防务", 14.0, 0.09, "Arms", "行星重型近防炮塔与高斯电磁火器制造"),
+            new StockTemplate("$PLST", "PlasteelDyn 玻璃钢重工", 11.0, 0.08, "Arms", "超合金复合动力装甲与高密度防护盾研制"),
+            new StockTemplate("$URAN", "UranCorp 泛星系铀能", 13.5, 0.12, "Mining", "超临界核能聚变反应堆与深层地质采掘"),
+
+            // --- 投机衍生基金 (Finance) ---
+            new StockTemplate("$DSF", "数字白银杠杆基金", 10.0, 0.30, "Finance", "追踪大盘情绪的高杠杆投机衍生基金")
+        };
+
+        private static readonly List<StockTemplate> QuantumNetOperatorStocks = new List<StockTemplate>
+        {
+            new StockTemplate("$SCOM", "星链通信 (StarCom)", 12.0, 0.08, "Quantum", "量子网络低轨星链覆盖通信商"),
+            new StockTemplate("$NEBU", "星云算力 (NebulaCloud)", 15.5, 0.07, "Quantum", "超导云算力与 RimSeek 智算调度服务商"),
+            new StockTemplate("$CART", "卡带发行商 (CartoBoard)", 7.5, 0.10, "Quantum", "数字娱乐内容发行与虚拟软件载体"),
+            new StockTemplate("$BAZR", "赛博百货 (CyberBazaar)", 9.0, 0.09, "Quantum", "全星系虚拟网购与数字商品平台"),
+            new StockTemplate("$SCAN", "深矿雷达 (MineScan)", 11.0, 0.08, "Quantum", "轨道重力梯度测绘与深层矿脉遥感云平台")
+        };
+
         public void InitializeStocks()
         {
-            if (stocks != null && stocks.Count > 0)
+            if (stocksInitialized && stocks != null && stocks.Count > 0)
             {
-                stocksInitialized = true;
+                EnsureAllStocksPresent();
                 return;
             }
             stocksInitialized = true;
             if (stocks == null) stocks = new List<StockData>();
             stocks.Clear();
+            EnsureAllStocksPresent();
+        }
 
-            // 固定公司股票
-            stocks.Add(CreateStock("$ISHN", "iShen 集团", 12.5, 0.05));
-            stocks.Add(CreateStock("$RIMT", "Rimtendo 任天缘", 8.2, 0.08));
-            stocks.Add(CreateStock("$RONY", "RONY 缘尼", 7.8, 0.07));
-            stocks.Add(CreateStock("$MSFT", "Macrosoft 微硬", 15.0, 0.03));
-            stocks.Add(CreateStock("$NOKI", "Nokirim 诺基林", 18.5, 0.02));
-            stocks.Add(CreateStock("$DAMI", "DaMi 科技", 4.5, 0.12));
-            stocks.Add(CreateStock("$BOOS", "BoosDead", 0.8, 0.25));
-            stocks.Add(CreateStock("$STAR", "StarveMe 科技", 3.2, 0.18));
-            stocks.Add(CreateStock("$DSF", "数字白银杠杆基金", 10.0, RimPayMod.settings?.stocksFundVolatility ?? 0.30f));
+        public void EnsureAllStocksPresent()
+        {
+            if (stocks == null) stocks = new List<StockData>();
 
-            // 动态派系股票
-            foreach (Faction f in Find.FactionManager.AllFactionsVisible)
+            // 1. 检查核心固定股票
+            foreach (var t in CoreFixedStocks)
             {
-                if (f.IsPlayer || f.temporary) continue;
-                string code = "$" + (f.Name.Length >= 3 ? f.Name.Substring(0, 3).ToUpper() : f.Name.ToUpper());
-                double basePrice = (f.def.techLevel == TechLevel.Animal ? 0.5 : f.def.techLevel == TechLevel.Neolithic ? 1.0 : f.def.techLevel == TechLevel.Medieval ? 2.0 : f.def.techLevel == TechLevel.Industrial ? 4.0 : f.def.techLevel == TechLevel.Spacer ? 8.0 : f.def.techLevel == TechLevel.Ultra ? 12.0 : 16.0);
-                double vol = 0.08 + (double)f.def.techLevel * 0.01;
-                stocks.Add(CreateStock(code, f.Name, basePrice, vol));
+                double vol = (t.code == "$DSF") ? (RimPayMod.settings?.stocksFundVolatility ?? 0.30f) : t.volatility;
+                var existing = stocks.FirstOrDefault(s => s.code == t.code);
+                if (existing == null)
+                {
+                    stocks.Add(CreateStock(t.code, t.name, t.basePrice, vol, t.category, -1, t.desc));
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(existing.category)) existing.category = t.category;
+                    if (string.IsNullOrEmpty(existing.desc)) existing.desc = t.desc;
+                }
+            }
+
+            // 2. 若安装量子网络，检查运营商股票
+            if (IsQuantumNetActive())
+            {
+                foreach (var t in QuantumNetOperatorStocks)
+                {
+                    var existing = stocks.FirstOrDefault(s => s.code == t.code);
+                    if (existing == null)
+                    {
+                        stocks.Add(CreateStock(t.code, t.name, t.basePrice, t.volatility, t.category, -1, t.desc));
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(existing.category)) existing.category = t.category;
+                        if (string.IsNullOrEmpty(existing.desc)) existing.desc = t.desc;
+                    }
+                }
+            }
+
+            // 3. 动态派系股票
+            if (Find.FactionManager != null)
+            {
+                foreach (Faction f in Find.FactionManager.AllFactionsVisible)
+                {
+                    if (f.IsPlayer || f.temporary) continue;
+                    string code = "$" + (f.Name.Length >= 3 ? f.Name.Substring(0, 3).ToUpper() : f.Name.ToUpper());
+                    var existing = stocks.FirstOrDefault(s => s.code == code || s.factionLoadID == f.loadID);
+                    if (existing == null)
+                    {
+                        double basePrice = (f.def.techLevel == TechLevel.Animal ? 0.5 : f.def.techLevel == TechLevel.Neolithic ? 1.0 : f.def.techLevel == TechLevel.Medieval ? 2.0 : f.def.techLevel == TechLevel.Industrial ? 4.0 : f.def.techLevel == TechLevel.Spacer ? 8.0 : f.def.techLevel == TechLevel.Ultra ? 12.0 : 16.0);
+                        double vol = 0.08 + (double)f.def.techLevel * 0.01;
+                        stocks.Add(CreateStock(code, f.Name, basePrice, vol, "Faction", f.loadID, $"{f.Name} (科技级别: {f.def.techLevel.ToString()})"));
+                    }
+                    else
+                    {
+                        existing.factionLoadID = f.loadID;
+                        existing.category = "Faction";
+                    }
+                }
             }
         }
 
         // 创建股票并预生成一段初始历史价格 (蜡烛K线图)
-        private static StockData CreateStock(string code, string name, double basePrice, double volatility)
+        private static StockData CreateStock(string code, string name, double basePrice, double volatility, string category = "Tech", int factionLoadID = -1, string desc = "")
         {
-            StockData s = new StockData(code, name, basePrice, volatility);
+            StockData s = new StockData(code, name, basePrice, volatility, category, factionLoadID, desc);
             float prevClose = (float)basePrice;
             int genDays = RimPayMod.settings?.stockHistoryDays > 0 ? RimPayMod.settings.stockHistoryDays : 15;
             for (int i = 0; i < genDays; i++)
@@ -1072,6 +1211,8 @@ namespace RimDigitalLife_RimPay
                 stocksInitialized = false;
                 InitializeStocks();
             }
+
+            EnsureAllStocksPresent();
 
             // 额外保险 (自愈机制)：如果任何股票的价格历史损坏、为空或不足 15 天
             // 立刻在内存中为其虚拟补充生成完整的 15 天 K线，确保任何新老存档都能立刻看到完美的大盘
@@ -1113,6 +1254,116 @@ namespace RimDigitalLife_RimPay
             s.price = s.priceHistory[s.priceHistory.Count - 1].close;
         }
 
+        // ======== 外部事件通知接口 ========
+        public void NotifyResearchFinished(ResearchProjectDef proj)
+        {
+            if (proj == null) return;
+            string tag = (proj.defName ?? "").ToLowerInvariant();
+            if (!recentResearchTags.Contains(tag)) recentResearchTags.Add(tag);
+        }
+
+        public void NotifyRaidStarted(int factionLoadID)
+        {
+            if (factionLoadID >= 0 && !recentRaidFactionIDs.Contains(factionLoadID))
+            {
+                recentRaidFactionIDs.Add(factionLoadID);
+            }
+        }
+
+        public void NotifyBigTrade(int factionLoadID, int silverAmount)
+        {
+            if (factionLoadID < 0 || silverAmount <= 0) return;
+            if (!recentBigTradeFactions.ContainsKey(factionLoadID)) recentBigTradeFactions[factionLoadID] = 0;
+            recentBigTradeFactions[factionLoadID] += silverAmount;
+        }
+
+        private bool HasRecentResearchMatch(params string[] keywords)
+        {
+            if (recentResearchTags == null || recentResearchTags.Count == 0) return false;
+            foreach (var tag in recentResearchTags)
+            {
+                foreach (var kw in keywords)
+                {
+                    if (tag.Contains(kw)) return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool IsConditionActive(Map map, string defName)
+        {
+            if (map?.gameConditionManager == null) return false;
+            var def = DefDatabase<GameConditionDef>.GetNamedSilentFail(defName);
+            return def != null && map.gameConditionManager.ConditionIsActive(def);
+        }
+
+        private static bool IsRimTuberActive()
+        {
+            return ModLister.GetActiveModWithIdentifier("maiya.rimtuber", true) != null ||
+                   ModLister.GetActiveModWithIdentifier("maiya.rimtuber_steam", true) != null;
+        }
+
+        private static bool CheckRimTuberLiveStatus(out bool isSelling, out float heat)
+        {
+            isSelling = false;
+            heat = 0f;
+            if (!IsRimTuberActive()) return false;
+            try
+            {
+                var asm = System.AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "RimTuber");
+                if (asm == null) return false;
+                var apiType = asm.GetType("RimTuber.RimTuberAPI");
+                if (apiType == null) return false;
+                var isLiveMethod = apiType.GetMethod("IsLive", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                if (isLiveMethod != null && (bool)isLiveMethod.Invoke(null, null))
+                {
+                    var heatMethod = apiType.GetMethod("GetHeatLevel", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    if (heatMethod != null) heat = (float)heatMethod.Invoke(null, null);
+
+                    var salesType = asm.GetType("RimTuber.LivestreamSalesManager");
+                    if (salesType != null)
+                    {
+                        var instProp = salesType.GetProperty("Instance", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        var inst = instProp?.GetValue(null, null);
+                        if (inst != null)
+                        {
+                            var isSellingField = salesType.GetField("isSelling", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                            if (isSellingField != null) isSelling = (bool)isSellingField.GetValue(inst);
+                        }
+                    }
+                    return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        private static bool IsQuantumNetActive()
+        {
+            return ModLister.GetActiveModWithIdentifier("maiya.RimDigitalLife.QuantumNet", true) != null ||
+                   ModLister.GetActiveModWithIdentifier("maiya.RimDigitalLife.QuantumNet_steam", true) != null ||
+                   ModLister.GetActiveModWithIdentifier("chezhou.RimDigitalLife.QuantumNet", true) != null;
+        }
+
+        private static bool CheckQuantumNetEvent(string eventId)
+        {
+            if (!IsQuantumNetActive()) return false;
+            try
+            {
+                var asm = System.AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "RimDigitalLife_QuantumNet");
+                if (asm == null) return false;
+                var mgrType = asm.GetType("RimDigitalLife_QuantumNet.NetworkEventManager");
+                if (mgrType == null) return false;
+                var isEventMethod = mgrType.GetMethod("IsEventActive", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                if (isEventMethod != null)
+                {
+                    return (bool)isEventMethod.Invoke(null, new object[] { eventId });
+                }
+            }
+            catch { }
+            return false;
+        }
+
         public void UpdateStockPrices()
         {
             int currentTick = Find.TickManager.TicksGame;
@@ -1127,25 +1378,157 @@ namespace RimDigitalLife_RimPay
             }
 
             if (!stocksInitialized) InitializeStocks();
+            EnsureAllStocksPresent();
 
-            // AI 市场情绪影响当日涨跌方向（bull 普涨 / bear 普跌 / neutral 随机）
+            // 1. AI 市场情绪影响当日涨跌方向（bull 普涨 / bear 普跌 / neutral 随机）
             float toneBias = 0f;
             if (RimPayMod.settings?.enableEconomyAI ?? false)
             {
-                if (RimPayAIProvider.marketTone == "bull") toneBias = 0.25f;
-                else if (RimPayAIProvider.marketTone == "bear") toneBias = -0.25f;
+                if (RimPayAIProvider.marketTone == "bull") toneBias = 0.20f;
+                else if (RimPayAIProvider.marketTone == "bear") toneBias = -0.20f;
             }
 
-            // 宏观事件额外影响：崩盘强烈下压且波动加剧，繁荣强烈上推
+            // 2. 宏观事件额外影响：崩盘强烈下压且波动加剧，繁荣强烈上推
             float macroBias = 0f;
             float macroVolMult = 1f;
-            if (activeMacroEvent == "market_crash") { macroBias = -0.45f; macroVolMult = 1.6f; }
-            else if (activeMacroEvent == "tech_boom") { macroBias = 0.35f; macroVolMult = 1.2f; }
+            if (activeMacroEvent == "market_crash") { macroBias = -0.35f; macroVolMult = 1.5f; }
+            else if (activeMacroEvent == "tech_boom") { macroBias = 0.28f; macroVolMult = 1.2f; }
 
+            // 3. 探测全球气候与天灾环境
+            Map map = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
+            bool hasHeatWave = IsConditionActive(map, "HeatWave");
+            bool hasColdSnap = IsConditionActive(map, "ColdSnap");
+            bool hasSolarFlare = IsConditionActive(map, "SolarFlare");
+            bool hasVolcanicWinter = IsConditionActive(map, "VolcanicWinter") || IsConditionActive(map, "ToxicFallout");
+
+            // 4. 探测 RimTuber 直播状态
+            bool isTuberLive = CheckRimTuberLiveStatus(out bool isSelling, out float tuberHeat);
+
+            // 5. 遍历计算每只股票的新价格
             foreach (StockData s in stocks)
             {
+                float specificBias = 0f;
+                float stockVolMult = macroVolMult;
+
+                // --- 派系股票联动 ---
+                if (s.IsFactionStock)
+                {
+                    Faction f = Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == s.factionLoadID);
+                    if (f != null)
+                    {
+                        // 外交好感度影响
+                        float goodwill = f.PlayerGoodwill;
+                        if (goodwill >= 75) specificBias += 0.08f; // 盟友溢价
+                        else if (goodwill >= 20) specificBias += 0.04f;
+                        else if (goodwill < 0)
+                        {
+                            specificBias -= 0.06f;
+                            stockVolMult *= 1.25f;
+                        }
+
+                        // 近期发动袭击：战败重创
+                        if (recentRaidFactionIDs.Contains(f.loadID))
+                        {
+                            specificBias -= 0.12f;
+                            stockVolMult *= 1.4f;
+                        }
+
+                        // 近期大宗贸易提振
+                        if (recentBigTradeFactions.ContainsKey(f.loadID) && recentBigTradeFactions[f.loadID] >= 2000)
+                        {
+                            specificBias += 0.07f;
+                        }
+                    }
+                }
+                else
+                {
+                    // --- 行业股票现实/事件联动 ---
+                    switch (s.category)
+                    {
+                        case "Agri": // 绿芽农业
+                            if (hasHeatWave || hasVolcanicWinter) specificBias -= 0.10f; // 干旱大灾
+                            if (HasRecentResearchMatch("hydroponics", "agriculture", "tree", "plant")) specificBias += 0.10f;
+                            break;
+
+                        case "Ranch": // 耗牛畜牧
+                            if (hasColdSnap) specificBias += 0.08f; // 严寒保暖需求
+                            if (hasVolcanicWinter) specificBias -= 0.08f;
+                            break;
+
+                        case "Food": // StarveMe 应急合成食品
+                            if (hasHeatWave || hasVolcanicWinter) specificBias += 0.12f; // 大饥荒推高应急食品需求！
+                            break;
+
+                        case "Medical": // 闪耀制药 / MedEx生物
+                            if (HasRecentResearchMatch("medicine", "bionics", "prosthetics", "xenogerm", "gene", "vital")) specificBias += 0.12f;
+                            break;
+
+                        case "Arms": // 顶峰军工 / 玻璃钢重工
+                            if (recentRaidFactionIDs.Count > 0)
+                            {
+                                specificBias += 0.10f; // 战事爆发拉动军火采购
+                                stockVolMult *= 1.3f;
+                            }
+                            if (HasRecentResearchMatch("gun", "armor", "mortar", "turret", "precision", "charge", "defense")) specificBias += 0.10f;
+                            break;
+
+                        case "Mining": // 泛星系铀能
+                            if (hasSolarFlare) specificBias -= 0.08f;
+                            if (HasRecentResearchMatch("deepdrill", "geothermal", "nuclear", "energy")) specificBias += 0.11f;
+                            break;
+
+                        case "Tech": // iShen, 微硬, 诺基林, 大米等
+                            if (hasSolarFlare) specificBias -= 0.09f;
+                            if (HasRecentResearchMatch("microelectronics", "fabrication", "shield", "computer", "digital", "battery")) specificBias += 0.09f;
+                            if (isSelling && (s.code == "$DAMI" || s.code == "$ISHN")) specificBias += 0.08f; // 带货热销
+                            break;
+
+                        case "Entertainment": // 任天缘, 缘尼
+                            if (isTuberLive) specificBias += 0.05f;
+                            break;
+
+                        case "ECom": // 轨道淘客电商
+                            if (isSelling) specificBias += 0.10f; // 直播带货直接利好电商
+                            if (CheckQuantumNetEvent("cyber_sale")) specificBias += 0.12f;
+                            break;
+
+                        case "Media": // 块茎传媒, 先驱报
+                            if (isTuberLive)
+                            {
+                                specificBias += 0.06f;
+                                if (tuberHeat > 0.4f) stockVolMult *= 1.4f; // 弹幕热度高推升传媒投机
+                            }
+                            break;
+
+                        case "Sports": // 巅峰竞技
+                            if (hasHeatWave || hasVolcanicWinter) specificBias -= 0.06f;
+                            break;
+
+                        case "Quantum": // 量子网络运营商股票
+                            if (CheckQuantumNetEvent("starlink_storm") && s.code == "$SCOM") { specificBias -= 0.15f; stockVolMult *= 1.5f; }
+                            if (CheckQuantumNetEvent("cyber_sale") && s.code == "$BAZR") specificBias += 0.12f;
+                            if (CheckQuantumNetEvent("minescan_calib") && s.code == "$SCAN") specificBias += 0.10f;
+                            if (CheckQuantumNetEvent("network_congested") && s.code == "$NEBU") specificBias -= 0.07f;
+                            break;
+
+                        case "Finance": // $DSF 杠杆基金
+                            if (isTuberLive && tuberHeat > 0.5f) stockVolMult *= 1.6f; // 散户游资狂热炒作
+                            break;
+                    }
+                }
+
+                // 6. 随机机构做空与游资拉盘事件（极低概率发生微小突发冲击）
+                if (Rand.Chance(0.04f))
+                {
+                    bool isLong = Rand.Bool;
+                    specificBias += isLong ? Rand.Range(0.08f, 0.14f) : Rand.Range(-0.14f, -0.08f);
+                    stockVolMult *= 1.3f;
+                }
+
+                // 综合偏置（折中力度控制在 ±0.25 范围以内）
+                float combinedBias = Mathf.Clamp((toneBias + macroBias) * 0.5f + specificBias, -0.25f, 0.25f);
                 float open = (float)s.price;
-                double change = (Rand.Value * 2.0 - 1.0) * s.volatility * macroVolMult + (toneBias + macroBias) * s.volatility;
+                double change = (Rand.Value * 2.0 - 1.0) * s.volatility * stockVolMult + combinedBias * s.volatility;
                 float close = open * (1f + (float)change);
                 if (close < 0.1f) close = 0.1f;
                 float high = Mathf.Max(open, close) + (float)(Rand.Value * open * s.volatility * 0.3);
@@ -1155,7 +1538,7 @@ namespace RimDigitalLife_RimPay
                 s.price = close;
                 s.changePercent = change * 100.0;
 
-                // 记录历史价格K线（保留天数从设置读取）
+                // 记录历史价格 K 线
                 int historyDays = RimPayMod.settings?.stockHistoryDays > 0 ? RimPayMod.settings.stockHistoryDays : 15;
                 s.priceHistory.Add(new StockBar(open, high, low, close));
                 while (s.priceHistory.Count > historyDays)
@@ -1163,6 +1546,21 @@ namespace RimDigitalLife_RimPay
                     s.priceHistory.RemoveAt(0);
                 }
             }
+
+            // RimTuber 动态墙联动：若有股票单日剧烈异动（>=18%），发热搜卡片
+            var topStock = stocks.OrderByDescending(x => Mathf.Abs((float)x.changePercent)).FirstOrDefault();
+            if (topStock != null && Mathf.Abs((float)topStock.changePercent) >= 18f)
+            {
+                string sign = topStock.changePercent >= 0 ? "+" : "";
+                string action = topStock.changePercent >= 0 ? "暴涨飙升" : "遭遇闪崩";
+                TryPostRimTuberFinanceFeed($"🔥【大盘异动】{topStock.code} 单日{action} {sign}{topStock.changePercent:F1}%",
+                    $"受多空资金激烈博弈与突发事件影响，{topStock.name} ({topStock.code}) 今日出现巨大振幅，最新股价报 {topStock.price:F2} @银。", "行情快报");
+            }
+
+            // 更新周期结束：重置近期短期事件缓存，准备下一周期
+            recentResearchTags.Clear();
+            recentRaidFactionIDs.Clear();
+            recentBigTradeFactions.Clear();
         }
 
         // 国库持仓
@@ -1270,6 +1668,11 @@ namespace RimDigitalLife_RimPay
                         string msg = $"嗨！我买的 {target.code} ({target.name}) 今天涨了，赚了 {totalProfit} @银！运气不错！";
                         RimTalkBridge.TriggerDialogue(pawn, pawn, "炒股收益", msg, false, AssistantPersona.Rimi);
                     }
+                    if (totalProfit >= 100)
+                    {
+                        TryPostRimTuberFinanceFeed("📈【殖民地股神】" + pawn.LabelShort + " 爆赚离场",
+                            $"{pawn.LabelShort} 今日凭借敏锐嗅觉成功抄底 {target.code} ({target.name})，单笔大赚 {totalProfit} @银！在殖民地引起热议。", "股民高光");
+                    }
                 }
                 else if (totalProfit < 0)
                 {
@@ -1281,6 +1684,11 @@ namespace RimDigitalLife_RimPay
                     {
                         string msg = $"唉...买的 {target.code} ({target.name}) 跌了，亏了 {loss} @银...再也不信了！";
                         RimTalkBridge.TriggerDialogue(pawn, pawn, "炒股亏损", msg, false, AssistantPersona.Sirim);
+                    }
+                    if (loss >= 100)
+                    {
+                        TryPostRimTuberFinanceFeed("📉【天台风很大】" + pawn.LabelShort + " 抄底被套牢",
+                            $"{pawn.LabelShort} 高位追涨 {target.code} ({target.name})，单日暴跌割肉，损失 {loss} @银... 今晚只能吃营养膏了。", "理财翻车");
                     }
                 }
             }
@@ -1341,6 +1749,9 @@ namespace RimDigitalLife_RimPay
             Scribe_Values.Look(ref storeSalesToday, "storeSalesToday", 0);
             Scribe_Values.Look(ref storeSalesAccumulated, "storeSalesAccumulated", 0);
             Scribe_Values.Look(ref storeSalesDayStamp, "storeSalesDayStamp", -1);
+            Scribe_Collections.Look(ref recentResearchTags, "recentResearchTags", LookMode.Value);
+            Scribe_Collections.Look(ref recentRaidFactionIDs, "recentRaidFactionIDs", LookMode.Value);
+            Scribe_Collections.Look(ref recentBigTradeFactions, "recentBigTradeFactions", LookMode.Value, LookMode.Value);
             
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -1357,6 +1768,9 @@ namespace RimDigitalLife_RimPay
                 if (treasuryStockHoldings == null) treasuryStockHoldings = new Dictionary<string, int>();
                 if (treasuryStockCost == null) treasuryStockCost = new Dictionary<string, double>();
                 if (treasuryLogs == null) treasuryLogs = new List<TreasuryLogEntry>();
+                if (recentResearchTags == null) recentResearchTags = new List<string>();
+                if (recentRaidFactionIDs == null) recentRaidFactionIDs = new List<int>();
+                if (recentBigTradeFactions == null) recentBigTradeFactions = new Dictionary<int, int>();
 
                 // 旧档迁移：有持仓但无成本记录（成本追踪上线前的购买），
                 // 按当前股价回填成本，使盈亏从 0 起步、之后随价格真实浮动。

@@ -16,6 +16,10 @@ namespace RimDigitalLife_QuantumNet
         private static MethodInfo _modifyBalanceMethod;
         private static MethodInfo _modifyTreasuryMethod;
 
+        private static Type _stockApiType;
+        private static MethodInfo _getMarketBriefMethod;
+        private static MethodInfo _getCategoryMovementMethod;
+
         public static bool IsRimPayAvailable
         {
             get
@@ -50,6 +54,18 @@ namespace RimDigitalLife_QuantumNet
                 if (_available)
                 {
                     Verse.Log.Message("[量子网络] RimPay 钱包桥初始化成功，套餐月租将从小人钱包自动扣除。");
+                }
+
+                // 反射获取股市 API（深度联动）
+                _stockApiType = asm.GetType("RimDigitalLife_RimPay.RimPayStockAPI");
+                if (_stockApiType != null)
+                {
+                    _getMarketBriefMethod = _stockApiType.GetMethod("GetMarketBriefSummary", BindingFlags.Public | BindingFlags.Static);
+                    _getCategoryMovementMethod = _stockApiType.GetMethod("GetCategoryMovement", BindingFlags.Public | BindingFlags.Static);
+                    if (_getMarketBriefMethod != null && _getCategoryMovementMethod != null)
+                    {
+                        Verse.Log.Message("[量子网络] RimPay 股市行情桥接成功，量子网络日报将播报运营商股票动态。");
+                    }
                 }
             }
             catch (Exception ex)
@@ -111,6 +127,28 @@ namespace RimDigitalLife_QuantumNet
                 Verse.Log.Warning($"[量子网络] 修改 RimPay 国库失败: {ex.Message}");
                 return false;
             }
+        }
+
+        // 获取量子网络运营商板块行情（如 "星链通信 +12.5%" 等）
+        public static string GetQuantumSectorMovement()
+        {
+            if (!IsRimPayAvailable || _getCategoryMovementMethod == null) return null;
+            try
+            {
+                return _getCategoryMovementMethod.Invoke(null, new object[] { "Quantum" }) as string;
+            }
+            catch { return null; }
+        }
+
+        // 获取全大盘简要行情综述
+        public static string GetMarketBrief()
+        {
+            if (!IsRimPayAvailable || _getMarketBriefMethod == null) return null;
+            try
+            {
+                return _getMarketBriefMethod.Invoke(null, null) as string;
+            }
+            catch { return null; }
         }
     }
 }

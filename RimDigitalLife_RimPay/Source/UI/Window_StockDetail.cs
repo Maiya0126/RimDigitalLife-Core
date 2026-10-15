@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -43,6 +44,24 @@ namespace RimDigitalLife_RimPay
             string profitStr = stockProfit >= 0 ? $"+{stockProfit}" : $"{stockProfit}";
             Color profitColor = stockProfit >= 0 ? Color.green : Color.red;
             listing.Label($"当前价格: {stock.price:F2} @银  |  今日涨跌: {changeStr.Colorize(changeColor)}  |  国库持仓: {heldStock} 股  |  盈亏: {profitStr.Colorize(profitColor)} @银");
+
+            if (!string.IsNullOrEmpty(stock.desc))
+            {
+                Text.Font = GameFont.Tiny;
+                GUI.color = new Color(0.75f, 0.75f, 0.75f);
+                string factionExtra = "";
+                if (stock.IsFactionStock)
+                {
+                    Faction f = Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == stock.factionLoadID);
+                    if (f != null)
+                    {
+                        factionExtra = $"  |  好感度: {f.PlayerGoodwill:+0;-0;0} ({f.PlayerRelationKind.GetLabel()})";
+                    }
+                }
+                listing.Label($"{stock.desc}{factionExtra}");
+                GUI.color = Color.white;
+                Text.Font = GameFont.Small;
+            }
             listing.GapLine();
 
             // K线蜡烛图 (占大约半个窗口)

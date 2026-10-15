@@ -7,24 +7,19 @@ namespace RimDigitalLife_QuantumNet
 {
     // ============================================================
     // RimSeek 健康提醒（畅享/无限包功能，本地实现不依赖 AI 请求）
-    // 订阅付费套餐 + 携带数码设备 + 网络覆盖的殖民者，
-    // 每天 8 点与 20 点各有一次机会（50%）收到 RimSeek 健康提醒：
-    // 获得「RimSeek 健康提醒」心情（被关心的感觉）；疲劳时附加休息建议。
+    // 方案 A：状况驱动——小人出现健康/需求问题时触发提醒（非定时问候）
+    // 检测状况：流血 / 有伤需治疗 / 明显疼痛 / 严重疲劳 / 严重饥饿
+    // 每个小人每类状况 1 天冷却，避免刷屏
+    // 效果：消息提示 + 「RimSeek 健康提醒」轻心情（被 AI 关心）
     // ============================================================
     public static class HealthReminderManager
     {
         public const string ThoughtDefName = "QuantumNet_HealthReminder";
 
-        private static int lastRemindTick = 0;
+        private const int CooldownTicks = 60000; // 每类状况提醒冷却 1 天
 
-        private static readonly string[] Tips = new string[]
-        {
-            "久坐伤身，记得起来活动活动筋骨！",
-            "长时间盯着屏幕对眼睛不好，看看远处的风景吧。",
-            "该补充水分了，来杯水休息一下。",
-            "伸展一下身体，健康的工作节奏更重要。",
-            "别忘了几小时后起来走动走动，活动手脚。"
-        };
+        // 小人 → 状况ID → 上次提醒 tick（内存即可，重档后重新提醒一次无妨）
+        private static readonly Dictionary<string, Dictionary<string, int>> lastRemindTicks = new Dictionary<string, Dictionary<string, int>>();
 
         // 由 GameComponent 低频驱动（每 1000 tick）
         public static void Tick()
@@ -38,41 +33,57 @@ namespace RimDigitalLife_QuantumNet
             if (map == null) return;
             if (!comp.HasNetworkCoverage(map)) return;
 
-            // 每天 8 点与 20 点各一次机会
-            int hour = GenLocalDate.HourOfDay(map);
-            if (hour != 8 && hour != 20) return;
-
             int tick = Find.TickManager.TicksGame;
-            if (tick - lastRemindTick < 30000) return; // 半天防重
-            lastRemindTick = tick;
 
-            if (!Rand.Chance(0.5f)) return;
-
-            // 筛选符合条件的小人（畅享/无限包 + 设备 + 在线）
-            List<Pawn> candidates = new List<Pawn>();
             foreach (Pawn pawn in map.mapPawns.FreeColonists)
             {
                 if (pawn.Dead || pawn.Destroyed || !pawn.Spawned) continue;
                 if (!comp.HasPaidPlan(pawn)) continue;
                 if (!RimSeekBuffManager.HasDigitalDevice(pawn)) continue;
-                candidates.Add(pawn);
-            }
-            if (candidates.Count == 0) return;
 
-            Pawn target = candidates.RandomElement();
-            Remind(target);
+                CheckAndRemind(pawn, tick);
+            }
         }
 
-        private static void Remind(Pawn pawn)
+        private static void CheckAndRemind(Pawn pawn, int tick)
         {
-            string tip = Tips[Rand.Range(0, Tips.Length)];
+            // 状况检测（优先级从高到低，一次最多提醒一条最重要的）
+            string conditionId = null;
+            string tip = null;
 
-            // 疲劳时附加休息建议
-            float rest = pawn.needs?.rest?.CurLevelPercentage ?? 1f;
-            if (rest < 0.35f)
+            if (pawn.health?.hediffSet == null) return;
+
+            if (pawn.health.hediffSet.BleedRateTotal > 0f)
             {
-                tip += "你已经很疲惫了，早点休息吧！";
+                conditionId = "bleeding";
+                tip = "检测到你在持续流血！RimSeek 强烈建议尽快就医或自行包扎止血。";
             }
+            else if (pawn.health.hediffSet.HasTendableHediff())
+            {
+                conditionId = "tendable";
+                tip = "你的身体有需要治疗的伤口或疾病，记得让医生处理一下。";
+            }
+            else if (pawn.health.hediffSet.PainTotal > 0.4f)
+            {
+                conditionId = "pain";
+                tip = "你正承受明显的疼痛，止痛或接受治疗会让你好受很多。";
+            }
+            else if (pawn.needs?.rest != null && pawn.needs.rest.CurLevelPercentage < 0.2f)
+            {
+                conditionId = "tired";
+                tip = "你快撑不住了！RimSeek 建议马上去床上好好睡一觉。";
+            }
+            else if (pawn.needs?.food != null && pawn.needs.food.CurLevelPercentage < 0.15f)
+            {
+                conditionId = "hungry";
+                tip = "你快饿坏了，记得吃点东西补充营养。";
+            }
+
+            if (conditionId == null) return;
+
+            // 冷却检查（每小人每类状况 1 天）
+            if (!CooldownPassed(pawn, conditionId, tick)) return;
+            MarkReminded(pawn, conditionId, tick);
 
             ThoughtDef thought = DefDatabase<ThoughtDef>.GetNamedSilentFail(ThoughtDefName);
             if (thought != null)
@@ -81,6 +92,30 @@ namespace RimDigitalLife_QuantumNet
             }
 
             Messages.Message($"[健康提醒] RimSeek 提醒 {pawn.LabelShort}：{tip}", MessageTypeDefOf.NeutralEvent, false);
+            if (Prefs.DevMode)
+            {
+                Verse.Log.Message($"[QuantumNet 健康提醒] {pawn.LabelShort} | 状况: {conditionId}");
+            }
+        }
+
+        private static bool CooldownPassed(Pawn pawn, string conditionId, int tick)
+        {
+            Dictionary<string, int> conds;
+            if (!lastRemindTicks.TryGetValue(pawn.ThingID, out conds)) return true;
+            int last;
+            if (!conds.TryGetValue(conditionId, out last)) return true;
+            return tick - last >= CooldownTicks;
+        }
+
+        private static void MarkReminded(Pawn pawn, string conditionId, int tick)
+        {
+            Dictionary<string, int> conds;
+            if (!lastRemindTicks.TryGetValue(pawn.ThingID, out conds))
+            {
+                conds = new Dictionary<string, int>();
+                lastRemindTicks[pawn.ThingID] = conds;
+            }
+            conds[conditionId] = tick;
         }
     }
 }

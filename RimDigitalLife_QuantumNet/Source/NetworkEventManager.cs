@@ -48,7 +48,7 @@ namespace RimDigitalLife_QuantumNet
                 initialized = true;
                 if (nextEventTick < 0)
                 {
-                    nextEventTick = tick + Rand.Range(120000, 300000); // 2~5 天后首个事件
+                    nextEventTick = tick + Rand.Range(300000, 600000); // 5~10 天后首个事件
                 }
             }
 
@@ -63,7 +63,7 @@ namespace RimDigitalLife_QuantumNet
             // 到点触发新事件
             if (tick >= nextEventTick)
             {
-                nextEventTick = tick + Rand.Range(120000, 300000); // 2~5 天后下一个
+                nextEventTick = tick + Rand.Range(300000, 600000); // 5~10 天后下一个
                 if (!HasActiveEvent)
                 {
                     TriggerRandomEvent(tick);
@@ -174,7 +174,7 @@ namespace RimDigitalLife_QuantumNet
                 activeEventId = "";
                 activeEventLabel = "";
             }
-            nextEventTick = tick + Rand.Range(120000, 300000); // 触发后照常排下一个随机事件
+            nextEventTick = tick + Rand.Range(300000, 600000); // 触发后照常排下一个随机事件
             TriggerRandomEventById(eventId, tick);
         }
 

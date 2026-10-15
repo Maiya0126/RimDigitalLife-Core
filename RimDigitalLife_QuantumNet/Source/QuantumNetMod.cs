@@ -14,7 +14,7 @@ namespace RimDigitalLife_QuantumNet
         private static Harmony harmony;
 
         // 模组版本（About.xml / 设置页 / 控制台 同步标注）
-        public const string ModVersion = "v0.4.01";
+        public const string ModVersion = "v1.0.5";
 
         private string jsonBuffer = "";
 

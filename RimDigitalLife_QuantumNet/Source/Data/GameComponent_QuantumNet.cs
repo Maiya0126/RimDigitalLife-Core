@@ -300,6 +300,13 @@ namespace RimDigitalLife_QuantumNet
                     body += "\n📡 " + QuantumNetAIProvider.newsText;
                 }
 
+                // RimPay 联动：追加量子网络运营商股票行情
+                string quantumStock = QuantumNetRimPayBridge.GetQuantumSectorMovement();
+                if (!string.IsNullOrEmpty(quantumStock))
+                {
+                    body += "\n📈 运营商股市：" + quantumStock;
+                }
+
                 Find.LetterStack.ReceiveLetter(
                     "量子网络日报",
                     body,
@@ -343,6 +350,8 @@ namespace RimDigitalLife_QuantumNet
             if (!string.IsNullOrEmpty(QuantumNetAIProvider.cloudWeatherHint)) topics.Add("云端天气预测：" + QuantumNetAIProvider.cloudWeatherHint);
             if (!string.IsNullOrEmpty(QuantumNetAIProvider.deepMineHint)) topics.Add("深矿雷达预测：" + QuantumNetAIProvider.deepMineHint);
             if (!string.IsNullOrEmpty(QuantumNetAIProvider.rimseekTip)) topics.Add("RimSeek 智算建议：" + QuantumNetAIProvider.rimseekTip);
+            string stockBrief = QuantumNetRimPayBridge.GetMarketBrief();
+            if (!string.IsNullOrEmpty(stockBrief)) topics.Add("边缘股市要闻：" + stockBrief);
             if (topics.Count == 0) return;
 
             Pawn speaker = readers[Rand.Range(0, readers.Count)];
