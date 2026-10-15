@@ -397,6 +397,44 @@ namespace RimDigitalLife_RimPay
 
                     int held = comp.GetStockHeld(s.code);
                     int marketValue = Mathf.RoundToInt((float)(held * s.price));
+                    int profit = comp.GetStockProfit(s.code);
+
+                    // 悬浮提示：显示板块、背景、最新异动成因与持仓分析
+                    if (Mouse.IsOver(row))
+                    {
+                        var sbTip = new System.Text.StringBuilder();
+                        sbTip.AppendLine($"<b>{s.code} · {s.name}</b>");
+                        sbTip.AppendLine($"行业板块: {GetCategoryLabel(s.category)}  |  基础波动率: {s.volatility * 100:F0}%");
+                        if (!string.IsNullOrEmpty(s.desc))
+                        {
+                            sbTip.AppendLine($"<i>{s.desc}</i>");
+                        }
+                        if (s.IsFactionStock)
+                        {
+                            Faction f = Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == s.factionLoadID);
+                            if (f != null)
+                            {
+                                sbTip.AppendLine($"所属派系: {f.Name} (好感度: {f.PlayerGoodwill:+0;-0;0} / {f.PlayerRelationKind.GetLabel()})");
+                            }
+                        }
+                        sbTip.AppendLine();
+                        sbTip.AppendLine($"当前价格: {s.price:F2} @银  |  今日涨跌: {changeStr}");
+                        if (held > 0)
+                        {
+                            sbTip.AppendLine($"国库持仓: {held} 股  |  当前市值: {marketValue} @银  |  持仓盈亏: {(profit >= 0 ? "+" : "")}{profit} @银");
+                        }
+                        if (!string.IsNullOrEmpty(s.lastHeadline))
+                        {
+                            sbTip.AppendLine();
+                            sbTip.AppendLine($"<b>【最新异动成因】</b>\n{s.lastHeadline}");
+                        }
+                        else
+                        {
+                            sbTip.AppendLine();
+                            sbTip.AppendLine("<i>【近期动态】大盘交易正常进行中，暂无突发事件。</i>");
+                        }
+                        TooltipHandler.TipRegion(row, sbTip.ToString().TrimEnd());
+                    }
 
                     Text.Anchor = TextAnchor.MiddleLeft;
                     Text.Font = GameFont.Tiny;
@@ -418,7 +456,6 @@ namespace RimDigitalLife_RimPay
                     Widgets.Label(new Rect(row.x + 494f, row.y, 90f, row.height), held > 0 ? $"{marketValue}" : "-");
 
                     // 6. 盈亏 (绿+红-)
-                    int profit = comp.GetStockProfit(s.code);
                     if (held > 0 && profit != 0)
                     {
                         GUI.color = profit >= 0 ? new Color(0.3f, 0.9f, 0.3f) : new Color(0.9f, 0.3f, 0.3f);
@@ -662,6 +699,28 @@ namespace RimDigitalLife_RimPay
             else if (bestSkill >= 10) salary += 20;
             else if (bestSkill >= 6) salary += 10;
             return salary;
+        }
+
+        private static string GetCategoryLabel(string cat)
+        {
+            switch (cat)
+            {
+                case "Tech": return "数码科技";
+                case "Entertainment": return "文化娱乐";
+                case "Food": return "食品合成";
+                case "Agri": return "大宗农业";
+                case "Ranch": return "畜牧养殖";
+                case "ECom": return "网络电商";
+                case "Media": return "自媒体互娱";
+                case "Sports": return "体育竞技";
+                case "Medical": return "生物制药";
+                case "Arms": return "军工防务";
+                case "Mining": return "采矿核能";
+                case "Finance": return "杠杆基金";
+                case "Quantum": return "量子网络运营商";
+                case "Faction": return "派系股票";
+                default: return "综合板块";
+            }
         }
 
         private static bool ColoredButton(Rect rect, string label, Color bgColor)

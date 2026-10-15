@@ -23,7 +23,7 @@ namespace RimDigitalLife_RimPay
             this.absorbInputAroundWindow = true;
         }
 
-        public override Vector2 InitialSize => new Vector2(650f, 540f);
+        public override Vector2 InitialSize => new Vector2(660f, 650f);
 
         public override void DoWindowContents(Rect inRect)
         {
@@ -119,8 +119,37 @@ namespace RimDigitalLife_RimPay
                 }
             }
 
+            // 近期市场动态与异动成因流
+            listing.Gap(10f);
+            listing.Label("<b>近期市场异动与简讯流:</b>");
+            if (stock.recentNews != null && stock.recentNews.Count > 0)
+            {
+                Text.Font = GameFont.Tiny;
+                foreach (string news in stock.recentNews)
+                {
+                    Color nColor = news.Contains("[涨]") ? new Color(0.35f, 0.9f, 0.45f) :
+                                   news.Contains("[跌]") ? new Color(1f, 0.4f, 0.4f) : new Color(0.85f, 0.85f, 0.85f);
+                    listing.Label(news.Colorize(nColor));
+                }
+                Text.Font = GameFont.Small;
+            }
+            else if (!string.IsNullOrEmpty(stock.lastHeadline))
+            {
+                Text.Font = GameFont.Tiny;
+                listing.Label(stock.lastHeadline);
+                Text.Font = GameFont.Small;
+            }
+            else
+            {
+                Text.Font = GameFont.Tiny;
+                GUI.color = Color.gray;
+                listing.Label("大盘交投平稳，暂无突发事件简讯。");
+                GUI.color = Color.white;
+                Text.Font = GameFont.Small;
+            }
+
             // 返回按钮
-            listing.Gap(15f);
+            listing.Gap(12f);
             Rect returnBtn = listing.GetRect(32f);
             Rect retPos = new Rect(returnBtn.xMax - 120f, returnBtn.y, 120f, returnBtn.height);
             if (Widgets.ButtonText(retPos, "返回"))

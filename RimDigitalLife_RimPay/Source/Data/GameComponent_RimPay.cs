@@ -119,6 +119,8 @@ namespace RimDigitalLife_RimPay
         public int factionLoadID = -1; // 绑定的派系 loadID（>=0 表示派系股票）
         public string category = "Tech"; // 行业分类 (Tech/Entertainment/Food/Agri/Ranch/ECom/Media/Sports/Medical/Arms/Mining/Finance/Quantum/Faction)
         public string desc = ""; // 简要介绍
+        public List<string> recentNews = new List<string>(); // 最近动态新闻列表 (如 "第1.15日 [+8.5%] 仿生科技突破...")
+        public string lastHeadline = ""; // 最新一条新闻简讯
 
         public bool IsFactionStock => factionLoadID >= 0;
 
@@ -134,6 +136,8 @@ namespace RimDigitalLife_RimPay
             this.category = category;
             this.factionLoadID = factionLoadID;
             this.desc = desc;
+            this.recentNews = new List<string>();
+            this.lastHeadline = "";
         }
 
         public void ExposeData()
@@ -146,7 +150,14 @@ namespace RimDigitalLife_RimPay
             Scribe_Values.Look(ref factionLoadID, "factionLoadID", -1);
             Scribe_Values.Look(ref category, "category", "Tech");
             Scribe_Values.Look(ref desc, "desc", "");
+            Scribe_Values.Look(ref lastHeadline, "lastHeadline", "");
+            Scribe_Collections.Look(ref recentNews, "recentNews", LookMode.Value);
             Scribe_Collections.Look(ref priceHistory, "priceHistory", LookMode.Deep);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (recentNews == null) recentNews = new List<string>();
+            }
         }
     }
 
@@ -547,7 +558,16 @@ namespace RimDigitalLife_RimPay
                     }
                     if (best != null && worst != null)
                     {
-                        sb.AppendLine($"股市行情：{best.name} 领涨 {best.changePercent:F1}%，{worst.name} 领跌 {worst.changePercent:F1}%。");
+                        string bSign = best.changePercent >= 0 ? "+" : "";
+                        sb.AppendLine($"股市行情：{best.name} 领涨 {bSign}{best.changePercent:F1}%，{worst.name} 领跌 {worst.changePercent:F1}%。");
+                        if (!string.IsNullOrEmpty(best.lastHeadline))
+                        {
+                            sb.AppendLine($"  [利好聚焦] {best.name} —— {best.lastHeadline}");
+                        }
+                        if (!string.IsNullOrEmpty(worst.lastHeadline))
+                        {
+                            sb.AppendLine($"  [利空预警] {worst.name} —— {worst.lastHeadline}");
+                        }
                     }
                 }
 
@@ -1409,11 +1429,11 @@ namespace RimDigitalLife_RimPay
             {
                 float specificBias = 0f;
                 float stockVolMult = macroVolMult;
+                Faction f = s.IsFactionStock ? Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == s.factionLoadID) : null;
 
                 // --- 派系股票联动 ---
                 if (s.IsFactionStock)
                 {
-                    Faction f = Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == s.factionLoadID);
                     if (f != null)
                     {
                         // 外交好感度影响
@@ -1518,8 +1538,10 @@ namespace RimDigitalLife_RimPay
                 }
 
                 // 6. 随机机构做空与游资拉盘事件（极低概率发生微小突发冲击）
+                bool wasShock = false;
                 if (Rand.Chance(0.04f))
                 {
+                    wasShock = true;
                     bool isLong = Rand.Bool;
                     specificBias += isLong ? Rand.Range(0.08f, 0.14f) : Rand.Range(-0.14f, -0.08f);
                     stockVolMult *= 1.3f;
@@ -1545,6 +1567,17 @@ namespace RimDigitalLife_RimPay
                 {
                     s.priceHistory.RemoveAt(0);
                 }
+
+                // 7. 动态生成并记录该股票今日现实级财经新闻简讯
+                int day = map != null ? GenLocalDate.DayOfYear(map) : 1;
+                int year = map != null ? GenLocalDate.Year(map) : 5500;
+                string headline = GenerateStockNewsHeadline(s, s.changePercent, map, hasHeatWave, hasColdSnap, hasSolarFlare, hasVolcanicWinter, isSelling, isTuberLive, tuberHeat, f, specificBias, wasShock);
+                s.lastHeadline = headline;
+                string signTag = s.changePercent >= 0 ? "[涨]" : "[跌]";
+                string signNum = s.changePercent >= 0 ? "+" : "";
+                if (s.recentNews == null) s.recentNews = new List<string>();
+                s.recentNews.Insert(0, $"第{year}.{day}日 {signTag} {signNum}{s.changePercent:F1}% {headline}");
+                while (s.recentNews.Count > 5) s.recentNews.RemoveAt(s.recentNews.Count - 1);
             }
 
             // RimTuber 动态墙联动：若有股票单日剧烈异动（>=18%），发热搜卡片
@@ -1553,14 +1586,144 @@ namespace RimDigitalLife_RimPay
             {
                 string sign = topStock.changePercent >= 0 ? "+" : "";
                 string action = topStock.changePercent >= 0 ? "暴涨飙升" : "遭遇闪崩";
-                TryPostRimTuberFinanceFeed($"🔥【大盘异动】{topStock.code} 单日{action} {sign}{topStock.changePercent:F1}%",
-                    $"受多空资金激烈博弈与突发事件影响，{topStock.name} ({topStock.code}) 今日出现巨大振幅，最新股价报 {topStock.price:F2} @银。", "行情快报");
+                string newsDetail = !string.IsNullOrEmpty(topStock.lastHeadline) ? topStock.lastHeadline : "受多空资金激烈博弈影响，日内振幅巨大。";
+                TryPostRimTuberFinanceFeed($"【大盘异动】{topStock.code} 单日{action} {sign}{topStock.changePercent:F1}%",
+                    $"{newsDetail} 最新股价报 {topStock.price:F2} @银。", "行情快报");
             }
 
             // 更新周期结束：重置近期短期事件缓存，准备下一周期
             recentResearchTags.Clear();
             recentRaidFactionIDs.Clear();
             recentBigTradeFactions.Clear();
+        }
+
+        // ======== 现实级生动财经新闻生成器 ========
+        private string GenerateStockNewsHeadline(StockData s, double changePct, Map map,
+            bool hasHeatWave, bool hasColdSnap, bool hasSolarFlare, bool hasVolcanicWinter,
+            bool isSelling, bool isTuberLive, float tuberHeat, Faction f, float specificBias, bool wasShock)
+        {
+            bool isUp = changePct >= 0;
+
+            // 1. 突发机构做空与游资扫货
+            if (wasShock)
+            {
+                if (isUp)
+                    return "神秘离岸财团大举建仓增持，主力资金强力买入拉抬股价。";
+                else
+                    return "知名星际做空机构发布做空研报，质疑其季度报表存在营收水分。";
+            }
+
+            // 2. 派系股票
+            if (s.IsFactionStock)
+            {
+                if (f != null && recentRaidFactionIDs.Contains(f.loadID))
+                {
+                    return "对殖民地突袭失利惨遭反击，主力精锐受重创引发市场抛售。";
+                }
+                if (f != null && recentBigTradeFactions.ContainsKey(f.loadID) && recentBigTradeFactions[f.loadID] >= 2000)
+                {
+                    return "与殖民地完成数千白银大宗物资交割，双边商贸景气度创季度新高。";
+                }
+                if (f != null)
+                {
+                    if (f.PlayerGoodwill >= 75)
+                        return "与殖民地深化战略同盟，双边边境关税豁免获议会通过。";
+                    if (f.PlayerGoodwill < 0)
+                        return isUp ? "边境局势缓和预期升温，防务摩擦成本有所控制。" : "地缘外交摩擦升级，边境商道受阻引发商业预期恶化。";
+                }
+                return isUp ? "领地完成季节性赋税征缴，财政盈余超市场预期。" : "星际通胀与补给消耗高企，派系季度财报不及预期。";
+            }
+
+            // 3. 行业股票
+            switch (s.category)
+            {
+                case "Agri":
+                    if (hasHeatWave || hasVolcanicWinter)
+                        return "极端恶劣天灾侵袭水培温室，主要粮食种植区发布大宗减产预警。";
+                    if (HasRecentResearchMatch("hydroponics", "agriculture", "tree", "plant"))
+                        return "高抗逆性水培植株育种科研突破，大宗粮食现货量价齐升。";
+                    return isUp ? "季节性农产丰产交割，深空储备粮订单超预期。" : "农用营养液原料涨价，水培农业利润空间受挤压。";
+
+                case "Ranch":
+                    if (hasColdSnap)
+                        return "极寒寒流席卷大陆！高保暖纯血耗牛毛皮制品与肉品需求井喷。";
+                    if (hasVolcanicWinter)
+                        return "天灾严寒与饲草短缺导致牲畜出栏受限，畜牧供应链承压。";
+                    return isUp ? "纯血耗牛优良繁育率大幅提升，优质肉品订单排期饱满。" : "饲料运输周期延宕，牲畜屠宰加工利润略有收窄。";
+
+                case "Food":
+                    if (hasHeatWave || hasVolcanicWinter)
+                        return "全球干旱饥荒推升避险需求！StarveMe 应急长保合成代餐罐头遭全星系抢购。";
+                    return isUp ? "快节奏拓荒代餐包销量走强，应急食品业务营收稳健。" : "普通食材产出充裕，高价压缩食品需求短期承压。";
+
+                case "Medical":
+                    if (HasRecentResearchMatch("medicine", "bionics", "prosthetics", "xenogerm", "gene", "vital"))
+                        return "高阶仿生神经修复与生化血清科研突破，机构全面上调目标评级。";
+                    return isUp ? "全能抗生素与免疫增强试剂订单充裕，生物制药板块量价齐升。" : "新型基因药剂临床审批流程延后，短线遭遇谨慎资金抛盘。";
+
+                case "Arms":
+                    if (recentRaidFactionIDs.Count > 0)
+                        return "战事爆发推升近防重火器紧急订购潮，军工防务全线走强！";
+                    if (HasRecentResearchMatch("gun", "armor", "mortar", "turret", "precision", "charge", "defense"))
+                        return "高能电磁武器与复合护甲专利通过军方验证，防务采购订单排满。";
+                    return isUp ? "定居点要塞化工程升级，阵地防御装备采购需求旺盛。" : "星系局部停火呼声渐高，消耗性弹药采购指标短期缩减。";
+
+                case "Mining":
+                    if (hasSolarFlare)
+                        return "地磁剧烈扰动导致深层地质勘探雷达失真，采矿工程进度受阻。";
+                    if (HasRecentResearchMatch("deepdrill", "geothermal", "nuclear", "energy"))
+                        return "深层地热核裂变能源科研落地，重工业高能采矿全面提速。";
+                    return isUp ? "高品位铀矿石现货紧俏，重工业能源需求带动开采估值。" : "大型采掘钻头损耗偏高，开采成本超预期导致短线震荡。";
+
+                case "Tech":
+                    if (hasSolarFlare)
+                        return "太阳耀斑导致多处数据中心离线，云端通信服务短暂中断引发抛盘。";
+                    if (HasRecentResearchMatch("microelectronics", "fabrication", "shield", "computer", "digital", "battery"))
+                        return "微电子制造与纳米集成电路研发突破，数码芯片板块全面爆发。";
+                    if (s.code == "$BOOS")
+                        return isUp ? "廉价拼装电子元件在落后定居点大举铺货，薄利多销提振估值。" : "涉嫌芯片套壳组装与虚假宣传，遭消费者权益保护协会立案调查。";
+                    if (s.code == "$DAMI")
+                        return isSelling ? "顶流主播直播带货热销！电动平衡车与智能出行系列卖爆断货。" : (isUp ? "平价代步平衡车在各定居点迅速普及，年轻拓荒群体形成抢购。" : "电机驱动控制器供应链延迟，部分型号交付周期拉长。");
+                    if (s.code == "$ISHN")
+                        return isSelling ? "旗舰智能终端直播带货爆单，星系高端消费数码龙头地位稳固。" : (isUp ? "新一代智能手表与终端发布，生态订阅营收占比创新高。" : "硬件产品迭代放缓引发投资者观望，短线处于估值盘整。");
+                    return isUp ? "数码终端生态协同优势显现，软件服务增值业务强劲。" : "核心芯片原料采购成本攀升，硬件毛利率面临阶段性压力。";
+
+                case "Entertainment":
+                    if (isTuberLive)
+                        return "主播正在火热开播，边缘娱乐互动软件在线活跃度达日内峰值。";
+                    return isUp ? "年度现象级游戏掌机大作首发告捷，卡带与数字下载量双双破纪录。" : "缺乏爆款独占游戏大作支撑，硬件销售进入周期性淡季。";
+
+                case "ECom":
+                    if (isSelling)
+                        return "顶流主播单场带货成交额破纪录，跨星系轨道电商供应链全负荷运转！";
+                    if (CheckQuantumNetEvent("cyber_sale"))
+                        return "赛博百货数字大促全面引爆，全星系线上零售成交单量破历史极值！";
+                    return isUp ? "自营轨道货运穿梭机队完成扩容，次日达履约率提升至新高。" : "远距离星系货运能耗成本上涨，电商物流配送毛利承压。";
+
+                case "Media":
+                    if (isTuberLive && tuberHeat > 0.4f)
+                        return "直播间弹幕热度爆表全网刷屏，流媒体广告赞助分成创历史新高！";
+                    return isUp ? "深度揭秘调查独家报道引发全网热议，媒体受众订阅数爆发增长。" : "边缘虚假传言引发公关信任危机，部分大牌赞助商削减宣发预算。";
+
+                case "Sports":
+                    return isUp ? "星际极限滑板竞速锦标赛收官，赛事联名周边与门票收入创佳绩。" : "主要参赛选手训练中遭遇骨折重伤退赛，观赛热度有所回落。";
+
+                case "Quantum":
+                    if (CheckQuantumNetEvent("starlink_storm") && s.code == "$SCOM")
+                        return "强磁场星链风暴袭来！低轨中继通信链路大面积掉线，通信服务紧急维护。";
+                    if (CheckQuantumNetEvent("cyber_sale") && s.code == "$BAZR")
+                        return "赛博百货年中庆典开启，虚拟网购与数字资产交易量打破历史峰值。";
+                    if (CheckQuantumNetEvent("minescan_calib") && s.code == "$SCAN")
+                        return "重力梯度遥感雷达高精度校准完毕，探明超高品位富矿引发勘探狂潮。";
+                    if (CheckQuantumNetEvent("network_congested") && s.code == "$NEBU")
+                        return "算力并发量达到带宽上限导致网络拥堵，云端任务排队引发客户投诉。";
+                    return isUp ? "量子加密信道扩容顺利交付，企业级安全通信协议获普遍采用。" : "微波中继天线阵列例行检修，区域网络吞吐量受到短期限制。";
+
+                case "Finance":
+                    return isUp ? "多头游资大举加杠杆抢筹，投机衍生基金日内放量强势拉抬！" : "高杠杆持仓盘遭遇集中爆仓清算，空方借势打压引发踩踏抛盘。";
+            }
+
+            return isUp ? "基本面保持健康，多方主力资金有序护盘买入。" : "获利盘选择高位离场套现，短线承压小幅回踩。";
         }
 
         // 国库持仓
