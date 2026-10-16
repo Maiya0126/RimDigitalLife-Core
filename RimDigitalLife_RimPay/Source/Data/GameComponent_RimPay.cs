@@ -193,6 +193,10 @@ namespace RimDigitalLife_RimPay
         // 上次更新股票价格的 tick
         private int lastStockUpdateTick = 0;
 
+        // 每日炒股战报上墙限流（transient）
+        private int lastTradeNewsDay = -1;
+        private int tradeNewsToday = 0;
+
         // 上次发薪水的 Tick
         private int lastPaydayTick = 0;
 
@@ -1786,6 +1790,10 @@ namespace RimDigitalLife_RimPay
             Map map = Find.AnyPlayerHomeMap;
             if (map == null) return;
 
+            // 每日炒股战报上墙限流（避免一次结算刷屏）
+            int tradeDay = GenLocalDate.DayOfYear(map);
+            if (lastTradeNewsDay != tradeDay) { lastTradeNewsDay = tradeDay; tradeNewsToday = 0; }
+
             foreach (Pawn pawn in map.mapPawns.FreeColonists)
             {
                 if (pawn.Dead) continue;
@@ -1839,8 +1847,9 @@ namespace RimDigitalLife_RimPay
                         string msg = $"嗨！我买的 {target.code} ({target.name}) 今天涨了，赚了 {totalProfit} @银！运气不错！";
                         RimTalkBridge.TriggerDialogue(pawn, pawn, "炒股收益", msg, false, AssistantPersona.Rimi);
                     }
-                    if (totalProfit >= 100)
+                    if (totalProfit >= 100 && tradeNewsToday < 2)
                     {
+                        tradeNewsToday++;
                         TryPostRimTuberFinanceFeed("【殖民地股神】" + pawn.LabelShort + " 爆赚离场",
                             $"{pawn.LabelShort} 今日凭借敏锐嗅觉成功抄底 {target.code} ({target.name})，单笔大赚 {totalProfit} @银！在殖民地引起热议。", "股民高光");
                     }
@@ -1856,8 +1865,9 @@ namespace RimDigitalLife_RimPay
                         string msg = $"唉...买的 {target.code} ({target.name}) 跌了，亏了 {loss} @银...再也不信了！";
                         RimTalkBridge.TriggerDialogue(pawn, pawn, "炒股亏损", msg, false, AssistantPersona.Sirim);
                     }
-                    if (loss >= 100)
+                    if (loss >= 100 && tradeNewsToday < 2)
                     {
+                        tradeNewsToday++;
                         TryPostRimTuberFinanceFeed("【天台风很大】" + pawn.LabelShort + " 抄底被套牢",
                             $"{pawn.LabelShort} 高位追涨 {target.code} ({target.name})，单日暴跌割肉，损失 {loss} @银... 今晚只能吃营养膏了。", "理财翻车");
                     }
