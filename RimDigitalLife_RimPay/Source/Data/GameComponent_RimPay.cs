@@ -457,7 +457,7 @@ namespace RimDigitalLife_RimPay
                 LetterDefOf.PositiveEvent, (LookTargets)null);
 
             // RimTuber 动态墙联动：大事件自动上墙
-            TryPostRimTuberFinanceFeed("🔥【宏观快讯】" + macroEventLabel, macroEventDesc, "市场头条");
+            TryPostRimTuberFinanceFeed("【宏观快讯】" + macroEventLabel, macroEventDesc, "市场头条");
         }
 
         private static void TryPostRimTuberFinanceFeed(string title, string body, string tag = "边缘财经")
@@ -1131,17 +1131,25 @@ namespace RimDigitalLife_RimPay
         {
             if (stocksInitialized && stocks != null && stocks.Count > 0)
             {
-                EnsureAllStocksPresent();
+                EnsureAllStocksPresent(force: true);
                 return;
             }
             stocksInitialized = true;
             if (stocks == null) stocks = new List<StockData>();
             stocks.Clear();
-            EnsureAllStocksPresent();
+            EnsureAllStocksPresent(force: true);
         }
 
-        public void EnsureAllStocksPresent()
+        // 节流：GetStockPrices 会被证券界面每帧调用，Ensure 全量扫描 O(n²) 且遍历派系，
+        // 非强制时每 2500 tick（约 40 秒）才真正扫描一次，避免每帧开销。
+        private int lastStockEnsureTick = -999999;
+
+        public void EnsureAllStocksPresent(bool force = false)
         {
+            int now = Find.TickManager?.TicksGame ?? 0;
+            if (!force && now - lastStockEnsureTick < 2500) return;
+            lastStockEnsureTick = now;
+
             if (stocks == null) stocks = new List<StockData>();
 
             // 1. 检查核心固定股票
@@ -1833,7 +1841,7 @@ namespace RimDigitalLife_RimPay
                     }
                     if (totalProfit >= 100)
                     {
-                        TryPostRimTuberFinanceFeed("📈【殖民地股神】" + pawn.LabelShort + " 爆赚离场",
+                        TryPostRimTuberFinanceFeed("【殖民地股神】" + pawn.LabelShort + " 爆赚离场",
                             $"{pawn.LabelShort} 今日凭借敏锐嗅觉成功抄底 {target.code} ({target.name})，单笔大赚 {totalProfit} @银！在殖民地引起热议。", "股民高光");
                     }
                 }
@@ -1850,7 +1858,7 @@ namespace RimDigitalLife_RimPay
                     }
                     if (loss >= 100)
                     {
-                        TryPostRimTuberFinanceFeed("📉【天台风很大】" + pawn.LabelShort + " 抄底被套牢",
+                        TryPostRimTuberFinanceFeed("【天台风很大】" + pawn.LabelShort + " 抄底被套牢",
                             $"{pawn.LabelShort} 高位追涨 {target.code} ({target.name})，单日暴跌割肉，损失 {loss} @银... 今晚只能吃营养膏了。", "理财翻车");
                     }
                 }

@@ -38,7 +38,7 @@ namespace RimDigitalLife_RimPay
 
             // 右上角：Mod 设置入口（三个 Tab 均可见）
             Rect settingsBtn = new Rect(inRect.xMax - 126f, inRect.y + 4f, 118f, 28f);
-            if (Widgets.ButtonText(settingsBtn, "⚙ 设置 (Settings)"))
+            if (Widgets.ButtonText(settingsBtn, "设置 (Settings)"))
             {
                 Find.WindowStack.Add(new Dialog_ModSettings(LoadedModManager.GetMod<RimPayMod>()));
             }

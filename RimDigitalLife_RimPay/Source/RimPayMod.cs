@@ -259,7 +259,7 @@ namespace RimDigitalLife_RimPay
 
             // 推荐使用 Player2 的话术（显著位置）
             Text.Font = GameFont.Tiny;
-            listing.Label("<color=#58d3f7><b>🎮 建议注册并使用 Player2 软件，免费体验全部 AI 功能！</b></color>");
+            listing.Label("<color=#58d3f7><b>[推荐] 建议注册并使用 Player2 软件，免费体验全部 AI 功能！</b></color>");
             listing.Label("<color=#58d3f7>Player2 为本地免费桌面程序，无需 API Key；若已安装且正在运行，勾选 Player2 配置即可直接使用。</color>");
             listing.Label("<color=#58d3f7>勾选的配置会按列表顺序从上到下依次尝试，失败或额度不足时自动切换下一个。</color>");
             Text.Font = GameFont.Small;
