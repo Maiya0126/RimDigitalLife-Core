@@ -39,12 +39,12 @@ namespace RimDigitalLife_RimPay
             listing.Begin(inRect);
 
             Text.Font = GameFont.Medium;
-            string title = isLending ? $"向 {faction.Name} 放贷" : $"从 {faction.Name} 借款";
+            string title = isLending ? "RP_W_Loan_LendTitle".Translate(faction.Name) : "RP_W_Loan_BorrowTitle".Translate(faction.Name);
             listing.Label(title);
             Text.Font = GameFont.Small;
             listing.GapLine();
 
-            listing.Label($"输入金额 (范围: 100 - {maxAmount} @银):");
+            listing.Label("RP_W_Loan_InputAmount".Translate(maxAmount));
             
             // 数值输入
             Rect inputRect = listing.GetRect(28f);
@@ -60,14 +60,14 @@ namespace RimDigitalLife_RimPay
             // 确认与取消按钮
             Rect btnRect = listing.GetRect(32f);
             Rect cancelBtn = new Rect(btnRect.x, btnRect.y, 110f, btnRect.height);
-            if (Widgets.ButtonText(cancelBtn, "取消"))
+            if (Widgets.ButtonText(cancelBtn, "RP_W_Loan_Cancel".Translate()))
             {
                 Close();
             }
 
             Rect confirmBtn = new Rect(btnRect.xMax - 110f, btnRect.y, 110f, btnRect.height);
             Color confirmBg = isLending ? new Color(0.15f, 0.55f, 0.2f) : new Color(0.15f, 0.4f, 0.8f);
-            if (ColoredButton(confirmBtn, "确认", confirmBg))
+            if (ColoredButton(confirmBtn, "RP_W_Loan_Confirm".Translate(), confirmBg))
             {
                 if (amount >= 100 && amount <= maxAmount)
                 {
@@ -76,7 +76,7 @@ namespace RimDigitalLife_RimPay
                 }
                 else
                 {
-                    Messages.Message("请输入有效的借贷金额 (不低于 100 且不超过上限)。", MessageTypeDefOf.RejectInput, false);
+                    Messages.Message("RP_W_Loan_InvalidAmount".Translate(), MessageTypeDefOf.RejectInput, false);
                 }
             }
 

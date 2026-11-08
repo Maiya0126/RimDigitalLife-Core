@@ -103,6 +103,21 @@ namespace RimDigitalLife_RimPay
         public float rimSimDeviceDiscount = 0.05f;      // 数码设备档折扣：殖民地有佩戴数码设备的殖民者时顾客实付 -5%
         public float rimSimQuantumDiscount = 0.10f;     // 量子网络档折扣：有订阅量子网络套餐的殖民者时 -10% (覆盖上档)
 
+        // ======== RimMarket 边缘市场联动 (Market Integration) ========
+        public bool enableRimMarketIntegration = true;  // RimMarket 边缘市场联动：小人消费优先用数字钱包，实体白银补足 (未安装自动休眠)
+
+        // ======== NPC 数字钱包 (NPC Wallets) ========
+        public bool enableNpcWallets = true;            // 按科技档给访客/商队小人随机开户（一次性）
+        public float npcWalletMultiplier = 1f;          // NPC 开户金额倍率 (1 = 默认档位)
+
+        // ======== Bunnygirl Race 赌场联动 ========
+        public bool enableBunnygirlIntegration = true;  // 停用每日零花钱 + 钱包对账同步 (未安装自动休眠)
+
+        // ======== Hospitality 访客联动 ========
+        public bool enableHospitalityIntegration = true; // 访客住宿/购物/餐饮优先数字钱包 (未安装自动休眠)
+
+        // ======== RimStock 边缘股市联动 ========
+        public bool enableRimStockIntegration = true;    // 券商入金可用数字国库资金 (未安装自动休眠)
         // AI 返回的 JSON 模板 (玩家可查阅/修改，可一键还原默认)
         public string economyJsonTemplate = DefaultEconomyJson;
 
@@ -140,6 +155,16 @@ namespace RimDigitalLife_RimPay
             Scribe_Values.Look(ref rimSimTreasuryRatio, "rimSimTreasuryRatio", 1f);
             Scribe_Values.Look(ref rimSimDeviceDiscount, "rimSimDeviceDiscount", 0.05f);
             Scribe_Values.Look(ref rimSimQuantumDiscount, "rimSimQuantumDiscount", 0.10f);
+            // RimMarket 边缘市场联动
+            Scribe_Values.Look(ref enableRimMarketIntegration, "enableRimMarketIntegration", true);
+            // NPC 数字钱包
+            Scribe_Values.Look(ref enableNpcWallets, "enableNpcWallets", true);
+            Scribe_Values.Look(ref npcWalletMultiplier, "npcWalletMultiplier", 1f);
+            // Bunnygirl / Hospitality 联动
+            Scribe_Values.Look(ref enableBunnygirlIntegration, "enableBunnygirlIntegration", true);
+            Scribe_Values.Look(ref enableHospitalityIntegration, "enableHospitalityIntegration", true);
+            // RimStock 股市联动
+            Scribe_Values.Look(ref enableRimStockIntegration, "enableRimStockIntegration", true);
 
             // ======== 经济参数（此前遗漏，导致重启后滑块全部回默认） ========
             // 薪资

@@ -41,9 +41,9 @@ namespace RimDigitalLife_QuantumNet
         {
             switch (p)
             {
-                case QuantumPlan.HighSpeed: return "高速畅享包";
-                case QuantumPlan.Infinite: return "量子无限包";
-                default: return "本地流量包";
+                case QuantumPlan.HighSpeed: return "QN_Plan_HighSpeed".Translate();
+                case QuantumPlan.Infinite: return "QN_Plan_Infinite".Translate();
+                default: return "QN_Plan_Local".Translate();
             }
         }
 
@@ -140,7 +140,7 @@ namespace RimDigitalLife_QuantumNet
 
             if (!HasNetworkCoverage())
             {
-                Messages.Message("[量子网络] 当前地图没有网络覆盖，无法订阅付费套餐。请建造并通电通讯台。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("[QuantumNet] " + "QN_Msg_NoCoverage".Translate(), MessageTypeDefOf.RejectInput, false);
                 return false;
             }
 
@@ -150,7 +150,7 @@ namespace RimDigitalLife_QuantumNet
                 data.plan = plan;
                 data.startDay = GenLocalDate.DayOfYear(Find.CurrentMap ?? Find.AnyPlayerHomeMap);
                 data.startYear = GenLocalDate.Year(Find.CurrentMap ?? Find.AnyPlayerHomeMap);
-                Messages.Message($"[量子网络] {pawn.LabelShort} 已订阅「{plan.GetLabel()}」({plan.GetPrice()} @银/{QuantumNetMod.settings?.planPeriodDays ?? 15}天)。", MessageTypeDefOf.NeutralEvent, false);
+                Messages.Message("[QuantumNet] " + "QN_Msg_Subscribed".Translate(pawn.LabelShort, plan.GetLabel(), plan.GetPrice(), QuantumNetMod.settings?.planPeriodDays ?? 15), MessageTypeDefOf.NeutralEvent, false);
                 return true;
             }
             return false;
@@ -275,40 +275,40 @@ namespace RimDigitalLife_QuantumNet
             try
             {
                 string statusText = QuantumNetAIProvider.networkStatus == "congested"
-                    ? "网络拥堵"
-                    : QuantumNetAIProvider.networkStatus == "outage" ? "网络中断" : "网络正常";
+                    ? "QN_Status_Congested".Translate()
+                    : QuantumNetAIProvider.networkStatus == "outage" ? "QN_Status_Outage".Translate() : "QN_Status_Normal".Translate();
 
-                string body = $"<b>今日量子网络播报</b>\n"
-                    + $"网络状态：{statusText}\n"
-                    + $"运营商事件：{NetworkEventManager.GetStatusText()}\n\n";
+                string body = "QN_Report_Header".Translate()
+                    + "QN_Report_Status".Translate(statusText) + "\n"
+                    + "QN_Report_Event".Translate(NetworkEventManager.GetStatusText()) + "\n\n";
 
                 if (!string.IsNullOrEmpty(QuantumNetAIProvider.cloudWeatherHint))
                 {
-                    body += "☁️ 云端天气：" + QuantumNetAIProvider.cloudWeatherHint + "\n";
+                    body += "QN_Report_Weather".Translate(QuantumNetAIProvider.cloudWeatherHint) + "\n";
                 }
                 if (!string.IsNullOrEmpty(QuantumNetAIProvider.deepMineHint))
                 {
-                    string tag = NetworkEventManager.MineScanHighPrecision ? "【校准·高精度】" : "";
-                    body += "⛏ 深矿雷达：" + tag + QuantumNetAIProvider.deepMineHint + "\n";
+                    string tag = NetworkEventManager.MineScanHighPrecision ? (string)"QN_Report_CalibTag".Translate() : "";
+                    body += "QN_Report_Mine".Translate(tag + QuantumNetAIProvider.deepMineHint) + "\n";
                 }
                 if (!string.IsNullOrEmpty(QuantumNetAIProvider.rimseekTip))
                 {
-                    body += "🤖 智算建议：" + QuantumNetAIProvider.rimseekTip + "\n";
+                    body += "QN_Report_Tip".Translate(QuantumNetAIProvider.rimseekTip) + "\n";
                 }
                 if (!string.IsNullOrEmpty(QuantumNetAIProvider.newsText))
                 {
-                    body += "\n📡 " + QuantumNetAIProvider.newsText;
+                    body += "\n" + "QN_Report_News".Translate(QuantumNetAIProvider.newsText);
                 }
 
                 // RimPay 联动：追加量子网络运营商股票行情
                 string quantumStock = QuantumNetRimPayBridge.GetQuantumSectorMovement();
                 if (!string.IsNullOrEmpty(quantumStock))
                 {
-                    body += "\n📈 运营商股市：" + quantumStock;
+                    body += "\n" + "QN_Report_Stock".Translate(quantumStock);
                 }
 
                 Find.LetterStack.ReceiveLetter(
-                    "量子网络日报",
+                    "QN_Report_LetterTitle".Translate(),
                     body,
                     LetterDefOf.NeutralEvent,
                     (LookTargets)null);
@@ -318,7 +318,7 @@ namespace RimDigitalLife_QuantumNet
             }
             catch (System.Exception ex)
             {
-                Verse.Log.Warning($"[量子网络] 发送日报失败: {ex.Message}");
+                Verse.Log.Warning("[QuantumNet] " + "QN_Report_Fail".Translate(ex.Message));
             }
         }
 
@@ -346,19 +346,19 @@ namespace RimDigitalLife_QuantumNet
 
             // 从今日 AI 资讯里随机挑一个话题
             var topics = new System.Collections.Generic.List<string>();
-            if (!string.IsNullOrEmpty(QuantumNetAIProvider.newsText)) topics.Add("网络新闻：" + QuantumNetAIProvider.newsText);
-            if (!string.IsNullOrEmpty(QuantumNetAIProvider.cloudWeatherHint)) topics.Add("云端天气预测：" + QuantumNetAIProvider.cloudWeatherHint);
-            if (!string.IsNullOrEmpty(QuantumNetAIProvider.deepMineHint)) topics.Add("深矿雷达预测：" + QuantumNetAIProvider.deepMineHint);
-            if (!string.IsNullOrEmpty(QuantumNetAIProvider.rimseekTip)) topics.Add("RimSeek 智算建议：" + QuantumNetAIProvider.rimseekTip);
+            if (!string.IsNullOrEmpty(QuantumNetAIProvider.newsText)) topics.Add("QN_Topic_News".Translate(QuantumNetAIProvider.newsText));
+            if (!string.IsNullOrEmpty(QuantumNetAIProvider.cloudWeatherHint)) topics.Add("QN_Topic_Weather".Translate(QuantumNetAIProvider.cloudWeatherHint));
+            if (!string.IsNullOrEmpty(QuantumNetAIProvider.deepMineHint)) topics.Add("QN_Topic_Mine".Translate(QuantumNetAIProvider.deepMineHint));
+            if (!string.IsNullOrEmpty(QuantumNetAIProvider.rimseekTip)) topics.Add("QN_Topic_Tip".Translate(QuantumNetAIProvider.rimseekTip));
             string stockBrief = QuantumNetRimPayBridge.GetMarketBrief();
-            if (!string.IsNullOrEmpty(stockBrief)) topics.Add("边缘股市要闻：" + stockBrief);
+            if (!string.IsNullOrEmpty(stockBrief)) topics.Add("QN_Topic_Stock".Translate(stockBrief));
             if (topics.Count == 0) return;
 
             Pawn speaker = readers[Rand.Range(0, readers.Count)];
             string topic = topics[Rand.Range(0, topics.Count)];
-            string msg = $"刚看了中午的量子网络日报。{topic}，你们觉得呢？";
-            RimTalkBridge.TriggerDialogue(speaker, speaker, "量子网络日报", msg, false, AssistantPersona.Rimi);
-            Verse.Log.Message($"[量子网络] 已让 {speaker.LabelShort} 通过 RimTalk 聊起今日网络资讯。");
+            string msg = "QN_Topic_Chat".Translate(topic);
+            RimTalkBridge.TriggerDialogue(speaker, speaker, "QN_Report_LetterTitle".Translate(), msg, false, AssistantPersona.Rimi);
+            Verse.Log.Message("[QuantumNet] " + "QN_Topic_Done".Translate(speaker.LabelShort));
         }
 
         private void CheckAndProcessPlans()
@@ -412,7 +412,7 @@ namespace RimDigitalLife_QuantumNet
                             data.plan = chosen;
                             data.startDay = day;
                             data.startYear = year;
-                            Verse.Log.Message($"[量子网络] {pawn.LabelShort} 自动选购「{chosen.GetLabel()}」({chosen.GetPrice()} @银)。");
+                            Verse.Log.Message("[QuantumNet] " + "QN_Log_AutoPlan".Translate(pawn.LabelShort, chosen.GetLabel(), chosen.GetPrice()));
                         }
                     }
                 }
@@ -429,7 +429,7 @@ namespace RimDigitalLife_QuantumNet
                     {
                         data.startDay = day;
                         data.startYear = year;
-                        Verse.Log.Message($"[量子网络] {pawn.LabelShort} 已自动续费「{data.plan.GetLabel()}」。");
+                        Verse.Log.Message("[QuantumNet] " + "QN_Log_Renewed".Translate(pawn.LabelShort, data.plan.GetLabel()));
                     }
                     else
                     {
@@ -438,7 +438,7 @@ namespace RimDigitalLife_QuantumNet
                         data.plan = QuantumPlan.Local;
                         data.startDay = day;
                         data.startYear = year;
-                        Messages.Message($"[量子网络] {pawn.LabelShort} 的「{old.GetLabel()}」已到期且续费失败，已降级为本地流量包。", MessageTypeDefOf.NeutralEvent, false);
+                        Messages.Message("[QuantumNet] " + "QN_Msg_RenewFail".Translate(pawn.LabelShort, old.GetLabel()), MessageTypeDefOf.NeutralEvent, false);
                     }
                 }
                 else
@@ -447,7 +447,7 @@ namespace RimDigitalLife_QuantumNet
                     data.plan = QuantumPlan.Local;
                     data.startDay = day;
                     data.startYear = year;
-                    Verse.Log.Message($"[量子网络] {pawn.LabelShort} 的「{old.GetLabel()}」已到期（未开启自动续费），已降级为本地流量包。");
+                    Verse.Log.Message("[QuantumNet] " + "QN_Log_Expired".Translate(pawn.LabelShort, old.GetLabel()));
                 }
             }
         }
@@ -517,7 +517,7 @@ namespace RimDigitalLife_QuantumNet
                 int balance = QuantumNetRimPayBridge.GetBalance(pawn);
                 if (balance >= price)
                 {
-                    QuantumNetRimPayBridge.TryModifyBalance(pawn, -price, "量子网络套餐");
+                    QuantumNetRimPayBridge.TryModifyBalance(pawn, -price, "QN_Plan_Reason".Translate());
                     return true;
                 }
                 return false; // 余额不足

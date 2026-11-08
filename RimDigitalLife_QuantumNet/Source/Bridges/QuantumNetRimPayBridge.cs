@@ -53,7 +53,7 @@ namespace RimDigitalLife_QuantumNet
                 _available = _getBalanceMethod != null && _modifyBalanceMethod != null && _modifyTreasuryMethod != null;
                 if (_available)
                 {
-                    Verse.Log.Message("[量子网络] RimPay 钱包桥初始化成功，套餐月租将从小人钱包自动扣除。");
+                    Verse.Log.Message("[QuantumNet] " + "QN_Bridge_RimPayWalletOk".Translate());
                 }
 
                 // 反射获取股市 API（深度联动）
@@ -64,13 +64,13 @@ namespace RimDigitalLife_QuantumNet
                     _getCategoryMovementMethod = _stockApiType.GetMethod("GetCategoryMovement", BindingFlags.Public | BindingFlags.Static);
                     if (_getMarketBriefMethod != null && _getCategoryMovementMethod != null)
                     {
-                        Verse.Log.Message("[量子网络] RimPay 股市行情桥接成功，量子网络日报将播报运营商股票动态。");
+                        Verse.Log.Message("[QuantumNet] " + "QN_Bridge_StockOk".Translate());
                     }
                 }
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[量子网络] RimPay 桥初始化失败: {ex.Message}");
+                Verse.Log.Warning("[QuantumNet] " + "QN_Bridge_InitFail".Translate(ex.Message));
             }
         }
 
@@ -91,7 +91,7 @@ namespace RimDigitalLife_QuantumNet
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[量子网络] 读取 RimPay 余额失败: {ex.Message}");
+                Verse.Log.Warning("[QuantumNet] " + "QN_Bridge_GetBalanceFail".Translate(ex.Message));
                 return 0;
             }
         }
@@ -107,7 +107,7 @@ namespace RimDigitalLife_QuantumNet
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[量子网络] 修改 RimPay 余额失败: {ex.Message}");
+                Verse.Log.Warning("[QuantumNet] " + "QN_Bridge_ModifyBalanceFail".Translate(ex.Message));
                 return false;
             }
         }
@@ -124,12 +124,12 @@ namespace RimDigitalLife_QuantumNet
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[量子网络] 修改 RimPay 国库失败: {ex.Message}");
+                Verse.Log.Warning("[QuantumNet] " + "QN_Bridge_ModifyTreasuryFail".Translate(ex.Message));
                 return false;
             }
         }
 
-        // 获取量子网络运营商板块行情（如 "星链通信 +12.5%" 等）
+        // 获取量子网络运营商板块行情（由 RimPay 侧本地化生成，如 "StarCom +12.5%" 等）
         public static string GetQuantumSectorMovement()
         {
             if (!IsRimPayAvailable || _getCategoryMovementMethod == null) return null;

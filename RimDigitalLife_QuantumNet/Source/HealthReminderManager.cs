@@ -56,27 +56,27 @@ namespace RimDigitalLife_QuantumNet
             if (pawn.health.hediffSet.BleedRateTotal > 0f)
             {
                 conditionId = "bleeding";
-                tip = "检测到你在持续流血！RimSeek 强烈建议尽快就医或自行包扎止血。";
+                tip = "QN_Health_Bleeding".Translate();
             }
             else if (pawn.health.hediffSet.HasTendableHediff())
             {
                 conditionId = "tendable";
-                tip = "你的身体有需要治疗的伤口或疾病，记得让医生处理一下。";
+                tip = "QN_Health_Tendable".Translate();
             }
             else if (pawn.health.hediffSet.PainTotal > 0.4f)
             {
                 conditionId = "pain";
-                tip = "你正承受明显的疼痛，止痛或接受治疗会让你好受很多。";
+                tip = "QN_Health_Pain".Translate();
             }
             else if (pawn.needs?.rest != null && pawn.needs.rest.CurLevelPercentage < 0.2f)
             {
                 conditionId = "tired";
-                tip = "你快撑不住了！RimSeek 建议马上去床上好好睡一觉。";
+                tip = "QN_Health_Tired".Translate();
             }
             else if (pawn.needs?.food != null && pawn.needs.food.CurLevelPercentage < 0.15f)
             {
                 conditionId = "hungry";
-                tip = "你快饿坏了，记得吃点东西补充营养。";
+                tip = "QN_Health_Hungry".Translate();
             }
 
             if (conditionId == null) return;
@@ -91,10 +91,10 @@ namespace RimDigitalLife_QuantumNet
                 pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(thought);
             }
 
-            Messages.Message($"[健康提醒] RimSeek 提醒 {pawn.LabelShort}：{tip}", MessageTypeDefOf.NeutralEvent, false);
+            Messages.Message("QN_Health_Msg".Translate(pawn.LabelShort, tip), MessageTypeDefOf.NeutralEvent, false);
             if (Prefs.DevMode)
             {
-                Verse.Log.Message($"[QuantumNet 健康提醒] {pawn.LabelShort} | 状况: {conditionId}");
+                Verse.Log.Message($"[QuantumNet Health] {pawn.LabelShort} | condition: {conditionId}");
             }
         }
 

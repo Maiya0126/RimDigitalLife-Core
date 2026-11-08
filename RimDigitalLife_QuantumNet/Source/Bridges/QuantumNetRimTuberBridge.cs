@@ -48,12 +48,12 @@ namespace RimDigitalLife_QuantumNet
                 _available = _isLiveMethod != null;
                 if (_available)
                 {
-                    Verse.Log.Message("[量子网络] RimTuber 桥初始化成功，可联动直播打赏。");
+                    Verse.Log.Message("[QuantumNet] " + "QN_Bridge_RimTuberOk".Translate());
                 }
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[量子网络] RimTuber 桥初始化失败: {ex.Message}");
+                Verse.Log.Warning("[QuantumNet] " + "QN_Bridge_RimTuberFail".Translate(ex.Message));
             }
         }
 

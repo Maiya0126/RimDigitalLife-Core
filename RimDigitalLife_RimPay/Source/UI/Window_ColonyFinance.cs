@@ -32,21 +32,21 @@ namespace RimDigitalLife_RimPay
 
             // 标题
             Text.Font = GameFont.Medium;
-            listing.Label("RimPay 殖民地财报总览");
+            listing.Label("RP_W_Finance_Title".Translate());
             Text.Font = GameFont.Small;
             listing.GapLine();
 
             // 资产总览
             int physicalSilver = map.resourceCounter.GetCount(ThingDefOf.Silver);
             int treasury = comp.CloudTreasuryBalance;
-            listing.Label($"<b>资产总览:</b>");
-            listing.Label($"  物理白银 (计入财富): {physicalSilver}");
-            listing.Label($"  数字国库 (不计入财富): {treasury}");
-            listing.Label($"  流动资产合计: {physicalSilver + treasury}");
+            listing.Label("RP_W_Finance_AssetTitle".Translate());
+            listing.Label("RP_W_Finance_AssetPhysical".Translate(physicalSilver));
+            listing.Label("RP_W_Finance_AssetTreasury".Translate(treasury));
+            listing.Label("RP_W_Finance_AssetTotal".Translate(physicalSilver + treasury));
             listing.Gap();
 
             // 殖民者财政名册
-            listing.Label($"<b>殖民者财政名册 (单位: @银):</b>");
+            listing.Label("RP_W_Finance_RosterTitle".Translate());
             listing.Gap(4f);
             Rect pawnRect = listing.GetRect(360f);
 
@@ -58,7 +58,7 @@ namespace RimDigitalLife_RimPay
 
             if (colonists.Count == 0)
             {
-                inner.Label("暂无殖民者。");
+                inner.Label("RP_W_Finance_NoColonists".Translate());
             }
             else
             {
@@ -67,7 +67,7 @@ namespace RimDigitalLife_RimPay
                     int bal = comp.GetBalance(p);
                     int salary = GetSalary(comp, p);
                     // 显示姓名、余额、预估日薪
-                    inner.Label($"  {p.LabelShort}  —  余额: {bal} @银  |  预估日薪: {salary} @银");
+                    inner.Label("RP_W_Finance_RosterLine".Translate(p.LabelShort, bal, salary));
                     inner.Gap(3f);
                 }
             }
@@ -78,7 +78,7 @@ namespace RimDigitalLife_RimPay
             listing.Gap(8f);
 
             // 说明文字
-            listing.Label("<i>提示: 选中殖民者可在底部控制栏点击钱包图标, 查看该小人的收支流水。</i>");
+            listing.Label("RP_W_Finance_Footnote".Translate());
 
             listing.End();
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using UnityEngine;
@@ -31,7 +31,8 @@ namespace RimDigitalLife_RimPay
 
         public string GetSummary()
         {
-            return $"第{year}.{day}日  {(isIncome ? "+" : "")}{amount} @银  {reason}";
+            string reasonText = string.IsNullOrEmpty(reason) ? reason : (string)reason.Translate();
+            return (string)"RP_Settle_TxSummary".Translate(year, day, isIncome ? "+" : "", amount, reasonText);
         }
 
         public void ExposeData()
@@ -297,8 +298,8 @@ namespace RimDigitalLife_RimPay
                 {
                     if (cloudTreasuryBalance >= dailySalary)
                     {
-                        ModifyTreasury(-dailySalary, "发薪");
-                        ModifyBalance(pawn, dailySalary, "每日工资");
+                        ModifyTreasury(-dailySalary, "RP_Reason_Payday");
+                        ModifyBalance(pawn, dailySalary, "RP_Reason_DailyWage");
                         totalPaid += dailySalary;
                     }
                     else
@@ -314,16 +315,16 @@ namespace RimDigitalLife_RimPay
                 int currentBalance = GetBalance(pawn);
                 if (currentBalance >= rent)
                 {
-                    ModifyBalance(pawn, -rent, "住宿房租");
-                    ModifyTreasury(rent, "房租");
+                    ModifyBalance(pawn, -rent, "RP_Reason_LodgingRent");
+                    ModifyTreasury(rent, "RP_Reason_RentIncome");
                     totalRent += rent;
                 }
                 else
                 {
                     // 钱不够付房租，强制清空，但不扣负数
                     int actualPaid = currentBalance;
-                    ModifyBalance(pawn, -actualPaid, "住宿房租(欠费)");
-                    ModifyTreasury(actualPaid, "房租(欠费)");
+                    ModifyBalance(pawn, -actualPaid, "RP_Reason_LodgingRentArrears");
+                    ModifyTreasury(actualPaid, "RP_Reason_RentArrears");
                     totalRent += actualPaid;
                 }
 
@@ -338,7 +339,7 @@ namespace RimDigitalLife_RimPay
                         int interest = (int)(newBalance * effRate);
                         if (interest > 0)
                         {
-                            ModifyBalance(pawn, interest, "基金利息");
+                            ModifyBalance(pawn, interest, "RP_Reason_FundInterest");
                             totalInterest += interest;
                             
                             // 定期给小人一点好心情，概率从设置读取
@@ -353,7 +354,7 @@ namespace RimDigitalLife_RimPay
 
             if (totalPaid > 0 || totalRent > 0)
             {
-                Messages.Message($"【RimPay结算中心】已完成本日薪资与房租结算 (共 {totalColonists} 人)。\n发放薪水: {totalPaid} @银 | 回收房租: {totalRent} @银 | 系统发放利息: {totalInterest} @银。", MessageTypeDefOf.NeutralEvent, false);
+                Messages.Message("RP_Settle_DailyDone".Translate(totalColonists, totalPaid, totalRent, totalInterest), MessageTypeDefOf.NeutralEvent, false);
             }
 
             // 4. 处理贷款利息
@@ -375,7 +376,10 @@ namespace RimDigitalLife_RimPay
             // 7. AI 财经事件 → RimTalk 播报 (让小人聊天提到今天的财经大事)
             BroadcastEconomyAiToRimTalk();
 
-            // 8. 记录本次发薪的基地日期（跨天补偿触发的基准）
+            // 8. NPC 数字钱包开户（按科技档随机，访客/商队一次性发放）
+            NpcWalletGenerator.SeedDailyWallets();
+
+            // 9. 记录本次发薪的基地日期（跨天补偿触发的基准）
             lastPaydayDayOfYear = GenLocalDate.DayOfYear(map);
             lastPaydayYear = GenLocalDate.Year(map);
         }
@@ -413,7 +417,7 @@ namespace RimDigitalLife_RimPay
                 macroEventDaysLeft--;
                 if (macroEventDaysLeft <= 0)
                 {
-                    Verse.Log.Message($"[RimPay AI] 宏观事件【{activeMacroEvent}】已结束。");
+                    Verse.Log.Message($"[RimPay AI] Macro event [{activeMacroEvent}] ended.");
                     activeMacroEvent = "";
                     macroEventLabel = "";
                     macroEventDesc = "";
@@ -452,19 +456,19 @@ namespace RimDigitalLife_RimPay
             macroEventDaysLeft = 3;
             macroEventLabel = GetMacroEventLabel(key);
             macroEventDesc = GetMacroEventDesc(key);
-            Verse.Log.Message($"[RimPay AI] 触发宏观事件【{macroEventLabel}】，持续 {macroEventDaysLeft} 天。");
+            Verse.Log.Message($"[RimPay AI] Macro event [{macroEventLabel}] triggered, lasts {macroEventDaysLeft} days.");
 
             Map map = Find.AnyPlayerHomeMap;
             if (map == null) return;
-            Find.LetterStack.ReceiveLetter("边缘财经快讯：" + macroEventLabel,
-                macroEventDesc + "\n\n（该宏观事件将持续 " + macroEventDaysLeft + " 天，期间影响股市/交易/搜刮等经济环节。）",
+            Find.LetterStack.ReceiveLetter("RP_Macro_LetterTitle".Translate((string)macroEventLabel.Translate()),
+                macroEventDesc + "\n\n" + (string)"RP_Macro_LetterBodySuffix".Translate(macroEventDaysLeft),
                 LetterDefOf.PositiveEvent, (LookTargets)null);
 
             // RimTuber 动态墙联动：大事件自动上墙
-            TryPostRimTuberFinanceFeed("【宏观快讯】" + macroEventLabel, macroEventDesc, "市场头条");
+            TryPostRimTuberFinanceFeed("RP_Macro_FeedTitle".Translate((string)macroEventLabel.Translate()), macroEventDesc, "RP_Macro_FeedTag");
         }
 
-        private static void TryPostRimTuberFinanceFeed(string title, string body, string tag = "边缘财经")
+        private static void TryPostRimTuberFinanceFeed(string title, string body, string tag = "RP_Tuber_FinanceTag")
         {
             if (!IsRimTuberActive()) return;
             try
@@ -476,7 +480,7 @@ namespace RimDigitalLife_RimPay
                 var postMethod = apiType.GetMethod("PostFinanceFeed", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
                 if (postMethod != null)
                 {
-                    postMethod.Invoke(null, new object[] { title, body, tag });
+                    postMethod.Invoke(null, new object[] { title, body, (string)tag.Translate() });
                 }
             }
             catch { }
@@ -486,11 +490,11 @@ namespace RimDigitalLife_RimPay
         {
             switch (key)
             {
-                case "market_crash": return "市场崩盘";
-                case "gold_rush": return "淘金热";
-                case "shortage": return "物资短缺";
-                case "tech_boom": return "科技繁荣";
-                default: return "未知事件";
+                case "market_crash": return "RP_Macro_Crash";
+                case "gold_rush": return "RP_Macro_GoldRush";
+                case "shortage": return "RP_Macro_Shortage";
+                case "tech_boom": return "RP_Macro_TechBoom";
+                default: return "RP_Macro_Unknown";
             }
         }
 
@@ -498,17 +502,17 @@ namespace RimDigitalLife_RimPay
         {
             switch (key)
             {
-                case "market_crash": return "边缘股市遭遇恐慌性抛售！未来数日股价大幅下挫、波动剧烈，商人也趁机压价。";
-                case "gold_rush": return "淘金热席卷边缘世界！敌人身上携带的数字白银大幅增加，击杀者分成也更丰厚。";
-                case "shortage": return "供应链紧张导致物价飞涨！餐费与生活成本上升，部分商品买卖价格明显波动。";
-                case "tech_boom": return "科技股暴涨！股市普涨、交易价格水涨船高，商人愿意出更高价收购你的货物。";
+                case "market_crash": return (string)"RP_Macro_CrashDesc".Translate();
+                case "gold_rush": return (string)"RP_Macro_GoldRushDesc".Translate();
+                case "shortage": return (string)"RP_Macro_ShortageDesc".Translate();
+                case "tech_boom": return (string)"RP_Macro_TechBoomDesc".Translate();
                 default: return "";
             }
         }
 
-        // 状态面板/其他模块读取当前宏观事件
+        // 状态面板/其他模块读取当前宏观事件（字段存翻译键，取用时转译；旧档中文原文 Translate 失败原样返回，天然兼容）
         public string ActiveMacroEvent => activeMacroEvent;
-        public string MacroEventLabel => macroEventLabel;
+        public string MacroEventLabel => macroEventLabel.Translate();
         public int MacroEventDaysLeft => macroEventDaysLeft;
 
         // ======== RimSim 商店联动统计 ========
@@ -544,12 +548,12 @@ namespace RimDigitalLife_RimPay
                 int year = GenLocalDate.Year(map);
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.AppendLine($"—— 边缘财经日报 · 第{year}.{day}日 ——");
+                sb.AppendLine("RP_Daily_Header".Translate(year, day));
                 sb.AppendLine();
 
                 // 国库概览
                 int physical = map.resourceCounter.GetCount(ThingDefOf.Silver);
-                sb.AppendLine($"国库收支：实体白银 {physical} @银，云端国库 {cloudTreasuryBalance} @银。");
+                sb.AppendLine("RP_Daily_TreasuryLine".Translate(physical, cloudTreasuryBalance));
 
                 // 股市今日概览 (找涨幅与跌幅最大的股票)
                 if (stocks.Count > 0)
@@ -563,14 +567,14 @@ namespace RimDigitalLife_RimPay
                     if (best != null && worst != null)
                     {
                         string bSign = best.changePercent >= 0 ? "+" : "";
-                        sb.AppendLine($"股市行情：{best.name} 领涨 {bSign}{best.changePercent:F1}%，{worst.name} 领跌 {worst.changePercent:F1}%。");
+                        sb.AppendLine("RP_Daily_MarketLine".Translate((string)best.name.Translate(), bSign + best.changePercent.ToString("F1"), (string)worst.name.Translate(), worst.changePercent.ToString("F1")));
                         if (!string.IsNullOrEmpty(best.lastHeadline))
                         {
-                            sb.AppendLine($"  [利好聚焦] {best.name} —— {best.lastHeadline}");
+                            sb.AppendLine("RP_Daily_MarketGood".Translate((string)best.name.Translate(), (string)best.lastHeadline.Translate()));
                         }
                         if (!string.IsNullOrEmpty(worst.lastHeadline))
                         {
-                            sb.AppendLine($"  [利空预警] {worst.name} —— {worst.lastHeadline}");
+                            sb.AppendLine("RP_Daily_MarketBad".Translate((string)worst.name.Translate(), (string)worst.lastHeadline.Translate()));
                         }
                     }
                 }
@@ -585,17 +589,17 @@ namespace RimDigitalLife_RimPay
                 }
                 if (playerLent > 0 || playerBorrowed > 0)
                 {
-                    sb.AppendLine($"借贷市场：在途放贷 {playerLent} @银，在途借款 {playerBorrowed} @银。");
+                    sb.AppendLine("RP_Daily_LoanActive".Translate(playerLent, playerBorrowed));
                 }
                 else
                 {
-                    sb.AppendLine("借贷市场：今日无在途贷款与借款。");
+                    sb.AppendLine("RP_Daily_LoanNone".Translate());
                 }
 
                 // 工资与纳税概览
                 if (totalPaid > 0)
                 {
-                    sb.AppendLine($"薪酬发放：今日共发放工资 {totalPaid} @银，回收房租 {totalRent} @银。");
+                    sb.AppendLine("RP_Daily_PayrollLine".Translate(totalPaid, totalRent));
                 }
 
                 // 昨日全天账单（从国库流水账汇总：餐费/搜刮/贸易/存取款/利息等）
@@ -608,14 +612,14 @@ namespace RimDigitalLife_RimPay
                 // AI 财经头条 (AI 开启且成功时追加)
                 if ((RimPayMod.settings?.enableEconomyAI ?? false) && RimPayAIProvider.hasAIResult && !string.IsNullOrEmpty(RimPayAIProvider.eventText))
                 {
-                    sb.AppendLine($"AI 财经头条：{RimPayAIProvider.eventText}");
+                    sb.AppendLine("RP_Daily_AiHeadline".Translate(RimPayAIProvider.eventText));
                 }
 
                 sb.AppendLine();
-                sb.AppendLine("— RimPay 数字经济拓展 · 边缘财经 —");
+                sb.AppendLine("RP_Daily_Footer".Translate());
 
                 Find.LetterStack.ReceiveLetter(
-                    "边缘财经日报",
+                    "RP_Daily_LetterTitle".Translate(),
                     sb.ToString(),
                     LetterDefOf.NeutralEvent,
                     (LookTargets)null);
@@ -624,7 +628,7 @@ namespace RimDigitalLife_RimPay
             {
                 if (RimPayMod.settings?.enableEconomyAI ?? false)
                 {
-                    Verse.Log.Message($"[RimPay] 每日财经日报生成失败: {ex.Message}");
+                    Verse.Log.Message($"[RimPay] Daily finance letter failed: {ex.Message}");
                 }
             }
         }
@@ -658,9 +662,9 @@ namespace RimDigitalLife_RimPay
 
             if (income == 0 && expense == 0) return null;
 
-            string incomeStr = income > 0 ? string.Join("、", incomeByReason.Select(kv => $"{kv.Key}+{kv.Value}")) : "无";
-            string expenseStr = expense > 0 ? string.Join("、", expenseByReason.Select(kv => $"{kv.Key}-{kv.Value}")) : "无";
-            return $"昨日账单：收入 {income} @银 ({incomeStr}) ｜ 支出 {expense} @银 ({expenseStr})。";
+            string incomeStr = income > 0 ? string.Join("、", incomeByReason.Select(kv => $"{(kv.Key.NullOrEmpty() ? kv.Key : (string)kv.Key.Translate())}+{kv.Value}")) : (string)"RP_Daily_None".Translate();
+            string expenseStr = expense > 0 ? string.Join("、", expenseByReason.Select(kv => $"{(kv.Key.NullOrEmpty() ? kv.Key : (string)kv.Key.Translate())}-{kv.Value}")) : (string)"RP_Daily_None".Translate();
+            return (string)"RP_Daily_YesterdayBill".Translate(income, incomeStr, expense, expenseStr);
         }
 
         private int CalculateRent(Pawn pawn)
@@ -800,7 +804,7 @@ namespace RimDigitalLife_RimPay
         {
             if (amount <= 0) return true;
             if (cloudTreasuryBalance < amount) return false;
-            ModifyTreasury(-amount, string.IsNullOrEmpty(reason) ? "模组扣款" : reason);
+            ModifyTreasury(-amount, string.IsNullOrEmpty(reason) ? "RP_Reason_ModPayment" : reason);
             return true;
         }
 
@@ -836,7 +840,7 @@ namespace RimDigitalLife_RimPay
 
             if (treasuryToUse > 0)
             {
-                ModifyTreasury(-treasuryToUse, string.IsNullOrEmpty(reason) ? "模组扣款" : reason);
+                ModifyTreasury(-treasuryToUse, string.IsNullOrEmpty(reason) ? "RP_Reason_ModPayment" : reason);
             }
 
             return treasuryToUse;
@@ -909,12 +913,12 @@ namespace RimDigitalLife_RimPay
         {
             if (pawn == null) return;
             string key = pawn.ThingID;
-            
+
             if (!personalWallets.ContainsKey(key))
             {
                 personalWallets[key] = 0;
             }
-            
+
             personalWallets[key] += amount;
             if (personalWallets[key] < 0) personalWallets[key] = 0;
 
@@ -923,6 +927,13 @@ namespace RimDigitalLife_RimPay
             {
                 RecordTransaction(pawn, amount, reason);
             }
+        }
+
+        // 仅记一条支出流水（余额已由调用方先行调整，供联动"预垫付-对账"两段式记账用）
+        public void RecordWalletExpense(Pawn pawn, int amount, string reason)
+        {
+            if (pawn == null || amount <= 0 || string.IsNullOrEmpty(reason)) return;
+            RecordTransaction(pawn, -amount, reason);
         }
 
         // 查询某人最近的交易流水
@@ -1041,8 +1052,8 @@ namespace RimDigitalLife_RimPay
                     if (lr.isFromPlayer)
                     {
                         // 放贷 → 收到利息
-                        ModifyTreasury(interest, "放贷利息");
-                        Messages.Message($"贷款利息到账: 从 {lr.factionName} 收到 {interest} @银 利息。", MessageTypeDefOf.PositiveEvent, false);
+                        ModifyTreasury(interest, "RP_Reason_LendInterest");
+                        Messages.Message("RP_Settle_LendInterestIn".Translate(lr.factionName, interest), MessageTypeDefOf.PositiveEvent, false);
                         lr.dueDay = currentDay + 15;
                     }
                     else
@@ -1050,14 +1061,14 @@ namespace RimDigitalLife_RimPay
                         // 借款 → 支付利息
                         if (cloudTreasuryBalance >= interest)
                         {
-                            ModifyTreasury(-interest, "借款利息");
-                            Messages.Message($"贷款利息支出: 向 {lr.factionName} 支付 {interest} @银 利息。", MessageTypeDefOf.NegativeEvent, false);
+                            ModifyTreasury(-interest, "RP_Reason_BorrowInterest");
+                            Messages.Message("RP_Settle_LendInterestOut".Translate(lr.factionName, interest), MessageTypeDefOf.NegativeEvent, false);
                             lr.dueDay = currentDay + 15;
                         }
                         else
                         {
                             // 国库不足 → 标记坏账
-                            Messages.Message($"警告: 无法支付 {lr.factionName} 的利息 {interest} @银，关系恶化！", MessageTypeDefOf.ThreatBig, false);
+                            Messages.Message("RP_Settle_LendBadDebt".Translate(lr.factionName, interest), MessageTypeDefOf.ThreatBig, false);
                             // 寻找派系并降低好感
                             Faction faction = Find.FactionManager.AllFactions.FirstOrDefault(f => f.loadID == lr.factionKey);
                             if (faction != null) faction.TryAffectGoodwillWith(Faction.OfPlayer, -15);
@@ -1094,41 +1105,41 @@ namespace RimDigitalLife_RimPay
         private static readonly List<StockTemplate> CoreFixedStocks = new List<StockTemplate>
         {
             // --- 消费电子与数码科技 (Tech) ---
-            new StockTemplate("$ISHN", "iShen 集团", 12.5, 0.05, "Tech", "星系消费电子巨头，主营智能手机与移动终端"),
-            new StockTemplate("$MSFT", "Macrosoft 微硬", 15.0, 0.03, "Tech", "老牌软件与操作系统垄断服务商"),
-            new StockTemplate("$NOKI", "Nokirim 诺基林", 18.5, 0.02, "Tech", "工业级通信设备与军工防护外壳制造"),
-            new StockTemplate("$DAMI", "DaMi 科技", 4.5, 0.12, "Tech", "平价个人智能出行与电动平衡车研发"),
-            new StockTemplate("$BOOS", "BoosDead", 0.8, 0.25, "Tech", "低端山寨数码与劣质电子元件组装厂"),
+            new StockTemplate("$ISHN", "RP_Corp_iShen", 12.5, 0.05, "Tech", "RP_Corp_iShen_Desc"),
+            new StockTemplate("$MSFT", "RP_Corp_Macrosoft", 15.0, 0.03, "Tech", "RP_Corp_Macrosoft_Desc"),
+            new StockTemplate("$NOKI", "RP_Corp_Nokirim", 18.5, 0.02, "Tech", "RP_Corp_Nokirim_Desc"),
+            new StockTemplate("$DAMI", "RP_Corp_DaMi", 4.5, 0.12, "Tech", "RP_Corp_DaMi_Desc"),
+            new StockTemplate("$BOOS", "RP_Corp_BoosDead", 0.8, 0.25, "Tech", "RP_Corp_BoosDead_Desc"),
 
             // --- 文化娱乐与大众消费 (Entertainment & Food) ---
-            new StockTemplate("$RIMT", "Rimtendo 任天缘", 8.2, 0.08, "Entertainment", "风靡边缘世界的掌机与卡带娱乐开发商"),
-            new StockTemplate("$RONY", "RONY 缘尼", 7.8, 0.07, "Entertainment", "高端影音视听主机与影像传感器巨头"),
-            new StockTemplate("$STAR", "StarveMe 科技", 3.2, 0.18, "Food", "深空应急合成食品与长保压缩营养膏"),
+            new StockTemplate("$RIMT", "RP_Corp_Rimtendo", 8.2, 0.08, "Entertainment", "RP_Corp_Rimtendo_Desc"),
+            new StockTemplate("$RONY", "RP_Corp_RONY", 7.8, 0.07, "Entertainment", "RP_Corp_RONY_Desc"),
+            new StockTemplate("$STAR", "RP_Corp_StarveMe", 3.2, 0.18, "Food", "RP_Corp_StarveMe_Desc"),
 
             // --- 现代现实主力行业 (Agri, Ranch, ECom, Media, Sports, Medical, Arms, Mining) ---
-            new StockTemplate("$AGRI", "GreenSprout 绿芽农业", 5.2, 0.10, "Agri", "大宗水培农作物与抗旱耐寒农产品种植"),
-            new StockTemplate("$MUFF", "MuffaloCorp 耗牛畜牧", 4.8, 0.11, "Ranch", "纯血耗牛繁育与保暖毛皮肉品联合体"),
-            new StockTemplate("$ECOM", "OrbitalBay 轨道淘客", 8.8, 0.08, "ECom", "星系轨道电商网购平台与货运直达"),
-            new StockTemplate("$TUBR", "TuberNet 块茎传媒", 6.5, 0.15, "Media", "流媒体与顶流自媒体孵化联盟"),
-            new StockTemplate("$NEWS", "RimTribune 边缘先驱报", 7.2, 0.06, "Media", "历史悠久的星系通讯社与中立财经新闻网"),
-            new StockTemplate("$GLAD", "ApexArena 巅峰竞技", 6.0, 0.12, "Sports", "星际极限滑板竞速赛与角斗联赛娱乐"),
-            new StockTemplate("$GLTR", "GlitterPharm 闪耀制药", 16.0, 0.06, "Medical", "闪耀世界高阶仿生体与全能抗生素研发"),
-            new StockTemplate("$MEDX", "MedEx 生物科技", 9.5, 0.10, "Medical", "异种基因重构与人造内脏培育工厂"),
-            new StockTemplate("$APEX", "ApexArms 顶峰防务", 14.0, 0.09, "Arms", "行星重型近防炮塔与高斯电磁火器制造"),
-            new StockTemplate("$PLST", "PlasteelDyn 玻璃钢重工", 11.0, 0.08, "Arms", "超合金复合动力装甲与高密度防护盾研制"),
-            new StockTemplate("$URAN", "UranCorp 泛星系铀能", 13.5, 0.12, "Mining", "超临界核能聚变反应堆与深层地质采掘"),
+            new StockTemplate("$AGRI", "RP_Corp_GreenSprout", 5.2, 0.10, "Agri", "RP_Corp_GreenSprout_Desc"),
+            new StockTemplate("$MUFF", "RP_Corp_MuffaloCorp", 4.8, 0.11, "Ranch", "RP_Corp_MuffaloCorp_Desc"),
+            new StockTemplate("$ECOM", "RP_Corp_OrbitalBay", 8.8, 0.08, "ECom", "RP_Corp_OrbitalBay_Desc"),
+            new StockTemplate("$TUBR", "RP_Corp_TuberNet", 6.5, 0.15, "Media", "RP_Corp_TuberNet_Desc"),
+            new StockTemplate("$NEWS", "RP_Corp_RimTribune", 7.2, 0.06, "Media", "RP_Corp_RimTribune_Desc"),
+            new StockTemplate("$GLAD", "RP_Corp_ApexArena", 6.0, 0.12, "Sports", "RP_Corp_ApexArena_Desc"),
+            new StockTemplate("$GLTR", "RP_Corp_GlitterPharm", 16.0, 0.06, "Medical", "RP_Corp_GlitterPharm_Desc"),
+            new StockTemplate("$MEDX", "RP_Corp_MedEx", 9.5, 0.10, "Medical", "RP_Corp_MedEx_Desc"),
+            new StockTemplate("$APEX", "RP_Corp_ApexArms", 14.0, 0.09, "Arms", "RP_Corp_ApexArms_Desc"),
+            new StockTemplate("$PLST", "RP_Corp_PlasteelDyn", 11.0, 0.08, "Arms", "RP_Corp_PlasteelDyn_Desc"),
+            new StockTemplate("$URAN", "RP_Corp_UranCorp", 13.5, 0.12, "Mining", "RP_Corp_UranCorp_Desc"),
 
             // --- 投机衍生基金 (Finance) ---
-            new StockTemplate("$DSF", "数字白银杠杆基金", 10.0, 0.30, "Finance", "追踪大盘情绪的高杠杆投机衍生基金")
+            new StockTemplate("$DSF", "RP_Corp_DigitalSilverFund", 10.0, 0.30, "Finance", "RP_Corp_DigitalSilverFund_Desc")
         };
 
         private static readonly List<StockTemplate> QuantumNetOperatorStocks = new List<StockTemplate>
         {
-            new StockTemplate("$SCOM", "星链通信 (StarCom)", 12.0, 0.08, "Quantum", "量子网络低轨星链覆盖通信商"),
-            new StockTemplate("$NEBU", "星云算力 (NebulaCloud)", 15.5, 0.07, "Quantum", "超导云算力与 RimSeek 智算调度服务商"),
-            new StockTemplate("$CART", "卡带发行商 (CartoBoard)", 7.5, 0.10, "Quantum", "数字娱乐内容发行与虚拟软件载体"),
-            new StockTemplate("$BAZR", "赛博百货 (CyberBazaar)", 9.0, 0.09, "Quantum", "全星系虚拟网购与数字商品平台"),
-            new StockTemplate("$SCAN", "深矿雷达 (MineScan)", 11.0, 0.08, "Quantum", "轨道重力梯度测绘与深层矿脉遥感云平台")
+            new StockTemplate("$SCOM", "RP_Corp_StarCom", 12.0, 0.08, "Quantum", "RP_Corp_StarCom_Desc"),
+            new StockTemplate("$NEBU", "RP_Corp_NebulaCloud", 15.5, 0.07, "Quantum", "RP_Corp_NebulaCloud_Desc"),
+            new StockTemplate("$CART", "RP_Corp_CartoBoard", 7.5, 0.10, "Quantum", "RP_Corp_CartoBoard_Desc"),
+            new StockTemplate("$BAZR", "RP_Corp_CyberBazaar", 9.0, 0.09, "Quantum", "RP_Corp_CyberBazaar_Desc"),
+            new StockTemplate("$SCAN", "RP_Corp_MineScan", 11.0, 0.08, "Quantum", "RP_Corp_MineScan_Desc")
         };
 
         public void InitializeStocks()
@@ -1202,7 +1213,7 @@ namespace RimDigitalLife_RimPay
                     {
                         double basePrice = (f.def.techLevel == TechLevel.Animal ? 0.5 : f.def.techLevel == TechLevel.Neolithic ? 1.0 : f.def.techLevel == TechLevel.Medieval ? 2.0 : f.def.techLevel == TechLevel.Industrial ? 4.0 : f.def.techLevel == TechLevel.Spacer ? 8.0 : f.def.techLevel == TechLevel.Ultra ? 12.0 : 16.0);
                         double vol = 0.08 + (double)f.def.techLevel * 0.01;
-                        stocks.Add(CreateStock(code, f.Name, basePrice, vol, "Faction", f.loadID, $"{f.Name} (科技级别: {f.def.techLevel.ToString()})"));
+                        stocks.Add(CreateStock(code, f.Name, basePrice, vol, "Faction", f.loadID, "RP_Corp_Faction_Desc".Translate(f.Name, f.def.techLevel.ToString())));
                     }
                     else
                     {
@@ -1585,10 +1596,10 @@ namespace RimDigitalLife_RimPay
                 int year = map != null ? GenLocalDate.Year(map) : 5500;
                 string headline = GenerateStockNewsHeadline(s, s.changePercent, map, hasHeatWave, hasColdSnap, hasSolarFlare, hasVolcanicWinter, isSelling, isTuberLive, tuberHeat, f, specificBias, wasShock);
                 s.lastHeadline = headline;
-                string signTag = s.changePercent >= 0 ? "[涨]" : "[跌]";
+                string signTag = s.changePercent >= 0 ? (string)"RP_News_SignUp".Translate() : (string)"RP_News_SignDown".Translate();
                 string signNum = s.changePercent >= 0 ? "+" : "";
                 if (s.recentNews == null) s.recentNews = new List<string>();
-                s.recentNews.Insert(0, $"第{year}.{day}日 {signTag} {signNum}{s.changePercent:F1}% {headline}");
+                s.recentNews.Insert(0, "RP_News_HistoryLine".Translate(year, day, signTag, signNum + s.changePercent.ToString("F1"), (string)headline.Translate()));
                 while (s.recentNews.Count > 5) s.recentNews.RemoveAt(s.recentNews.Count - 1);
             }
 
@@ -1597,10 +1608,10 @@ namespace RimDigitalLife_RimPay
             if (topStock != null && Mathf.Abs((float)topStock.changePercent) >= 18f)
             {
                 string sign = topStock.changePercent >= 0 ? "+" : "";
-                string action = topStock.changePercent >= 0 ? "暴涨飙升" : "遭遇闪崩";
-                string newsDetail = !string.IsNullOrEmpty(topStock.lastHeadline) ? topStock.lastHeadline : "受多空资金激烈博弈影响，日内振幅巨大。";
-                TryPostRimTuberFinanceFeed($"【大盘异动】{topStock.code} 单日{action} {sign}{topStock.changePercent:F1}%",
-                    $"{newsDetail} 最新股价报 {topStock.price:F2} @银。", "行情快报");
+                string action = topStock.changePercent >= 0 ? "RP_Tuber_Surge".Translate() : "RP_Tuber_FlashCrash".Translate();
+                string newsDetail = !string.IsNullOrEmpty(topStock.lastHeadline) ? (string)topStock.lastHeadline.Translate() : (string)"RP_News_VolatileDefault".Translate();
+                TryPostRimTuberFinanceFeed("RP_Tuber_MarketAlert".Translate(topStock.code, action, sign + topStock.changePercent.ToString("F1")),
+                    "RP_Tuber_MarketAlertBody".Translate(newsDetail, topStock.price.ToString("F2")), "RP_Tuber_MarketTag");
             }
 
             // 更新周期结束：重置近期短期事件缓存，准备下一周期
@@ -1620,9 +1631,9 @@ namespace RimDigitalLife_RimPay
             if (wasShock)
             {
                 if (isUp)
-                    return "神秘离岸财团大举建仓增持，主力资金强力买入拉抬股价。";
+                    return "RP_News_ShockBuy";
                 else
-                    return "知名星际做空机构发布做空研报，质疑其季度报表存在营收水分。";
+                    return "RP_News_ShockShort";
             }
 
             // 2. 派系股票
@@ -1630,20 +1641,20 @@ namespace RimDigitalLife_RimPay
             {
                 if (f != null && recentRaidFactionIDs.Contains(f.loadID))
                 {
-                    return "对殖民地突袭失利惨遭反击，主力精锐受重创引发市场抛售。";
+                    return "RP_News_Faction_1";
                 }
                 if (f != null && recentBigTradeFactions.ContainsKey(f.loadID) && recentBigTradeFactions[f.loadID] >= 2000)
                 {
-                    return "与殖民地完成数千白银大宗物资交割，双边商贸景气度创季度新高。";
+                    return "RP_News_Faction_2";
                 }
                 if (f != null)
                 {
                     if (f.PlayerGoodwill >= 75)
-                        return "与殖民地深化战略同盟，双边边境关税豁免获议会通过。";
+                        return "RP_News_Faction_3";
                     if (f.PlayerGoodwill < 0)
-                        return isUp ? "边境局势缓和预期升温，防务摩擦成本有所控制。" : "地缘外交摩擦升级，边境商道受阻引发商业预期恶化。";
+                        return isUp ? "RP_News_Faction_4" : "RP_News_Faction_5";
                 }
-                return isUp ? "领地完成季节性赋税征缴，财政盈余超市场预期。" : "星际通胀与补给消耗高企，派系季度财报不及预期。";
+                return isUp ? "RP_News_Faction_6" : "RP_News_Faction_7";
             }
 
             // 3. 行业股票
@@ -1651,91 +1662,91 @@ namespace RimDigitalLife_RimPay
             {
                 case "Agri":
                     if (hasHeatWave || hasVolcanicWinter)
-                        return "极端恶劣天灾侵袭水培温室，主要粮食种植区发布大宗减产预警。";
+                        return "RP_News_Agri_1";
                     if (HasRecentResearchMatch("hydroponics", "agriculture", "tree", "plant"))
-                        return "高抗逆性水培植株育种科研突破，大宗粮食现货量价齐升。";
-                    return isUp ? "季节性农产丰产交割，深空储备粮订单超预期。" : "农用营养液原料涨价，水培农业利润空间受挤压。";
+                        return "RP_News_Agri_2";
+                    return isUp ? "RP_News_Agri_3" : "RP_News_Agri_4";
 
                 case "Ranch":
                     if (hasColdSnap)
-                        return "极寒寒流席卷大陆！高保暖纯血耗牛毛皮制品与肉品需求井喷。";
+                        return "RP_News_Ranch_1";
                     if (hasVolcanicWinter)
-                        return "天灾严寒与饲草短缺导致牲畜出栏受限，畜牧供应链承压。";
-                    return isUp ? "纯血耗牛优良繁育率大幅提升，优质肉品订单排期饱满。" : "饲料运输周期延宕，牲畜屠宰加工利润略有收窄。";
+                        return "RP_News_Ranch_2";
+                    return isUp ? "RP_News_Ranch_3" : "RP_News_Ranch_4";
 
                 case "Food":
                     if (hasHeatWave || hasVolcanicWinter)
-                        return "全球干旱饥荒推升避险需求！StarveMe 应急长保合成代餐罐头遭全星系抢购。";
-                    return isUp ? "快节奏拓荒代餐包销量走强，应急食品业务营收稳健。" : "普通食材产出充裕，高价压缩食品需求短期承压。";
+                        return "RP_News_Food_1";
+                    return isUp ? "RP_News_Food_2" : "RP_News_Food_3";
 
                 case "Medical":
                     if (HasRecentResearchMatch("medicine", "bionics", "prosthetics", "xenogerm", "gene", "vital"))
-                        return "高阶仿生神经修复与生化血清科研突破，机构全面上调目标评级。";
-                    return isUp ? "全能抗生素与免疫增强试剂订单充裕，生物制药板块量价齐升。" : "新型基因药剂临床审批流程延后，短线遭遇谨慎资金抛盘。";
+                        return "RP_News_Medical_1";
+                    return isUp ? "RP_News_Medical_2" : "RP_News_Medical_3";
 
                 case "Arms":
                     if (recentRaidFactionIDs.Count > 0)
-                        return "战事爆发推升近防重火器紧急订购潮，军工防务全线走强！";
+                        return "RP_News_Arms_1";
                     if (HasRecentResearchMatch("gun", "armor", "mortar", "turret", "precision", "charge", "defense"))
-                        return "高能电磁武器与复合护甲专利通过军方验证，防务采购订单排满。";
-                    return isUp ? "定居点要塞化工程升级，阵地防御装备采购需求旺盛。" : "星系局部停火呼声渐高，消耗性弹药采购指标短期缩减。";
+                        return "RP_News_Arms_2";
+                    return isUp ? "RP_News_Arms_3" : "RP_News_Arms_4";
 
                 case "Mining":
                     if (hasSolarFlare)
-                        return "地磁剧烈扰动导致深层地质勘探雷达失真，采矿工程进度受阻。";
+                        return "RP_News_Mining_1";
                     if (HasRecentResearchMatch("deepdrill", "geothermal", "nuclear", "energy"))
-                        return "深层地热核裂变能源科研落地，重工业高能采矿全面提速。";
-                    return isUp ? "高品位铀矿石现货紧俏，重工业能源需求带动开采估值。" : "大型采掘钻头损耗偏高，开采成本超预期导致短线震荡。";
+                        return "RP_News_Mining_2";
+                    return isUp ? "RP_News_Mining_3" : "RP_News_Mining_4";
 
                 case "Tech":
                     if (hasSolarFlare)
-                        return "太阳耀斑导致多处数据中心离线，云端通信服务短暂中断引发抛盘。";
+                        return "RP_News_Tech_1";
                     if (HasRecentResearchMatch("microelectronics", "fabrication", "shield", "computer", "digital", "battery"))
-                        return "微电子制造与纳米集成电路研发突破，数码芯片板块全面爆发。";
+                        return "RP_News_Tech_2";
                     if (s.code == "$BOOS")
-                        return isUp ? "廉价拼装电子元件在落后定居点大举铺货，薄利多销提振估值。" : "涉嫌芯片套壳组装与虚假宣传，遭消费者权益保护协会立案调查。";
+                        return isUp ? "RP_News_Tech_3" : "RP_News_Tech_4";
                     if (s.code == "$DAMI")
-                        return isSelling ? "顶流主播直播带货热销！电动平衡车与智能出行系列卖爆断货。" : (isUp ? "平价代步平衡车在各定居点迅速普及，年轻拓荒群体形成抢购。" : "电机驱动控制器供应链延迟，部分型号交付周期拉长。");
+                        return isSelling ? "RP_News_Tech_5" : (isUp ? "RP_News_Tech_6" : "RP_News_Tech_7");
                     if (s.code == "$ISHN")
-                        return isSelling ? "旗舰智能终端直播带货爆单，星系高端消费数码龙头地位稳固。" : (isUp ? "新一代智能手表与终端发布，生态订阅营收占比创新高。" : "硬件产品迭代放缓引发投资者观望，短线处于估值盘整。");
-                    return isUp ? "数码终端生态协同优势显现，软件服务增值业务强劲。" : "核心芯片原料采购成本攀升，硬件毛利率面临阶段性压力。";
+                        return isSelling ? "RP_News_Tech_8" : (isUp ? "RP_News_Tech_9" : "RP_News_Tech_10");
+                    return isUp ? "RP_News_Tech_11" : "RP_News_Tech_12";
 
                 case "Entertainment":
                     if (isTuberLive)
-                        return "主播正在火热开播，边缘娱乐互动软件在线活跃度达日内峰值。";
-                    return isUp ? "年度现象级游戏掌机大作首发告捷，卡带与数字下载量双双破纪录。" : "缺乏爆款独占游戏大作支撑，硬件销售进入周期性淡季。";
+                        return "RP_News_Ent_1";
+                    return isUp ? "RP_News_Ent_2" : "RP_News_Ent_3";
 
                 case "ECom":
                     if (isSelling)
-                        return "顶流主播单场带货成交额破纪录，跨星系轨道电商供应链全负荷运转！";
+                        return "RP_News_ECom_1";
                     if (CheckQuantumNetEvent("cyber_sale"))
-                        return "赛博百货数字大促全面引爆，全星系线上零售成交单量破历史极值！";
-                    return isUp ? "自营轨道货运穿梭机队完成扩容，次日达履约率提升至新高。" : "远距离星系货运能耗成本上涨，电商物流配送毛利承压。";
+                        return "RP_News_ECom_2";
+                    return isUp ? "RP_News_ECom_3" : "RP_News_ECom_4";
 
                 case "Media":
                     if (isTuberLive && tuberHeat > 0.4f)
-                        return "直播间弹幕热度爆表全网刷屏，流媒体广告赞助分成创历史新高！";
-                    return isUp ? "深度揭秘调查独家报道引发全网热议，媒体受众订阅数爆发增长。" : "边缘虚假传言引发公关信任危机，部分大牌赞助商削减宣发预算。";
+                        return "RP_News_Media_1";
+                    return isUp ? "RP_News_Media_2" : "RP_News_Media_3";
 
                 case "Sports":
-                    return isUp ? "星际极限滑板竞速锦标赛收官，赛事联名周边与门票收入创佳绩。" : "主要参赛选手训练中遭遇骨折重伤退赛，观赛热度有所回落。";
+                    return isUp ? "RP_News_Sports_1" : "RP_News_Sports_2";
 
                 case "Quantum":
                     if (CheckQuantumNetEvent("starlink_storm") && s.code == "$SCOM")
-                        return "强磁场星链风暴袭来！低轨中继通信链路大面积掉线，通信服务紧急维护。";
+                        return "RP_News_Quantum_1";
                     if (CheckQuantumNetEvent("cyber_sale") && s.code == "$BAZR")
-                        return "赛博百货年中庆典开启，虚拟网购与数字资产交易量打破历史峰值。";
+                        return "RP_News_Quantum_2";
                     if (CheckQuantumNetEvent("minescan_calib") && s.code == "$SCAN")
-                        return "重力梯度遥感雷达高精度校准完毕，探明超高品位富矿引发勘探狂潮。";
+                        return "RP_News_Quantum_3";
                     if (CheckQuantumNetEvent("network_congested") && s.code == "$NEBU")
-                        return "算力并发量达到带宽上限导致网络拥堵，云端任务排队引发客户投诉。";
-                    return isUp ? "量子加密信道扩容顺利交付，企业级安全通信协议获普遍采用。" : "微波中继天线阵列例行检修，区域网络吞吐量受到短期限制。";
+                        return "RP_News_Quantum_4";
+                    return isUp ? "RP_News_Quantum_5" : "RP_News_Quantum_6";
 
                 case "Finance":
-                    return isUp ? "多头游资大举加杠杆抢筹，投机衍生基金日内放量强势拉抬！" : "高杠杆持仓盘遭遇集中爆仓清算，空方借势打压引发踩踏抛盘。";
+                    return isUp ? "RP_News_Finance_1" : "RP_News_Finance_2";
             }
 
-            return isUp ? "基本面保持健康，多方主力资金有序护盘买入。" : "获利盘选择高位离场套现，短线承压小幅回踩。";
+            return isUp ? "RP_News_General_1" : "RP_News_General_2";
         }
 
         // 国库持仓
@@ -1840,36 +1851,36 @@ namespace RimDigitalLife_RimPay
                 if (totalProfit > 0)
                 {
                     // 赚钱
-                    ModifyBalance(pawn, totalProfit, "炒股收益");
+                    ModifyBalance(pawn, totalProfit, "RP_Reason_TradeProfit");
                     pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(DefDatabase<ThoughtDef>.GetNamed("RimDigital_Profit"));
                     if (totalProfit > S_trade.pawnTradeRimTalkThreshold && RimTalkBridge.IsRimTalkAvailable)
                     {
-                        string msg = $"嗨！我买的 {target.code} ({target.name}) 今天涨了，赚了 {totalProfit} @银！运气不错！";
+                        string msg = $"嗨！我买的 {target.code} ({target.name.Translate()}) 今天涨了，赚了 {totalProfit} @银！运气不错！";
                         RimTalkBridge.TriggerDialogue(pawn, pawn, "炒股收益", msg, false, AssistantPersona.Rimi);
                     }
                     if (totalProfit >= 100 && tradeNewsToday < 2)
                     {
                         tradeNewsToday++;
-                        TryPostRimTuberFinanceFeed("【殖民地股神】" + pawn.LabelShort + " 爆赚离场",
-                            $"{pawn.LabelShort} 今日凭借敏锐嗅觉成功抄底 {target.code} ({target.name})，单笔大赚 {totalProfit} @银！在殖民地引起热议。", "股民高光");
+                        TryPostRimTuberFinanceFeed("RP_Tuber_StockGodTitle".Translate(pawn.LabelShort),
+                            "RP_Tuber_StockGodBody".Translate(pawn.LabelShort, target.code, (string)target.name.Translate(), totalProfit), "RP_Tuber_StockGodTag");
                     }
                 }
                 else if (totalProfit < 0)
                 {
                     // 亏钱
                     int loss = -totalProfit;
-                    ModifyBalance(pawn, -loss, "炒股亏损");
+                    ModifyBalance(pawn, -loss, "RP_Reason_TradeLoss");
                     pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(DefDatabase<ThoughtDef>.GetNamed("RimDigital_Loss"));
                     if (loss > S_trade.pawnTradeRimTalkThreshold && RimTalkBridge.IsRimTalkAvailable)
                     {
-                        string msg = $"唉...买的 {target.code} ({target.name}) 跌了，亏了 {loss} @银...再也不信了！";
+                        string msg = $"唉...买的 {target.code} ({target.name.Translate()}) 跌了，亏了 {loss} @银...再也不信了！";
                         RimTalkBridge.TriggerDialogue(pawn, pawn, "炒股亏损", msg, false, AssistantPersona.Sirim);
                     }
                     if (loss >= 100 && tradeNewsToday < 2)
                     {
                         tradeNewsToday++;
-                        TryPostRimTuberFinanceFeed("【天台风很大】" + pawn.LabelShort + " 抄底被套牢",
-                            $"{pawn.LabelShort} 高位追涨 {target.code} ({target.name})，单日暴跌割肉，损失 {loss} @银... 今晚只能吃营养膏了。", "理财翻车");
+                        TryPostRimTuberFinanceFeed("RP_Tuber_RooftopTitle".Translate(pawn.LabelShort),
+                            "RP_Tuber_RooftopBody".Translate(pawn.LabelShort, target.code, (string)target.name.Translate(), loss), "RP_Tuber_RooftopTag");
                     }
                 }
             }
@@ -1900,9 +1911,9 @@ namespace RimDigitalLife_RimPay
                 }
             }
 
-            string incomeStr = income > 0 ? string.Join(" | ", incomeByReason.Select(kv => $"{kv.Key}+{kv.Value}")) : "无";
-            string expenseStr = expense > 0 ? string.Join(" | ", expenseByReason.Select(kv => $"{kv.Key}-{kv.Value}")) : "无";
-            return $"昨日国库收支: 收入 {income} @银 ({incomeStr}) | 支出 {expense} @银 ({expenseStr})";
+            string incomeStr = income > 0 ? string.Join(" | ", incomeByReason.Select(kv => $"{(kv.Key.NullOrEmpty() ? kv.Key : (string)kv.Key.Translate())}+{kv.Value}")) : (string)"RP_Daily_None".Translate();
+            string expenseStr = expense > 0 ? string.Join(" | ", expenseByReason.Select(kv => $"{(kv.Key.NullOrEmpty() ? kv.Key : (string)kv.Key.Translate())}-{kv.Value}")) : (string)"RP_Daily_None".Translate();
+            return (string)"RP_Daily_TreasurySummary".Translate(income, incomeStr, expense, expenseStr);
         }
 
         // 存档与读档
@@ -1933,6 +1944,9 @@ namespace RimDigitalLife_RimPay
             Scribe_Collections.Look(ref recentResearchTags, "recentResearchTags", LookMode.Value);
             Scribe_Collections.Look(ref recentRaidFactionIDs, "recentRaidFactionIDs", LookMode.Value);
             Scribe_Collections.Look(ref recentBigTradeFactions, "recentBigTradeFactions", LookMode.Value, LookMode.Value);
+
+            // NPC 钱包开户记录（防花光后重复开户刷钱）
+            NpcWalletGenerator.ExposeData();
             
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -1962,7 +1976,7 @@ namespace RimDigitalLife_RimPay
                     if (sd != null)
                     {
                         treasuryStockCost[kvp.Key] = kvp.Value * sd.price;
-                        Verse.Log.Message($"[RimPay] 迁移持仓成本: {kvp.Key} x{kvp.Value} @ {sd.price:F2}（旧档回填）");
+                        Verse.Log.Message($"[RimPay] Migrated holding cost: {kvp.Key} x{kvp.Value} @ {sd.price:F2} (legacy save backfill)");
                     }
                 }
             }

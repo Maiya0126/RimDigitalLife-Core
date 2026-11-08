@@ -36,14 +36,14 @@ namespace RimDigitalLife_RimPay
             Text.Font = GameFont.Medium;
             string changeStr = stock.changePercent >= 0 ? $"+{stock.changePercent:F1}%" : $"{stock.changePercent:F1}%";
             Color changeColor = stock.changePercent >= 0 ? Color.green : Color.red;
-            listing.Label($"{stock.code}  {stock.name}");
+            listing.Label("RP_W_Stock_DetailTitle".Translate(stock.code, stock.name.Translate()));
             Text.Font = GameFont.Small;
 
             int heldStock = comp.GetStockHeld(stock.code);
             int stockProfit = comp.GetStockProfit(stock.code);
             string profitStr = stockProfit >= 0 ? $"+{stockProfit}" : $"{stockProfit}";
             Color profitColor = stockProfit >= 0 ? Color.green : Color.red;
-            listing.Label($"当前价格: {stock.price:F2} @银  |  今日涨跌: {changeStr.Colorize(changeColor)}  |  国库持仓: {heldStock} 股  |  盈亏: {profitStr.Colorize(profitColor)} @银");
+            listing.Label("RP_W_Stock_DetailInfo".Translate(stock.price.ToString("F2"), changeStr.Colorize(changeColor), heldStock, profitStr.Colorize(profitColor)));
 
             if (!string.IsNullOrEmpty(stock.desc))
             {
@@ -55,10 +55,10 @@ namespace RimDigitalLife_RimPay
                     Faction f = Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == stock.factionLoadID);
                     if (f != null)
                     {
-                        factionExtra = $"  |  好感度: {f.PlayerGoodwill:+0;-0;0} ({f.PlayerRelationKind.GetLabel()})";
+                        factionExtra = "RP_W_Stock_DetailFaction".Translate(f.PlayerGoodwill.ToString("+0;-0;0"), f.PlayerRelationKind.GetLabel());
                     }
                 }
-                listing.Label($"{stock.desc}{factionExtra}");
+                listing.Label($"{stock.desc.Translate()}{factionExtra}");
                 GUI.color = Color.white;
                 Text.Font = GameFont.Small;
             }
@@ -71,7 +71,7 @@ namespace RimDigitalLife_RimPay
             listing.Gap(12f);
 
             // 交易操作区
-            listing.Label($"<b>交易操作:</b> (国库可用余额: {comp.CloudTreasuryBalance} @银)");
+            listing.Label("RP_W_Stock_TradeTitle".Translate(comp.CloudTreasuryBalance));
             Rect tradeRow = listing.GetRect(30f);
             Rect inputRect = new Rect(tradeRow.x, tradeRow.y, 140f, tradeRow.height);
             Widgets.TextFieldNumeric(inputRect, ref tradeAmount, ref tradeBuffer, 1, 10000);
@@ -87,17 +87,17 @@ namespace RimDigitalLife_RimPay
             // 买入按钮 (绿)
             Rect buyBtn = new Rect(q3.xMax + 20f, tradeRow.y, 75f, tradeRow.height);
             int totalBuyCost = Mathf.RoundToInt((float)(tradeAmount * stock.price));
-            if (ColoredButton(buyBtn, "买入", new Color(0.15f, 0.55f, 0.2f)))
+            if (ColoredButton(buyBtn, "RP_W_Stock_Buy".Translate(), new Color(0.15f, 0.55f, 0.2f)))
             {
                 if (comp.CloudTreasuryBalance >= totalBuyCost)
                 {
                     comp.BuyStock(stock.code, tradeAmount, stock.price);
-                    comp.ModifyTreasury(-totalBuyCost, "股票买入");
-                    Messages.Message($"【RimPay证券】成功以每股 {stock.price:F2} @银 的价格购买了 {tradeAmount} 股 {stock.code}，共消耗 {totalBuyCost} @银。", MessageTypeDefOf.PositiveEvent, false);
+                    comp.ModifyTreasury(-totalBuyCost, "RP_Reason_StockBuy");
+                    Messages.Message("RP_W_Stock_BuyDone".Translate(stock.price.ToString("F2"), tradeAmount, stock.code, totalBuyCost), MessageTypeDefOf.PositiveEvent, false);
                 }
                 else
                 {
-                    Messages.Message("数字国库资金不足，无法购买该数量的股票！", MessageTypeDefOf.RejectInput, false);
+                    Messages.Message("RP_W_Stock_BuyNoFunds".Translate(), MessageTypeDefOf.RejectInput, false);
                 }
             }
 
@@ -105,23 +105,23 @@ namespace RimDigitalLife_RimPay
             Rect sellBtn = new Rect(buyBtn.xMax + 8f, tradeRow.y, 75f, tradeRow.height);
             int held = comp.GetStockHeld(stock.code);
             int totalSellRevenue = Mathf.RoundToInt((float)(tradeAmount * stock.price));
-            if (ColoredButton(sellBtn, "卖出", new Color(0.55f, 0.15f, 0.15f)))
+            if (ColoredButton(sellBtn, "RP_W_Stock_Sell".Translate(), new Color(0.55f, 0.15f, 0.15f)))
             {
                 if (held >= tradeAmount)
                 {
                     comp.SellStock(stock.code, tradeAmount, stock.price);
-                    comp.ModifyTreasury(totalSellRevenue, "股票卖出");
-                    Messages.Message($"【RimPay证券】成功以每股 {stock.price:F2} @银 的价格卖出了 {tradeAmount} 股 {stock.code}，获得 {totalSellRevenue} @银。", MessageTypeDefOf.PositiveEvent, false);
+                    comp.ModifyTreasury(totalSellRevenue, "RP_Reason_StockSell");
+                    Messages.Message("RP_W_Stock_SellDone".Translate(stock.price.ToString("F2"), tradeAmount, stock.code, totalSellRevenue), MessageTypeDefOf.PositiveEvent, false);
                 }
                 else
                 {
-                    Messages.Message("持仓数量不足，无法卖出该数额！", MessageTypeDefOf.RejectInput, false);
+                    Messages.Message("RP_W_Stock_SellNoHeld".Translate(), MessageTypeDefOf.RejectInput, false);
                 }
             }
 
             // 近期市场动态与异动成因流
             listing.Gap(10f);
-            listing.Label("<b>近期市场异动与简讯流:</b>");
+            listing.Label("RP_W_Stock_NewsTitle".Translate());
             if (stock.recentNews != null && stock.recentNews.Count > 0)
             {
                 Text.Font = GameFont.Tiny;
@@ -136,14 +136,14 @@ namespace RimDigitalLife_RimPay
             else if (!string.IsNullOrEmpty(stock.lastHeadline))
             {
                 Text.Font = GameFont.Tiny;
-                listing.Label(stock.lastHeadline);
+                listing.Label(stock.lastHeadline.Translate());
                 Text.Font = GameFont.Small;
             }
             else
             {
                 Text.Font = GameFont.Tiny;
                 GUI.color = Color.gray;
-                listing.Label("大盘交投平稳，暂无突发事件简讯。");
+                listing.Label("RP_W_Stock_NoNews".Translate());
                 GUI.color = Color.white;
                 Text.Font = GameFont.Small;
             }
@@ -152,7 +152,7 @@ namespace RimDigitalLife_RimPay
             listing.Gap(12f);
             Rect returnBtn = listing.GetRect(32f);
             Rect retPos = new Rect(returnBtn.xMax - 120f, returnBtn.y, 120f, returnBtn.height);
-            if (Widgets.ButtonText(retPos, "返回"))
+            if (Widgets.ButtonText(retPos, "RP_W_Stock_Back".Translate()))
             {
                 Close();
             }
@@ -167,7 +167,7 @@ namespace RimDigitalLife_RimPay
 
             if (stock.priceHistory.Count < 2)
             {
-                Widgets.Label(chartArea, "暂无足够历史数据。");
+                Widgets.Label(chartArea, "RP_W_Stock_NoHistory".Translate());
                 return;
             }
 
@@ -222,8 +222,8 @@ namespace RimDigitalLife_RimPay
 
             // 价格标注
             GUI.color = new Color(0.7f, 0.7f, 0.7f);
-            Widgets.Label(new Rect(chartArea.x + 6f, chartArea.y + 4f, 120f, 14f), $"最高: {maxPrice:F2}");
-            Widgets.Label(new Rect(chartArea.x + 6f, chartArea.y + chartArea.height - 18f, 120f, 14f), $"最低: {minPrice:F2}");
+            Widgets.Label(new Rect(chartArea.x + 6f, chartArea.y + 4f, 120f, 14f), "RP_W_Stock_ChartHigh".Translate(maxPrice.ToString("F2")));
+            Widgets.Label(new Rect(chartArea.x + 6f, chartArea.y + chartArea.height - 18f, 120f, 14f), "RP_W_Stock_ChartLow".Translate(minPrice.ToString("F2")));
             GUI.color = Color.white;
         }
 

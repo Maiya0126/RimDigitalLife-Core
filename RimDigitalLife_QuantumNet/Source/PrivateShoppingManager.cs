@@ -72,30 +72,30 @@ namespace RimDigitalLife_QuantumNet
             if (balance < amount) return; // 钱不够就不买
 
             string item = RandomShopItem();
-            if (QuantumNetRimPayBridge.TryModifyBalance(pawn, -amount, "私有网购·" + item))
+            if (QuantumNetRimPayBridge.TryModifyBalance(pawn, -amount, "QN_Shop_Reason".Translate(item)))
             {
                 ThoughtDef thought = DefDatabase<ThoughtDef>.GetNamedSilentFail(ThoughtDefName);
                 if (thought != null)
                 {
                     pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(thought);
                 }
-                string saleTag = NetworkEventManager.ShoppingHalfPrice ? "（大促半价）" : "";
-                Messages.Message($"[网购] {pawn.LabelShort} 用数字钱包在赛博百货购买了「{item}」{saleTag}，花费 {amount} @银，包裹已送达！", MessageTypeDefOf.NeutralEvent, false);
+                string saleTag = NetworkEventManager.ShoppingHalfPrice ? (string)"QN_Shop_SaleTag".Translate() : "";
+                Messages.Message("QN_Shop_Msg".Translate(pawn.LabelShort, item, saleTag, amount), MessageTypeDefOf.NeutralEvent, false);
             }
         }
 
         private static string RandomShopItem()
         {
-            string[] items = new string[]
+            string[] itemKeys = new string[]
             {
-                "零食大礼包",
-                "限量版玩具",
-                "游戏卡带",
-                "新款衣服",
-                "化妆品",
-                "虚拟主题皮肤"
+                "QN_Shop_Item_Snack",
+                "QN_Shop_Item_Toy",
+                "QN_Shop_Item_Cart",
+                "QN_Shop_Item_Clothes",
+                "QN_Shop_Item_Cosmetics",
+                "QN_Shop_Item_Skin"
             };
-            return items[UnityEngine.Random.Range(0, items.Length)];
+            return itemKeys[UnityEngine.Random.Range(0, itemKeys.Length)].Translate();
         }
     }
 }

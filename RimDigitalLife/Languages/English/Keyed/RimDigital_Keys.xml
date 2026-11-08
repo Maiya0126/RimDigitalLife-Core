@@ -16,39 +16,76 @@
 	<RDL_Mote_RimiPush>(Rimi sent a notification)</RDL_Mote_RimiPush>
 	<RDL_Mote_ConnectingSirim>(Accessing Sirim Database...)</RDL_Mote_ConnectingSirim>
 	<RDL_Mote_SirimRunning>(Sirim running in background)</RDL_Mote_SirimRunning>
+	<RDL_Mote_Caught>Caught slacking!</RDL_Mote_Caught>
+	<RDL_Mote_SlackVideo>Watching short videos...</RDL_Mote_SlackVideo>
+	<RDL_Mote_SlackMessage>Replying to a message...</RDL_Mote_SlackMessage>
+	<RDL_Mote_SlackStock>Checking stocks...</RDL_Mote_SlackStock>
+	<RDL_Mote_SlackIdle>Slacking off...</RDL_Mote_SlackIdle>
+	<RDL_Mote_FellOff>Ouch, fell off!</RDL_Mote_FellOff>
 
 	<RDL_Settings_SlackerTitle>Slacker Mechanism Settings</RDL_Settings_SlackerTitle>
-	<RDL_Settings_Chance>Slack Chance: {0}</RDL_Settings_Chance>
-	<RDL_Settings_Radius>Detection Radius: {0} tiles</RDL_Settings_Radius>
-	<RDL_Settings_MoodBonus>Slack Mood Bonus: +{0}</RDL_Settings_MoodBonus>
+	<RDL_Settings_Chance>Slack Chance: {0:F1}% (Default: 2.0%)</RDL_Settings_Chance>
+	<RDL_Settings_Radius>Detection Radius: {0:F0} tiles</RDL_Settings_Radius>
+	<RDL_Settings_MoodBonus>Slack Mood Bonus: +{0:F0}</RDL_Settings_MoodBonus>
 
 	<RDL_Settings_AllowedDevices>Allowed Device Types:</RDL_Settings_AllowedDevices>
 	<RDL_Settings_AllowComm>Allow Phones/Watches (Communication)</RDL_Settings_AllowComm>
 	<RDL_Settings_AllowGame>Allow Handhelds (Recreation)</RDL_Settings_AllowGame>
 
-	<RDL_Settings_PenaltyTitle>Penalties &amp; Difficulty:</RDL_Settings_PenaltyTitle>
+	<RDL_Settings_PenaltyTitle>Penalties and Difficulty:</RDL_Settings_PenaltyTitle>
 	<RDL_Settings_ShowBubbles>Show Overhead Bubbles</RDL_Settings_ShowBubbles>
 	<RDL_Settings_StrictMode>Strict Mode</RDL_Settings_StrictMode>
 	<RDL_Settings_StrictDesc>Work is forcibly interrupted and the pawn is stunned for 2s when caught.</RDL_Settings_StrictDesc>
 	<RDL_Settings_Penalty>Distraction Penalty</RDL_Settings_Penalty>
 	<RDL_Settings_PenaltyDesc>Global work speed reduced by 5% when carrying digital devices.</RDL_Settings_PenaltyDesc>
 
+	<!-- Mobility Settings -->
+	<RDL_Settings_MobilityTitle>Mobility Settings</RDL_Settings_MobilityTitle>
+	<RDL_Settings_SkateFall>Skateboard Fall Chance: {0:F0}% (Default: 10%)</RDL_Settings_SkateFall>
+	<RDL_Settings_HoverFall>Hoverboard Fall Chance: {0:F0}% (Default: 5%)</RDL_Settings_HoverFall>
+	<RDL_Settings_SpeedTitle>Speed Bonus</RDL_Settings_SpeedTitle>
+	<RDL_Settings_SkateSpeed>Skateboard Speed Bonus: +{0:F0} (Default: +16)</RDL_Settings_SkateSpeed>
+	<RDL_Settings_HoverSpeed>Hoverboard Speed Bonus: +{0:F0} (Default: +8)</RDL_Settings_HoverSpeed>
+
 	<RDL_Settings_AssistantTitle>Smart Assistant Settings</RDL_Settings_AssistantTitle>
 	<RDL_Settings_EnableAssistant>Enable Rimi/Sirim Chat</RDL_Settings_EnableAssistant>
 	<RDL_Settings_EnableAssistantDesc>When disabled, pawns will not trigger Rimi/Sirim conversations automatically or manually.</RDL_Settings_EnableAssistantDesc>
-	<RDL_Settings_ChatInterval>Auto-Chat Interval (Default: 12 hours)</RDL_Settings_ChatInterval>
+	<RDL_Settings_ChatInterval>Auto-Chat Interval: {0:F1} hours (Default: 12)</RDL_Settings_ChatInterval>
 	<RDL_Settings_ChatOff>[Disabled]</RDL_Settings_ChatOff>
+
+	<!-- Health Reminder Settings -->
+	<RDL_Settings_ReminderTitle>Health Reminders</RDL_Settings_ReminderTitle>
+	<RDL_Settings_ReminderSub>Reminding the player in front of the screen to rest and stay healthy</RDL_Settings_ReminderSub>
+	<RDL_Settings_EyeEnable>Enable Eye Rest Reminder</RDL_Settings_EyeEnable>
+	<RDL_Settings_EyeEnableDesc>Periodically reminds you to rest your eyes and look into the distance.</RDL_Settings_EyeEnableDesc>
+	<RDL_Settings_WaterEnable>Enable Hydration Reminder</RDL_Settings_WaterEnable>
+	<RDL_Settings_WaterEnableDesc>Periodically reminds you to drink a glass of water.</RDL_Settings_WaterEnableDesc>
+	<RDL_Settings_LateNightEnable>Enable Late Night Reminder</RDL_Settings_LateNightEnable>
+	<RDL_Settings_LateNightEnableDesc>Reminds you to rest during late night hours.</RDL_Settings_LateNightEnableDesc>
+	<RDL_Settings_Interval>Reminder Interval: {0:F0} minutes</RDL_Settings_Interval>
+	<RDL_Settings_LateNightRange>Late Night Hours: {0}:00 - {1}:00</RDL_Settings_LateNightRange>
+	<RDL_Settings_StartTime>Adjust start time:</RDL_Settings_StartTime>
+	<RDL_Settings_EndTime>Adjust end time:</RDL_Settings_EndTime>
+	<RDL_Settings_ReminderStyle>Reminder Style:</RDL_Settings_ReminderStyle>
+	<RDL_Settings_UseDialog>Use dialog reminders</RDL_Settings_UseDialog>
+	<RDL_Settings_UseDialogDesc>Show reminders in a popup dialog (more noticeable). Uncheck to use the message sidebar instead.</RDL_Settings_UseDialogDesc>
+	<RDL_Settings_PauseGame>Pause game on reminder</RDL_Settings_PauseGame>
+	<RDL_Settings_PauseGameDesc>Automatically pause the game when a reminder pops up.</RDL_Settings_PauseGameDesc>
+	<RDL_Settings_PlayTime>Session play time: {0}</RDL_Settings_PlayTime>
+	<RDL_Time_HM>{0}h {1}m</RDL_Time_HM>
+	<RDL_Settings_TestReminder>Test Reminder</RDL_Settings_TestReminder>
+	<RDL_Settings_Version>Current mod version: {0}</RDL_Settings_Version>
 
 	<!-- Health Reminders -->
 	<RDL_Reminder_Eye_Title>Eye Rest Reminder</RDL_Reminder_Eye_Title>
 	<RDL_Reminder_Eye_Message>You've been playing for a while. Time to rest your eyes!\nTip: Look at something distant or close your eyes for a few minutes.</RDL_Reminder_Eye_Message>
-	
+
 	<RDL_Reminder_Water_Title>Hydration Reminder</RDL_Reminder_Water_Title>
 	<RDL_Reminder_Water_Message>Time to drink some water!\nStand up, stretch, and stay hydrated.</RDL_Reminder_Water_Message>
-	
+
 	<RDL_Reminder_LateNight_Title>Late Night Reminder</RDL_Reminder_LateNight_Title>
 	<RDL_Reminder_LateNight_Message>It's already {0} - pretty late!\nTake care of yourself and get some rest. The colony will still be here tomorrow!</RDL_Reminder_LateNight_Message>
-	
+
 	<RDL_Reminder_OK>Got it</RDL_Reminder_OK>
 
 	<RDL_Reminder_Footer>This reminder is brought to you by Uncle @MaiyaMaiya's Rim Digital Life mod. You can adjust the interval and toggle this feature in Mod Settings. Apologies for any inconvenience.</RDL_Reminder_Footer>

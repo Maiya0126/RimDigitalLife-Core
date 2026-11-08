@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <Apparel_Nokirim.label>Nokirim</Apparel_Nokirim.label>
+  <Apparel_Nokirim.description>Nokirim (诺基林) 生产的远古通讯神器。\n\n功能：\n- 基础通讯\n- 物理防御 (它真的很硬)</Apparel_Nokirim.description>
+
+  <Apparel_iShen_Phone.label>iShen Pro Max</Apparel_iShen_Phone.label>
+  <Apparel_iShen_Phone.description>iShen (肾果科技) 的年度旗舰手机。</Apparel_iShen_Phone.description>
+
+  <Apparel_iShen_Pad.label>iShen Pad Pro</Apparel_iShen_Pad.label>
+  <Apparel_iShen_Pad.description>iShen (肾果科技) 出品的生产力工具。</Apparel_iShen_Pad.description>
+
+  <Apparel_iShen_Watch.label>iShen Watch Ultra</Apparel_iShen_Watch.label>
+  <Apparel_iShen_Watch.description>iShen (肾果科技) 的旗舰智能手表。</Apparel_iShen_Watch.description>
+
   <Apparel_Rimdle.label>Rimdle Paperwhite</Apparel_Rimdle.label>
   <Apparel_Rimdle.description>一款专为阅读设计的电子墨水屏设备。它的屏幕像纸一样柔和，非常省电。\n\n功能：\n- 学习速度 +20% (知识就是力量)\n- 娱乐效率 +10% (看小说也很快乐)</Apparel_Rimdle.description>
 

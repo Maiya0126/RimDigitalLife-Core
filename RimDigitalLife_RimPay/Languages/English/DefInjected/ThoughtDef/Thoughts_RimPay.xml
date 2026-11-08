@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<RimDigital_ReceivedBonus.label>received a bonus</RimDigital_ReceivedBonus.label>
+	<RimDigital_ReceivedBonus.description>The boss actually paid me a digital silver bonus today, and a decent one at that! Praise the colony, praise the boss! I'm going to buy something tasty!</RimDigital_ReceivedBonus.description>
+	<RimDigital_Fined.label>funds confiscated</RimDigital_Fined.label>
+	<RimDigital_Fined.description>The digital silver I worked so hard to save was forcibly confiscated! This is plain robbery! I'm furious!</RimDigital_Fined.description>
+	<RimDigital_UnpaidWage.label>colony wage arrears</RimDigital_UnpaidWage.label>
+	<RimDigital_UnpaidWage.description>The boss can't even pay wages! My wallet is empty and I can barely afford my data plan! And they still expect me to work hard? Not a chance!</RimDigital_UnpaidWage.description>
+	<RimDigital_InterestYield.label>fund interest gained</RimDigital_InterestYield.label>
+	<RimDigital_InterestYield.description>Checked my digital wallet's fund today - interest went up again! Watching that digital silver number grow feels great!</RimDigital_InterestYield.description>
+	<RimDigital_Profit.label>stock profit</RimDigital_Profit.label>
+	<RimDigital_Profit.description>The stocks I bought went up today. Made quite a bit of digital silver! I'm basically the stock god!</RimDigital_Profit.description>
+	<RimDigital_Loss.label>stock loss</RimDigital_Loss.label>
+	<RimDigital_Loss.description>The stocks I bought dropped... lost quite a bit of digital silver. Never touching those again! (Next time for sure)</RimDigital_Loss.description>
+</LanguageData>

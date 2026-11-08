@@ -175,7 +175,7 @@ namespace RimDigitalLife
             int totalMinutes = (int)(accumulatedSeconds / 60f);
             int hours = totalMinutes / 60;
             int minutes = totalMinutes % 60;
-            return $"{hours}小时{minutes}分钟";
+            return "RDL_Time_HM".Translate(hours, minutes);
         }
     }
 }

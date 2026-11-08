@@ -74,19 +74,19 @@ namespace RimDigitalLife_QuantumNet
                 int balance = QuantumNetRimPayBridge.GetBalance(pawn);
                 if (balance <= 0)
                 {
-                    Messages.Message($"[直播] {pawn.LabelShort} 正在看玩家直播，可惜钱包空空，无法打赏。", MessageTypeDefOf.NeutralEvent, false);
+                    Messages.Message("QN_Tip_NoMoney".Translate(pawn.LabelShort), MessageTypeDefOf.NeutralEvent, false);
                     return;
                 }
                 if (amount > balance) amount = balance;
 
-                QuantumNetRimPayBridge.TryModifyBalance(pawn, -amount, "看直播打赏");
+                QuantumNetRimPayBridge.TryModifyBalance(pawn, -amount, "QN_Tip_Reason".Translate());
                 QuantumNetRimPayBridge.TryModifyTreasury(amount); // 直接进数字国库（玩家=主播）
 
-                Messages.Message($"[直播] {pawn.LabelShort} 正在观看玩家直播，打赏了 {amount} @银 支持主播！", MessageTypeDefOf.PositiveEvent, false);
+                Messages.Message("QN_Tip_Did".Translate(pawn.LabelShort, amount), MessageTypeDefOf.PositiveEvent, false);
             }
             else
             {
-                Messages.Message($"[直播] {pawn.LabelShort} 正在观看玩家直播，为主播加油！", MessageTypeDefOf.PositiveEvent, false);
+                Messages.Message("QN_Tip_Cheer".Translate(pawn.LabelShort), MessageTypeDefOf.PositiveEvent, false);
             }
 
             // 心情：支持主播 +6（无 RimPay 也保留看直播心情）

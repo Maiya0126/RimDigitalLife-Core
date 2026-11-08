@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- ==================== Settings: General ==================== -->
+  <RP_Set_TabGeneral>General</RP_Set_TabGeneral>
+  <RP_Set_TabAI>Economy AI</RP_Set_TabAI>
+  <RP_Set_Version>Mod version: {0}</RP_Set_Version>
+
+  <!-- ==================== Settings: Salary ==================== -->
+  <RP_Set_Salary_Title>Payroll</RP_Set_Salary_Title>
+  <RP_Set_Salary_Enable>Enable wage payments</RP_Set_Salary_Enable>
+  <RP_Set_Salary_Base>Base wage: {0} @silver/day</RP_Set_Salary_Base>
+  <RP_Set_Salary_Child>Child allowance: {0} @silver/day</RP_Set_Salary_Child>
+  <RP_Set_Salary_Slave>Slave stipend: {0} @silver/day</RP_Set_Salary_Slave>
+  <RP_Set_Salary_Expert>Expert bonus: +{0} @silver/day</RP_Set_Salary_Expert>
+  <RP_Set_Salary_Skilled>Skilled worker bonus: +{0} @silver/day</RP_Set_Salary_Skilled>
+  <RP_Set_Salary_Basic>Basic worker bonus: +{0} @silver/day</RP_Set_Salary_Basic>
+
+  <!-- ==================== Settings: Rent ==================== -->
+  <RP_Set_Rent_Title>Lodging Rent</RP_Set_Rent_Title>
+  <RP_Set_Rent_Enable>Enable rent collection</RP_Set_Rent_Enable>
+  <RP_Set_Rent_Luxury>Luxury room (impressiveness &gt;120): {0} @silver/day</RP_Set_Rent_Luxury>
+  <RP_Set_Rent_High>Fine room (impressiveness &gt;80): {0} @silver/day</RP_Set_Rent_High>
+  <RP_Set_Rent_Mid>Decent room (impressiveness &gt;50): {0} @silver/day</RP_Set_Rent_Mid>
+  <RP_Set_Rent_Low>Plain room (impressiveness &gt;20): {0} @silver/day</RP_Set_Rent_Low>
+  <RP_Set_Rent_Min>Shabby room: {0} @silver/day</RP_Set_Rent_Min>
+  <RP_Set_Rent_DeviceDiscount>Digital device rent discount: {0}%</RP_Set_Rent_DeviceDiscount>
+
+  <!-- ==================== Settings: Meals ==================== -->
+  <RP_Set_Meal_Title>Meal Fees</RP_Set_Meal_Title>
+  <RP_Set_Meal_Enable>Enable meal charges</RP_Set_Meal_Enable>
+  <RP_Set_Meal_Lavish>Lavish meal: {0} @silver/meal</RP_Set_Meal_Lavish>
+  <RP_Set_Meal_Fine>Fine meal: {0} @silver/meal</RP_Set_Meal_Fine>
+  <RP_Set_Meal_Simple>Simple meal: {0} @silver/meal</RP_Set_Meal_Simple>
+  <RP_Set_Meal_Awful>Awful meal (nutrient paste etc.): {0} @silver/meal</RP_Set_Meal_Awful>
+  <RP_Set_Meal_Raw>Raw food/berries: {0} @silver/meal</RP_Set_Meal_Raw>
+
+  <!-- ==================== Settings: Medical ==================== -->
+  <RP_Set_Medical_Title>Medical Care (RimPay Health Insurance)</RP_Set_Medical_Title>
+  <RP_Set_Medical_Enable>Enable medical fees</RP_Set_Medical_Enable>
+  <RP_Set_Medical_Desc>Doctors charge a fee per treatment: the patient's wallet pays first, and any shortfall is covered by the digital treasury's health insurance. Medical income flows back to the treasury.</RP_Set_Medical_Desc>
+  <RP_Set_Medical_Fee>Fee per treatment: {0} @silver</RP_Set_Medical_Fee>
+
+  <!-- ==================== Settings: Interest ==================== -->
+  <RP_Set_Interest_Title>Deposit Interest</RP_Set_Interest_Title>
+  <RP_Set_Interest_Enable>Enable deposit interest</RP_Set_Interest_Enable>
+  <RP_Set_Interest_MinBalance>Minimum balance for interest: {0} @silver</RP_Set_Interest_MinBalance>
+  <RP_Set_Interest_Rate>Daily interest rate: {0}%</RP_Set_Interest_Rate>
+  <RP_Set_Interest_Mood>Good-mood chance from interest: {0}%</RP_Set_Interest_Mood>
+
+  <!-- ==================== Settings: Loans ==================== -->
+  <RP_Set_Loan_Title>Loan Center</RP_Set_Loan_Title>
+  <RP_Set_Loan_Enable>Enable loan center</RP_Set_Loan_Enable>
+  <RP_Set_Loan_RateBase>Base lending rate: {0}%/season</RP_Set_Loan_RateBase>
+  <RP_Set_Loan_RateFriendly>Friendly faction rate: {0}%/season</RP_Set_Loan_RateFriendly>
+  <RP_Set_Loan_RateCold>Hostile faction rate: {0}%/season</RP_Set_Loan_RateCold>
+  <RP_Set_Loan_BorrowBase>Base borrowing rate: {0}%/season</RP_Set_Loan_BorrowBase>
+  <RP_Set_Loan_Period>Loan period: {0} days</RP_Set_Loan_Period>
+  <RP_Set_Loan_DefaultAmount>Default loan amount: {0} @silver</RP_Set_Loan_DefaultAmount>
+  <RP_Set_Loan_BadDebt>Goodwill penalty for bad debt: {0}</RP_Set_Loan_BadDebt>
+
+  <!-- ==================== Settings: Stock Market ==================== -->
+  <RP_Set_Stock_Title>Stock Trading</RP_Set_Stock_Title>
+  <RP_Set_Stock_Enable>Enable stock trading</RP_Set_Stock_Enable>
+  <RP_Set_Stock_Interval>Price update interval: {0} days</RP_Set_Stock_Interval>
+  <RP_Set_Stock_FundVol>$DSF leveraged fund volatility: {0}%</RP_Set_Stock_FundVol>
+  <RP_Set_Stock_HistoryDays>Candlestick history retained: {0} days</RP_Set_Stock_HistoryDays>
+
+  <!-- ==================== Settings: Pawn Auto-Trading ==================== -->
+  <RP_Set_PawnTrade_Title>Pawn Auto-Trading</RP_Set_PawnTrade_Title>
+  <RP_Set_PawnTrade_Enable>Enable pawn auto-trading</RP_Set_PawnTrade_Enable>
+  <RP_Set_PawnTrade_MinBalance>Minimum wallet balance to trade: {0} @silver</RP_Set_PawnTrade_MinBalance>
+  <RP_Set_PawnTrade_Ratio>Invested balance ratio: {0}%</RP_Set_PawnTrade_Ratio>
+  <RP_Set_PawnTrade_Cap>Per-trade investment cap: {0} @silver</RP_Set_PawnTrade_Cap>
+  <RP_Set_PawnTrade_RimTalk>Profit/loss threshold to trigger RimTalk: {0} @silver</RP_Set_PawnTrade_RimTalk>
+  <RP_Set_PawnTrade_HitChance>Base hit chance: {0}%</RP_Set_PawnTrade_HitChance>
+  <RP_Set_PawnTrade_HitPerSkill>Hit chance per Intellectual skill point: {0}%</RP_Set_PawnTrade_HitPerSkill>
+
+  <!-- ==================== Settings: Looting ==================== -->
+  <RP_Set_Loot_Title>Enemy Looting</RP_Set_Loot_Title>
+  <RP_Set_Loot_Enable>Enable enemy RimPay looting</RP_Set_Loot_Enable>
+  <RP_Set_Loot_KillerShare>Killer's share: {0}% (the rest goes to the treasury)</RP_Set_Loot_KillerShare>
+
+  <!-- ==================== Settings: Wallet Records ==================== -->
+  <RP_Set_WalletFlow_Title>Wallet Records</RP_Set_WalletFlow_Title>
+  <RP_Set_WalletFlow_Max>Records kept per pawn: {0}</RP_Set_WalletFlow_Max>
+
+  <!-- ==================== Settings: Wealth Escrow ==================== -->
+  <RP_Set_Escrow_Title>Wealth Escrow</RP_Set_Escrow_Title>
+  <RP_Set_Escrow_Desc>RimPay offers digital asset escrow: escrowed assets no longer count toward raid threat points, while the colony's real wealth stays unchanged. Silver held in the digital treasury is already physically hidden and needs no escrow.</RP_Set_Escrow_Desc>
+  <RP_Set_Escrow_Building>Escrow building wealth</RP_Set_Escrow_Building>
+  <RP_Set_Escrow_BuildingDesc>Colony building wealth (including floors) is held as national reserves and no longer counts toward raid threat points.</RP_Set_Escrow_BuildingDesc>
+  <RP_Set_Escrow_Equipment>Escrow carried equipment</RP_Set_Escrow_Equipment>
+  <RP_Set_Escrow_EquipmentDesc>Weapons, apparel, and cargo carried by pawns/animals no longer count toward raid threat points; pawn and mechanoid body value is unaffected.</RP_Set_Escrow_EquipmentDesc>
+
+  <!-- ==================== Settings: RimSim Integration ==================== -->
+  <RP_Set_RimSim_Title>RimSimManagementFramework Shop Integration</RP_Set_RimSim_Title>
+  <RP_Set_RimSim_Desc>Requires RimSimManagementFramework. If not installed, the features below sleep automatically (regardless of mod load order).</RP_Set_RimSim_Desc>
+  <RP_Set_RimSim_Enable>Enable RimSim shop integration</RP_Set_RimSim_Enable>
+  <RP_Set_RimSim_EnableDesc>Checkout discounts + shop income automatically deposited into the digital treasury. Requires RimSimManagementFramework.</RP_Set_RimSim_EnableDesc>
+  <RP_Set_RimSim_TreasuryRatio>Share of shop income to treasury: {0}%</RP_Set_RimSim_TreasuryRatio>
+  <RP_Set_RimSim_DeviceDiscount>Digital ecosystem discount (wearing RimDigitalLife devices): customers pay -{0}%</RP_Set_RimSim_DeviceDiscount>
+  <RP_Set_RimSim_QuantumDiscount>Quantum net tier discount (a colonist subscribes to QuantumNet): customers pay -{0}%</RP_Set_RimSim_QuantumDiscount>
+
+  <!-- ==================== Settings: RimMarket Integration ==================== -->
+  <RP_Set_RimMarket_Title>RimMarket Integration</RP_Set_RimMarket_Title>
+  <RP_Set_RimMarket_Desc>Requires RimMarket. If not installed, the features below sleep automatically (regardless of mod load order).</RP_Set_RimMarket_Desc>
+  <RP_Set_RimMarket_Enable>Enable RimMarket wallet payments</RP_Set_RimMarket_Enable>
+  <RP_Set_RimMarket_EnableDesc>Pawns spending at RimMarket pay with their digital wallet first; any shortfall is covered by physical silver on hand.</RP_Set_RimMarket_EnableDesc>
+
+  <!-- ==================== Settings: NPC Wallets ==================== -->
+  <RP_Set_NpcWallet_Title>NPC Digital Wallets</RP_Set_NpcWallet_Title>
+  <RP_Set_NpcWallet_Desc>Randomly generates digital wallet balances for visiting non-player faction pawns based on faction tech level, for use in consumption integrations.</RP_Set_NpcWallet_Desc>
+  <RP_Set_NpcWallet_Enable>Enable NPC digital wallets</RP_Set_NpcWallet_Enable>
+  <RP_Set_NpcWallet_EnableDesc>At each daily settlement, visiting pawns on the map receive a one-time randomized starting balance; pawns that already have funds are skipped.</RP_Set_NpcWallet_EnableDesc>
+  <RP_Set_NpcWallet_Multiplier>Wallet amount multiplier: {0}x</RP_Set_NpcWallet_Multiplier>
+
+  <!-- ==================== Settings: Bunnygirl Integration ==================== -->
+  <RP_Set_Bunny_Title>Bunnygirl Race Casino Integration</RP_Set_Bunny_Title>
+  <RP_Set_Bunny_Desc>Requires Bunnygirl Race. If not installed, the features below sleep automatically (regardless of mod load order).</RP_Set_Bunny_Desc>
+  <RP_Set_Bunny_Enable>Enable casino wallet integration</RP_Set_Bunny_Enable>
+  <RP_Set_Bunny_EnableDesc>Bunnygirl pocket money and casino wins/losses are tracked in their digital wallet, preventing double counting.</RP_Set_Bunny_EnableDesc>
+
+  <!-- ==================== Settings: Hospitality Integration ==================== -->
+  <RP_Set_Hospitality_Title>Hospitality Guest Integration</RP_Set_Hospitality_Title>
+  <RP_Set_Hospitality_Desc>Requires Hospitality. If not installed, the features below sleep automatically (regardless of mod load order).</RP_Set_Hospitality_Desc>
+  <RP_Set_Hospitality_Enable>Enable guest wallet integration</RP_Set_Hospitality_Enable>
+  <RP_Set_Hospitality_EnableDesc>Guest lodging/shopping/food purchases are charged to their digital wallet, with income flowing back to the colony.</RP_Set_Hospitality_EnableDesc>
+
+  <!-- ==================== Settings: RimStock Integration ==================== -->
+  <RP_Set_RimStock_Title>RimStock Earth Market Integration</RP_Set_RimStock_Title>
+  <RP_Set_RimStock_Desc>Requires RimStock. If not installed, the features below sleep automatically (regardless of mod load order). RimStock's broker market is called the "Earth market" — it is separate from RimPay's own RimWorld stock market, and the two never interact.</RP_Set_RimStock_Desc>
+  <RP_Set_RimStock_Enable>Enable Earth market deposit integration</RP_Set_RimStock_Enable>
+  <RP_Set_RimStock_EnableDesc>Depositing funds at the RimStock broker automatically deducts the matching digital silver from the RimPay digital treasury.</RP_Set_RimStock_EnableDesc>
+
+  <!-- ==================== Economy AI Settings ==================== -->
+  <RP_AI_Title>Economy AI Control (RimPay Economy AI)</RP_AI_Title>
+  <RP_AI_P2Promo1>[Recommended] Register and use the Player2 app to enjoy all AI features for free!</RP_AI_P2Promo1>
+  <RP_AI_P2Promo2>Player2 is a free local desktop app with no API key needed; if it is installed and running, just tick the Player2 config to use it.</RP_AI_P2Promo2>
+  <RP_AI_P2Promo3>Ticked configs are tried top-to-bottom in list order; on failure or quota exhaustion the next one takes over automatically.</RP_AI_P2Promo3>
+  <RP_AI_EnableDesc>When enabled, each day's economic variables are randomized by AI; if every config fails, it automatically falls back to built-in randomness.</RP_AI_EnableDesc>
+  <RP_AI_Enable>Enable AI economy control</RP_AI_Enable>
+  <RP_AI_Interval>AI refresh interval: {0} hours (shorter = more active; mind your API usage)</RP_AI_Interval>
+  <RP_AI_Providers>Provider configs (tick to enable; order = try order):</RP_AI_Providers>
+  <RP_AI_LiveTitle>AI Economy Live Status</RP_AI_LiveTitle>
+  <RP_AI_LiveDesc>Shows the economic values the AI has generated and applied right now, to verify the AI is actually in control.</RP_AI_LiveDesc>
+  <RP_AI_S_Toggle>AI control switch</RP_AI_S_Toggle>
+  <RP_AI_S_SalaryMult>Wage multiplier (salaryMultiplier)</RP_AI_S_SalaryMult>
+  <RP_AI_S_SalaryMultVal>{0} x daily wage</RP_AI_S_SalaryMultVal>
+  <RP_AI_S_RentMult>Rent multiplier (rentMultiplier)</RP_AI_S_RentMult>
+  <RP_AI_S_RentMultVal>{0} x daily rent</RP_AI_S_RentMultVal>
+  <RP_AI_S_InterestDelta>Interest rate delta (interestRateDelta)</RP_AI_S_InterestDelta>
+  <RP_AI_S_InterestDeltaVal>{0}% added to base rate</RP_AI_S_InterestDeltaVal>
+  <RP_AI_S_LoanMult>Loan rate multiplier (loanRateMultiplier)</RP_AI_S_LoanMult>
+  <RP_AI_S_LoanMultVal>{0} x loan/lend rates</RP_AI_S_LoanMultVal>
+  <RP_AI_S_MealMult>Meal fee multiplier (mealFeeMultiplier)</RP_AI_S_MealMult>
+  <RP_AI_S_MealMultVal>{0} x meal fee</RP_AI_S_MealMultVal>
+  <RP_AI_S_LootDelta>Loot share delta (lootShareDelta)</RP_AI_S_LootDelta>
+  <RP_AI_S_LootDeltaVal>{0} added to killer's share</RP_AI_S_LootDeltaVal>
+  <RP_AI_S_TradeMult>Trade price multiplier (tradePriceMultiplier)</RP_AI_S_TradeMult>
+  <RP_AI_S_TradeMultVal>{0} x buy/sell prices</RP_AI_S_TradeMultVal>
+  <RP_AI_S_Tone>Market tone (marketTone)</RP_AI_S_Tone>
+  <RP_AI_S_Macro>Macro event</RP_AI_S_Macro>
+  <RP_AI_S_MacroVal>{0} ({1} days left)</RP_AI_S_MacroVal>
+  <RP_AI_S_Event>AI finance headline (eventText)</RP_AI_S_Event>
+  <RP_AI_S_LastDay>Last request day</RP_AI_S_LastDay>
+  <RP_AI_S_LastDayFmt>{0} (today: {1})</RP_AI_S_LastDayFmt>
+  <RP_AI_S_HasResult>Has AI result</RP_AI_S_HasResult>
+  <RP_AI_S_Fails>Consecutive failures</RP_AI_S_Fails>
+  <RP_AI_S_InFlight>Request in flight</RP_AI_S_InFlight>
+  <RP_AI_S_LastError>Last error</RP_AI_S_LastError>
+  <RP_AI_ForceBtn>Request AI Economy Data Now (Force Request)</RP_AI_ForceBtn>
+  <RP_AI_ForceDesc>The button above bypasses the once-per-day limit and makes the AI generate a fresh set of values shown above — handy for verifying the connection and AI control.</RP_AI_ForceDesc>
+  <RP_AI_ArchiveTitle>AI Result Archive (Last 10)</RP_AI_ArchiveTitle>
+  <RP_AI_ArchiveEmpty>(No entries yet; recorded automatically once the AI returns a result)</RP_AI_ArchiveEmpty>
+  <RP_AI_ArchiveLine>{0} | Wage x{1} Rent x{2} Loan x{3} Meal x{4} Int {5} Price x{6} Loot {7} | {8} | {9}</RP_AI_ArchiveLine>
+  <RP_AI_ArchiveHeadline>  Headline: {0}</RP_AI_ArchiveHeadline>
+  <RP_AI_LetterTitle>Daily Finance Report (Letter)</RP_AI_LetterTitle>
+  <RP_AI_DailyLetter>Send daily finance report letter</RP_AI_DailyLetter>
+  <RP_AI_DailyLetterDesc>If disabled, no letter is sent and only the settlement message remains.</RP_AI_DailyLetterDesc>
+  <RP_AI_RimTalkCast>Broadcast AI headlines via RimTalk</RP_AI_RimTalkCast>
+  <RP_AI_RimTalkCastDesc>After the AI generates each daily financial event, a pawn chats about it via RimTalk. Requires RimTalk installed and enabled.</RP_AI_RimTalkCastDesc>
+  <RP_AI_JsonTitle>AI Economy JSON Template</RP_AI_JsonTitle>
+  <RP_AI_JsonDesc>This JSON tells the AI which economic variables to return each day; edit freely, and restore defaults anytime if you break it.</RP_AI_JsonDesc>
+  <RP_AI_JsonSave>Save JSON Template (Save)</RP_AI_JsonSave>
+  <RP_AI_JsonSaved>[RimPay] JSON template saved.</RP_AI_JsonSaved>
+  <RP_AI_JsonReset>Restore Defaults (Reset)</RP_AI_JsonReset>
+  <RP_AI_JsonResetDone>[RimPay] Default JSON template restored.</RP_AI_JsonResetDone>
+  <RP_AI_TestingConn>Testing... (Testing...)</RP_AI_TestingConn>
+  <RP_AI_TestingBtn>Testing... (Testing...)</RP_AI_TestingBtn>
+  <RP_AI_AddConfig>Add provider config (+)</RP_AI_AddConfig>
+  <RP_AI_CfgDetail>Config details:</RP_AI_CfgDetail>
+  <RP_AI_CfgProvider>Provider:</RP_AI_CfgProvider>
+  <RP_AI_CfgP2Hint>Player2 local service: no API key needed — just install and run Player2.</RP_AI_CfgP2Hint>
+  <RP_AI_CfgLocalHint>Local model: fails automatically and falls through to the next config until Ollama is installed.</RP_AI_CfgLocalHint>
+  <RP_AI_CfgEndpoint>Endpoint URL (blank = provider default):</RP_AI_CfgEndpoint>
+  <RP_AI_CfgModel>Model name (blank = provider default):</RP_AI_CfgModel>
+  <RP_AI_CfgEnable>Enable this config</RP_AI_CfgEnable>
+  <RP_AI_CfgTest>Test Connection</RP_AI_CfgTest>
+
+  <!-- ==================== AI Status Messages ==================== -->
+  <RP_AI_ErrNotEnabled>[RimPay AI] Please tick "Enable AI economy control" on the AI settings page first.</RP_AI_ErrNotEnabled>
+  <RP_AI_ErrNoConfig>[RimPay AI] No provider config is ticked, cannot request. Please tick a config below first.</RP_AI_ErrNoConfig>
+  <RP_AI_ErrInFlight>[RimPay AI] A request is already in flight, please wait...</RP_AI_ErrInFlight>
+  <RP_AI_ForceRequested>[RimPay AI] Forced request sent; see the status panel above and the log for results.</RP_AI_ForceRequested>
+  <RP_AI_SnapshotDay>Day {0}.{1}</RP_AI_SnapshotDay>
+  <RP_AI_SnapshotUnknownDay>Unknown date</RP_AI_SnapshotUnknownDay>
+  <RP_AI_MacroNone>No macro event</RP_AI_MacroNone>
+  <RP_AI_FailCooldown>[RimPay AI] {0} consecutive failures, entering cooldown ({1}s); economy falls back to local randomness</RP_AI_FailCooldown>
+  <RP_AI_Fail>[RimPay AI] Request failed ({0} times); economy falls back to local randomness</RP_AI_Fail>
+
+  <!-- ==================== Common Words ==================== -->
+  <RP_Common_On>On</RP_Common_On>
+  <RP_Common_Off>Off</RP_Common_Off>
+  <RP_Common_Yes>Yes</RP_Common_Yes>
+  <RP_Common_No>No</RP_Common_No>
+  <RP_Common_None>None</RP_Common_None>
+  <RP_Common_PendingAI>(None yet; requires a successful AI return)</RP_Common_PendingAI>
+  <RP_Common_Cooldown>Cooldown active</RP_Common_Cooldown>
+
+  <!-- ==================== Market Tone ==================== -->
+  <RP_Tone_Bull>Bull</RP_Tone_Bull>
+  <RP_Tone_Bear>Bear</RP_Tone_Bear>
+  <RP_Tone_Neutral>Neutral</RP_Tone_Neutral>
+
+  <!-- ==================== Test Connection Errors ==================== -->
+  <RP_T_NoConfig>Config is empty</RP_T_NoConfig>
+  <RP_T_NoEndpoint>Endpoint URL is missing</RP_T_NoEndpoint>
+  <RP_T_NoKey>API key is missing</RP_T_NoKey>
+  <RP_T_NoModel>Model name is missing</RP_T_NoModel>
+  <RP_T_NoBody>Could not build the request body</RP_T_NoBody>
+  <RP_T_Timeout>Connection timed out (20s) — possibly a network issue or a wrong endpoint URL</RP_T_Timeout>
+  <RP_T_ErrPlayer2> — The Player2 desktop app is not running or not ready; make sure Player2 is running and try again</RP_T_ErrPlayer2>
+  <RP_T_ErrLocal> — Local model service not started (Ollama / LM Studio not running or not listening on port 11434)</RP_T_ErrLocal>
+  <RP_T_ErrNoConn> — Could not connect to the server; check your network and endpoint URL</RP_T_ErrNoConn>
+  <RP_T_Err400> — Bad request: most likely a wrong model name, please double-check it</RP_T_Err400>
+  <RP_T_Err401> — Authentication failed: API key invalid or expired</RP_T_Err401>
+  <RP_T_Err403> — Access denied: API key lacks permission or the account is restricted</RP_T_Err403>
+  <RP_T_Err404> — Endpoint not found: the endpoint URL may be wrong</RP_T_Err404>
+  <RP_T_Err429> — Rate limited: too many requests, try again later</RP_T_Err429>
+  <RP_T_Err5xx> — Server error: the API provider is temporarily down, try again later</RP_T_Err5xx>
+  <RP_T_ServerResponse>Server response: {0}</RP_T_ServerResponse>
+  <RP_T_Ok>Connection successful! Model: {0} | AI reply: {1}</RP_T_Ok>
+  <RP_T_ParseFail>Connected, but the response could not be parsed (chat may still work)\nRaw response: {0}</RP_T_ParseFail>
+  <RP_T_NetworkError>Network error: {0} - please check your connection</RP_T_NetworkError>
+  <RP_T_Exception>Exception ({0}): {1}</RP_T_Exception>
+
+  <!-- ==================== Macro Events ==================== -->
+  <RP_Macro_ToneBull>Market broadly up</RP_Macro_ToneBull>
+  <RP_Macro_ToneBear>Market under pressure</RP_Macro_ToneBear>
+  <RP_Macro_ToneNeutral>Market sideways</RP_Macro_ToneNeutral>
+  <RP_Macro_BriefBoth>{0}: top gainer {1}, top loser {2}</RP_Macro_BriefBoth>
+  <RP_Macro_BriefGainer>{0}: top gainer {1}</RP_Macro_BriefGainer>
+  <RP_Macro_BriefLoser>{0}: top loser {1}</RP_Macro_BriefLoser>
+  <RP_Macro_Crash>Market Crash</RP_Macro_Crash>
+  <RP_Macro_GoldRush>Gold Rush</RP_Macro_GoldRush>
+  <RP_Macro_Shortage>Supply Shortage</RP_Macro_Shortage>
+  <RP_Macro_TechBoom>Tech Boom</RP_Macro_TechBoom>
+  <RP_Macro_Unknown>Unknown Event</RP_Macro_Unknown>
+  <RP_Macro_CrashDesc>Panic selling hits the Rim stock market! Prices will plunge sharply with wild swings over the coming days, and traders will lowball your goods.</RP_Macro_CrashDesc>
+  <RP_Macro_GoldRushDesc>Gold rush sweeps the Rim! Enemies now carry far more digital silver, and the killer's share is richer too.</RP_Macro_GoldRushDesc>
+  <RP_Macro_ShortageDesc>Strained supply chains send prices soaring! Meal fees and living costs rise, and some goods see notable price swings.</RP_Macro_ShortageDesc>
+  <RP_Macro_TechBoomDesc>Tech stocks surge! The market rallies broadly, trade prices climb, and traders will pay more for your goods.</RP_Macro_TechBoomDesc>
+  <RP_Macro_LetterTitle>RimEdge Finance Flash: {0}</RP_Macro_LetterTitle>
+  <RP_Macro_LetterBodySuffix>(This macro event lasts {0} more days, affecting stocks/trading/looting and other economic systems.)</RP_Macro_LetterBodySuffix>
+  <RP_Macro_FeedTitle>[Macro Flash] {0}</RP_Macro_FeedTitle>
+  <RP_Macro_FeedTag>Market Headlines</RP_Macro_FeedTag>
+
+  <!-- ==================== Corporations (27) ==================== -->
+  <RP_Corp_iShen>iShen Group</RP_Corp_iShen>
+  <RP_Corp_iShen_Desc>Galactic consumer electronics giant focused on smartphones and mobile devices</RP_Corp_iShen_Desc>
+  <RP_Corp_Macrosoft>Macrosoft</RP_Corp_Macrosoft>
+  <RP_Corp_Macrosoft_Desc>Veteran software and OS monopoly service provider</RP_Corp_Macrosoft_Desc>
+  <RP_Corp_Nokirim>Nokirim</RP_Corp_Nokirim>
+  <RP_Corp_Nokirim_Desc>Industrial-grade communication gear and military-grade casing manufacturer</RP_Corp_Nokirim_Desc>
+  <RP_Corp_DaMi>DaMi Tech</RP_Corp_DaMi>
+  <RP_Corp_DaMi_Desc>Budget personal smart mobility and self-balancing scooter developer</RP_Corp_DaMi_Desc>
+  <RP_Corp_BoosDead>BoosDead</RP_Corp_BoosDead>
+  <RP_Corp_BoosDead_Desc>Low-end knockoff digital and shoddy electronics assembly plant</RP_Corp_BoosDead_Desc>
+  <RP_Corp_Rimtendo>Rimtendo</RP_Corp_Rimtendo>
+  <RP_Corp_Rimtendo_Desc>Handheld and cartridge entertainment developer beloved across the Rim</RP_Corp_Rimtendo_Desc>
+  <RP_Corp_RONY>RONY</RP_Corp_RONY>
+  <RP_Corp_RONY_Desc>Premium audiovisual console and image sensor titan</RP_Corp_RONY_Desc>
+  <RP_Corp_StarveMe>StarveMe Tech</RP_Corp_StarveMe>
+  <RP_Corp_StarveMe_Desc>Deep-space emergency synthetic food and long-life compressed nutrient paste</RP_Corp_StarveMe_Desc>
+  <RP_Corp_GreenSprout>GreenSprout Agri</RP_Corp_GreenSprout>
+  <RP_Corp_GreenSprout_Desc>Commodity hydroponic crops and drought/cold-resistant produce grower</RP_Corp_GreenSprout_Desc>
+  <RP_Corp_MuffaloCorp>MuffaloCorp Ranch</RP_Corp_MuffaloCorp>
+  <RP_Corp_MuffaloCorp_Desc>Purebred muffalo breeding and warm fur/meat conglomerate</RP_Corp_MuffaloCorp_Desc>
+  <RP_Corp_OrbitalBay>OrbitalBay</RP_Corp_OrbitalBay>
+  <RP_Corp_OrbitalBay_Desc>Orbital e-commerce marketplace with direct freight delivery</RP_Corp_OrbitalBay_Desc>
+  <RP_Corp_TuberNet>TuberNet Media</RP_Corp_TuberNet>
+  <RP_Corp_TuberNet_Desc>Streaming media and top influencer incubation alliance</RP_Corp_TuberNet_Desc>
+  <RP_Corp_RimTribune>RimTribune</RP_Corp_RimTribune>
+  <RP_Corp_RimTribune_Desc>Long-standing galactic wire service and neutral financial news network</RP_Corp_RimTribune_Desc>
+  <RP_Corp_ApexArena>ApexArena</RP_Corp_ApexArena>
+  <RP_Corp_ApexArena_Desc>Interstellar extreme skateboard racing and gladiator league entertainment</RP_Corp_ApexArena_Desc>
+  <RP_Corp_GlitterPharm>GlitterPharm</RP_Corp_GlitterPharm>
+  <RP_Corp_GlitterPharm_Desc>Glitterworld advanced prosthetics and universal antibiotic R&amp;D</RP_Corp_GlitterPharm_Desc>
+  <RP_Corp_MedEx>MedEx Biotech</RP_Corp_MedEx>
+  <RP_Corp_MedEx_Desc>Xenogenome restructuring and artificial organ cultivation factory</RP_Corp_MedEx_Desc>
+  <RP_Corp_ApexArms>ApexArms Defense</RP_Corp_ApexArms>
+  <RP_Corp_ApexArms_Desc>Planetary heavy point-defense turrets and gauss electromagnetic arms maker</RP_Corp_ApexArms_Desc>
+  <RP_Corp_PlasteelDyn>PlasteelDyn Industries</RP_Corp_PlasteelDyn>
+  <RP_Corp_PlasteelDyn_Desc>Super-alloy composite power armor and high-density shield developer</RP_Corp_PlasteelDyn_Desc>
+  <RP_Corp_UranCorp>UranCorp</RP_Corp_UranCorp>
+  <RP_Corp_UranCorp_Desc>Supercritical nuclear fusion reactors and deep geology mining</RP_Corp_UranCorp_Desc>
+  <RP_Corp_DigitalSilverFund>Digital Silver Leveraged Fund</RP_Corp_DigitalSilverFund>
+  <RP_Corp_DigitalSilverFund_Desc>High-leverage speculative derivative fund tracking market sentiment</RP_Corp_DigitalSilverFund_Desc>
+  <RP_Corp_StarCom>StarCom</RP_Corp_StarCom>
+  <RP_Corp_StarCom_Desc>Quantum net low-orbit satellite coverage carrier</RP_Corp_StarCom_Desc>
+  <RP_Corp_NebulaCloud>NebulaCloud</RP_Corp_NebulaCloud>
+  <RP_Corp_NebulaCloud_Desc>Superconducting cloud computing and RimSeek scheduling service provider</RP_Corp_NebulaCloud_Desc>
+  <RP_Corp_CartoBoard>CartoBoard</RP_Corp_CartoBoard>
+  <RP_Corp_CartoBoard_Desc>Digital entertainment publishing and virtual software carrier</RP_Corp_CartoBoard_Desc>
+  <RP_Corp_CyberBazaar>CyberBazaar</RP_Corp_CyberBazaar>
+  <RP_Corp_CyberBazaar_Desc>Galaxy-wide virtual shopping and digital goods platform</RP_Corp_CyberBazaar_Desc>
+  <RP_Corp_MineScan>MineScan</RP_Corp_MineScan>
+  <RP_Corp_MineScan_Desc>Orbital gravity-gradient mapping and deep vein remote-sensing cloud platform</RP_Corp_MineScan_Desc>
+  <RP_Corp_Faction_Desc>{0} (tech level: {1})</RP_Corp_Faction_Desc>
+
+  <!-- ==================== Financial News (61) ==================== -->
+  <RP_News_Tech_1>Solar flares knock multiple data centers offline; brief cloud communication outages trigger a sell-off.</RP_News_Tech_1>
+  <RP_News_Tech_2>Breakthrough in microelectronics and nano-integrated circuits; the digital chip sector erupts across the board.</RP_News_Tech_2>
+  <RP_News_Tech_3>Cheap assembled electronics flood underdeveloped settlements; thin-margin volume lifts valuations.</RP_News_Tech_3>
+  <RP_News_Tech_4>Under investigation by the consumer protection association over rebranded chip assembly and false advertising.</RP_News_Tech_4>
+  <RP_News_Tech_5>Top streamer's live sale is a smash hit! E-scooters and smart mobility lines sell out.</RP_News_Tech_5>
+  <RP_News_Tech_6>Budget commuter scooters spread quickly across settlements; young pioneer crowds snap them up.</RP_News_Tech_6>
+  <RP_News_Tech_7>Motor controller supply chain delays stretch delivery times for some models.</RP_News_Tech_7>
+  <RP_News_Tech_8>Flagship smart devices go viral in live sales; the galaxy's premium consumer-digital leader holds firm.</RP_News_Tech_8>
+  <RP_News_Tech_9>New-generation smartwatches and terminals launch; ecosystem subscription revenue hits a record share.</RP_News_Tech_9>
+  <RP_News_Tech_10>Slowing hardware iterations leave investors on the fence; the stock consolidates short-term.</RP_News_Tech_10>
+  <RP_News_Tech_11>Digital ecosystem synergies shine; software service add-on business is booming.</RP_News_Tech_11>
+  <RP_News_Tech_12>Rising core chip material costs squeeze hardware margins for now.</RP_News_Tech_12>
+  <RP_News_Faction_1>Raid on the colony ends in failure and a fierce counterattack; the loss of elite forces sparks a market sell-off.</RP_News_Faction_1>
+  <RP_News_Faction_2>Completes a bulk goods settlement worth thousands of silver with the colony; bilateral trade sentiment hits a quarterly high.</RP_News_Faction_2>
+  <RP_News_Faction_3>Deepens its strategic alliance with the colony; cross-border tariff exemption passes the council.</RP_News_Faction_3>
+  <RP_News_Faction_4>Expectations of eased border tensions rise; defense friction costs come under control.</RP_News_Faction_4>
+  <RP_News_Faction_5>Geopolitical friction escalates; blocked border trade routes sour business expectations.</RP_News_Faction_5>
+  <RP_News_Faction_6>Seasonal tax collection wraps up with a fiscal surplus that beats market expectations.</RP_News_Faction_6>
+  <RP_News_Faction_7>Galactic inflation and high resupply costs leave the quarterly report below expectations.</RP_News_Faction_7>
+  <RP_News_Quantum_1>A powerful magnetic starlink storm strikes! Low-orbit relay links drop en masse; emergency comm maintenance underway.</RP_News_Quantum_1>
+  <RP_News_Quantum_2>CyberBazaar's mid-year gala kicks off; virtual shopping and digital asset trade volumes smash all-time records.</RP_News_Quantum_2>
+  <RP_News_Quantum_3>Gravity-gradient remote sensing radar fully calibrated; discovery of ultra-grade rich ore ignites a prospecting rush.</RP_News_Quantum_3>
+  <RP_News_Quantum_4>Concurrent compute load hits bandwidth limits; queued cloud tasks trigger customer complaints.</RP_News_Quantum_4>
+  <RP_News_Quantum_5>Quantum-encrypted channel expansion delivered on schedule; enterprise secure comms protocol sees wide adoption.</RP_News_Quantum_5>
+  <RP_News_Quantum_6> Microwave relay antenna arrays undergo routine maintenance; regional network throughput briefly limited.</RP_News_Quantum_6>
+  <RP_News_Agri_1>Extreme weather ravages hydroponic greenhouses; major grain-growing zones issue bulk harvest-loss warnings.</RP_News_Agri_1>
+  <RP_News_Agri_2>Breeding breakthrough in high-stress hydroponic crops sends bulk grain spot prices and volumes higher.</RP_News_Agri_2>
+  <RP_News_Agri_3>Seasonal bumper harvest delivery; deep-space grain reserve orders exceed expectations.</RP_News_Agri_3>
+  <RP_News_Agri_4>Agri-nutrient solution raw materials get pricier, squeezing hydroponic profit margins.</RP_News_Agri_4>
+  <RP_News_Ranch_1>An extreme cold snap sweeps the continent! Demand for warm purebred muffalo fur and meat skyrockets.</RP_News_Ranch_1>
+  <RP_News_Ranch_2>Harsh weather and fodder shortage limit livestock slaughter; the ranch supply chain strains.</RP_News_Ranch_2>
+  <RP_News_Ranch_3>Purebred muffalo breeding rates improve sharply; premium meat orders are fully booked.</RP_News_Ranch_3>
+  <RP_News_Ranch_4>Feed transport cycles drag on; livestock processing profits narrow slightly.</RP_News_Ranch_4>
+  <RP_News_Arms_1>Outbreaks of fighting trigger emergency orders for heavy point-defense weaponry; defense stocks surge across the board!</RP_News_Arms_1>
+  <RP_News_Arms_2>High-energy electromagnetic weapons and composite armor patents pass military validation; defense procurement is booked solid.</RP_News_Arms_2>
+  <RP_News_Arms_3>Settlement fortification upgrades drive robust demand for positional defense equipment.</RP_News_Arms_3>
+  <RP_News_Arms_4>Calls for localized ceasefires grow; expendable ammunition procurement dips short-term.</RP_News_Arms_4>
+  <RP_News_Mining_1>Intense geomagnetic disturbances distort deep geological survey radar; mining projects stall.</RP_News_Mining_1>
+  <RP_News_Mining_2>Deep geothermal nuclear fission research lands; heavy-industry high-energy mining accelerates across the board.</RP_News_Mining_2>
+  <RP_News_Mining_3>High-grade uranium ore is tight in spot markets; heavy-industry energy demand lifts mining valuations.</RP_News_Mining_3>
+  <RP_News_Mining_4>Heavy drill bit wear runs high; above-expected mining costs cause short-term swings.</RP_News_Mining_4>
+  <RP_News_ECom_1>A top streamer's single session sets a sales record; the cross-galaxy orbital e-commerce supply chain runs at full capacity!</RP_News_ECom_1>
+  <RP_News_ECom_2>The CyberBazaar digital mega-sale ignites; galaxy-wide online retail order volumes break all records!</RP_News_ECom_2>
+  <RP_News_ECom_3>Its own orbital freight shuttle fleet finishes expansion; next-day fulfillment hits a new high.</RP_News_ECom_3>
+  <RP_News_ECom_4>Rising energy costs for long-haul galactic freight squeeze e-commerce delivery margins.</RP_News_ECom_4>
+  <RP_News_Ent_1>The streamer is live and hot; RimEdge entertainment app activity peaks for the day.</RP_News_Ent_1>
+  <RP_News_Ent_2>The year's blockbuster handheld title launches to acclaim; cartridge and digital download numbers both set records.</RP_News_Ent_2>
+  <RP_News_Ent_3>Without a hit exclusive to lean on, hardware sales enter a cyclical off-season.</RP_News_Ent_3>
+  <RP_News_Food_1>Global drought and famine stoke demand for safety! StarveMe long-life synthetic meal cans are snapped up across the galaxy.</RP_News_Food_1>
+  <RP_News_Food_2>Fast-paced pioneer meal packs sell strongly; the emergency food business posts steady revenue.</RP_News_Food_2>
+  <RP_News_Food_3>Ordinary food output is plentiful; demand for premium compressed food eases short-term.</RP_News_Food_3>
+  <RP_News_Medical_1>Breakthrough in advanced bionic nerve repair and bio-serum research; institutions upgrade target ratings across the board.</RP_News_Medical_1>
+  <RP_News_Medical_2>Universal antibiotic and immune-booster orders are plentiful; the biopharma sector gains on volume.</RP_News_Medical_2>
+  <RP_News_Medical_3>Clinical approval for a new gene drug slips; cautious money takes profits short-term.</RP_News_Medical_3>
+  <RP_News_Media_1>Live chat heat breaks the internet; streaming ad and sponsorship revenue shares hit an all-time high!</RP_News_Media_1>
+  <RP_News_Media_2>An exclusive investigative exposé sparks galaxy-wide debate; subscriber numbers explode.</RP_News_Media_2>
+  <RP_News_Media_3>Rim rumors trigger a public trust crisis; major sponsors trim their promo budgets.</RP_News_Media_3>
+  <RP_News_Sports_1>The interstellar extreme skateboard racing championship wraps up; co-branded merchandise and ticket revenue post strong results.</RP_News_Sports_1>
+  <RP_News_Sports_2>A leading athlete withdraws after breaking a bone in training; viewership cools somewhat.</RP_News_Sports_2>
+  <RP_News_Finance_1>Bullish hot money piles on leverage to grab chips; the speculative derivative fund surges on heavy volume!</RP_News_Finance_1>
+  <RP_News_Finance_2>Highly leveraged positions face concentrated liquidation; bears pile on and trigger a stampede of sell orders.</RP_News_Finance_2>
+  <RP_News_General_1>Fundamentals stay healthy; bulls defend the stock with orderly buying.</RP_News_General_1>
+  <RP_News_General_2>Profit-takers cash out at highs; the stock pulls back slightly under short-term pressure.</RP_News_General_2>
+  <RP_News_ShockBuy>A mysterious offshore consortium builds a big stake; institutional money buys in hard and lifts the price.</RP_News_ShockBuy>
+  <RP_News_ShockShort>A famed interstellar short seller publishes a bearish report, questioning inflated revenue in its quarterly statements.</RP_News_ShockShort>
+  	<RP_News_SignUp>[UP]</RP_News_SignUp>
+	<RP_News_SignDown>[DOWN]</RP_News_SignDown>
+	<RP_News_HistoryLine>Day {0}.{1} {2} {3}% {4}</RP_News_HistoryLine>
+  <RP_News_VolatileDefault>Wild intraday swings amid fierce battles between bulls and bears.</RP_News_VolatileDefault>
+
+  <!-- ==================== Daily Settlement ==================== -->
+  <RP_Settle_TxSummary>Day {0}.{1}  {2}{3} @silver  {4}</RP_Settle_TxSummary>
+  <RP_Settle_DailyDone>[RimPay Settlement] Daily wage and rent settlement complete ({0} colonists).\nWages paid: {1} @silver | Rent collected: {2} @silver | Interest issued: {3} @silver.</RP_Settle_DailyDone>
+  <RP_Settle_LendInterestIn>Loan interest received: {1} @silver from {0}.</RP_Settle_LendInterestIn>
+  <RP_Settle_LendInterestOut>Loan interest paid: {1} @silver to {0}.</RP_Settle_LendInterestOut>
+  <RP_Settle_LendBadDebt>Warning: cannot pay {1} @silver interest owed to {0}; relations sour!</RP_Settle_LendBadDebt>
+
+  <!-- ==================== Daily Finance Report ==================== -->
+  <RP_Daily_LetterTitle>RimEdge Finance Daily</RP_Daily_LetterTitle>
+  <RP_Daily_Header>—— RimEdge Finance Daily · Day {0}.{1} ——</RP_Daily_Header>
+  <RP_Daily_TreasuryLine>Treasury: {0} @silver physical, {1} @silver digital treasury.</RP_Daily_TreasuryLine>
+  <RP_Daily_MarketLine>Market: {0} leads gains at {1}%, {2} leads losses at {3}%.</RP_Daily_MarketLine>
+  <RP_Daily_MarketGood>  [Bullish Focus] {0} —— {1}</RP_Daily_MarketGood>
+  <RP_Daily_MarketBad>  [Bearish Alert] {0} —— {1}</RP_Daily_MarketBad>
+  <RP_Daily_LoanActive>Loans: {0} @silver lent out, {1} @silver borrowed.</RP_Daily_LoanActive>
+  <RP_Daily_LoanNone>Loans: no outstanding loans or borrowings today.</RP_Daily_LoanNone>
+  <RP_Daily_PayrollLine>Payroll: {0} @silver in wages paid today, {1} @silver in rent collected.</RP_Daily_PayrollLine>
+  <RP_Daily_AiHeadline>AI Finance Headline: {0}</RP_Daily_AiHeadline>
+  <RP_Daily_Footer>— RimPay Digital Economy · RimEdge Finance —</RP_Daily_Footer>
+  <RP_Daily_None>None</RP_Daily_None>
+  <RP_Daily_YesterdayBill>Yesterday's bill: income {0} @silver ({1}) | expense {2} @silver ({3}).</RP_Daily_YesterdayBill>
+  <RP_Daily_TreasurySummary>Treasury flow: income {0} @silver ({1}) | expense {2} @silver ({3}).</RP_Daily_TreasurySummary>
+
+  <!-- ==================== Bookkeeping Reasons (51) ==================== -->
+  <RP_Reason_Payday>Payday</RP_Reason_Payday>
+  <RP_Reason_DailyWage>Daily wage</RP_Reason_DailyWage>
+  <RP_Reason_LodgingRent>Lodging rent</RP_Reason_LodgingRent>
+  <RP_Reason_RentIncome>Rent income</RP_Reason_RentIncome>
+  <RP_Reason_LodgingRentArrears>Lodging rent (arrears)</RP_Reason_LodgingRentArrears>
+  <RP_Reason_RentArrears>Rent arrears</RP_Reason_RentArrears>
+  <RP_Reason_FundInterest>Fund interest</RP_Reason_FundInterest>
+  <RP_Reason_LendInterest>Lending interest</RP_Reason_LendInterest>
+  <RP_Reason_BorrowInterest>Borrowing interest</RP_Reason_BorrowInterest>
+  <RP_Reason_ModPayment>Mod payment</RP_Reason_ModPayment>
+  <RP_Reason_TradeProfit>Trading profit</RP_Reason_TradeProfit>
+  <RP_Reason_TradeLoss>Trading loss</RP_Reason_TradeLoss>
+  <RP_Reason_PocketMoneyTransfer>Pocket money transfer</RP_Reason_PocketMoneyTransfer>
+  <RP_Reason_CasinoSpending>Casino spending</RP_Reason_CasinoSpending>
+  <RP_Reason_CasinoWinnings>Casino winnings</RP_Reason_CasinoWinnings>
+  <RP_Reason_GuestSpending>Guest spending</RP_Reason_GuestSpending>
+  <RP_Reason_GuestFood>Guest dining</RP_Reason_GuestFood>
+  <RP_Reason_GuestShopping>Guest shopping</RP_Reason_GuestShopping>
+  <RP_Reason_GuestLodging>Guest lodging</RP_Reason_GuestLodging>
+  <RP_Reason_EdgeMarketSpending>RimMarket spending</RP_Reason_EdgeMarketSpending>
+  <RP_Reason_StoreIncome>Shop income</RP_Reason_StoreIncome>
+  <RP_Reason_EarthStockDeposit>Earth market deposit</RP_Reason_EarthStockDeposit>
+  <RP_Reason_PersonalSavings>Personal savings</RP_Reason_PersonalSavings>
+  <RP_Reason_LendOut>Loan lent out</RP_Reason_LendOut>
+  <RP_Reason_BorrowIn>Borrowed funds</RP_Reason_BorrowIn>
+  <RP_Reason_LendTo>Lent to</RP_Reason_LendTo>
+  <RP_Reason_BorrowFrom>Borrowed from</RP_Reason_BorrowFrom>
+  <RP_Reason_ReclaimLoan>Loan reclaimed</RP_Reason_ReclaimLoan>
+  <RP_Reason_RepayLoan>Loan repaid</RP_Reason_RepayLoan>
+  <RP_Reason_SilverDeposit>Silver deposited</RP_Reason_SilverDeposit>
+  <RP_Reason_SilverWithdraw>Silver withdrawn</RP_Reason_SilverWithdraw>
+  <RP_Reason_StockBuy>Stock bought</RP_Reason_StockBuy>
+  <RP_Reason_StockSell>Stock sold</RP_Reason_StockSell>
+  <RP_Reason_GiveBonus>Bonus issued</RP_Reason_GiveBonus>
+  <RP_Reason_PlayerBonus>Player bonus</RP_Reason_PlayerBonus>
+  <RP_Reason_Confiscated>Funds confiscated</RP_Reason_Confiscated>
+  <RP_Reason_ConfiscateIn>Confiscated to treasury</RP_Reason_ConfiscateIn>
+  <RP_Reason_MealCost>Meal fee</RP_Reason_MealCost>
+  <RP_Reason_MealIncome>Meal fee income</RP_Reason_MealIncome>
+  <RP_Reason_ReliefMeal>Relief meal</RP_Reason_ReliefMeal>
+  <RP_Reason_MealRelief>Relief meal income</RP_Reason_MealRelief>
+  <RP_Reason_MedicalCost>Medical fee</RP_Reason_MedicalCost>
+  <RP_Reason_MedicalIncome>Medical income</RP_Reason_MedicalIncome>
+  <RP_Reason_MedicalCover>Insurance coverage</RP_Reason_MedicalCover>
+  <RP_Reason_LootWallet>Enemy wallet looted</RP_Reason_LootWallet>
+  <RP_Reason_LootTax>Loot remitted</RP_Reason_LootTax>
+  <RP_Reason_TradePay>Trade payment</RP_Reason_TradePay>
+
+  <!-- ==================== RimTuber Feed ==================== -->
+  <RP_Tuber_StockGodTitle>[Colony Stock God] {0} cashes out big</RP_Tuber_StockGodTitle>
+  <RP_Tuber_StockGodBody>{0} called the bottom on {1} ({2}) with razor-sharp instincts today and pocketed {3} @silver in a single trade! The colony is buzzing.</RP_Tuber_StockGodBody>
+  <RP_Tuber_StockGodTag>Trader Glory</RP_Tuber_StockGodTag>
+  <RP_Tuber_RooftopTitle>[Rooftop Winds] {0} trapped at the top</RP_Tuber_RooftopTitle>
+  <RP_Tuber_RooftopBody>{0} chased {1} ({2}) at its peak, cut losses after the day's plunge, and lost {3} @silver... nutrient paste for dinner tonight.</RP_Tuber_RooftopBody>
+  <RP_Tuber_RooftopTag>Investing Fail</RP_Tuber_RooftopTag>
+  <RP_Tuber_MarketAlert>[Market Alert] {0} {1} {2}% in a single day</RP_Tuber_MarketAlert>
+  <RP_Tuber_MarketAlertBody>{0} Latest price: {1} @silver.</RP_Tuber_MarketAlertBody>
+  <RP_Tuber_MarketTag>Market Flash</RP_Tuber_MarketTag>
+  <RP_Tuber_Surge>surges</RP_Tuber_Surge>
+  <RP_Tuber_FlashCrash>flash-crashes</RP_Tuber_FlashCrash>
+  <RP_Tuber_FinanceTag>RimEdge Finance</RP_Tuber_FinanceTag>
+
+  <!-- ==================== RimStock Integration ==================== -->
+  <RP_Int_EarthStockDepositPaid>Earth market deposit: {0} digital silver deducted from the digital treasury.</RP_Int_EarthStockDepositPaid>
+
+  <!-- ==================== Gizmos ==================== -->
+  <RP_Gizmo_Treasury_Label>Digital Treasury</RP_Gizmo_Treasury_Label>
+  <RP_Gizmo_Treasury_Desc>Open the RimPay digital treasury and colony finance overview. Deposit/withdraw silver, view colony-wide assets and colonist wallets.</RP_Gizmo_Treasury_Desc>
+  <RP_Gizmo_Wallet_Label>Digital Wallet: {0}</RP_Gizmo_Wallet_Label>
+  <RP_Gizmo_Wallet_Desc>Open {0}'s RimPay digital wallet.\nView transaction history, issue bonuses, or confiscate funds.</RP_Gizmo_Wallet_Desc>
+
+  <!-- ==================== Meal/Medical/Loot/Trade Misc ==================== -->
+  <RP_Meal_DevLogPaid>[RimPay Meal] {0} paid {1} @silver for a meal ({2}); wallet balance {3}.</RP_Meal_DevLogPaid>
+  <RP_Meal_DevLogRelief>[RimPay Meal] {0}'s wallet fell short; ate a relief meal (paid {1} @silver, owed {2}).</RP_Meal_DevLogRelief>
+  <RP_Medical_MoteCovered>Medical fee {0} @silver (treasury covered {1})</RP_Medical_MoteCovered>
+  <RP_Medical_Mote>Medical fee {0} @silver</RP_Medical_Mote>
+  <RP_Loot_UnknownEnemy>an enemy</RP_Loot_UnknownEnemy>
+  <RP_Loot_MsgKiller>Looted {1} @silver in digital silver from {0} ({2} to {3}, {4} to the digital treasury)</RP_Loot_MsgKiller>
+  <RP_Loot_MsgTreasury>Looted {1} @silver in digital silver from {0}; all of it went to the digital treasury.</RP_Loot_MsgTreasury>
+  <RP_Trade_TreasuryPaid>{0} digital silver seamlessly deducted from the digital treasury for this trade.</RP_Trade_TreasuryPaid>
+  <RP_Trade_ShortPaid>Short payment: paid {0} @silver / owed {1} @silver, shortfall {2} @silver.</RP_Trade_ShortPaid>
+  <RP_Trade_LogShortPaid>[RimPay] Short payment: owed {0}, physical silver {1}, treasury balance {2}, shortfall {3}.</RP_Trade_LogShortPaid>
+
+  <!-- ==================== Window Common ==================== -->
+  <RP_W_Settings>Mod Settings</RP_W_Settings>
+
+  <!-- ==================== Treasury Window ==================== -->
+  <RP_W_Treasury_Title>RimPay Digital Treasury — Colony Finance Overview</RP_W_Treasury_Title>
+  <RP_W_Treasury_Tab>Digital Treasury</RP_W_Treasury_Tab>
+  <RP_W_Treasury_Asilver>Physical Silver</RP_W_Treasury_Asilver>
+  <RP_W_Treasury_CountedWealth>Counts toward colony wealth</RP_W_Treasury_CountedWealth>
+  <RP_W_Treasury_HiddenPhysically>Physically hidden</RP_W_Treasury_HiddenPhysically>
+  <RP_W_Treasury_TotalLiquid>Total Liquid Assets</RP_W_Treasury_TotalLiquid>
+  <RP_W_Treasury_EscrowBuilding>Escrow (Buildings)</RP_W_Treasury_EscrowBuilding>
+  <RP_W_Treasury_EscrowEquip>Escrow (Equipment)</RP_W_Treasury_EscrowEquip>
+  <RP_W_Treasury_NotCountedRaid>Not counted toward raids</RP_W_Treasury_NotCountedRaid>
+  <RP_W_Treasury_CountedRaid>Counted toward raids</RP_W_Treasury_CountedRaid>
+  <RP_W_Treasury_SummaryLine>&lt;b&gt;Colony-wide Summary&lt;/b&gt;  Daily payroll: {0}  |  Colonist wallets: {1}  |  Digital treasury: {2}  |  Total digital assets: {3}  (in @silver)</RP_W_Treasury_SummaryLine>
+  <RP_W_Treasury_Footnote>&lt;i&gt;Unit: @silver (1 digital silver = 1 physical silver)  |  Physical silver counts toward colony wealth, the digital treasury does not  |  Deposit silver into the digital treasury to lower colony wealth and soften raids    [v1.0.3]&lt;/i&gt;</RP_W_Treasury_Footnote>
+  <RP_W_Treasury_DepositWithdraw>Deposit / Withdraw Silver</RP_W_Treasury_DepositWithdraw>
+  <RP_W_Treasury_DepositLabel>Deposit (physical silver → digital treasury):</RP_W_Treasury_DepositLabel>
+  <RP_W_Treasury_DepositBtn>Deposit</RP_W_Treasury_DepositBtn>
+  <RP_W_Treasury_All>All</RP_W_Treasury_All>
+  <RP_W_Treasury_DepositDone>Deposited {0} @silver into the digital treasury.</RP_W_Treasury_DepositDone>
+  <RP_W_Treasury_WithdrawLabel>Withdraw (digital treasury → physical silver):</RP_W_Treasury_WithdrawLabel>
+  <RP_W_Treasury_WithdrawBtn>Withdraw</RP_W_Treasury_WithdrawBtn>
+  <RP_W_Treasury_WithdrawDone>Withdrew {0} @silver from the digital treasury.</RP_W_Treasury_WithdrawDone>
+  <RP_W_Treasury_DepositAvail>Physical silver available: {0} @silver  |  Digital treasury balance: {1} @silver</RP_W_Treasury_DepositAvail>
+  <RP_W_Treasury_RosterTitle>Colonist Finance Roster</RP_W_Treasury_RosterTitle>
+  <RP_W_Treasury_RosterSummary>Daily payroll total: {0}  |  Treasury covers {1} days  (in @silver)</RP_W_Treasury_RosterSummary>
+  <RP_W_Treasury_ColName>Name</RP_W_Treasury_ColName>
+  <RP_W_Treasury_ColBalance>Balance @silver</RP_W_Treasury_ColBalance>
+  <RP_W_Treasury_ColSalary>Daily wage @silver</RP_W_Treasury_ColSalary>
+  <RP_W_Treasury_ColType>Type</RP_W_Treasury_ColType>
+  <RP_W_Treasury_NoColonists>No colonists.</RP_W_Treasury_NoColonists>
+  <RP_W_Treasury_CompLoadFail>Game component failed to load; treasury data unavailable.</RP_W_Treasury_CompLoadFail>
+  <RP_W_Treasury_Balance>Digital treasury balance: {0} @silver</RP_W_Treasury_Balance>
+  <RP_W_Treasury_Tier_Auto>Auto</RP_W_Treasury_Tier_Auto>
+  <RP_W_Treasury_Tier_Child>Child</RP_W_Treasury_Tier_Child>
+  <RP_W_Treasury_Tier_Slave>Slave</RP_W_Treasury_Tier_Slave>
+  <RP_W_Treasury_Tier_Novice>Novice</RP_W_Treasury_Tier_Novice>
+  <RP_W_Treasury_Tier_Basic>Basic Worker</RP_W_Treasury_Tier_Basic>
+  <RP_W_Treasury_Tier_Skilled>Skilled Worker</RP_W_Treasury_Tier_Skilled>
+  <RP_W_Treasury_Tier_Expert>Expert</RP_W_Treasury_Tier_Expert>
+
+  <!-- ==================== Loan Window ==================== -->
+  <RP_W_Loan_Tab>Loan Center</RP_W_Loan_Tab>
+  <RP_W_Loan_Title>RimPay Loan Center</RP_W_Loan_Title>
+  <RP_W_Loan_ListHeader>Lending and borrowing list (rates float with faction goodwill):</RP_W_Loan_ListHeader>
+  <RP_W_Loan_ColFaction>Faction</RP_W_Loan_ColFaction>
+  <RP_W_Loan_ColGoodwill>Goodwill</RP_W_Loan_ColGoodwill>
+  <RP_W_Loan_ColRate>Rate/season</RP_W_Loan_ColRate>
+  <RP_W_Loan_ColLedger>Ledger</RP_W_Loan_ColLedger>
+  <RP_W_Loan_NoFactions>No factions available for lending.</RP_W_Loan_NoFactions>
+  <RP_W_Loan_Ally>Ally</RP_W_Loan_Ally>
+  <RP_W_Loan_Neutral>Neutral</RP_W_Loan_Neutral>
+  <RP_W_Loan_Cold>Hostile</RP_W_Loan_Cold>
+  <RP_W_Loan_Relation>{0} ({1})</RP_W_Loan_Relation>
+  <RP_W_Loan_RateValue>{0}%</RP_W_Loan_RateValue>
+  <RP_W_Loan_NoDebt>No debt</RP_W_Loan_NoDebt>
+  <RP_W_Loan_Lend>Lend</RP_W_Loan_Lend>
+  <RP_W_Loan_LendDone>Successfully lent {1} @silver to {0} at {2}% per season.</RP_W_Loan_LendDone>
+  <RP_W_Loan_Borrow>Borrow</RP_W_Loan_Borrow>
+  <RP_W_Loan_BorrowDone>Successfully borrowed {1} @silver from {0} at {2}% per season.</RP_W_Loan_BorrowDone>
+  <RP_W_Loan_ActiveRecords>&lt;b&gt;Active loan records:&lt;/b&gt;</RP_W_Loan_ActiveRecords>
+  <RP_W_Loan_NoRecords>  No outstanding loans or borrowings.</RP_W_Loan_NoRecords>
+  <RP_W_Loan_RecordLine>  {0} {1} : &lt;color={2}&gt;{3}&lt;/color&gt; @silver  (rate: {4}%/season | due: day {5})</RP_W_Loan_RecordLine>
+  <RP_W_Loan_Reclaim>Reclaim Principal</RP_W_Loan_Reclaim>
+  <RP_W_Loan_ReclaimDone>[RimPay Loans] Reclaimed the {1} @silver principal lent to {0}; it has been deposited into the digital treasury.</RP_W_Loan_ReclaimDone>
+  <RP_W_Loan_Repay>Repay Loan</RP_W_Loan_Repay>
+  <RP_W_Loan_RepayDone>[RimPay Loans] Fully repaid the {1} @silver principal borrowed from {0}.</RP_W_Loan_RepayDone>
+  <RP_W_Loan_RepayNoFunds>Digital treasury balance is insufficient to repay the loan!</RP_W_Loan_RepayNoFunds>
+  <RP_W_Loan_LendTitle>Lend to {0}</RP_W_Loan_LendTitle>
+  <RP_W_Loan_BorrowTitle>Borrow from {0}</RP_W_Loan_BorrowTitle>
+  <RP_W_Loan_InputAmount>Enter amount (range: 100 - {0} @silver):</RP_W_Loan_InputAmount>
+  <RP_W_Loan_Cancel>Cancel</RP_W_Loan_Cancel>
+  <RP_W_Loan_Confirm>Confirm</RP_W_Loan_Confirm>
+  <RP_W_Loan_InvalidAmount>Please enter a valid loan amount (at least 100 and no more than the cap).</RP_W_Loan_InvalidAmount>
+
+  <!-- ==================== Stock Window ==================== -->
+  <RP_W_Stock_Tab>Stock Trading</RP_W_Stock_Tab>
+  <RP_W_Stock_Title>RimPay Stock Exchange</RP_W_Stock_Title>
+  <RP_W_Stock_BalanceHint>Digital treasury balance: {0} @silver</RP_W_Stock_BalanceHint>
+  <RP_W_Stock_ColCode>Code</RP_W_Stock_ColCode>
+  <RP_W_Stock_ColName>Name</RP_W_Stock_ColName>
+  <RP_W_Stock_ColPrice>Price</RP_W_Stock_ColPrice>
+  <RP_W_Stock_ColChange>Change</RP_W_Stock_ColChange>
+  <RP_W_Stock_ColHeld>Held</RP_W_Stock_ColHeld>
+  <RP_W_Stock_ColValue>Value</RP_W_Stock_ColValue>
+  <RP_W_Stock_ColProfit>P/L</RP_W_Stock_ColProfit>
+  <RP_W_Stock_NoData>No stock data available.</RP_W_Stock_NoData>
+  <RP_W_Stock_TipSectors>Sector: {0}  |  Base volatility: {1}%</RP_W_Stock_TipSectors>
+  <RP_W_Stock_TipFaction>Bound faction: {0} (goodwill: {1} / {2})</RP_W_Stock_TipFaction>
+  <RP_W_Stock_TipPrice>Current price: {0} @silver  |  Today's change: {1}</RP_W_Stock_TipPrice>
+  <RP_W_Stock_TipHeld>Treasury holdings: {0} shares  |  Market value: {1} @silver  |  Position P/L: {2} @silver</RP_W_Stock_TipHeld>
+  <RP_W_Stock_TipHeadline>&lt;b&gt;[Latest Move Explained]&lt;/b&gt;\n{0}</RP_W_Stock_TipHeadline>
+  <RP_W_Stock_TipNoEvent>&lt;i&gt;[Recent News] Trading proceeds normally; no sudden events.&lt;/i&gt;</RP_W_Stock_TipNoEvent>
+  <RP_W_Stock_Detail>Details</RP_W_Stock_Detail>
+  <RP_W_Stock_DetailTitle>{0}  {1}</RP_W_Stock_DetailTitle>
+  <RP_W_Stock_DetailInfo>Current price: {0} @silver  |  Today's change: {1}  |  Treasury holdings: {2} shares  |  P/L: {3} @silver</RP_W_Stock_DetailInfo>
+  <RP_W_Stock_DetailFaction>  |  Goodwill: {0} ({1})</RP_W_Stock_DetailFaction>
+  <RP_W_Stock_TradeTitle>&lt;b&gt;Trade:&lt;/b&gt; (treasury available: {0} @silver)</RP_W_Stock_TradeTitle>
+  <RP_W_Stock_Buy>Buy</RP_W_Stock_Buy>
+  <RP_W_Stock_BuyDone>[RimPay Stocks] Bought {1} shares of {2} at {0} @silver/share, costing {3} @silver total.</RP_W_Stock_BuyDone>
+  <RP_W_Stock_BuyNoFunds>Digital treasury funds are insufficient to buy that many shares!</RP_W_Stock_BuyNoFunds>
+  <RP_W_Stock_Sell>Sell</RP_W_Stock_Sell>
+  <RP_W_Stock_SellDone>[RimPay Stocks] Sold {1} shares of {2} at {0} @silver/share, receiving {3} @silver.</RP_W_Stock_SellDone>
+  <RP_W_Stock_SellNoHeld>Insufficient holdings to sell that amount!</RP_W_Stock_SellNoHeld>
+  <RP_W_Stock_NewsTitle>Recent Market Moves and News Feed:</RP_W_Stock_NewsTitle>
+  <RP_W_Stock_NoNews>The market is calm; no sudden-event briefs.</RP_W_Stock_NoNews>
+  <RP_W_Stock_Back>Back</RP_W_Stock_Back>
+  <RP_W_Stock_NoHistory>Not enough history to draw the candlestick chart.</RP_W_Stock_NoHistory>
+  <RP_W_Stock_ChartHigh>High {0}</RP_W_Stock_ChartHigh>
+  <RP_W_Stock_ChartLow>Low {0}</RP_W_Stock_ChartLow>
+  <RP_W_Stock_Cat_Tech>Tech and Digital</RP_W_Stock_Cat_Tech>
+  <RP_W_Stock_Cat_Entertainment>Entertainment</RP_W_Stock_Cat_Entertainment>
+  <RP_W_Stock_Cat_Food>Emergency Food</RP_W_Stock_Cat_Food>
+  <RP_W_Stock_Cat_Agri>Agriculture</RP_W_Stock_Cat_Agri>
+  <RP_W_Stock_Cat_Ranch>Ranching</RP_W_Stock_Cat_Ranch>
+  <RP_W_Stock_Cat_ECom>Orbital E-Commerce</RP_W_Stock_Cat_ECom>
+  <RP_W_Stock_Cat_Media>Media</RP_W_Stock_Cat_Media>
+  <RP_W_Stock_Cat_Sports>Sports</RP_W_Stock_Cat_Sports>
+  <RP_W_Stock_Cat_Medical>Pharma and Biotech</RP_W_Stock_Cat_Medical>
+  <RP_W_Stock_Cat_Arms>Defense</RP_W_Stock_Cat_Arms>
+  <RP_W_Stock_Cat_Mining>Mining and Energy</RP_W_Stock_Cat_Mining>
+  <RP_W_Stock_Cat_Finance>Speculative Funds</RP_W_Stock_Cat_Finance>
+  <RP_W_Stock_Cat_Quantum>Quantum Net</RP_W_Stock_Cat_Quantum>
+  <RP_W_Stock_Cat_Faction>Faction Stock</RP_W_Stock_Cat_Faction>
+  <RP_W_Stock_Cat_Misc>Misc</RP_W_Stock_Cat_Misc>
+
+  <!-- ==================== Wallet Window ==================== -->
+  <RP_W_Wallet_Title>{0}'s RimPay Digital Wallet</RP_W_Wallet_Title>
+  <RP_W_Wallet_TreasuryRef>Digital treasury balance (reference): {0} @silver</RP_W_Wallet_TreasuryRef>
+  <RP_W_Wallet_Balance>Current balance: {0} @silver</RP_W_Wallet_Balance>
+  <RP_W_Wallet_RecordsTitle>&lt;b&gt;Recent transactions (in @silver):&lt;/b&gt;</RP_W_Wallet_RecordsTitle>
+  <RP_W_Wallet_NoRecords>No transaction records.</RP_W_Wallet_NoRecords>
+  <RP_W_Wallet_RecordLine>&lt;color={0}&gt;{1}&lt;/color&gt;</RP_W_Wallet_RecordLine>
+  <RP_W_Wallet_BonusTitle>&lt;b&gt;Issue Bonus (from digital treasury):&lt;/b&gt;</RP_W_Wallet_BonusTitle>
+  <RP_W_Wallet_BonusBtn>Issue</RP_W_Wallet_BonusBtn>
+  <RP_W_Wallet_BonusDone>Issued a {1} @silver bonus to {0}!</RP_W_Wallet_BonusDone>
+  <RP_W_Wallet_BonusNoFunds>Digital treasury balance is insufficient to issue a bonus!</RP_W_Wallet_BonusNoFunds>
+  <RP_W_Wallet_FineTitle>&lt;b&gt;Confiscate Funds (to digital treasury):&lt;/b&gt;</RP_W_Wallet_FineTitle>
+  <RP_W_Wallet_FineBtn>Confiscate</RP_W_Wallet_FineBtn>
+  <RP_W_Wallet_FineFullBtn>All</RP_W_Wallet_FineFullBtn>
+  <RP_W_Wallet_FineNoFunds>{0} is penniless; nothing to confiscate.</RP_W_Wallet_FineNoFunds>
+  <RP_W_Wallet_FineDone>Confiscated {1} @silver from {0} into the digital treasury!</RP_W_Wallet_FineDone>
+
+  <!-- ==================== Colony Finance Window ==================== -->
+  <RP_W_Finance_Title>RimPay Colony Finance Overview</RP_W_Finance_Title>
+  <RP_W_Finance_AssetTitle>&lt;b&gt;Asset Overview:&lt;/b&gt;</RP_W_Finance_AssetTitle>
+  <RP_W_Finance_AssetPhysical>  Physical silver (counts toward wealth): {0}</RP_W_Finance_AssetPhysical>
+  <RP_W_Finance_AssetTreasury>  Digital treasury (not counted): {0}</RP_W_Finance_AssetTreasury>
+  <RP_W_Finance_AssetTotal>  Total liquid assets: {0}</RP_W_Finance_AssetTotal>
+  <RP_W_Finance_RosterTitle>&lt;b&gt;Colonist Finance Roster (in @silver):&lt;/b&gt;</RP_W_Finance_RosterTitle>
+  <RP_W_Finance_NoColonists>No colonists.</RP_W_Finance_NoColonists>
+  <RP_W_Finance_RosterLine>  {0}  —  Balance: {1} @silver  |  Est. daily wage: {2} @silver</RP_W_Finance_RosterLine>
+  <RP_W_Finance_Footnote>&lt;i&gt;Tip: select a colonist and click the wallet icon on the bottom bar to view their transaction history.&lt;/i&gt;</RP_W_Finance_Footnote>
+</LanguageData>

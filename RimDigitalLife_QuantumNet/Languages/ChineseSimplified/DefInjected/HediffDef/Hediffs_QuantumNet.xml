@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<QuantumNet_RimSeek_HighSpeed.label>RimSeek 智算辅助（畅享）</QuantumNet_RimSeek_HighSpeed.label>
+	<QuantumNet_RimSeek_HighSpeed.description>通过高速畅享包接入 RimSeek AI 智算，全局工作效率得到提升。</QuantumNet_RimSeek_HighSpeed.description>
+	<QuantumNet_RimSeek_Infinite.label>RimSeek 深度协作</QuantumNet_RimSeek_Infinite.label>
+	<QuantumNet_RimSeek_Infinite.description>通过量子无限包接入 RimSeek 深度协作，工作效率大幅提升且专注不易分心。</QuantumNet_RimSeek_Infinite.description>
+	<QuantumNet_RimSeek_Congested.label>RimSeek 智算（拥堵）</QuantumNet_RimSeek_Congested.label>
+	<QuantumNet_RimSeek_Congested.description>量子网络拥堵中，RimSeek 在线任务降级运行，效率延长且大打折扣。</QuantumNet_RimSeek_Congested.description>
+</LanguageData>

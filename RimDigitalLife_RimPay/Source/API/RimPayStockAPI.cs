@@ -37,7 +37,7 @@ namespace RimDigitalLife_RimPay
             if (stocks == null || stocks.Count == 0) return "";
             var top = stocks.OrderByDescending(s => s.changePercent).FirstOrDefault();
             if (top == null || top.changePercent <= 0) return "";
-            return $"{top.code} ({top.name}) +{top.changePercent:F1}%";
+            return $"{top.code} ({top.name.Translate()}) +{top.changePercent:F1}%";
         }
 
         // 获取领跌股票摘要（如 "$SCOM (星链通信) -15.0%"）
@@ -48,7 +48,7 @@ namespace RimDigitalLife_RimPay
             if (stocks == null || stocks.Count == 0) return "";
             var worst = stocks.OrderBy(s => s.changePercent).FirstOrDefault();
             if (worst == null || worst.changePercent >= 0) return "";
-            return $"{worst.code} ({worst.name}) {worst.changePercent:F1}%";
+            return $"{worst.code} ({worst.name.Translate()}) {worst.changePercent:F1}%";
         }
 
         // 今日大盘一句话速报（供弹幕、量子网络日报引用）
@@ -62,14 +62,14 @@ namespace RimDigitalLife_RimPay
             string gainer = GetTopGainerSummary();
             string loser = GetTopLoserSummary();
             string tone = GetMarketTone();
-            string toneDesc = tone == "bull" ? "大盘普涨" : tone == "bear" ? "大盘承压" : "大盘震荡";
+            string toneDesc = tone == "bull" ? (string)"RP_Macro_ToneBull".Translate() : tone == "bear" ? (string)"RP_Macro_ToneBear".Translate() : (string)"RP_Macro_ToneNeutral".Translate();
 
             if (!string.IsNullOrEmpty(gainer) && !string.IsNullOrEmpty(loser))
-                return $"{toneDesc}：领涨 {gainer}，领跌 {loser}";
+                return "RP_Macro_BriefBoth".Translate(toneDesc, gainer, loser);
             if (!string.IsNullOrEmpty(gainer))
-                return $"{toneDesc}：领涨 {gainer}";
+                return "RP_Macro_BriefGainer".Translate(toneDesc, gainer);
             if (!string.IsNullOrEmpty(loser))
-                return $"{toneDesc}：领跌 {loser}";
+                return "RP_Macro_BriefLoser".Translate(toneDesc, loser);
             return toneDesc;
         }
 
@@ -82,7 +82,7 @@ namespace RimDigitalLife_RimPay
             var comp = Current.Game?.GetComponent<GameComponent_RimPay>();
             var s = comp?.GetStockPrices()?.FirstOrDefault(x => x.code == code);
             if (s == null) return false;
-            name = s.name;
+            name = s.name.Translate();
             price = s.price;
             changePercent = s.changePercent;
             return true;
@@ -97,7 +97,7 @@ namespace RimDigitalLife_RimPay
             var best = stocks.OrderByDescending(s => s.changePercent).FirstOrDefault();
             if (best == null) return "";
             string sign = best.changePercent >= 0 ? "+" : "";
-            return $"{best.name} {sign}{best.changePercent:F1}%";
+            return $"{best.name.Translate()} {sign}{best.changePercent:F1}%";
         }
     }
 }

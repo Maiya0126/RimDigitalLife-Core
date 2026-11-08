@@ -109,7 +109,7 @@ namespace RimDigitalLife_QuantumNet
             {
                 QuantumNetProvider.Local, new QuantumNetProviderDef
                 {
-                    Label = "本地模型 (Ollama / LM Studio)",
+                    Label = "Local Model (Ollama / LM Studio)",
                     EndpointUrl = "http://127.0.0.1:11434/v1/chat/completions",
                     DefaultModel = "qwen2.5:7b",
                     RequiresApiKey = false

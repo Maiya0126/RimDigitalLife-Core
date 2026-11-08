@@ -25,17 +25,40 @@ namespace RimDigitalLife_RimPay
         public static void Postfix(Pawn ingester, TargetIndex ingestibleInd, Toil __result)
         {
             if (__result == null || ingester == null) return;
-            __result.AddFinishAction(delegate
+
+            // 委托执行后自移除：Toil.Cleanup 执行 finishActions 后不清空列表，
+            // 而 JobDriver_Ingest 吃尸体（Corpse）时会 JumpIf 跳回咀嚼、二次进入
+            // 同一个 FinalizeIngest toil 实例 → finishActions 被执行两次 = 玩家
+            // 反馈的"一次消费扣费两次"。自移除保证每个 toil 实例只扣一次。
+            // （另注意：JobDriver_FoodFeedPatient 会整体覆写 toil.finishActions，
+            //   那条路径本就不会产生我们的委托，无需处理。）
+            Action chargeAction = null;
+            chargeAction = delegate
             {
+                try
+                {
+                    __result.finishActions?.Remove(chargeAction);
+                }
+                catch { }
                 ChargeMealFee(ingester, ingestibleInd);
-            });
+            };
+            __result.AddFinishAction(chargeAction);
         }
 
         // 真正"吃完"时执行扣费（此时食物已被消耗，CurJob 必然正确）
+        // 防重入：同一 tick 内同一小人只允许扣一次餐费（兜底未知 toil 重入路径）
+        private static int lastChargedTick = -1;
+        private static int lastChargedPawnId = -1;
+
         private static void ChargeMealFee(Pawn ingester, TargetIndex ingestibleInd)
         {
             if (ingester == null || ingester.Dead || !ingester.IsColonistPlayerControlled) return;
             if (ingester.jobs?.curJob == null) return;
+
+            int nowTick = Find.TickManager.TicksGame;
+            if (nowTick == lastChargedTick && ingester.thingIDNumber == lastChargedPawnId) return;
+            lastChargedTick = nowTick;
+            lastChargedPawnId = ingester.thingIDNumber;
 
             GameComponent_RimPay comp = Current.Game.GetComponent<GameComponent_RimPay>();
             if (comp == null) return;
@@ -73,21 +96,21 @@ namespace RimDigitalLife_RimPay
             if (balance >= cost)
             {
                 // 扣费并回流国库
-                comp.ModifyBalance(ingester, -cost, "用餐费用");
-                comp.ModifyTreasury(cost, "餐费");
+                comp.ModifyBalance(ingester, -cost, "RP_Reason_MealCost");
+                comp.ModifyTreasury(cost, "RP_Reason_MealIncome");
                 if (Prefs.DevMode)
                 {
-                    Verse.Log.Message($"[RimPay 餐费] {ingester.LabelShort} 用餐扣费 {cost} @银 ({food.LabelShort})，钱包余额 {balance - cost}。");
+                    Verse.Log.Message("RP_Meal_DevLogPaid".Translate(ingester.LabelShort, cost, food.LabelShort, balance - cost));
                 }
             }
             else
             {
                 // 钱包余额不足以支付餐费，吃上"救济粮"
-                comp.ModifyBalance(ingester, -balance, "救济粮");
-                comp.ModifyTreasury(balance, "餐费(救济)");
+                comp.ModifyBalance(ingester, -balance, "RP_Reason_ReliefMeal");
+                comp.ModifyTreasury(balance, "RP_Reason_MealRelief");
                 if (Prefs.DevMode)
                 {
-                    Verse.Log.Message($"[RimPay 餐费] {ingester.LabelShort} 钱包不足，吃救济粮 (支付 {balance} @银, 应付 {cost})。");
+                    Verse.Log.Message("RP_Meal_DevLogRelief".Translate(ingester.LabelShort, balance, cost));
                 }
             }
         }

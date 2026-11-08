@@ -25,8 +25,8 @@ namespace RimDigitalLife_QuantumNet
                 {
                     Find.WindowStack.Add(new Window_QuantumNetConsole(console.Map));
                 },
-                defaultLabel = "量子网络",
-                defaultDesc = "打开量子网络控制台：查看网络覆盖与殖民者流量/算力套餐。",
+                defaultLabel = "QN_Gizmo_Label".Translate(),
+                defaultDesc = "QN_Gizmo_Desc".Translate(),
                 icon = ContentFinder<UnityEngine.Texture2D>.Get("UI/Icons/QuantumNet_Icon", false) ?? BaseContent.BadTex,
                 hotKey = KeyBindingDefOf.Misc2
             };

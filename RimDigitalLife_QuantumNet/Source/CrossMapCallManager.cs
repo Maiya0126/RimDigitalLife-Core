@@ -79,8 +79,8 @@ namespace RimDigitalLife_QuantumNet
         // 基地小人「接到来电」：RimTalk 生成基地小人的回应气泡
         private static void TriggerCall(Pawn caller, Pawn recipient, Map home)
         {
-            string biomeName = "荒野";
-            string distanceText = "？";
+            string biomeName = "QN_Call_Wilderness".Translate();
+            string distanceText = "?";
             bool found = false;
 
             foreach (Caravan c in Find.WorldObjects.Caravans)
@@ -106,18 +106,17 @@ namespace RimDigitalLife_QuantumNet
 
             if (!found)
             {
-                biomeName = "未知区域";
-                distanceText = "远方的";
+                biomeName = "QN_Call_UnknownArea".Translate();
             }
 
-            // 基地小人视角：接到来电并回应（RimTalk 必定处理地图上的小人）
+            // AI prompt（发给 LLM，不翻译键化——中文 prompt 对中文模型效果最好；英文玩家同样可理解生成结果）
             string userPrompt = $"你的好友{caller.LabelShort}正跟随远征队，在距离主基地 {distanceText} 公里的「{biomeName}」中。"
                 + $"刚才{caller.LabelShort}给你打来了一个跨地图视频电话，信号有些延迟，{caller.LabelShort}说非常想念你和大家，聊了远征队的近况。"
                 + $"请以{recipient.LabelShort}的口吻，说出你在通话中对{caller.LabelShort}说的话（关心、叮嘱、分享基地近况）。";
 
-            bool ok = RimTalkBridge.TriggerDialogue(recipient, recipient, "跨地图通话", userPrompt, false, AssistantPersona.Rimi);
+            bool ok = RimTalkBridge.TriggerDialogue(recipient, recipient, "QN_Call_Title".Translate(), userPrompt, false, AssistantPersona.Rimi);
 
-            Verse.Log.Message($"[量子网络] 📡 [远征队·{caller.LabelShort} ➔ 基地·{recipient.LabelShort}]: 跨地图通话已接通 {(ok ? "成功" : "队列失败")}");
+            Verse.Log.Message("[QuantumNet] " + "QN_Call_Log".Translate(caller.LabelShort, recipient.LabelShort, ok ? "QN_Call_Ok".Translate() : "QN_Call_QueueFail".Translate()));
         }
 
         // 开发者模式测试入口（绕过冷却/套餐/覆盖检查，直接走完整通话链路）

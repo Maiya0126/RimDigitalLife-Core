@@ -4,6 +4,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <!-- 游戏版本目标：17 = 编译到 1.7 (Waylith)，16 = 编译到 1.6。用法：msbuild /p:GameVer=16 -->
+    <GameVer Condition=" '$(GameVer)' == '' ">17</GameVer>
     <ProjectGuid>{3F5C8E41-9A2D-4B7E-A6C4-2D8F1B5E7A09}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -12,6 +14,26 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <!-- 按版本选择引用库根目录 -->
+    <RW17Root Condition=" '$(GameVer)' == '16' ">..\_refs16\</RW17Root>
+    <RW17Root Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\</RW17Root>
+    <HarmonyDll Condition=" '$(GameVer)' == '16' ">..\..\..\Games\steamapps\workshop\content\294100\2009463077\1.6\Assemblies\0Harmony.dll</HarmonyDll>
+    <HarmonyDll Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll</HarmonyDll>
+    <CoreDll Condition=" '$(GameVer)' == '16' ">..\RimDigitalLife\bin\Release16\RimDigitalLife.dll</CoreDll>
+    <CoreDll Condition=" '$(GameVer)' != '16' ">..\RimDigitalLife\bin\Release\RimDigitalLife.dll</CoreDll>
+    <!-- 1.7 (Waylith)：Unity 类型全部在 UnityStubs.dll；1.6：各模块独立 DLL -->
+    <RefUnityEngine Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.dll</RefUnityEngine>
+    <RefUnityEngine Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefUnityEngine>
+    <RefCoreModule Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.CoreModule.dll</RefCoreModule>
+    <RefCoreModule Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefCoreModule>
+    <RefIMGUIModule Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.IMGUIModule.dll</RefIMGUIModule>
+    <RefIMGUIModule Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefIMGUIModule>
+    <RefTextRendering Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.TextRenderingModule.dll</RefTextRendering>
+    <RefTextRendering Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefTextRendering>
+    <RefUIModule Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.UI.dll</RefUIModule>
+    <RefUIModule Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefUIModule>
+    <RefUnityWebRequest Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.UnityWebRequestModule.dll</RefUnityWebRequest>
+    <RefUnityWebRequest Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefUnityWebRequest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +44,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' And '$(GameVer)' == '16' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release16\</OutputPath>
+    <DefineConstants>TRACE;RW_1_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' And '$(GameVer)' != '16' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,40 +62,40 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\Games\steamapps\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>$(HarmonyDll)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(RW17Root)Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RimDigitalLife">
-      <HintPath>..\RimDigitalLife\bin\Release\RimDigitalLife.dll</HintPath>
+      <HintPath>$(CoreDll)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RefUnityEngine)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RefCoreModule)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RefIMGUIModule)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RefTextRendering)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RefUIModule)</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RefUnityWebRequest)</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -100,9 +130,16 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@echo off
-:: Deploy via PowerShell (handles Chinese/Unicode paths correctly)
-powershell -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)deploy.ps1" "$(TargetDir)$(TargetName).dll"
+    <!-- 双版本部署：模组根目录版本文件夹（游戏 InitLoadFolders 机制）。不放 Assemblies\1.x 子目录（递归扫描会双载冲突）。 -->
+    <PostBuildEvent Condition=" '$(GameVer)' == '16' ">@echo off
+set MODDIR=D:\Games\steamapps\common\RimWorld\Mods\MaiyaMod02C Rim Digital Life - Quantum Net Expansion 量子网络拓展
+if not exist "%MODDIR%\1.6\Assemblies" mkdir "%MODDIR%\1.6\Assemblies"
+copy /Y "$(TargetDir)$(TargetName).dll" "%MODDIR%\1.6\Assemblies\"
+</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(GameVer)' != '16' ">@echo off
+set MODDIR=D:\Games\steamapps\common\RimWorld\Mods\MaiyaMod02C Rim Digital Life - Quantum Net Expansion 量子网络拓展
+if not exist "%MODDIR%\1.7\Assemblies" mkdir "%MODDIR%\1.7\Assemblies"
+copy /Y "$(TargetDir)$(TargetName).dll" "%MODDIR%\1.7\Assemblies\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

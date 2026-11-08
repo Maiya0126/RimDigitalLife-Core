@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <Apparel_Nokirim.label>Nokirim</Apparel_Nokirim.label>
+  <Apparel_Nokirim.description>An ancient communication artifact made by Nokirim.\n\nFeatures:\n- Basic communication\n- Physical defense (it is genuinely that tough)</Apparel_Nokirim.description>
+
+  <Apparel_iShen_Phone.label>iShen Pro Max</Apparel_iShen_Phone.label>
+  <Apparel_iShen_Phone.description>The annual flagship smartphone by iShen Tech.</Apparel_iShen_Phone.description>
+
+  <Apparel_iShen_Pad.label>iShen Pad Pro</Apparel_iShen_Pad.label>
+  <Apparel_iShen_Pad.description>A productivity tool from iShen Tech.</Apparel_iShen_Pad.description>
+
+  <Apparel_iShen_Watch.label>iShen Watch Ultra</Apparel_iShen_Watch.label>
+  <Apparel_iShen_Watch.description>The flagship smartwatch by iShen Tech.</Apparel_iShen_Watch.description>
+
   <Apparel_Rimdle.label>Rimdle Paperwhite</Apparel_Rimdle.label>
   <Apparel_Rimdle.description>An e-ink device designed specifically for reading. Its screen is as soft as paper and extremely power-efficient.\n\nFeatures:\n- Learning Speed +20% (Knowledge is power)\n- Recreation Efficiency +10% (Reading novels is fun too)</Apparel_Rimdle.description>
 

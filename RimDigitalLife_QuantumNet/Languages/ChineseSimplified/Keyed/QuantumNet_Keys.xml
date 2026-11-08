@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<!-- ===== 通用 ===== -->
+	<QN_None>无</QN_None>
+	<QN_Yes>是</QN_Yes>
+	<QN_No>否</QN_No>
+	<QN_Testing>正在测试连接... (Testing...)</QN_Testing>
+
+	<!-- ===== Gizmo / 控制台 ===== -->
+	<QN_Gizmo_Label>量子网络</QN_Gizmo_Label>
+	<QN_Gizmo_Desc>打开量子网络控制台：查看网络覆盖与殖民者流量/算力套餐。</QN_Gizmo_Desc>
+	<QN_Console_Title>量子网络控制台 (Quantum Net Console)</QN_Console_Title>
+	<QN_Console_Covered>● 当前地图已接入量子网络 (星链覆盖 100%)</QN_Console_Covered>
+	<QN_Console_NoCoverage>● 当前地图无网络覆盖 - 请建造并通电通讯台</QN_Console_NoCoverage>
+	<QN_Console_Event>⚡ 运营商事件：{0}</QN_Console_Event>
+	<QN_Console_Pricing>套餐价格 (每 {0} 天):  高速畅享包 {1} @银  |  量子无限包 {2} @银  |  本地流量包 免费</QN_Console_Pricing>
+	<QN_Console_NoRimPay>未检测到 RimPay 模组：付费套餐不可用，将自动降级为本地流量包。</QN_Console_NoRimPay>
+	<QN_Console_Plans>殖民者套餐</QN_Console_Plans>
+	<QN_Console_Current>当前: {0}</QN_Console_Current>
+	<QN_Console_Footer>量子网络控制台  [{0}]</QN_Console_Footer>
+
+	<!-- ===== 套餐 ===== -->
+	<QN_Plan_Local>本地流量包</QN_Plan_Local>
+	<QN_Plan_HighSpeed>高速畅享包</QN_Plan_HighSpeed>
+	<QN_Plan_Infinite>量子无限包</QN_Plan_Infinite>
+	<QN_Plan_Reason>量子网络套餐</QN_Plan_Reason>
+	<QN_Msg_NoCoverage>[QuantumNet] 当前地图没有网络覆盖，无法订阅付费套餐。请建造并通电通讯台。</QN_Msg_NoCoverage>
+	<QN_Msg_Subscribed>[QuantumNet] {0} 已订阅「{1}」({2} @银/{3}天)。</QN_Msg_Subscribed>
+	<QN_Msg_RenewFail>[QuantumNet] {0} 的「{1}」已到期且续费失败，已降级为本地流量包。</QN_Msg_RenewFail>
+	<QN_Log_AutoPlan>[QuantumNet] {0} 自动选购「{1}」({2} @银)。</QN_Log_AutoPlan>
+	<QN_Log_Renewed>[QuantumNet] {0} 已自动续费「{1}」。</QN_Log_Renewed>
+	<QN_Log_Expired>[QuantumNet] {0} 的「{1}」已到期（未开启自动续费），已降级为本地流量包。</QN_Log_Expired>
+
+	<!-- ===== 运营商事件 ===== -->
+	<QN_Event_Storm_Label>星链风暴</QN_Event_Storm_Label>
+	<QN_Event_Storm_Desc>星链通信 (StarCom) 的卫星阵列遭遇太阳风暴，当前地图量子网络暂时中断！\n网络恢复前：RimSeek 智算失效、付费套餐暂停结算、跨地图通话与网购不可用。</QN_Event_Storm_Desc>
+	<QN_Event_Congest_Label>网络拥堵</QN_Event_Congest_Label>
+	<QN_Event_Congest_Desc>星云算力 (NebulaCloud) 数据中心过载，量子网络大面积拥堵！\n网络恢复前：RimSeek 智算效率大幅下降。</QN_Event_Congest_Desc>
+	<QN_Event_Sale_Label>赛博百货大促</QN_Event_Sale_Label>
+	<QN_Event_Sale_Desc>赛博百货 (CyberBazaar) 年度大促开启！\n活动期间：私有网购全部半价，小人网购心情加成提升。</QN_Event_Sale_Desc>
+	<QN_Event_Carto_Label>卡带新品发售</QN_Event_Carto_Label>
+	<QN_Event_Carto_Desc>游戏卡带发行商 (CartoBoard) 发布了年度大作！\n活动期间：小人们网购热情高涨（触发概率翻倍）。</QN_Event_Carto_Desc>
+	<QN_Event_Calib_Label>深矿雷达校准</QN_Event_Calib_Label>
+	<QN_Event_Calib_Desc>深矿雷达 (MineScan) 完成年度校准，今日预测精度大幅提升。</QN_Event_Calib_Desc>
+	<QN_Event_Promo_Label>套餐半价促销</QN_Event_Promo_Label>
+	<QN_Event_Promo_Desc>量子网络运营商联合促销！\n活动期间：所有付费套餐新订/续费半价。</QN_Event_Promo_Desc>
+	<QN_Event_Triggered>触发运营商事件【{0}】，持续 {1} 天。</QN_Event_Triggered>
+	<QN_Event_Ended>运营商事件【{0}】已结束。</QN_Event_Ended>
+	<QN_Event_Msg>[QuantumNet] 运营商事件：{0}</QN_Event_Msg>
+	<QN_Event_LetterTitle>运营商事件：{0}</QN_Event_LetterTitle>
+	<QN_Event_DaysLeft>{0} (剩 {1} 天)</QN_Event_DaysLeft>
+
+	<!-- ===== 虚拟供应商 ===== -->
+	<QN_Provider_StarCom_Name>星链通信 (StarCom)</QN_Provider_StarCom_Name>
+	<QN_Provider_StarCom_Role>量子网络星链覆盖提供商</QN_Provider_StarCom_Role>
+	<QN_Provider_NebulaCloud_Name>星云算力 (NebulaCloud)</QN_Provider_NebulaCloud_Name>
+	<QN_Provider_NebulaCloud_Role>云算力与 RimSeek 智算服务商</QN_Provider_NebulaCloud_Role>
+	<QN_Provider_CartoBoard_Name>游戏卡带发行商 (CartoBoard)</QN_Provider_CartoBoard_Name>
+	<QN_Provider_CartoBoard_Role>数字娱乐内容与游戏卡带供应商</QN_Provider_CartoBoard_Role>
+	<QN_Provider_CyberBazaar_Name>赛博百货 (CyberBazaar)</QN_Provider_CyberBazaar_Name>
+	<QN_Provider_CyberBazaar_Role>虚拟网购与数字商品平台</QN_Provider_CyberBazaar_Role>
+	<QN_Provider_MineScan_Name>深矿雷达 (MineScan)</QN_Provider_MineScan_Name>
+	<QN_Provider_MineScan_Role>云端深矿雷达与地质预测服务商</QN_Provider_MineScan_Role>
+
+	<!-- ===== 网络状态 / 日报 ===== -->
+	<QN_Status_Congested>网络拥堵</QN_Status_Congested>
+	<QN_Status_Outage>网络中断</QN_Status_Outage>
+	<QN_Status_Normal>网络正常</QN_Status_Normal>
+	<QN_Report_Header>&lt;b&gt;今日量子网络播报&lt;/b&gt;\n</QN_Report_Header>
+	<QN_Report_Status>网络状态：{0}</QN_Report_Status>
+	<QN_Report_Event>运营商事件：{0}</QN_Report_Event>
+	<QN_Report_Weather>☁ 云端天气：{0}</QN_Report_Weather>
+	<QN_Report_CalibTag>【校准·高精度】</QN_Report_CalibTag>
+	<QN_Report_Mine>⛏ 深矿雷达：{0}</QN_Report_Mine>
+	<QN_Report_Tip>[智算] {0}</QN_Report_Tip>
+	<QN_Report_News>[新闻] {0}</QN_Report_News>
+	<QN_Report_Stock>[股市] {0}</QN_Report_Stock>
+	<QN_Report_LetterTitle>量子网络日报</QN_Report_LetterTitle>
+	<QN_Report_Fail>发送日报失败: {0}</QN_Report_Fail>
+	<QN_Topic_News>网络新闻：{0}</QN_Topic_News>
+	<QN_Topic_Weather>云端天气预测：{0}</QN_Topic_Weather>
+	<QN_Topic_Mine>深矿雷达预测：{0}</QN_Topic_Mine>
+	<QN_Topic_Tip>RimSeek 智算建议：{0}</QN_Topic_Tip>
+	<QN_Topic_Stock>边缘股市要闻：{0}</QN_Topic_Stock>
+	<QN_Topic_Chat>刚看了中午的量子网络日报。{0}，你们觉得呢？</QN_Topic_Chat>
+	<QN_Topic_Done>已让 {0} 通过 RimTalk 聊起今日网络资讯。</QN_Topic_Done>
+
+	<!-- ===== 健康提醒 ===== -->
+	<QN_Health_Bleeding>检测到你在持续流血！RimSeek 强烈建议尽快就医或自行包扎止血。</QN_Health_Bleeding>
+	<QN_Health_Tendable>你的身体有需要治疗的伤口或疾病，记得让医生处理一下。</QN_Health_Tendable>
+	<QN_Health_Pain>你正承受明显的疼痛，止痛或接受治疗会让你好受很多。</QN_Health_Pain>
+	<QN_Health_Tired>你快撑不住了！RimSeek 建议马上去床上好好睡一觉。</QN_Health_Tired>
+	<QN_Health_Hungry>你快饿坏了，记得吃点东西补充营养。</QN_Health_Hungry>
+	<QN_Health_Msg>[健康提醒] RimSeek 提醒 {0}：{1}</QN_Health_Msg>
+
+	<!-- ===== 私有网购 ===== -->
+	<QN_Shop_Reason>私有网购·{0}</QN_Shop_Reason>
+	<QN_Shop_SaleTag>（大促半价）</QN_Shop_SaleTag>
+	<QN_Shop_Msg>[网购] {0} 用数字钱包在赛博百货购买了「{1}」{2}，花费 {3} @银，包裹已送达！</QN_Shop_Msg>
+	<QN_Shop_Item_Snack>零食大礼包</QN_Shop_Item_Snack>
+	<QN_Shop_Item_Toy>限量版玩具</QN_Shop_Item_Toy>
+	<QN_Shop_Item_Cart>游戏卡带</QN_Shop_Item_Cart>
+	<QN_Shop_Item_Clothes>新款衣服</QN_Shop_Item_Clothes>
+	<QN_Shop_Item_Cosmetics>化妆品</QN_Shop_Item_Cosmetics>
+	<QN_Shop_Item_Skin>虚拟主题皮肤</QN_Shop_Item_Skin>
+
+	<!-- ===== 直播打赏 ===== -->
+	<QN_Tip_Reason>看直播打赏</QN_Tip_Reason>
+	<QN_Tip_NoMoney>[直播] {0} 正在看玩家直播，可惜钱包空空，无法打赏。</QN_Tip_NoMoney>
+	<QN_Tip_Did>[直播] {0} 正在观看玩家直播，打赏了 {1} @银 支持主播！</QN_Tip_Did>
+	<QN_Tip_Cheer>[直播] {0} 正在观看玩家直播，为主播加油！</QN_Tip_Cheer>
+
+	<!-- ===== 跨地图通话 ===== -->
+	<QN_Call_Wilderness>荒野</QN_Call_Wilderness>
+	<QN_Call_UnknownArea>未知区域</QN_Call_UnknownArea>
+	<QN_Call_Title>跨地图通话</QN_Call_Title>
+	<QN_Call_Log>[远征队·{0} ➔ 基地·{1}]: 跨地图通话已接通 {2}</QN_Call_Log>
+	<QN_Call_Ok>成功</QN_Call_Ok>
+	<QN_Call_QueueFail>队列失败</QN_Call_QueueFail>
+
+	<!-- ===== 桥接日志 ===== -->
+	<QN_Bridge_RimPayWalletOk>RimPay 钱包桥初始化成功，套餐月租将从小人钱包自动扣除。</QN_Bridge_RimPayWalletOk>
+	<QN_Bridge_StockOk>RimPay 股市行情桥接成功，量子网络日报将播报运营商股票动态。</QN_Bridge_StockOk>
+	<QN_Bridge_InitFail>RimPay 桥初始化失败: {0}</QN_Bridge_InitFail>
+	<QN_Bridge_GetBalanceFail>读取 RimPay 余额失败: {0}</QN_Bridge_GetBalanceFail>
+	<QN_Bridge_ModifyBalanceFail>修改 RimPay 余额失败: {0}</QN_Bridge_ModifyBalanceFail>
+	<QN_Bridge_ModifyTreasuryFail>修改 RimPay 国库失败: {0}</QN_Bridge_ModifyTreasuryFail>
+	<QN_Bridge_RimTuberOk>RimTuber 桥初始化成功，可联动直播打赏。</QN_Bridge_RimTuberOk>
+	<QN_Bridge_RimTuberFail>RimTuber 桥初始化失败: {0}</QN_Bridge_RimTuberFail>
+	<QN_Err_NoTradable>未找到可转移给商船的任何</QN_Err_NoTradable>
+
+	<!-- ===== DebugAction 提示（开发者） ===== -->
+	<QN_Dbg_NoEvent>当前没有活动中的运营商事件。</QN_Dbg_NoEvent>
+	<QN_Dbg_Ended>已结束当前运营商事件。</QN_Dbg_Ended>
+	<QN_Dbg_NoActive>无活动事件</QN_Dbg_NoActive>
+	<QN_Dbg_Status>运营商事件状态：{0}</QN_Dbg_Status>
+	<QN_Dbg_NoHomeMap>没有玩家基地地图。</QN_Dbg_NoHomeMap>
+	<QN_Dbg_NoRimTalk>RimTalk 未安装或不可用，无法测试跨地图通话。</QN_Dbg_NoRimTalk>
+	<QN_Dbg_NoCaravan>当前没有远征队（caravan），无法测试跨地图通话。请先派出一支远征队。</QN_Dbg_NoCaravan>
+	<QN_Dbg_TestCall>已发起测试通话：[远征队·{0} ➔ 基地·{1}]，查看日志与 RimTalk 气泡。</QN_Dbg_TestCall>
+
+	<!-- ===== 设置页 ===== -->
+	<QN_Tab_General>常规设置 (General)</QN_Tab_General>
+	<QN_Tab_AI>AI 设置 (AI Network)</QN_Tab_AI>
+	<QN_Set_CoverageTitle>量子网络覆盖 (星链系)</QN_Set_CoverageTitle>
+	<QN_Set_EnableNet>启用量子网络</QN_Set_EnableNet>
+	<QN_Set_NeedConsole>需要通讯台 (通电通讯台 = 当前地图 100% 覆盖)</QN_Set_NeedConsole>
+	<QN_Set_MapBeacon>全图贸易信标 (任意地图只要有一个通电轨道贸易信标，全图物品即可贸易/发射)</QN_Set_MapBeacon>
+	<QN_Set_PlansTitle>流量/算力套餐</QN_Set_PlansTitle>
+	<QN_Set_Period>套餐计费周期: {0} 天 (1 象)</QN_Set_Period>
+	<QN_Set_HighPrice>高速畅享包: {0} @银/{1}天</QN_Set_HighPrice>
+	<QN_Set_InfPrice>量子无限包: {0} @银/{1}天</QN_Set_InfPrice>
+	<QN_Set_AutoPlan>套餐自动选购 (按余额/性格/远征需求/报销政策)</QN_Set_AutoPlan>
+	<QN_Set_WalletPay>月租从 RimPay 钱包自动扣费 (无 RimPay 则默认本地包)</QN_Set_WalletPay>
+	<QN_Set_Subsidy>报销政策: 由玩家买单，小人可直接订量子无限包 (无需自掏腰包)</QN_Set_Subsidy>
+	<QN_Set_HighTitle>高速畅享包功能</QN_Set_HighTitle>
+	<QN_Set_RimSeek>RimSeek 智算辅助 (全局工作 +10%、科研 +15%)</QN_Set_RimSeek>
+	<QN_Set_Health>RimSeek 健康提醒 (畅享/无限包，每天提醒小人注意健康)</QN_Set_Health>
+	<QN_Set_LiveTip>看直播打赏 (需 RimTuber 联动)</QN_Set_LiveTip>
+	<QN_Set_Hack>黑客破解敌人钱包 (+20% 收益)</QN_Set_Hack>
+	<QN_Set_Shop>私有网购 (虚拟产品)</QN_Set_Shop>
+	<QN_Set_InfTitle>量子无限包功能</QN_Set_InfTitle>
+	<QN_Set_DeepCoop>RimSeek 深度协作 (+20% 效率且防分心)</QN_Set_DeepCoop>
+	<QN_Set_CrossMap>RimTalk 跨地图视频通话 (需 RimTalk 联动)</QN_Set_CrossMap>
+	<QN_Set_CloudPredict>云端天气/深矿雷达预测 (需要 AI 网络智算)</QN_Set_CloudPredict>
+	<QN_Set_Version>当前模组版本: {0}</QN_Set_Version>
+
+	<!-- ===== AI 设置页 ===== -->
+	<QN_AI_Title>AI 网络智算 (QuantumNet AI)</QN_AI_Title>
+	<QN_AI_P2Promo1>[推荐] 建议注册并使用 Player2 软件，免费体验全部 AI 功能！</QN_AI_P2Promo1>
+	<QN_AI_P2Promo2>Player2 为本地免费桌面程序，无需 API Key；若已安装且正在运行，勾选 Player2 配置即可直接使用。</QN_AI_P2Promo2>
+	<QN_AI_P2Promo3>勾选的配置会按列表顺序从上到下依次尝试，失败或额度不足时自动切换下一个。</QN_AI_P2Promo3>
+	<QN_AI_EnableDesc>开启后，每日量子网络数据（天气/深矿/智算建议/新闻）由 AI 生成；全部配置失败时自动回退到默认。</QN_AI_EnableDesc>
+	<QN_AI_Enable>启用 AI 网络智算</QN_AI_Enable>
+	<QN_AI_Interval>请求最小间隔: {0} 小时 (避免刷爆)</QN_AI_Interval>
+	<QN_AI_ReportFreq>量子网络日报频次 (AI 生成：网络状态/天气/深矿/新闻)</QN_AI_ReportFreq>
+	<QN_AI_FreqOffSel>■ 关闭</QN_AI_FreqOffSel>
+	<QN_AI_FreqOff>关闭</QN_AI_FreqOff>
+	<QN_AI_Freq2Sel>■ 每 2 天</QN_AI_Freq2Sel>
+	<QN_AI_Freq2>每 2 天</QN_AI_Freq2>
+	<QN_AI_Freq1Sel>■ 每天</QN_AI_Freq1Sel>
+	<QN_AI_Freq1>每天</QN_AI_Freq1>
+	<QN_AI_FreqDesc>关闭 = 不请求 AI 也不发日报（省 token）；每天 12:00 按频次发送，需订阅量子无限包的殖民者。</QN_AI_FreqDesc>
+	<QN_AI_RimTalkCast>AI 网络资讯播报给 RimTalk 小人对话 (需 RimTalk)</QN_AI_RimTalkCast>
+	<QN_AI_RimTalkCastDesc>日报发出后，随机一名订阅量子无限包的殖民者会通过 RimTalk 聊起今日网络新闻/天气/深矿预测。</QN_AI_RimTalkCastDesc>
+	<QN_AI_Providers>供应商配置 (勾选启用，顺序=尝试顺序):</QN_AI_Providers>
+	<QN_AI_AddConfig>添加供应商配置 (+)</QN_AI_AddConfig>
+	<QN_AI_CfgDetail>配置详情:</QN_AI_CfgDetail>
+	<QN_AI_CfgProvider>供应商:</QN_AI_CfgProvider>
+	<QN_AI_CfgP2Hint>Player2 本地服务：无需 API Key，安装并运行 Player2 即可。</QN_AI_CfgP2Hint>
+	<QN_AI_CfgLocalHint>本地模型：未安装 Ollama 前会自动失败并切换下一个配置。</QN_AI_CfgLocalHint>
+	<QN_AI_CfgEndpoint>端点 URL (留空则用供应商默认):</QN_AI_CfgEndpoint>
+	<QN_AI_CfgModel>模型名称 (留空则用供应商默认):</QN_AI_CfgModel>
+	<QN_AI_CfgEnable>启用此配置</QN_AI_CfgEnable>
+	<QN_AI_CfgTest>测试连接 (Test Connection)</QN_AI_CfgTest>
+	<QN_AI_LiveTitle>量子网络实时状态 (Live Status)</QN_AI_LiveTitle>
+	<QN_AI_LiveDesc>实时显示 AI 当前生成并生效的网络数据，用于验证 AI 是否真正掌控量子网络。</QN_AI_LiveDesc>
+	<QN_AI_S_Toggle>AI 网络智算开关</QN_AI_S_Toggle>
+	<QN_AI_S_Status>网络状态 (networkStatus)</QN_AI_S_Status>
+	<QN_AI_S_Weather>云端天气 (cloudWeatherHint)</QN_AI_S_Weather>
+	<QN_AI_S_Mine>深矿雷达 (deepMineHint)</QN_AI_S_Mine>
+	<QN_AI_S_Tip>智算建议 (rimseekTip)</QN_AI_S_Tip>
+	<QN_AI_S_News>网络新闻 (newsText)</QN_AI_S_News>
+	<QN_AI_S_None>(暂无，需 AI 成功返回)</QN_AI_S_None>
+	<QN_AI_S_LastDay>最近请求日</QN_AI_S_LastDay>
+	<QN_AI_S_LastDayFmt>{0} (今日: {1})</QN_AI_S_LastDayFmt>
+	<QN_AI_S_HasResult>是否有 AI 结果</QN_AI_S_HasResult>
+	<QN_AI_S_Fails>连续失败次数</QN_AI_S_Fails>
+	<QN_AI_S_Cooldown>冷却中</QN_AI_S_Cooldown>
+	<QN_AI_S_InFlight>请求进行中</QN_AI_S_InFlight>
+	<QN_AI_S_LastError>最近错误</QN_AI_S_LastError>
+	<QN_AI_ForceBtn>立即请求一次 AI 网络数据 (Force Request)</QN_AI_ForceBtn>
+	<QN_AI_ForceDesc>点击上方按钮可绕过「每日一次」限制，立即让 AI 生成一组新数据并显示在上面，用于验证连接与 AI 掌控。</QN_AI_ForceDesc>
+	<QN_AI_JsonTitle>AI 网络 JSON 模板 (JSON Template)</QN_AI_JsonTitle>
+	<QN_AI_JsonDesc>该 JSON 指示 AI 每日返回的量子网络数据，可自由编辑；改乱后可一键还原默认。</QN_AI_JsonDesc>
+	<QN_AI_JsonSave>保存 JSON 模板 (Save)</QN_AI_JsonSave>
+	<QN_AI_JsonSaved>JSON 模板已保存。</QN_AI_JsonSaved>
+	<QN_AI_JsonReset>还原默认 JSON (Reset)</QN_AI_JsonReset>
+	<QN_AI_JsonResetDone>已还原默认 JSON 模板。</QN_AI_JsonResetDone>
+
+	<!-- ===== AI 请求提示 ===== -->
+	<QN_AI_NeedEnable>请先在 AI 设置页勾选「启用 AI 网络智算」后再试。</QN_AI_NeedEnable>
+	<QN_AI_NoConfig>未勾选任何供应商配置，无法请求。请先在下方勾选一个配置。</QN_AI_NoConfig>
+	<QN_AI_InFlight>已有请求进行中，请稍候...</QN_AI_InFlight>
+	<QN_AI_Forced>已发起强制请求，结果见上方状态面板与日志。</QN_AI_Forced>
+	<QN_AI_E_ConfigEmpty>配置为空，请先添加并选中一个供应商配置</QN_AI_E_ConfigEmpty>
+	<QN_AI_E_EndpointEmpty>端点 URL 为空 - 请填写端点 URL（或选择供应商自动填充）</QN_AI_E_EndpointEmpty>
+	<QN_AI_E_KeyEmpty>API Key 为空 - 该供应商需要 API Key</QN_AI_E_KeyEmpty>
+	<QN_AI_E_ModelEmpty>模型名称为空 - 请填写模型名称（例如 deepseek-chat / gpt-4o-mini）</QN_AI_E_ModelEmpty>
+	<QN_AI_E_NoBody>无法构造请求体</QN_AI_E_NoBody>
+	<QN_AI_E_Timeout>连接超时 (20s) - 可能是网络问题或端点 URL 错误</QN_AI_E_Timeout>
+	<QN_AI_E_Player2>Player2 桌面程序未启动或未就绪，请确认 Player2 正在运行后再试</QN_AI_E_Player2>
+	<QN_AI_E_LocalModel>本地模型服务未启动（Ollama / LM Studio 未运行或未监听 11434 端口）</QN_AI_E_LocalModel>
+	<QN_AI_E_NoConn>无法连接服务器，请检查网络与端点 URL</QN_AI_E_NoConn>
+	<QN_AI_E_BadRequest>请求格式错误：很可能是模型名称不对，请核对模型名</QN_AI_E_BadRequest>
+	<QN_AI_E_Auth>认证失败：API Key 无效或已过期</QN_AI_E_Auth>
+	<QN_AI_E_Forbidden>访问被拒绝：API Key 无权限或账户受限</QN_AI_E_Forbidden>
+	<QN_AI_E_NotFound>端点不存在：端点 URL 可能写错</QN_AI_E_NotFound>
+	<QN_AI_E_RateLimit>请求过频被限流，请稍后再试</QN_AI_E_RateLimit>
+	<QN_AI_E_Server>服务器错误：API 供应商暂时故障，稍后再试</QN_AI_E_Server>
+	<QN_AI_E_Body>服务器返回: {0}</QN_AI_E_Body>
+	<QN_AI_T_Connected>连接成功! 模型: {0} | AI 回复: {1}</QN_AI_T_Connected>
+	<QN_AI_T_ParseFail>已连接，但响应解析失败 (聊天功能可能仍可用)\n原始响应: {0}</QN_AI_T_ParseFail>
+	<QN_AI_E_Network>网络错误: {0} - 请检查网络连接</QN_AI_E_Network>
+	<QN_AI_E_Exception>异常 ({0}): {1}</QN_AI_E_Exception>
+	<QN_AI_NewsSuffix>今日发布最新动态。</QN_AI_NewsSuffix>
+	<QN_AI_RelatedPrefix>（相关方：{0}）</QN_AI_RelatedPrefix>
+</LanguageData>

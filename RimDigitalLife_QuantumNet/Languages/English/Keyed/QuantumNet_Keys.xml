@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<!-- ===== Common ===== -->
+	<QN_None>None</QN_None>
+	<QN_Yes>Yes</QN_Yes>
+	<QN_No>No</QN_No>
+	<QN_Testing>Testing connection... (Testing...)</QN_Testing>
+
+	<!-- ===== Gizmo / Console ===== -->
+	<QN_Gizmo_Label>Quantum Net</QN_Gizmo_Label>
+	<QN_Gizmo_Desc>Open the Quantum Net console: view network coverage and colonist data/compute plans.</QN_Gizmo_Desc>
+	<QN_Console_Title>Quantum Net Console</QN_Console_Title>
+	<QN_Console_Covered>● This map is connected to Quantum Net (Starlink coverage 100%)</QN_Console_Covered>
+	<QN_Console_NoCoverage>● No network coverage on this map - build and power a comms console</QN_Console_NoCoverage>
+	<QN_Console_Event>⚡ Carrier event: {0}</QN_Console_Event>
+	<QN_Console_Pricing>Plan pricing (per {0} days):  HighSpeed {1} @silver | Quantum Infinite {2} @silver | Local Free</QN_Console_Pricing>
+	<QN_Console_NoRimPay>RimPay mod not detected: paid plans unavailable, will auto-downgrade to Local plan.</QN_Console_NoRimPay>
+	<QN_Console_Plans>Colonist Plans</QN_Console_Plans>
+	<QN_Console_Current>Current: {0}</QN_Console_Current>
+	<QN_Console_Footer>Quantum Net Console  [{0}]</QN_Console_Footer>
+
+	<!-- ===== Plans ===== -->
+	<QN_Plan_Local>Local Data Plan</QN_Plan_Local>
+	<QN_Plan_HighSpeed>HighSpeed Plan</QN_Plan_HighSpeed>
+	<QN_Plan_Infinite>Quantum Infinite Plan</QN_Plan_Infinite>
+	<QN_Plan_Reason>Quantum Net plan</QN_Plan_Reason>
+	<QN_Msg_NoCoverage>[QuantumNet] No network coverage on this map, cannot subscribe to paid plans. Build and power a comms console.</QN_Msg_NoCoverage>
+	<QN_Msg_Subscribed>[QuantumNet] {0} subscribed to "{1}" ({2} @silver/{3} days).</QN_Msg_Subscribed>
+	<QN_Msg_RenewFail>[QuantumNet] {0}'s "{1}" expired and renewal failed, downgraded to Local plan.</QN_Msg_RenewFail>
+	<QN_Log_AutoPlan>[QuantumNet] {0} auto-purchased "{1}" ({2} @silver).</QN_Log_AutoPlan>
+	<QN_Log_Renewed>[QuantumNet] {0} auto-renewed "{1}".</QN_Log_Renewed>
+	<QN_Log_Expired>[QuantumNet] {0}'s "{1}" expired (auto-renew off), downgraded to Local plan.</QN_Log_Expired>
+
+	<!-- ===== Carrier Events ===== -->
+	<QN_Event_Storm_Label>Starlink Storm</QN_Event_Storm_Label>
+	<QN_Event_Storm_Desc>StarCom's satellite array was hit by a solar storm. Quantum Net on this map is temporarily down!\nUntil restored: RimSeek disabled, paid plans suspended, cross-map calls and online shopping unavailable.</QN_Event_Storm_Desc>
+	<QN_Event_Congest_Label>Network Congestion</QN_Event_Congest_Label>
+	<QN_Event_Congest_Desc>NebulaCloud data centers are overloaded. Quantum Net is heavily congested!\nUntil restored: RimSeek efficiency greatly reduced.</QN_Event_Congest_Desc>
+	<QN_Event_Sale_Label>CyberBazaar Mega Sale</QN_Event_Sale_Label>
+	<QN_Event_Sale_Desc>CyberBazaar's annual mega sale begins!\nDuring the event: all private online shopping half price, mood bonus increased.</QN_Event_Sale_Desc>
+	<QN_Event_Carto_Label>New Game Cart Release</QN_Event_Carto_Label>
+	<QN_Event_Carto_Desc>CartoBoard released this year's blockbuster!\nDuring the event: colonists shop online more eagerly (double trigger chance).</QN_Event_Carto_Desc>
+	<QN_Event_Calib_Label>Deep Mine Radar Calibration</QN_Event_Calib_Label>
+	<QN_Event_Calib_Desc>MineScan completed its annual calibration. Today's prediction accuracy greatly improved.</QN_Event_Calib_Desc>
+	<QN_Event_Promo_Label>Plan Half-Price Promo</QN_Event_Promo_Label>
+	<QN_Event_Promo_Desc>Quantum Net carriers joint promotion!\nDuring the event: all paid plans half price for new subscriptions/renewals.</QN_Event_Promo_Desc>
+	<QN_Event_Triggered>Carrier event [{0}] triggered, lasting {1} days.</QN_Event_Triggered>
+	<QN_Event_Ended>Carrier event [{0}] has ended.</QN_Event_Ended>
+	<QN_Event_Msg>[QuantumNet] Carrier event: {0}</QN_Event_Msg>
+	<QN_Event_LetterTitle>Carrier Event: {0}</QN_Event_LetterTitle>
+	<QN_Event_DaysLeft>{0} ({1} days left)</QN_Event_DaysLeft>
+
+	<!-- ===== Virtual Providers ===== -->
+	<QN_Provider_StarCom_Name>StarCom</QN_Provider_StarCom_Name>
+	<QN_Provider_StarCom_Role>Quantum Net low-orbit starlink coverage provider</QN_Provider_StarCom_Role>
+	<QN_Provider_NebulaCloud_Name>NebulaCloud</QN_Provider_NebulaCloud_Name>
+	<QN_Provider_NebulaCloud_Role>Cloud computing and RimSeek scheduling provider</QN_Provider_NebulaCloud_Role>
+	<QN_Provider_CartoBoard_Name>CartoBoard</QN_Provider_CartoBoard_Name>
+	<QN_Provider_CartoBoard_Role>Digital entertainment content and game cart supplier</QN_Provider_CartoBoard_Role>
+	<QN_Provider_CyberBazaar_Name>CyberBazaar</QN_Provider_CyberBazaar_Name>
+	<QN_Provider_CyberBazaar_Role>Galaxy-wide virtual shopping and digital goods platform</QN_Provider_CyberBazaar_Role>
+	<QN_Provider_MineScan_Name>MineScan</QN_Provider_MineScan_Name>
+	<QN_Provider_MineScan_Role>Orbital deep mine radar and geological prediction service</QN_Provider_MineScan_Role>
+
+	<!-- ===== Network Status / Daily Report ===== -->
+	<QN_Status_Congested>Congested</QN_Status_Congested>
+	<QN_Status_Outage>Outage</QN_Status_Outage>
+	<QN_Status_Normal>Normal</QN_Status_Normal>
+	<QN_Report_Header>&lt;b&gt;Today's Quantum Net Broadcast&lt;/b&gt;\n</QN_Report_Header>
+	<QN_Report_Status>Network status: {0}</QN_Report_Status>
+	<QN_Report_Event>Carrier event: {0}</QN_Report_Event>
+	<QN_Report_Weather>☁ Cloud weather: {0}</QN_Report_Weather>
+	<QN_Report_CalibTag>[Calibrated·High Precision]</QN_Report_CalibTag>
+	<QN_Report_Mine>⛏ Deep mine radar: {0}</QN_Report_Mine>
+	<QN_Report_Tip>[AI] {0}</QN_Report_Tip>
+	<QN_Report_News>[NEWS] {0}</QN_Report_News>
+	<QN_Report_Stock>[STOCK] {0}</QN_Report_Stock>
+	<QN_Report_LetterTitle>Quantum Net Daily</QN_Report_LetterTitle>
+	<QN_Report_Fail>Failed to send daily report: {0}</QN_Report_Fail>
+	<QN_Topic_News>Network news: {0}</QN_Topic_News>
+	<QN_Topic_Weather>Cloud weather forecast: {0}</QN_Topic_Weather>
+	<QN_Topic_Mine>Deep mine radar forecast: {0}</QN_Topic_Mine>
+	<QN_Topic_Tip>RimSeek tip: {0}</QN_Topic_Tip>
+	<QN_Topic_Stock>Market headlines: {0}</QN_Topic_Stock>
+	<QN_Topic_Chat>Just read the noon Quantum Net Daily. {0} - what do you think?</QN_Topic_Chat>
+	<QN_Topic_Done>Asked {0} to chat about today's network news via RimTalk.</QN_Topic_Done>
+
+	<!-- ===== Health Reminders ===== -->
+	<QN_Health_Bleeding>You are bleeding! RimSeek strongly recommends seeking treatment or bandaging immediately.</QN_Health_Bleeding>
+	<QN_Health_Tendable>You have wounds or illnesses that need treatment. Have a doctor take a look.</QN_Health_Tendable>
+	<QN_Health_Pain>You are in notable pain. Painkillers or treatment would help a lot.</QN_Health_Pain>
+	<QN_Health_Tired>You can barely hold on! RimSeek suggests going to bed right now.</QN_Health_Tired>
+	<QN_Health_Hungry>You are starving. Remember to eat something.</QN_Health_Hungry>
+	<QN_Health_Msg>[Health] RimSeek reminds {0}: {1}</QN_Health_Msg>
+
+	<!-- ===== Private Shopping ===== -->
+	<QN_Shop_Reason>Online shopping·{0}</QN_Shop_Reason>
+	<QN_Shop_SaleTag>(Mega sale half price)</QN_Shop_SaleTag>
+	<QN_Shop_Msg>[Shopping] {0} bought "{1}"{2} at CyberBazaar with digital wallet for {3} @silver. Package delivered!</QN_Shop_Msg>
+	<QN_Shop_Item_Snack>Snack gift pack</QN_Shop_Item_Snack>
+	<QN_Shop_Item_Toy>Limited edition toy</QN_Shop_Item_Toy>
+	<QN_Shop_Item_Cart>Game cart</QN_Shop_Item_Cart>
+	<QN_Shop_Item_Clothes>New clothes</QN_Shop_Item_Clothes>
+	<QN_Shop_Item_Cosmetics>Cosmetics</QN_Shop_Item_Cosmetics>
+	<QN_Shop_Item_Skin>Virtual theme skin</QN_Shop_Item_Skin>
+
+	<!-- ===== Stream Tips ===== -->
+	<QN_Tip_Reason>Stream tip</QN_Tip_Reason>
+	<QN_Tip_NoMoney>[Stream] {0} is watching your livestream, but their wallet is empty - no tip.</QN_Tip_NoMoney>
+	<QN_Tip_Did>[Stream] {0} tipped {1} @silver while watching your livestream!</QN_Tip_Did>
+	<QN_Tip_Cheer>[Stream] {0} is watching your livestream and cheering!</QN_Tip_Cheer>
+
+	<!-- ===== Cross-Map Calls ===== -->
+	<QN_Call_Wilderness>the wilderness</QN_Call_Wilderness>
+	<QN_Call_UnknownArea>Unknown area</QN_Call_UnknownArea>
+	<QN_Call_Title>Cross-map call</QN_Call_Title>
+	<QN_Call_Log>[Caravan·{0} ➔ Base·{1}]: cross-map call connected - {2}</QN_Call_Log>
+	<QN_Call_Ok>OK</QN_Call_Ok>
+	<QN_Call_QueueFail>queue failed</QN_Call_QueueFail>
+
+	<!-- ===== Bridge Logs ===== -->
+	<QN_Bridge_RimPayWalletOk>RimPay wallet bridge initialized. Plan fees will auto-deduct from pawn wallets.</QN_Bridge_RimPayWalletOk>
+	<QN_Bridge_StockOk>RimPay stock market bridge connected. Daily report will cover carrier stock movements.</QN_Bridge_StockOk>
+	<QN_Bridge_InitFail>RimPay bridge init failed: {0}</QN_Bridge_InitFail>
+	<QN_Bridge_GetBalanceFail>Failed to read RimPay balance: {0}</QN_Bridge_GetBalanceFail>
+	<QN_Bridge_ModifyBalanceFail>Failed to modify RimPay balance: {0}</QN_Bridge_ModifyBalanceFail>
+	<QN_Bridge_ModifyTreasuryFail>Failed to modify RimPay treasury: {0}</QN_Bridge_ModifyTreasuryFail>
+	<QN_Bridge_RimTuberOk>RimTuber bridge initialized. Stream tipping enabled.</QN_Bridge_RimTuberOk>
+	<QN_Bridge_RimTuberFail>RimTuber bridge init failed: {0}</QN_Bridge_RimTuberFail>
+	<QN_Err_NoTradable>Could not find any</QN_Err_NoTradable>
+
+	<!-- ===== DebugAction (developer) ===== -->
+	<QN_Dbg_NoEvent>No active carrier event right now.</QN_Dbg_NoEvent>
+	<QN_Dbg_Ended>Current carrier event ended.</QN_Dbg_Ended>
+	<QN_Dbg_NoActive>No active event</QN_Dbg_NoActive>
+	<QN_Dbg_Status>Carrier event status: {0}</QN_Dbg_Status>
+	<QN_Dbg_NoHomeMap>No player home map.</QN_Dbg_NoHomeMap>
+	<QN_Dbg_NoRimTalk>RimTalk not installed or unavailable, cannot test cross-map calls.</QN_Dbg_NoRimTalk>
+	<QN_Dbg_NoCaravan>No caravan right now. Send out a caravan first to test cross-map calls.</QN_Dbg_NoCaravan>
+	<QN_Dbg_TestCall>Test call initiated: [Caravan·{0} ➔ Base·{1}]. Check log and RimTalk bubbles.</QN_Dbg_TestCall>
+
+	<!-- ===== Settings Page ===== -->
+	<QN_Tab_General>General</QN_Tab_General>
+	<QN_Tab_AI>AI Network</QN_Tab_AI>
+	<QN_Set_CoverageTitle>Quantum Net Coverage (Starlink)</QN_Set_CoverageTitle>
+	<QN_Set_EnableNet>Enable Quantum Net</QN_Set_EnableNet>
+	<QN_Set_NeedConsole>Require comms console (powered console = 100% coverage on this map)</QN_Set_NeedConsole>
+	<QN_Set_MapBeacon>Map-wide trade beacon (any powered orbital trade beacon on any map = all items tradable/launchable)</QN_Set_MapBeacon>
+	<QN_Set_PlansTitle>Data/Compute Plans</QN_Set_PlansTitle>
+	<QN_Set_Period>Plan billing period: {0} days (1 quadrum)</QN_Set_Period>
+	<QN_Set_HighPrice>HighSpeed plan: {0} @silver/{1} days</QN_Set_HighPrice>
+	<QN_Set_InfPrice>Quantum Infinite plan: {0} @silver/{1} days</QN_Set_InfPrice>
+	<QN_Set_AutoPlan>Auto plan purchase (by balance/trait/caravan needs/subsidy)</QN_Set_AutoPlan>
+	<QN_Set_WalletPay>Monthly fee auto-deducted from RimPay wallet (Local plan if no RimPay)</QN_Set_WalletPay>
+	<QN_Set_Subsidy>Subsidy policy: player pays, pawns can get Quantum Infinite directly (no personal cost)</QN_Set_Subsidy>
+	<QN_Set_HighTitle>HighSpeed Plan Features</QN_Set_HighTitle>
+	<QN_Set_RimSeek>RimSeek assist (global work +10%, research +15%)</QN_Set_RimSeek>
+	<QN_Set_Health>RimSeek health reminders (HighSpeed/Infinite, daily health tips)</QN_Set_Health>
+	<QN_Set_LiveTip>Stream tipping (requires RimTuber)</QN_Set_LiveTip>
+	<QN_Set_Hack>Hack enemy wallets (+20% loot)</QN_Set_Hack>
+	<QN_Set_Shop>Private online shopping (virtual goods)</QN_Set_Shop>
+	<QN_Set_InfTitle>Quantum Infinite Plan Features</QN_Set_InfTitle>
+	<QN_Set_DeepCoop>RimSeek deep cooperation (+20% efficiency, anti-distraction)</QN_Set_DeepCoop>
+	<QN_Set_CrossMap>RimTalk cross-map video calls (requires RimTalk)</QN_Set_CrossMap>
+	<QN_Set_CloudPredict>Cloud weather/deep mine radar prediction (requires AI)</QN_Set_CloudPredict>
+	<QN_Set_Version>Current mod version: {0}</QN_Set_Version>
+
+	<!-- ===== AI Settings Page ===== -->
+	<QN_AI_Title>AI Network Intelligence (QuantumNet AI)</QN_AI_Title>
+	<QN_AI_P2Promo1>[Recommended] Register and use the Player2 app to enjoy all AI features for free!</QN_AI_P2Promo1>
+	<QN_AI_P2Promo2>Player2 is a free local desktop app, no API Key needed; if installed and running, just check the Player2 config to use it.</QN_AI_P2Promo2>
+	<QN_AI_P2Promo3>Checked configs are tried top-to-bottom in list order; failures or quota exhaustion auto-switch to the next.</QN_AI_P2Promo3>
+	<QN_AI_EnableDesc>When enabled, daily Quantum Net data (weather/mine/tips/news) is AI-generated; auto-falls back to defaults if all configs fail.</QN_AI_EnableDesc>
+	<QN_AI_Enable>Enable AI Network Intelligence</QN_AI_Enable>
+	<QN_AI_Interval>Minimum request interval: {0} hours (avoid spamming)</QN_AI_Interval>
+	<QN_AI_ReportFreq>Quantum Net Daily frequency (AI: status/weather/mine/news)</QN_AI_ReportFreq>
+	<QN_AI_FreqOffSel>■ Off</QN_AI_FreqOffSel>
+	<QN_AI_FreqOff>Off</QN_AI_FreqOff>
+	<QN_AI_Freq2Sel>■ Every 2 days</QN_AI_Freq2Sel>
+	<QN_AI_Freq2>Every 2 days</QN_AI_Freq2>
+	<QN_AI_Freq1Sel>■ Daily</QN_AI_Freq1Sel>
+	<QN_AI_Freq1>Daily</QN_AI_Freq1>
+	<QN_AI_FreqDesc>Off = no AI requests and no daily report (saves tokens); sent at 12:00 by frequency, requires Quantum Infinite subscribers.</QN_AI_FreqDesc>
+	<QN_AI_RimTalkCast>Broadcast AI network news via RimTalk (requires RimTalk)</QN_AI_RimTalkCast>
+	<QN_AI_RimTalkCastDesc>After the daily report, a random Quantum Infinite subscriber chats about today's network news/weather/mine forecast via RimTalk.</QN_AI_RimTalkCastDesc>
+	<QN_AI_Providers>Provider configs (check to enable, order = try order):</QN_AI_Providers>
+	<QN_AI_AddConfig>Add provider config (+)</QN_AI_AddConfig>
+	<QN_AI_CfgDetail>Config details:</QN_AI_CfgDetail>
+	<QN_AI_CfgProvider>Provider:</QN_AI_CfgProvider>
+	<QN_AI_CfgP2Hint>Player2 local service: no API Key needed. Install and run Player2.</QN_AI_CfgP2Hint>
+	<QN_AI_CfgLocalHint>Local model: auto-fails and switches to next config if Ollama is not installed.</QN_AI_CfgLocalHint>
+	<QN_AI_CfgEndpoint>Endpoint URL (blank = provider default):</QN_AI_CfgEndpoint>
+	<QN_AI_CfgModel>Model name (blank = provider default):</QN_AI_CfgModel>
+	<QN_AI_CfgEnable>Enable this config</QN_AI_CfgEnable>
+	<QN_AI_CfgTest>Test Connection</QN_AI_CfgTest>
+	<QN_AI_LiveTitle>Quantum Net Live Status</QN_AI_LiveTitle>
+	<QN_AI_LiveDesc>Shows network data currently generated and applied by AI, to verify whether AI really controls Quantum Net.</QN_AI_LiveDesc>
+	<QN_AI_S_Toggle>AI Network Intelligence</QN_AI_S_Toggle>
+	<QN_AI_S_Status>Network status (networkStatus)</QN_AI_S_Status>
+	<QN_AI_S_Weather>Cloud weather (cloudWeatherHint)</QN_AI_S_Weather>
+	<QN_AI_S_Mine>Deep mine radar (deepMineHint)</QN_AI_S_Mine>
+	<QN_AI_S_Tip>RimSeek tip (rimseekTip)</QN_AI_S_Tip>
+	<QN_AI_S_News>Network news (newsText)</QN_AI_S_News>
+	<QN_AI_S_None>(none yet, needs successful AI return)</QN_AI_S_None>
+	<QN_AI_S_LastDay>Last request day</QN_AI_S_LastDay>
+	<QN_AI_S_LastDayFmt>{0} (today: {1})</QN_AI_S_LastDayFmt>
+	<QN_AI_S_HasResult>Has AI result</QN_AI_S_HasResult>
+	<QN_AI_S_Fails>Consecutive failures</QN_AI_S_Fails>
+	<QN_AI_S_Cooldown>In cooldown</QN_AI_S_Cooldown>
+	<QN_AI_S_InFlight>Request in flight</QN_AI_S_InFlight>
+	<QN_AI_S_LastError>Last error</QN_AI_S_LastError>
+	<QN_AI_ForceBtn>Force one AI network request now</QN_AI_ForceBtn>
+	<QN_AI_ForceDesc>The button above bypasses the once-per-day limit and lets AI generate a fresh set of data shown above, to verify connection and AI control.</QN_AI_ForceDesc>
+	<QN_AI_JsonTitle>AI Network JSON Template</QN_AI_JsonTitle>
+	<QN_AI_JsonDesc>This JSON tells AI what daily Quantum Net data to return. Edit freely; one click restores defaults.</QN_AI_JsonDesc>
+	<QN_AI_JsonSave>Save JSON template</QN_AI_JsonSave>
+	<QN_AI_JsonSaved>JSON template saved.</QN_AI_JsonSaved>
+	<QN_AI_JsonReset>Reset default JSON</QN_AI_JsonReset>
+	<QN_AI_JsonResetDone>Default JSON template restored.</QN_AI_JsonResetDone>
+
+	<!-- ===== AI Request Hints ===== -->
+	<QN_AI_NeedEnable>Enable "AI Network Intelligence" on the AI settings page first.</QN_AI_NeedEnable>
+	<QN_AI_NoConfig>No provider config checked. Check at least one config below.</QN_AI_NoConfig>
+	<QN_AI_InFlight>A request is already in flight, please wait...</QN_AI_InFlight>
+	<QN_AI_Forced>Force request initiated. See the status panel and log above.</QN_AI_Forced>
+	<QN_AI_E_ConfigEmpty>Config is empty. Add and select a provider config first</QN_AI_E_ConfigEmpty>
+	<QN_AI_E_EndpointEmpty>Endpoint URL is empty - fill it in (or pick a provider to auto-fill)</QN_AI_E_EndpointEmpty>
+	<QN_AI_E_KeyEmpty>API Key is empty - this provider requires an API Key</QN_AI_E_KeyEmpty>
+	<QN_AI_E_ModelEmpty>Model name is empty - fill in a model name (e.g. deepseek-chat / gpt-4o-mini)</QN_AI_E_ModelEmpty>
+	<QN_AI_E_NoBody>Could not build request body</QN_AI_E_NoBody>
+	<QN_AI_E_Timeout>Connection timeout (20s) - network issue or wrong endpoint URL</QN_AI_E_Timeout>
+	<QN_AI_E_Player2>Player2 desktop app not started or not ready. Make sure Player2 is running and retry</QN_AI_E_Player2>
+	<QN_AI_E_LocalModel>Local model service not running (Ollama / LM Studio not running or not listening on port 11434)</QN_AI_E_LocalModel>
+	<QN_AI_E_NoConn>Could not reach the server. Check network and endpoint URL</QN_AI_E_NoConn>
+	<QN_AI_E_BadRequest>Bad request: most likely a wrong model name. Double-check the model</QN_AI_E_BadRequest>
+	<QN_AI_E_Auth>Authentication failed: API Key invalid or expired</QN_AI_E_Auth>
+	<QN_AI_E_Forbidden>Access denied: API Key lacks permission or account restricted</QN_AI_E_Forbidden>
+	<QN_AI_E_NotFound>Endpoint not found: endpoint URL may be wrong</QN_AI_E_NotFound>
+	<QN_AI_E_RateLimit>Rate limited. Try again later</QN_AI_E_RateLimit>
+	<QN_AI_E_Server>Server error: provider temporarily down. Try again later</QN_AI_E_Server>
+	<QN_AI_E_Body>Server returned: {0}</QN_AI_E_Body>
+	<QN_AI_T_Connected>Connected! Model: {0} | AI reply: {1}</QN_AI_T_Connected>
+	<QN_AI_T_ParseFail>Connected, but response parsing failed (chat may still work)\nRaw response: {0}</QN_AI_T_ParseFail>
+	<QN_AI_E_Network>Network error: {0} - check your connection</QN_AI_E_Network>
+	<QN_AI_E_Exception>Exception ({0}): {1}</QN_AI_E_Exception>
+	<QN_AI_NewsSuffix>released the latest update today.</QN_AI_NewsSuffix>
+	<QN_AI_RelatedPrefix>(related party: {0})</QN_AI_RelatedPrefix>
+</LanguageData>

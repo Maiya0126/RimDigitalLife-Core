@@ -35,7 +35,7 @@ namespace RimDigitalLife_QuantumNet
                 Thing thing = MapWideBeaconUtility.FindThingOfDef(resDef, map);
                 if (thing == null)
                 {
-                    Verse.Log.Error("[量子网络] 未找到可转移给商船的任何 " + (resDef?.ToString() ?? "?") + "。");
+                    Verse.Log.Error("[QuantumNet] " + "QN_Err_NoTradable".Translate() + " " + (resDef?.ToString() ?? "?") + ".");
                     break;
                 }
                 int num = Mathf.Min(debt, thing.stackCount);

@@ -55,7 +55,7 @@ namespace RimDigitalLife_QuantumNet
             // 事件到期结束
             if (!string.IsNullOrEmpty(activeEventId) && tick >= eventEndTick)
             {
-                Verse.Log.Message($"[量子网络] 运营商事件【{activeEventLabel}】已结束。");
+                Verse.Log.Message("[QuantumNet] " + "QN_Event_Ended".Translate(activeEventLabel));
                 activeEventId = "";
                 activeEventLabel = "";
             }
@@ -75,52 +75,59 @@ namespace RimDigitalLife_QuantumNet
         {
             int durationTicks;
             string label;
-            string desc;
             switch (eventId)
             {
                 case StarlinkStorm:
                     durationTicks = Rand.Range(60000, 120000); // 1~2 天
-                    label = "星链风暴";
-                    desc = "星链通信 (StarCom) 的卫星阵列遭遇太阳风暴，当前地图量子网络暂时中断！\n网络恢复前：RimSeek 智算失效、付费套餐暂停结算、跨地图通话与网购不可用。";
+                    label = "QN_Event_Storm_Label".Translate();
                     break;
                 case NetworkCongested:
                     durationTicks = Rand.Range(60000, 120000); // 1~2 天
-                    label = "网络拥堵";
-                    desc = "星云算力 (NebulaCloud) 数据中心过载，量子网络大面积拥堵！\n网络恢复前：RimSeek 智算效率大幅下降。";
+                    label = "QN_Event_Congest_Label".Translate();
                     break;
                 case CyberSale:
                     durationTicks = Rand.Range(120000, 180000); // 2~3 天
-                    label = "赛博百货大促";
-                    desc = "赛博百货 (CyberBazaar) 年度大促开启！\n活动期间：私有网购全部半价，小人网购心情加成提升。";
+                    label = "QN_Event_Sale_Label".Translate();
                     break;
                 case CartoRelease:
                     durationTicks = Rand.Range(60000, 120000); // 1~2 天
-                    label = "卡带新品发售";
-                    desc = "游戏卡带发行商 (CartoBoard) 发布了年度大作！\n活动期间：小人们网购热情高涨（触发概率翻倍）。";
+                    label = "QN_Event_Carto_Label".Translate();
                     break;
                 case MineScanCalib:
                     durationTicks = Rand.Range(60000, 120000); // 1~2 天
-                    label = "深矿雷达校准";
-                    desc = "深矿雷达 (MineScan) 完成年度校准，今日预测精度大幅提升。";
+                    label = "QN_Event_Calib_Label".Translate();
                     break;
                 default: // PlanPromo
                     durationTicks = Rand.Range(60000, 120000); // 1~2 天
-                    label = "套餐半价促销";
-                    desc = "量子网络运营商联合促销！\n活动期间：所有付费套餐新订/续费半价。";
+                    label = "QN_Event_Promo_Label".Translate();
                     break;
             }
+            string desc = EventDesc(eventId);
 
             activeEventId = eventId;
             activeEventLabel = label;
             eventEndTick = tick + durationTicks;
 
-            Verse.Log.Message($"[量子网络] 触发运营商事件【{label}】，持续 {durationTicks / 60000f:F1} 天。");
-            Messages.Message($"[量子网络] 运营商事件：{label}", MessageTypeDefOf.NeutralEvent, false);
+            Verse.Log.Message("[QuantumNet] " + "QN_Event_Triggered".Translate(label, (durationTicks / 60000f).ToString("F1")));
+            Messages.Message("QN_Event_Msg".Translate(label), MessageTypeDefOf.NeutralEvent, false);
             Find.LetterStack.ReceiveLetter(
-                "运营商事件：" + label,
+                "QN_Event_LetterTitle".Translate(label),
                 desc,
                 LetterDefOf.NeutralEvent,
                 (LookTargets)null);
+        }
+
+        private static string EventDesc(string eventId)
+        {
+            switch (eventId)
+            {
+                case StarlinkStorm: return "QN_Event_Storm_Desc".Translate();
+                case NetworkCongested: return "QN_Event_Congest_Desc".Translate();
+                case CyberSale: return "QN_Event_Sale_Desc".Translate();
+                case CartoRelease: return "QN_Event_Carto_Desc".Translate();
+                case MineScanCalib: return "QN_Event_Calib_Desc".Translate();
+                default: return "QN_Event_Promo_Desc".Translate();
+            }
         }
 
         // 事件效果查询接口
@@ -146,9 +153,9 @@ namespace RimDigitalLife_QuantumNet
         // 事件状态文本（控制台/日报用）
         public static string GetStatusText()
         {
-            if (!HasActiveEvent) return "无";
+            if (!HasActiveEvent) return "QN_None".Translate();
             int daysLeft = Mathf.Max(0, (int)((eventEndTick - Find.TickManager.TicksGame) / 60000f) + 1);
-            return activeEventLabel + " (剩 " + daysLeft + " 天)";
+            return "QN_Event_DaysLeft".Translate(activeEventLabel, daysLeft);
         }
 
         // ======== 开发者模式（DebugAction 调用） ========

@@ -27,7 +27,7 @@ namespace RimDigitalLife_QuantumNet
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "量子网络控制台 (Quantum Net Console)");
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "QN_Console_Title".Translate());
             Text.Font = GameFont.Small;
 
             float y = inRect.y + 38f;
@@ -39,16 +39,16 @@ namespace RimDigitalLife_QuantumNet
             Rect coverageRow = new Rect(inRect.x, y, inRect.width, 24f);
             GUI.color = coverage ? new Color(0.3f, 0.9f, 0.3f) : new Color(1f, 0.3f, 0.3f);
             Widgets.Label(coverageRow, coverage
-                ? "● 当前地图已接入量子网络 (星链覆盖 100%)"
-                : "● 当前地图无网络覆盖 - 请建造并通电通讯台");
+                ? "QN_Console_Covered".Translate()
+                : "QN_Console_NoCoverage".Translate());
             GUI.color = Color.white;
             y += 30f;
 
             // 运营商事件状态
             string eventStatus = NetworkEventManager.GetStatusText();
-            if (eventStatus != "无")
+            if (eventStatus != "QN_None".Translate())
             {
-                Widgets.Label(new Rect(inRect.x, y, inRect.width, 22f), "⚡ 运营商事件：" + eventStatus);
+                Widgets.Label(new Rect(inRect.x, y, inRect.width, 22f), "QN_Console_Event".Translate(eventStatus));
             }
             y += 26f;
 
@@ -57,20 +57,20 @@ namespace RimDigitalLife_QuantumNet
             int hp = S?.highSpeedPrice ?? 60;
             int inf = S?.quantumInfinitePrice ?? 180;
             Widgets.Label(new Rect(inRect.x, y, inRect.width, 20f),
-                $"套餐价格 (每 {period} 天):  高速畅享包 {hp} @银  |  量子无限包 {inf} @银  |  本地流量包 免费");
+                "QN_Console_Pricing".Translate(period, hp, inf));
             y += 26f;
 
             if (!QuantumNetRimPayBridge.IsRimPayAvailable)
             {
                 GUI.color = new Color(1f, 0.8f, 0.3f);
                 Widgets.Label(new Rect(inRect.x, y, inRect.width, 20f),
-                    "未检测到 RimPay 模组：付费套餐不可用，将自动降级为本地流量包。");
+                    "QN_Console_NoRimPay".Translate());
                 GUI.color = Color.white;
                 y += 26f;
             }
 
             y += 4f;
-            Widgets.Label(new Rect(inRect.x, y, inRect.width, 22f), "<b>殖民者套餐</b>");
+            Widgets.Label(new Rect(inRect.x, y, inRect.width, 22f), "<b>" + "QN_Console_Plans".Translate() + "</b>");
             y += 28f;
 
             Rect viewRect = new Rect(inRect.x, y, inRect.width, inRect.yMax - y - 32f);
@@ -90,7 +90,7 @@ namespace RimDigitalLife_QuantumNet
                 Rect row = new Rect(0f, itemY, scrollRect.width, 30f);
                 Widgets.DrawBoxSolid(row, new Color(0.2f, 0.2f, 0.2f, 0.15f));
                 Widgets.Label(new Rect(row.x + 8f, row.y + 4f, 120f, 22f), pawn.LabelShort);
-                Widgets.Label(new Rect(row.x + 132f, row.y + 4f, 150f, 22f), "当前: " + plan.GetLabel());
+                Widgets.Label(new Rect(row.x + 132f, row.y + 4f, 150f, 22f), "QN_Console_Current".Translate(plan.GetLabel()));
 
                 float bx = row.x + 290f;
                 DrawPlanButton(new Rect(bx, row.y + 3f, 200f, 24f), pawn, QuantumPlan.Local, plan);
@@ -107,7 +107,7 @@ namespace RimDigitalLife_QuantumNet
             Text.Font = GameFont.Tiny;
             GUI.color = new Color(0.7f, 0.7f, 0.7f);
             Widgets.Label(new Rect(inRect.x, inRect.yMax - 20f, inRect.width, 18f),
-                "<i>量子网络控制台  [" + QuantumNetMod.ModVersion + "]</i>");
+                "<i>" + "QN_Console_Footer".Translate(QuantumNetMod.ModVersion) + "</i>");
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
         }

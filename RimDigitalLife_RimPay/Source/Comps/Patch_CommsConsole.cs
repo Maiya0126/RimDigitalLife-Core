@@ -26,8 +26,8 @@ namespace RimDigitalLife_RimPay
                 {
                     Find.WindowStack.Add(new Window_TreasuryTerminal(console.Map));
                 },
-                defaultLabel = "数字国库",
-                defaultDesc = "打开 RimPay 数字国库与殖民地财报总览。存取白银、查看全区资产与殖民者钱包。",
+                defaultLabel = "RP_Gizmo_Treasury_Label".Translate(),
+                defaultDesc = "RP_Gizmo_Treasury_Desc".Translate(),
                 icon = ContentFinder<UnityEngine.Texture2D>.Get("UI/Icons/RimPay_Treasury", false) ?? ContentFinder<UnityEngine.Texture2D>.Get("UI/Icons/RimPay_Icon", false) ?? BaseContent.BadTex,
                 hotKey = KeyBindingDefOf.Misc1
             };

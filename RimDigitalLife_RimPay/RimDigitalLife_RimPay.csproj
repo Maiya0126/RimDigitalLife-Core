@@ -4,7 +4,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{88F77025-DCC4-4515-9012-E63919894E55}</ProjectGuid>
+    <!-- 游戏版本目标：17 = 编译到 1.7 (Waylith)，16 = 编译到 1.6。用法：msbuild /p:GameVer=16 -->
+    <GameVer Condition=" '$(GameVer)' == '' ">17</GameVer>
+    <ProjectGuid>{88F77025-DCC4-4515-9012-D63919894E55}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RimDigitalLife_RimPay</RootNamespace>
@@ -12,6 +14,26 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <!-- 按版本选择引用库根目录 -->
+    <RW17Root Condition=" '$(GameVer)' == '16' ">..\_refs16\</RW17Root>
+    <RW17Root Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\</RW17Root>
+    <HarmonyDll Condition=" '$(GameVer)' == '16' ">..\..\..\Games\steamapps\workshop\content\294100\2009463077\1.6\Assemblies\0Harmony.dll</HarmonyDll>
+    <HarmonyDll Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll</HarmonyDll>
+    <CoreDll Condition=" '$(GameVer)' == '16' ">..\RimDigitalLife\bin\Release16\RimDigitalLife.dll</CoreDll>
+    <CoreDll Condition=" '$(GameVer)' != '16' ">..\RimDigitalLife\bin\Release\RimDigitalLife.dll</CoreDll>
+    <!-- 1.7 (Waylith)：Unity 类型全部在 UnityStubs.dll；1.6：各模块独立 DLL -->
+    <RefUnityEngine Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.dll</RefUnityEngine>
+    <RefUnityEngine Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefUnityEngine>
+    <RefCoreModule Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.CoreModule.dll</RefCoreModule>
+    <RefCoreModule Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefCoreModule>
+    <RefIMGUIModule Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.IMGUIModule.dll</RefIMGUIModule>
+    <RefIMGUIModule Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefIMGUIModule>
+    <RefTextRendering Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.TextRenderingModule.dll</RefTextRendering>
+    <RefTextRendering Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefTextRendering>
+    <RefUIModule Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.UI.dll</RefUIModule>
+    <RefUIModule Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefUIModule>
+    <RefUnityWebRequest Condition=" '$(GameVer)' == '16' ">..\_refs16\UnityEngine.UnityWebRequestModule.dll</RefUnityWebRequest>
+    <RefUnityWebRequest Condition=" '$(GameVer)' != '16' ">..\..\..\Games\steamapps\common\RimWorld\UnityStubs.dll</RefUnityWebRequest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +44,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' And '$(GameVer)' == '16' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release16\</OutputPath>
+    <DefineConstants>TRACE;RW_1_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' And '$(GameVer)' != '16' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,40 +62,40 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\Games\steamapps\workshop\content\294100\2009463077\1.6\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>$(HarmonyDll)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\ProjectTITAN\ProjectTITAN\Source\Assemblies\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(RW17Root)Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RimDigitalLife">
-      <HintPath>..\RimDigitalLife\bin\Release\RimDigitalLife.dll</HintPath>
+      <HintPath>$(CoreDll)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\ProjectTITAN\ProjectTITAN\Source\Assemblies\UnityEngine.dll</HintPath>
+      <HintPath>$(RefUnityEngine)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\ProjectTITAN\ProjectTITAN\Source\Assemblies\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(RefCoreModule)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\ProjectTITAN\ProjectTITAN\Source\Assemblies\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(RefIMGUIModule)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\ProjectTITAN\ProjectTITAN\Source\Assemblies\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(RefTextRendering)</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\ProjectTITAN\ProjectTITAN\Source\Assemblies\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(RefUIModule)</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>..\..\RimAiVinci\RimAiVinci\bin\Release\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>$(RefUnityWebRequest)</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -84,6 +114,12 @@
     <Compile Include="Source\Comps\Patch_Research.cs" />
     <Compile Include="Source\Comps\Patch_RaidStock.cs" />
     <Compile Include="Source\Compat\RimSimIntegration.cs" />
+    <Compile Include="Source\Compat\RimMarketIntegration.cs" />
+    <Compile Include="Source\Compat\BunnygirlIntegration.cs" />
+    <Compile Include="Source\Compat\HospitalityIntegration.cs" />
+    <Compile Include="Source\Compat\RimStockIntegration.cs" />
+    <Compile Include="Source\Compat\CompatPatchHelper.cs" />
+    <Compile Include="Source\Comps\NpcWalletGenerator.cs" />
     <Compile Include="Source\API\RimPayStockAPI.cs" />
     <Compile Include="Source\UI\Window_PawnWallet.cs" />
     <Compile Include="Source\UI\Window_ColonyFinance.cs" />
@@ -105,23 +141,22 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@echo off
-:: 1. Copy DLL
-if not exist "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Assemblies" mkdir "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Assemblies"
-copy /Y "$(TargetDir)$(TargetName).dll" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Assemblies\"
+    <!-- 双版本部署：模组根目录版本文件夹（游戏 InitLoadFolders 机制）。不放 Assemblies\1.x 子目录（递归扫描会双载冲突）。 -->
+    <PostBuildEvent Condition=" '$(GameVer)' == '16' ">@echo off
+set MODDIR=D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展
+if not exist "%MODDIR%\1.6\Assemblies" mkdir "%MODDIR%\1.6\Assemblies"
+copy /Y "$(TargetDir)$(TargetName).dll" "%MODDIR%\1.6\Assemblies\"
+</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(GameVer)' != '16' ">@echo off
+set MODDIR=D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展
+if not exist "%MODDIR%\1.7\Assemblies" mkdir "%MODDIR%\1.7\Assemblies"
+copy /Y "$(TargetDir)$(TargetName).dll" "%MODDIR%\1.7\Assemblies\"
 
-:: 2. Copy Defs
-if exist "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Defs" rmdir /S /Q "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Defs"
-xcopy /E /I /Y "$(ProjectDir)Defs" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Defs"
-
-:: 3. Copy About
-xcopy /E /I /Y "$(ProjectDir)About" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\About"
-
-:: 4. Copy Textures
-xcopy /E /I /Y "$(ProjectDir)Textures" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Textures"
-
-:: 5. Copy Languages
-xcopy /E /I /Y "$(ProjectDir)Languages" "D:\games\steamapps\common\Rimworld\Mods\MaiyaMod02B Rim Digital Life - RimPay Expansion 数字经济拓展\Languages"
+:: Copy Defs / About / Textures / Languages
+xcopy /E /I /Y "$(ProjectDir)Defs" "%MODDIR%\Defs"
+xcopy /E /I /Y "$(ProjectDir)About" "%MODDIR%\About"
+xcopy /E /I /Y "$(ProjectDir)Textures" "%MODDIR%\Textures"
+xcopy /E /I /Y "$(ProjectDir)Languages" "%MODDIR%\Languages"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

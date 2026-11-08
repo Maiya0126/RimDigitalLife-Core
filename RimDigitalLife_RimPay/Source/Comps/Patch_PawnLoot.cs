@@ -6,15 +6,14 @@ using HarmonyLib;
 
 namespace RimDigitalLife_RimPay
 {
-    [StaticConstructorOnStartup]
-    public static class LootHarmony
-    {
-        static LootHarmony()
-        {
-            var harmony = new Harmony("maiya.RimDigitalLife.RimPay.Loot");
-            harmony.PatchAll();
-        }
-    }
+    // ========================================================================
+    // 注意：本文件的 [HarmonyPatch] 类（Kill / MakeDowned）由 RimPayHarmony 的
+    // harmony.PatchAll() 统一注册（PatchAll 扫描全程序集）。
+    // 此处曾有一个独立的 LootHarmony 静态构造器再 PatchAll 一次——两个不同
+    // Harmony id 对同一方法重复注册，导致全程序集 postfix 执行两次
+    // （玩家反馈"餐费每次消费扣费 2 次"的根因，日志同毫秒成对扣费）。
+    // 已删除该重复初始化，勿再加回。
+    // ========================================================================
 
     [HarmonyPatch(typeof(Pawn), "Kill")]
     public static class Patch_Pawn_Kill
@@ -32,7 +31,7 @@ namespace RimDigitalLife_RimPay
         [HarmonyPostfix]
         public static void Postfix(Pawn_HealthTracker __instance, DamageInfo? dinfo)
         {
-            Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
+            Pawn pawn = (Pawn)typeof(Pawn_HealthTracker).GetField("pawn", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(__instance);
             if (pawn != null)
             {
                 PawnLootHelper.ProcessLoot(pawn, dinfo);
@@ -84,20 +83,14 @@ namespace RimDigitalLife_RimPay
 
             if (halfToKiller > 0 && isColonistKill)
             {
-                comp.ModifyBalance(instigator, halfToKiller, "掠夺敌人钱包");
+                comp.ModifyBalance(instigator, halfToKiller, "RP_Reason_LootWallet");
             }
-            comp.ModifyTreasury(halfToTreasury, "搜刮上缴");
+            comp.ModifyTreasury(halfToTreasury, "RP_Reason_LootTax");
 
-            string who = isColonistKill ? pawn.LabelShort : "一名敌人";
-            string msg = "从 " + who + " 身上搜刮到 " + lootValue + " @银 的数字白银";
-            if (isColonistKill)
-            {
-                msg += " (" + halfToKiller + " 归 " + instigator.LabelShort + "，" + halfToTreasury + " 入数字国库)";
-            }
-            else
-            {
-                msg += "，已全额缴入数字国库。";
-            }
+            string who = isColonistKill ? pawn.LabelShort : (string)"RP_Loot_UnknownEnemy".Translate();
+            string msg = isColonistKill
+                ? "RP_Loot_MsgKiller".Translate(who, lootValue, halfToKiller, instigator.LabelShort, halfToTreasury)
+                : "RP_Loot_MsgTreasury".Translate(who, lootValue);
             Messages.Message(msg, MessageTypeDefOf.NeutralEvent, false);
         }
 

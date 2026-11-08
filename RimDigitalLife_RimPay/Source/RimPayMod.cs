@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using RimWorld;
@@ -31,7 +31,7 @@ namespace RimDigitalLife_RimPay
 
         public override string SettingsCategory()
         {
-            return "Rim Digital Life - RimPay 边缘数码生活：数字经济拓展 (v1.1.0)";
+            return "Rim Digital Life - RimPay Expansion (v1.1.0)";
         }
 
         private int selectedConfigIdx = -1;
@@ -48,11 +48,11 @@ namespace RimDigitalLife_RimPay
             else
                 Widgets.DrawHighlight(aiTab);
 
-            if (Widgets.ButtonText(generalTab, "常规设置 (General)"))
+            if (Widgets.ButtonText(generalTab, "RP_Set_TabGeneral".Translate()))
             {
                 currentPage = RimPaySettingsPage.General;
             }
-            if (Widgets.ButtonText(aiTab, "AI 设置 (AI Economy)"))
+            if (Widgets.ButtonText(aiTab, "RP_Set_TabAI".Translate()))
             {
                 currentPage = RimPaySettingsPage.AI;
             }
@@ -75,169 +75,211 @@ namespace RimDigitalLife_RimPay
             listing.Begin(viewRect);
 
             // ============ 薪资 ============
-            listing.Label("<b>薪资发放</b>");
+            listing.Label("<b>" + "RP_Set_Salary_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用工资发放", ref settings.enableSalary);
-            listing.Label($"基础工资: {settings.baseSalary} @银/日");
+            listing.CheckboxLabeled("RP_Set_Salary_Enable".Translate(), ref settings.enableSalary);
+            listing.Label("RP_Set_Salary_Base".Translate(settings.baseSalary));
             settings.baseSalary = Mathf.RoundToInt(listing.Slider(settings.baseSalary, 0f, 100f));
-            listing.Label($"儿童零花钱: {settings.childSalary} @银/日");
+            listing.Label("RP_Set_Salary_Child".Translate(settings.childSalary));
             settings.childSalary = Mathf.RoundToInt(listing.Slider(settings.childSalary, 0f, 50f));
-            listing.Label($"奴隶安抚金: {settings.slaveSalary} @银/日");
+            listing.Label("RP_Set_Salary_Slave".Translate(settings.slaveSalary));
             settings.slaveSalary = Mathf.RoundToInt(listing.Slider(settings.slaveSalary, 0f, 50f));
-            listing.Label($"专家加成: +{settings.expertBonus} @银/日");
+            listing.Label("RP_Set_Salary_Expert".Translate(settings.expertBonus));
             settings.expertBonus = Mathf.RoundToInt(listing.Slider(settings.expertBonus, 0f, 100f));
-            listing.Label($"熟练工加成: +{settings.skilledBonus} @银/日");
+            listing.Label("RP_Set_Salary_Skilled".Translate(settings.skilledBonus));
             settings.skilledBonus = Mathf.RoundToInt(listing.Slider(settings.skilledBonus, 0f, 60f));
-            listing.Label($"基础工人加成: +{settings.basicBonus} @银/日");
+            listing.Label("RP_Set_Salary_Basic".Translate(settings.basicBonus));
             settings.basicBonus = Mathf.RoundToInt(listing.Slider(settings.basicBonus, 0f, 40f));
             listing.Gap(10f);
 
             // ============ 房租 ============
-            listing.Label("<b>住宿房租</b>");
+            listing.Label("<b>" + "RP_Set_Rent_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用房租收取", ref settings.enableRent);
-            listing.Label($"奢华房间 (印象>120): {settings.rentLuxury} @银/日");
+            listing.CheckboxLabeled("RP_Set_Rent_Enable".Translate(), ref settings.enableRent);
+            listing.Label("RP_Set_Rent_Luxury".Translate(settings.rentLuxury));
             settings.rentLuxury = Mathf.RoundToInt(listing.Slider(settings.rentLuxury, 0f, 50f));
-            listing.Label($"高级房间 (印象>80): {settings.rentHigh} @银/日");
+            listing.Label("RP_Set_Rent_High".Translate(settings.rentHigh));
             settings.rentHigh = Mathf.RoundToInt(listing.Slider(settings.rentHigh, 0f, 40f));
-            listing.Label($"舒适房间 (印象>50): {settings.rentMid} @银/日");
+            listing.Label("RP_Set_Rent_Mid".Translate(settings.rentMid));
             settings.rentMid = Mathf.RoundToInt(listing.Slider(settings.rentMid, 0f, 30f));
-            listing.Label($"普通房间 (印象>20): {settings.rentLow} @银/日");
+            listing.Label("RP_Set_Rent_Low".Translate(settings.rentLow));
             settings.rentLow = Mathf.RoundToInt(listing.Slider(settings.rentLow, 0f, 20f));
-            listing.Label($"简陋房间: {settings.rentMin} @银/日");
+            listing.Label("RP_Set_Rent_Min".Translate(settings.rentMin));
             settings.rentMin = Mathf.RoundToInt(listing.Slider(settings.rentMin, 0f, 10f));
-            listing.Label($"佩戴数码设备折扣: {Mathf.RoundToInt((1f - settings.deviceRentDiscount) * 100f)}%");
+            listing.Label("RP_Set_Rent_DeviceDiscount".Translate(Mathf.RoundToInt((1f - settings.deviceRentDiscount) * 100f)));
             settings.deviceRentDiscount = 1f - listing.Slider(1f - settings.deviceRentDiscount, 0f, 0.5f);
             listing.Gap(10f);
 
             // ============ 餐费 ============
-            listing.Label("<b>用餐扣费</b>");
+            listing.Label("<b>" + "RP_Set_Meal_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用餐费扣除", ref settings.enableMealFee);
-            listing.Label($"奢华餐: {settings.mealLavish} @银/顿");
+            listing.CheckboxLabeled("RP_Set_Meal_Enable".Translate(), ref settings.enableMealFee);
+            listing.Label("RP_Set_Meal_Lavish".Translate(settings.mealLavish));
             settings.mealLavish = Mathf.RoundToInt(listing.Slider(settings.mealLavish, 0f, 30f));
-            listing.Label($"精致餐: {settings.mealFine} @银/顿");
+            listing.Label("RP_Set_Meal_Fine".Translate(settings.mealFine));
             settings.mealFine = Mathf.RoundToInt(listing.Slider(settings.mealFine, 0f, 25f));
-            listing.Label($"简单餐: {settings.mealSimple} @银/顿");
+            listing.Label("RP_Set_Meal_Simple".Translate(settings.mealSimple));
             settings.mealSimple = Mathf.RoundToInt(listing.Slider(settings.mealSimple, 0f, 20f));
-            listing.Label($"难吃餐 (营养膏等): {settings.mealAwful} @银/顿");
+            listing.Label("RP_Set_Meal_Awful".Translate(settings.mealAwful));
             settings.mealAwful = Mathf.RoundToInt(listing.Slider(settings.mealAwful, 0f, 15f));
-            listing.Label($"生食/浆果: {settings.mealRaw} @银/顿");
+            listing.Label("RP_Set_Meal_Raw".Translate(settings.mealRaw));
             settings.mealRaw = Mathf.RoundToInt(listing.Slider(settings.mealRaw, 0f, 10f));
             listing.Gap(10f);
 
             // ============ 医疗就医 (RimPay 医保) ============
-            listing.Label("<b>医疗就医 (RimPay 医保)</b>");
+            listing.Label("<b>" + "RP_Set_Medical_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用诊疗扣费", ref settings.enableMedicalFee,
-                "医生治疗时收取诊疗费：病人钱包优先支付，不足部分由数字国库医保报销。诊疗收入回流国库。");
-            listing.Label($"单次诊疗费: {settings.medicalBaseFee} @银");
+            listing.CheckboxLabeled("RP_Set_Medical_Enable".Translate(), ref settings.enableMedicalFee,
+                "RP_Set_Medical_Desc".Translate());
+            listing.Label("RP_Set_Medical_Fee".Translate(settings.medicalBaseFee));
             settings.medicalBaseFee = Mathf.RoundToInt(listing.Slider(settings.medicalBaseFee, 0f, 100f));
             listing.Gap(10f);
 
             // ============ 余额宝利息 ============
-            listing.Label("<b>余额宝利息</b>");
+            listing.Label("<b>" + "RP_Set_Interest_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用存款利息", ref settings.enableInterest);
-            listing.Label($"计息门槛 (余额超过才计息): {settings.interestMinBalance} @银");
+            listing.CheckboxLabeled("RP_Set_Interest_Enable".Translate(), ref settings.enableInterest);
+            listing.Label("RP_Set_Interest_MinBalance".Translate(settings.interestMinBalance));
             settings.interestMinBalance = Mathf.RoundToInt(listing.Slider(settings.interestMinBalance, 0f, 500f));
-            listing.Label($"每日利率: {settings.interestRate * 100f:F2}%");
+            listing.Label("RP_Set_Interest_Rate".Translate((settings.interestRate * 100f).ToString("F2")));
             settings.interestRate = listing.Slider(settings.interestRate, 0f, 0.02f);
-            listing.Label($"利息好心情概率: {settings.interestMoodChance * 100f:F0}%");
+            listing.Label("RP_Set_Interest_Mood".Translate((settings.interestMoodChance * 100f).ToString("F0")));
             settings.interestMoodChance = listing.Slider(settings.interestMoodChance, 0f, 1f);
             listing.Gap(10f);
 
             // ============ 借贷 ============
-            listing.Label("<b>借贷中心</b>");
+            listing.Label("<b>" + "RP_Set_Loan_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用借贷中心", ref settings.enableLoan);
-            listing.Label($"基准放贷利率: {settings.loanRateBase * 100f:F0}%/季");
+            listing.CheckboxLabeled("RP_Set_Loan_Enable".Translate(), ref settings.enableLoan);
+            listing.Label("RP_Set_Loan_RateBase".Translate((settings.loanRateBase * 100f).ToString("F0")));
             settings.loanRateBase = listing.Slider(settings.loanRateBase, 0f, 0.2f);
-            listing.Label($"友好派系利率: {settings.loanRateFriendly * 100f:F0}%/季");
+            listing.Label("RP_Set_Loan_RateFriendly".Translate((settings.loanRateFriendly * 100f).ToString("F0")));
             settings.loanRateFriendly = listing.Slider(settings.loanRateFriendly, 0f, 0.2f);
-            listing.Label($"冷漠派系利率: {settings.loanRateCold * 100f:F0}%/季");
+            listing.Label("RP_Set_Loan_RateCold".Translate((settings.loanRateCold * 100f).ToString("F0")));
             settings.loanRateCold = listing.Slider(settings.loanRateCold, 0f, 0.2f);
-            listing.Label($"基准借款利率: {settings.borrowRateBase * 100f:F0}%/季");
+            listing.Label("RP_Set_Loan_BorrowBase".Translate((settings.borrowRateBase * 100f).ToString("F0")));
             settings.borrowRateBase = listing.Slider(settings.borrowRateBase, 0f, 0.25f);
-            listing.Label($"借贷周期: {settings.loanDefaultPeriod} 天");
+            listing.Label("RP_Set_Loan_Period".Translate(settings.loanDefaultPeriod));
             settings.loanDefaultPeriod = Mathf.RoundToInt(listing.Slider(settings.loanDefaultPeriod, 1f, 60f));
-            listing.Label($"借贷默认金额: {settings.loanDefaultAmount} @银");
+            listing.Label("RP_Set_Loan_DefaultAmount".Translate(settings.loanDefaultAmount));
             settings.loanDefaultAmount = Mathf.RoundToInt(listing.Slider(settings.loanDefaultAmount, 100f, 5000f));
-            listing.Label($"逾期坏账好感惩罚: {settings.loanBadDebtGoodwill}");
+            listing.Label("RP_Set_Loan_BadDebt".Translate(settings.loanBadDebtGoodwill));
             settings.loanBadDebtGoodwill = Mathf.RoundToInt(listing.Slider(settings.loanBadDebtGoodwill, -50f, 0f));
             listing.Gap(10f);
 
             // ============ 股市 ============
-            listing.Label("<b>证券交易</b>");
+            listing.Label("<b>" + "RP_Set_Stock_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用证券交易", ref settings.enableStocks);
-            listing.Label($"股价更新间隔: {settings.stockPriceUpdateTicks / 60000f:F1} 天");
+            listing.CheckboxLabeled("RP_Set_Stock_Enable".Translate(), ref settings.enableStocks);
+            listing.Label("RP_Set_Stock_Interval".Translate((settings.stockPriceUpdateTicks / 60000f).ToString("F1")));
             settings.stockPriceUpdateTicks = Mathf.RoundToInt(listing.Slider(settings.stockPriceUpdateTicks / 60000f, 0.5f, 3f) * 60000f);
-            listing.Label($"$DSF 杠杆基金波动率: {settings.stocksFundVolatility * 100f:F0}%");
+            listing.Label("RP_Set_Stock_FundVol".Translate((settings.stocksFundVolatility * 100f).ToString("F0")));
             settings.stocksFundVolatility = listing.Slider(settings.stocksFundVolatility, 0.05f, 0.6f);
-            listing.Label($"K线保留天数: {settings.stockHistoryDays} 天");
+            listing.Label("RP_Set_Stock_HistoryDays".Translate(settings.stockHistoryDays));
             settings.stockHistoryDays = Mathf.RoundToInt(listing.Slider(settings.stockHistoryDays, 5f, 30f));
             listing.Gap(10f);
 
             // ============ 小人炒股 ============
-            listing.Label("<b>小人自动炒股</b>");
+            listing.Label("<b>" + "RP_Set_PawnTrade_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用小人自动炒股", ref settings.enablePawnTrading);
-            listing.Label($"炒股最低余额门槛: {settings.pawnTradeMinBalance} @银");
+            listing.CheckboxLabeled("RP_Set_PawnTrade_Enable".Translate(), ref settings.enablePawnTrading);
+            listing.Label("RP_Set_PawnTrade_MinBalance".Translate(settings.pawnTradeMinBalance));
             settings.pawnTradeMinBalance = Mathf.RoundToInt(listing.Slider(settings.pawnTradeMinBalance, 0f, 1000f));
-            listing.Label($"投入余额比例: {settings.pawnTradeInvestRatio * 100f:F0}%");
+            listing.Label("RP_Set_PawnTrade_Ratio".Translate((settings.pawnTradeInvestRatio * 100f).ToString("F0")));
             settings.pawnTradeInvestRatio = listing.Slider(settings.pawnTradeInvestRatio, 0f, 0.5f);
-            listing.Label($"单次投入上限: {settings.pawnTradeInvestCap} @银");
+            listing.Label("RP_Set_PawnTrade_Cap".Translate(settings.pawnTradeInvestCap));
             settings.pawnTradeInvestCap = Mathf.RoundToInt(listing.Slider(settings.pawnTradeInvestCap, 50f, 500f));
-            listing.Label($"盈亏触发 RimTalk 阈值: {settings.pawnTradeRimTalkThreshold} @银");
+            listing.Label("RP_Set_PawnTrade_RimTalk".Translate(settings.pawnTradeRimTalkThreshold));
             settings.pawnTradeRimTalkThreshold = Mathf.RoundToInt(listing.Slider(settings.pawnTradeRimTalkThreshold, 10f, 100f));
-            listing.Label($"基础命中率: {settings.pawnTradeBaseHitChance * 100f:F0}%");
+            listing.Label("RP_Set_PawnTrade_HitChance".Translate((settings.pawnTradeBaseHitChance * 100f).ToString("F0")));
             settings.pawnTradeBaseHitChance = listing.Slider(settings.pawnTradeBaseHitChance, 0.1f, 0.9f);
-            listing.Label($"每点智力命中加成: {settings.pawnTradeHitPerSkill * 100f:F0}%");
+            listing.Label("RP_Set_PawnTrade_HitPerSkill".Translate((settings.pawnTradeHitPerSkill * 100f).ToString("F0")));
             settings.pawnTradeHitPerSkill = listing.Slider(settings.pawnTradeHitPerSkill, 0f, 0.1f);
             listing.Gap(10f);
 
             // ============ 搜刮 ============
-            listing.Label("<b>敌人搜刮</b>");
+            listing.Label("<b>" + "RP_Set_Loot_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("启用敌人 RimPay 搜刮", ref settings.enablePawnLoot);
-            listing.Label($"击杀者分成: {settings.lootKillerShare * 100f:F0}% (其余入国库)");
+            listing.CheckboxLabeled("RP_Set_Loot_Enable".Translate(), ref settings.enablePawnLoot);
+            listing.Label("RP_Set_Loot_KillerShare".Translate((settings.lootKillerShare * 100f).ToString("F0")));
             settings.lootKillerShare = listing.Slider(settings.lootKillerShare, 0f, 1f);
             listing.Gap(10f);
 
             // ============ 钱包流水 ============
-            listing.Label("<b>钱包流水</b>");
+            listing.Label("<b>" + "RP_Set_WalletFlow_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.Label($"每人保留流水条数: {settings.maxTransactionPerPawn} 条");
+            listing.Label("RP_Set_WalletFlow_Max".Translate(settings.maxTransactionPerPawn));
             settings.maxTransactionPerPawn = Mathf.RoundToInt(listing.Slider(settings.maxTransactionPerPawn, 5f, 50f));
             listing.Gap(10f);
 
             // ============ 财富托管 (Wealth Escrow) ============
-            listing.Label("<b>财富托管 (Wealth Escrow)</b>");
+            listing.Label("<b>" + "RP_Set_Escrow_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.Label("<i>RimPay 提供数字资产托管：被托管的资产不参与袭击威胁点计算，殖民地真实财富不变。数字国库中的白银已物理隐藏，无需托管。</i>");
-            listing.CheckboxLabeled("建筑财富托管", ref settings.hideBuildingWealth,
-                "殖民地建筑（含地板）财富托管为国家储备，不再计入袭击威胁点。");
-            listing.CheckboxLabeled("随身装备托管", ref settings.hidePawnEquipmentWealth,
-                "小人/动物随身携带的武器、衣物、驮载物品不计入袭击威胁点；不影响小人本体与机械体价值。");
+            listing.Label("<i>" + "RP_Set_Escrow_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_Escrow_Building".Translate(), ref settings.hideBuildingWealth,
+                "RP_Set_Escrow_BuildingDesc".Translate());
+            listing.CheckboxLabeled("RP_Set_Escrow_Equipment".Translate(), ref settings.hidePawnEquipmentWealth,
+                "RP_Set_Escrow_EquipmentDesc".Translate());
             listing.Gap(10f);
 
             // ============ RimSimManagementFramework边缘模拟经营框架联动 ============
-            listing.Label("<b>RimSimManagementFramework边缘模拟经营框架联动 (Shop Integration)</b>");
+            listing.Label("<b>" + "RP_Set_RimSim_Title".Translate() + "</b>");
             listing.GapLine();
-            listing.Label("<i>需安装 RimSimManagementFramework边缘模拟经营框架。未安装时以下功能自动休眠（与模组加载顺序无关）。</i>");
-            listing.CheckboxLabeled("启用边缘模拟经营框架商店联动", ref settings.enableRimSimIntegration,
-                "结账折扣 + 店铺收入自动入数字国库。需安装 RimSimManagementFramework边缘模拟经营框架。");
-            listing.Label($"店铺收入入国库比例: {settings.rimSimTreasuryRatio * 100f:F0}%");
+            listing.Label("<i>" + "RP_Set_RimSim_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_RimSim_Enable".Translate(), ref settings.enableRimSimIntegration,
+                "RP_Set_RimSim_EnableDesc".Translate());
+            listing.Label("RP_Set_RimSim_TreasuryRatio".Translate((settings.rimSimTreasuryRatio * 100f).ToString("F0")));
             settings.rimSimTreasuryRatio = listing.Slider(settings.rimSimTreasuryRatio, 0f, 1f);
-            listing.Label($"数码生态折扣 (佩戴 RimDigitalLife 数码设备): 顾客实付 -{settings.rimSimDeviceDiscount * 100f:F0}%");
+            listing.Label("RP_Set_RimSim_DeviceDiscount".Translate((settings.rimSimDeviceDiscount * 100f).ToString("F0")));
             settings.rimSimDeviceDiscount = listing.Slider(settings.rimSimDeviceDiscount, 0f, 0.3f);
-            listing.Label($"量子网络档折扣 (有殖民者订阅量子网络): 顾客实付 -{settings.rimSimQuantumDiscount * 100f:F0}%");
+            listing.Label("RP_Set_RimSim_QuantumDiscount".Translate((settings.rimSimQuantumDiscount * 100f).ToString("F0")));
             settings.rimSimQuantumDiscount = listing.Slider(settings.rimSimQuantumDiscount, 0f, 0.3f);
             listing.Gap(10f);
 
+            // ============ RimMarket 边缘市场联动 ============
+            listing.Label("<b>" + "RP_Set_RimMarket_Title".Translate() + "</b>");
+            listing.GapLine();
+            listing.Label("<i>" + "RP_Set_RimMarket_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_RimMarket_Enable".Translate(), ref settings.enableRimMarketIntegration,
+                "RP_Set_RimMarket_EnableDesc".Translate());
+            listing.Gap(10f);
+
+            // ============ NPC 数字钱包 ============
+            listing.Label("<b>" + "RP_Set_NpcWallet_Title".Translate() + "</b>");
+            listing.GapLine();
+            listing.Label("<i>" + "RP_Set_NpcWallet_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_NpcWallet_Enable".Translate(), ref settings.enableNpcWallets,
+                "RP_Set_NpcWallet_EnableDesc".Translate());
+            listing.Label("RP_Set_NpcWallet_Multiplier".Translate(settings.npcWalletMultiplier.ToString("F1")));
+            settings.npcWalletMultiplier = listing.Slider(settings.npcWalletMultiplier, 0.1f, 3f);
+            listing.Gap(10f);
+
+            // ============ Bunnygirl Race 赌场联动 ============
+            listing.Label("<b>" + "RP_Set_Bunny_Title".Translate() + "</b>");
+            listing.GapLine();
+            listing.Label("<i>" + "RP_Set_Bunny_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_Bunny_Enable".Translate(), ref settings.enableBunnygirlIntegration,
+                "RP_Set_Bunny_EnableDesc".Translate());
+            listing.Gap(10f);
+
+            // ============ Hospitality 访客联动 ============
+            listing.Label("<b>" + "RP_Set_Hospitality_Title".Translate() + "</b>");
+            listing.GapLine();
+            listing.Label("<i>" + "RP_Set_Hospitality_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_Hospitality_Enable".Translate(), ref settings.enableHospitalityIntegration,
+                "RP_Set_Hospitality_EnableDesc".Translate());
+            listing.Gap(10f);
+
+            // ============ RimStock 边缘股市联动 ============
+            listing.Label("<b>" + "RP_Set_RimStock_Title".Translate() + "</b>");
+            listing.GapLine();
+            listing.Label("<i>" + "RP_Set_RimStock_Desc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_Set_RimStock_Enable".Translate(), ref settings.enableRimStockIntegration,
+                "RP_Set_RimStock_EnableDesc".Translate());
+            listing.Gap(10f);
+
             listing.Gap(6f);
-            listing.Label("<b>当前模组版本: v1.1.0</b>");
+            listing.Label("<b>" + "RP_Set_Version".Translate("v1.1.0") + "</b>");
 
             listing.End();
             Widgets.EndScrollView();
@@ -254,94 +296,104 @@ namespace RimDigitalLife_RimPay
             listing.Begin(viewRect);
 
             // ============ AI 经济智能（多供应商配置） ============
-            listing.Label("<b>AI 经济控制 (RimPay Economy AI)</b>");
+            listing.Label("<b>" + "RP_AI_Title".Translate() + "</b>");
             listing.GapLine();
 
             // 推荐使用 Player2 的话术（显著位置）
             Text.Font = GameFont.Tiny;
-            listing.Label("<color=#58d3f7><b>[推荐] 建议注册并使用 Player2 软件，免费体验全部 AI 功能！</b></color>");
-            listing.Label("<color=#58d3f7>Player2 为本地免费桌面程序，无需 API Key；若已安装且正在运行，勾选 Player2 配置即可直接使用。</color>");
-            listing.Label("<color=#58d3f7>勾选的配置会按列表顺序从上到下依次尝试，失败或额度不足时自动切换下一个。</color>");
+            listing.Label("<color=#58d3f7><b>" + "RP_AI_P2Promo1".Translate() + "</b></color>");
+            listing.Label("<color=#58d3f7>" + "RP_AI_P2Promo2".Translate() + "</color>");
+            listing.Label("<color=#58d3f7>" + "RP_AI_P2Promo3".Translate() + "</color>");
             Text.Font = GameFont.Small;
             listing.Gap(4f);
 
-            listing.Label("<i>开启后，每日经济变量由 AI 随机控制；全部配置失败时自动回退到内置随机。</i>");
-            listing.CheckboxLabeled("启用 AI 控制经济", ref settings.enableEconomyAI);
+            listing.Label("<i>" + "RP_AI_EnableDesc".Translate() + "</i>");
+            listing.CheckboxLabeled("RP_AI_Enable".Translate(), ref settings.enableEconomyAI);
             listing.Gap(4f);
 
-            listing.Label($"AI 刷新间隔: {settings.aiRefreshIntervalHours} 小时 (越短越活跃，注意 API 用量)");
+            listing.Label("RP_AI_Interval".Translate(settings.aiRefreshIntervalHours));
             settings.aiRefreshIntervalHours = Mathf.RoundToInt(listing.Slider(settings.aiRefreshIntervalHours, 2f, 72f));
             listing.Gap(4f);
 
             // 供应商配置列表
-            listing.Label("<b>供应商配置 (勾选启用，顺序=尝试顺序):</b>");
+            listing.Label("<b>" + "RP_AI_Providers".Translate() + "</b>");
             listing.Gap(3f);
             DrawAIConfigList(listing);
 
             listing.Gap(10f);
 
             // ============ AI 实时状态面板（验证 AI 是否掌控经济） ============
-            listing.Label("<b>AI 经济实时状态 (Live Status)</b>");
+            listing.Label("<b>" + "RP_AI_LiveTitle".Translate() + "</b>");
             listing.GapLine();
-            listing.Label("<i>实时显示 AI 当前生成并生效的经济数值，用于验证 AI 是否真正掌控经济。</i>");
+            listing.Label("<i>" + "RP_AI_LiveDesc".Translate() + "</i>");
             listing.Gap(4f);
 
-            DrawStatusRow(listing, "AI 控制开关", settings.enableEconomyAI ? "已开启" : "已关闭");
-            DrawStatusRow(listing, "工资倍率 (salaryMultiplier)", $"{RimPayAIProvider.salaryMultiplier:F2} × 每日工资");
-            DrawStatusRow(listing, "房租倍率 (rentMultiplier)", $"{RimPayAIProvider.rentMultiplier:F2} × 每日房租");
-            DrawStatusRow(listing, "余额宝利率增量 (interestRateDelta)", $"{RimPayAIProvider.interestRateDelta:+0.00;-0.00;0.00}% 加到基础利率");
-            DrawStatusRow(listing, "借贷利率倍率 (loanRateMultiplier)", $"{RimPayAIProvider.loanRateMultiplier:F2} × 借贷/放贷利率");
-            DrawStatusRow(listing, "餐费倍率 (mealFeeMultiplier)", $"{RimPayAIProvider.mealFeeMultiplier:F2} × 每顿餐费");
-            DrawStatusRow(listing, "搜刮分成增量 (lootShareDelta)", $"{RimPayAIProvider.lootShareDelta:+0.00;-0.00;0.00} 加进击杀者分成");
-            DrawStatusRow(listing, "交易价格倍率 (tradePriceMultiplier)", $"{RimPayAIProvider.tradePriceMultiplier:F2} × 买卖价格");
-            string toneText = RimPayAIProvider.marketTone == "bull" ? "bull (牛市：股市普涨)" :
-                              RimPayAIProvider.marketTone == "bear" ? "bear (熊市：股市普跌)" :
-                              "neutral (中性：股市随机)";
-            DrawStatusRow(listing, "市场情绪 (marketTone)", toneText);
+            DrawStatusRow(listing, "RP_AI_S_Toggle".Translate(), settings.enableEconomyAI ? "RP_Common_On".Translate() : "RP_Common_Off".Translate());
+            DrawStatusRow(listing, "RP_AI_S_SalaryMult".Translate(), "RP_AI_S_SalaryMultVal".Translate(RimPayAIProvider.salaryMultiplier.ToString("F2")));
+            DrawStatusRow(listing, "RP_AI_S_RentMult".Translate(), "RP_AI_S_RentMultVal".Translate(RimPayAIProvider.rentMultiplier.ToString("F2")));
+            DrawStatusRow(listing, "RP_AI_S_InterestDelta".Translate(), "RP_AI_S_InterestDeltaVal".Translate(RimPayAIProvider.interestRateDelta.ToString("+0.00;-0.00;0.00")));
+            DrawStatusRow(listing, "RP_AI_S_LoanMult".Translate(), "RP_AI_S_LoanMultVal".Translate(RimPayAIProvider.loanRateMultiplier.ToString("F2")));
+            DrawStatusRow(listing, "RP_AI_S_MealMult".Translate(), "RP_AI_S_MealMultVal".Translate(RimPayAIProvider.mealFeeMultiplier.ToString("F2")));
+            DrawStatusRow(listing, "RP_AI_S_LootDelta".Translate(), "RP_AI_S_LootDeltaVal".Translate(RimPayAIProvider.lootShareDelta.ToString("+0.00;-0.00;0.00")));
+            DrawStatusRow(listing, "RP_AI_S_TradeMult".Translate(), "RP_AI_S_TradeMultVal".Translate(RimPayAIProvider.tradePriceMultiplier.ToString("F2")));
+            string toneText = RimPayAIProvider.marketTone == "bull" ? (string)"RP_Tone_Bull".Translate() :
+                              RimPayAIProvider.marketTone == "bear" ? (string)"RP_Tone_Bear".Translate() :
+                              (string)"RP_Tone_Neutral".Translate();
+            DrawStatusRow(listing, "RP_AI_S_Tone".Translate(), toneText);
             GameComponent_RimPay compStatus = Current.Game?.GetComponent<GameComponent_RimPay>();
             if (compStatus != null)
             {
                 string macroText = string.IsNullOrEmpty(compStatus.ActiveMacroEvent)
-                    ? "(无)"
-                    : $"{compStatus.MacroEventLabel} (剩余 {compStatus.MacroEventDaysLeft} 天)";
-                DrawStatusRow(listing, "宏观事件", macroText);
+                    ? (string)"RP_Common_None".Translate()
+                    : (string)"RP_AI_S_MacroVal".Translate(compStatus.MacroEventLabel, compStatus.MacroEventDaysLeft);
+                DrawStatusRow(listing, "RP_AI_S_Macro".Translate(), macroText);
             }
-            DrawStatusRow(listing, "AI 财经头条 (eventText)", string.IsNullOrEmpty(RimPayAIProvider.eventText) ? "(暂无，需 AI 成功返回)" : RimPayAIProvider.eventText);
+            DrawStatusRow(listing, "RP_AI_S_Event".Translate(), string.IsNullOrEmpty(RimPayAIProvider.eventText) ? (string)"RP_Common_PendingAI".Translate() : RimPayAIProvider.eventText);
             Map statusMap = Find.CurrentMap ?? Find.AnyPlayerHomeMap;
             string todayStr = statusMap != null ? GenLocalDate.DayOfYear(statusMap).ToString() : "-";
-            DrawStatusRow(listing, "最近请求日", $"{RimPayAIProvider.LastRequestDay} (今日: {todayStr})");
-            DrawStatusRow(listing, "是否有 AI 结果", RimPayAIProvider.hasAIResult ? "是" : "否");
-            DrawStatusRow(listing, "连续失败次数", RimPayAIProvider.ConsecutiveFailures.ToString());
-            DrawStatusRow(listing, "冷却中", RimPayAIProvider.IsCooldownActive ? "是" : "否");
-            DrawStatusRow(listing, "请求进行中", RimPayAIProvider.IsRequestInFlight ? "是" : "否");
+            DrawStatusRow(listing, "RP_AI_S_LastDay".Translate(), "RP_AI_S_LastDayFmt".Translate(RimPayAIProvider.LastRequestDay, todayStr));
+            DrawStatusRow(listing, "RP_AI_S_HasResult".Translate(), RimPayAIProvider.hasAIResult ? "RP_Common_Yes".Translate() : "RP_Common_No".Translate());
+            DrawStatusRow(listing, "RP_AI_S_Fails".Translate(), RimPayAIProvider.ConsecutiveFailures.ToString());
+            DrawStatusRow(listing, "RP_Common_Cooldown".Translate(), RimPayAIProvider.IsCooldownActive ? "RP_Common_Yes".Translate() : "RP_Common_No".Translate());
+            DrawStatusRow(listing, "RP_AI_S_InFlight".Translate(), RimPayAIProvider.IsRequestInFlight ? "RP_Common_Yes".Translate() : "RP_Common_No".Translate());
             if (!string.IsNullOrEmpty(RimPayAIProvider.LastHttpErrorDetail))
-                DrawStatusRow(listing, "最近错误", RimPayAIProvider.LastHttpErrorDetail);
+                DrawStatusRow(listing, "RP_AI_S_LastError".Translate(), RimPayAIProvider.LastHttpErrorDetail);
 
             listing.Gap(4f);
             Rect forceRow = listing.GetRect(30f);
-            if (Widgets.ButtonText(forceRow, "立即请求一次 AI 经济数据 (Force Request)"))
+            if (Widgets.ButtonText(forceRow, "RP_AI_ForceBtn".Translate()))
             {
                 RimPayAIProvider.ForceRequestNow();
             }
             listing.Gap(6f);
-            listing.Label("<i>点击上方按钮可绕过「每日一次」限制，立即让 AI 生成一组新数值并显示在上面，用于验证连接与 AI 掌控。</i>");
+            listing.Label("<i>" + "RP_AI_ForceDesc".Translate() + "</i>");
             listing.Gap(10f);
 
             // ============ AI 结果归档（最近 10 次） ============
-            listing.Label("<b>AI 结果归档 (最近 10 次)</b>");
+            listing.Label("<b>" + "RP_AI_ArchiveTitle".Translate() + "</b>");
             listing.GapLine();
             var archive = RimPayAIProvider.HistoryArchive;
             if (archive == null || archive.Count == 0)
             {
-                listing.Label("<i>(暂无归档，AI 成功返回后自动记录)</i>");
+                listing.Label("<i>" + "RP_AI_ArchiveEmpty".Translate() + "</i>");
             }
             else
             {
                 Text.Font = GameFont.Tiny;
                 foreach (var snap in archive)
                 {
-                    string line = $"{snap.dayLabel} | 薪×{snap.salaryMult:F2} 租×{snap.rentMult:F2} 贷×{snap.loanMult:F2} 餐×{snap.mealMult:F2} 利{snap.interestDelta:+0.00;-0.00;0.00} 价×{snap.tradeMult:F2} 搜{snap.lootDelta:+0.00;-0.00;0.00} | {snap.tone} | {snap.macro}";
-                    if (!string.IsNullOrEmpty(snap.evt)) line += $"\n  头条: {snap.evt}";
+                    string line = "RP_AI_ArchiveLine".Translate(
+                        snap.dayLabel,
+                        snap.salaryMult.ToString("F2"),
+                        snap.rentMult.ToString("F2"),
+                        snap.loanMult.ToString("F2"),
+                        snap.mealMult.ToString("F2"),
+                        snap.interestDelta.ToString("+0.00;-0.00;0.00"),
+                        snap.tradeMult.ToString("F2"),
+                        snap.lootDelta.ToString("+0.00;-0.00;0.00"),
+                        snap.tone,
+                        snap.macro);
+                    if (!string.IsNullOrEmpty(snap.evt)) line += "\n  " + "RP_AI_ArchiveHeadline".Translate(snap.evt);
                     listing.Label(line);
                     listing.Gap(2f);
                 }
@@ -350,18 +402,18 @@ namespace RimDigitalLife_RimPay
             listing.Gap(10f);
 
             // ============ 每日财经日报信封 ============
-            listing.Label("<b>每日财经日报 (信封提醒)</b>");
+            listing.Label("<b>" + "RP_AI_LetterTitle".Translate() + "</b>");
             listing.GapLine();
-            listing.CheckboxLabeled("开启每日财经日报信封", ref settings.showDailyEconomyLetter,
-                "若关闭，则不发送信封，仅保留结算消息。");
-            listing.CheckboxLabeled("AI 财经播报给 RimTalk 小人对话", ref settings.enableAiRimTalkBroadcast,
-                "每日 AI 生成财经事件后，让一名小人通过 RimTalk 聊起这个话题。需已安装并启用 RimTalk。");
+            listing.CheckboxLabeled("RP_AI_DailyLetter".Translate(), ref settings.showDailyEconomyLetter,
+                "RP_AI_DailyLetterDesc".Translate());
+            listing.CheckboxLabeled("RP_AI_RimTalkCast".Translate(), ref settings.enableAiRimTalkBroadcast,
+                "RP_AI_RimTalkCastDesc".Translate());
             listing.Gap(10f);
 
             // ============ AI 经济 JSON 模板（提示词编辑器样式，同 RimTalk/RimTuber） ============
-            listing.Label("<b>AI 经济 JSON 模板 (JSON Template)</b>");
+            listing.Label("<b>" + "RP_AI_JsonTitle".Translate() + "</b>");
             listing.GapLine();
-            listing.Label("<i>该 JSON 指示 AI 每日返回的经济变量，可自由编辑；改乱后可一键还原默认。</i>");
+            listing.Label("<i>" + "RP_AI_JsonDesc".Translate() + "</i>");
             listing.Gap(4f);
 
             Rect jsonRect = listing.GetRect(240f);
@@ -372,16 +424,16 @@ namespace RimDigitalLife_RimPay
             Rect saveJsonBtn = new Rect(jsonBtnRow.x, jsonBtnRow.y, jsonBtnRow.width / 2f - 4f, jsonBtnRow.height);
             Rect resetJsonBtn = new Rect(jsonBtnRow.x + jsonBtnRow.width / 2f + 4f, jsonBtnRow.y, jsonBtnRow.width / 2f - 4f, jsonBtnRow.height);
 
-            if (Widgets.ButtonText(saveJsonBtn, "保存 JSON 模板 (Save)"))
+            if (Widgets.ButtonText(saveJsonBtn, "RP_AI_JsonSave".Translate()))
             {
                 settings.economyJsonTemplate = jsonBuffer;
-                Messages.Message("[RimPay] JSON 模板已保存。", MessageTypeDefOf.NeutralEvent, false);
+                Messages.Message("[RimPay] " + "RP_AI_JsonSaved".Translate(), MessageTypeDefOf.NeutralEvent, false);
             }
-            if (Widgets.ButtonText(resetJsonBtn, "还原默认 JSON (Reset)"))
+            if (Widgets.ButtonText(resetJsonBtn, "RP_AI_JsonReset".Translate()))
             {
                 settings.RestoreDefaultJson();
                 jsonBuffer = settings.economyJsonTemplate;
-                Messages.Message("[RimPay] 已还原默认 JSON 模板。", MessageTypeDefOf.NeutralEvent, false);
+                Messages.Message("[RimPay] " + "RP_AI_JsonResetDone".Translate(), MessageTypeDefOf.NeutralEvent, false);
             }
 
             listing.End();
@@ -401,7 +453,7 @@ namespace RimDigitalLife_RimPay
         {
             if (testInProgress) return;
             testInProgress = true;
-            testResultText = "正在测试连接... (Testing...)";
+            testResultText = "RP_AI_TestingConn".Translate();
             testConfigOverride = cfg;
 
             ThreadPool.QueueUserWorkItem(_ =>
@@ -493,7 +545,7 @@ namespace RimDigitalLife_RimPay
 
             Rect addRow = listing.GetRect(30f);
             Rect addBtn = new Rect(addRow.x, addRow.y, addRow.width, addRow.height);
-            if (Widgets.ButtonText(addBtn, "添加供应商配置 (+)"))
+            if (Widgets.ButtonText(addBtn, "RP_AI_AddConfig".Translate()))
             {
                 var options = new List<FloatMenuOption>();
                 foreach (RimPayProvider provider in System.Enum.GetValues(typeof(RimPayProvider)))
@@ -521,10 +573,10 @@ namespace RimDigitalLife_RimPay
         private void DrawAIConfigEditor(Listing_Standard listing, RimPayProviderConfig cfg)
         {
             listing.GapLine();
-            listing.Label("<b>配置详情:</b> " + cfg.DisplayLabel);
+            listing.Label("<b>" + "RP_AI_CfgDetail".Translate() + "</b> " + cfg.DisplayLabel);
 
             Rect provRow = listing.GetRect(30f);
-            Widgets.Label(new Rect(provRow.x, provRow.y, 100f, provRow.height), "供应商:");
+            Widgets.Label(new Rect(provRow.x, provRow.y, 100f, provRow.height), "RP_AI_CfgProvider".Translate());
             Rect provBtn = new Rect(provRow.x + 105f, provRow.y, provRow.width - 105f, provRow.height);
             if (Widgets.ButtonText(provBtn, cfg.provider.GetLabel()))
             {
@@ -548,11 +600,11 @@ namespace RimDigitalLife_RimPay
 
             if (cfg.provider == RimPayProvider.Player2)
             {
-                listing.Label("Player2 本地服务：无需 API Key，安装并运行 Player2 即可。");
+                listing.Label("RP_AI_CfgP2Hint".Translate());
             }
             else if (cfg.provider == RimPayProvider.Local)
             {
-                listing.Label("本地模型：未安装 Ollama 前会自动失败并切换下一个配置。");
+                listing.Label("RP_AI_CfgLocalHint".Translate());
             }
 
             if (cfg.provider.GetRequiresApiKey())
@@ -561,18 +613,18 @@ namespace RimDigitalLife_RimPay
                 cfg.apiKey = listing.TextEntry(cfg.apiKey ?? "");
             }
 
-            listing.Label("端点 URL (留空则用供应商默认):");
+            listing.Label("RP_AI_CfgEndpoint".Translate());
             cfg.endpointUrl = listing.TextEntry(cfg.endpointUrl ?? "");
 
-            listing.Label("模型名称 (留空则用供应商默认):");
+            listing.Label("RP_AI_CfgModel".Translate());
             cfg.model = listing.TextEntry(cfg.model ?? "");
 
-            listing.CheckboxLabeled("启用此配置", ref cfg.enabled);
+            listing.CheckboxLabeled("RP_AI_CfgEnable".Translate(), ref cfg.enabled);
 
             // ============ 测试连接按钮 ============
             listing.Gap(4f);
             Rect testBtnRect = listing.GetRect(30f);
-            if (Widgets.ButtonText(testBtnRect, testInProgress ? "正在测试中... (Testing...)" : "测试连接 (Test Connection)"))
+            if (Widgets.ButtonText(testBtnRect, testInProgress ? (string)"RP_AI_TestingBtn".Translate() : (string)"RP_AI_CfgTest".Translate()))
             {
                 StartTestConnection(cfg);
             }

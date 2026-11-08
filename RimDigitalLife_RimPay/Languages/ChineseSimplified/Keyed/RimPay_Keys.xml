@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <!-- ==================== 设置页：通用 ==================== -->
+  <RP_Set_TabGeneral>常规设置</RP_Set_TabGeneral>
+  <RP_Set_TabAI>AI 经济</RP_Set_TabAI>
+  <RP_Set_Version>当前模组版本: {0}</RP_Set_Version>
+
+  <!-- ==================== 设置页：薪资 ==================== -->
+  <RP_Set_Salary_Title>薪资发放</RP_Set_Salary_Title>
+  <RP_Set_Salary_Enable>启用工资发放</RP_Set_Salary_Enable>
+  <RP_Set_Salary_Base>基础工资: {0} @银/日</RP_Set_Salary_Base>
+  <RP_Set_Salary_Child>儿童零花钱: {0} @银/日</RP_Set_Salary_Child>
+  <RP_Set_Salary_Slave>奴隶安抚金: {0} @银/日</RP_Set_Salary_Slave>
+  <RP_Set_Salary_Expert>专家加成: +{0} @银/日</RP_Set_Salary_Expert>
+  <RP_Set_Salary_Skilled>熟练工加成: +{0} @银/日</RP_Set_Salary_Skilled>
+  <RP_Set_Salary_Basic>基础工人加成: +{0} @银/日</RP_Set_Salary_Basic>
+
+  <!-- ==================== 设置页：房租 ==================== -->
+  <RP_Set_Rent_Title>住宿房租</RP_Set_Rent_Title>
+  <RP_Set_Rent_Enable>启用房租收取</RP_Set_Rent_Enable>
+  <RP_Set_Rent_Luxury>奢华房间 (印象&gt;120): {0} @银/日</RP_Set_Rent_Luxury>
+  <RP_Set_Rent_High>高级房间 (印象&gt;80): {0} @银/日</RP_Set_Rent_High>
+  <RP_Set_Rent_Mid>舒适房间 (印象&gt;50): {0} @银/日</RP_Set_Rent_Mid>
+  <RP_Set_Rent_Low>普通房间 (印象&gt;20): {0} @银/日</RP_Set_Rent_Low>
+  <RP_Set_Rent_Min>简陋房间: {0} @银/日</RP_Set_Rent_Min>
+  <RP_Set_Rent_DeviceDiscount>佩戴数码设备折扣: {0}%</RP_Set_Rent_DeviceDiscount>
+
+  <!-- ==================== 设置页：餐费 ==================== -->
+  <RP_Set_Meal_Title>用餐扣费</RP_Set_Meal_Title>
+  <RP_Set_Meal_Enable>启用餐费扣除</RP_Set_Meal_Enable>
+  <RP_Set_Meal_Lavish>奢华餐: {0} @银/顿</RP_Set_Meal_Lavish>
+  <RP_Set_Meal_Fine>精致餐: {0} @银/顿</RP_Set_Meal_Fine>
+  <RP_Set_Meal_Simple>简单餐: {0} @银/顿</RP_Set_Meal_Simple>
+  <RP_Set_Meal_Awful>难吃餐 (营养膏等): {0} @银/顿</RP_Set_Meal_Awful>
+  <RP_Set_Meal_Raw>生食/浆果: {0} @银/顿</RP_Set_Meal_Raw>
+
+  <!-- ==================== 设置页：医疗 ==================== -->
+  <RP_Set_Medical_Title>医疗就医 (RimPay 医保)</RP_Set_Medical_Title>
+  <RP_Set_Medical_Enable>启用诊疗扣费</RP_Set_Medical_Enable>
+  <RP_Set_Medical_Desc>医生治疗时收取诊疗费：病人钱包优先支付，不足部分由数字国库医保报销。诊疗收入回流国库。</RP_Set_Medical_Desc>
+  <RP_Set_Medical_Fee>单次诊疗费: {0} @银</RP_Set_Medical_Fee>
+
+  <!-- ==================== 设置页：利息 ==================== -->
+  <RP_Set_Interest_Title>余额宝利息</RP_Set_Interest_Title>
+  <RP_Set_Interest_Enable>启用存款利息</RP_Set_Interest_Enable>
+  <RP_Set_Interest_MinBalance>计息门槛 (余额超过才计息): {0} @银</RP_Set_Interest_MinBalance>
+  <RP_Set_Interest_Rate>每日利率: {0}%</RP_Set_Interest_Rate>
+  <RP_Set_Interest_Mood>利息好心情概率: {0}%</RP_Set_Interest_Mood>
+
+  <!-- ==================== 设置页：借贷 ==================== -->
+  <RP_Set_Loan_Title>借贷中心</RP_Set_Loan_Title>
+  <RP_Set_Loan_Enable>启用借贷中心</RP_Set_Loan_Enable>
+  <RP_Set_Loan_RateBase>基准放贷利率: {0}%/季</RP_Set_Loan_RateBase>
+  <RP_Set_Loan_RateFriendly>友好派系利率: {0}%/季</RP_Set_Loan_RateFriendly>
+  <RP_Set_Loan_RateCold>冷漠派系利率: {0}%/季</RP_Set_Loan_RateCold>
+  <RP_Set_Loan_BorrowBase>基准借款利率: {0}%/季</RP_Set_Loan_BorrowBase>
+  <RP_Set_Loan_Period>借贷周期: {0} 天</RP_Set_Loan_Period>
+  <RP_Set_Loan_DefaultAmount>借贷默认金额: {0} @银</RP_Set_Loan_DefaultAmount>
+  <RP_Set_Loan_BadDebt>逾期坏账好感惩罚: {0}</RP_Set_Loan_BadDebt>
+
+  <!-- ==================== 设置页：股市 ==================== -->
+  <RP_Set_Stock_Title>证券交易</RP_Set_Stock_Title>
+  <RP_Set_Stock_Enable>启用证券交易</RP_Set_Stock_Enable>
+  <RP_Set_Stock_Interval>股价更新间隔: {0} 天</RP_Set_Stock_Interval>
+  <RP_Set_Stock_FundVol>$DSF 杠杆基金波动率: {0}%</RP_Set_Stock_FundVol>
+  <RP_Set_Stock_HistoryDays>K线保留天数: {0} 天</RP_Set_Stock_HistoryDays>
+
+  <!-- ==================== 设置页：小人炒股 ==================== -->
+  <RP_Set_PawnTrade_Title>小人自动炒股</RP_Set_PawnTrade_Title>
+  <RP_Set_PawnTrade_Enable>启用小人自动炒股</RP_Set_PawnTrade_Enable>
+  <RP_Set_PawnTrade_MinBalance>炒股最低余额门槛: {0} @银</RP_Set_PawnTrade_MinBalance>
+  <RP_Set_PawnTrade_Ratio>投入余额比例: {0}%</RP_Set_PawnTrade_Ratio>
+  <RP_Set_PawnTrade_Cap>单次投入上限: {0} @银</RP_Set_PawnTrade_Cap>
+  <RP_Set_PawnTrade_RimTalk>盈亏触发 RimTalk 阈值: {0} @银</RP_Set_PawnTrade_RimTalk>
+  <RP_Set_PawnTrade_HitChance>基础命中率: {0}%</RP_Set_PawnTrade_HitChance>
+  <RP_Set_PawnTrade_HitPerSkill>每点智力命中加成: {0}%</RP_Set_PawnTrade_HitPerSkill>
+
+  <!-- ==================== 设置页：搜刮 ==================== -->
+  <RP_Set_Loot_Title>敌人搜刮</RP_Set_Loot_Title>
+  <RP_Set_Loot_Enable>启用敌人 RimPay 搜刮</RP_Set_Loot_Enable>
+  <RP_Set_Loot_KillerShare>击杀者分成: {0}% (其余入国库)</RP_Set_Loot_KillerShare>
+
+  <!-- ==================== 设置页：钱包流水 ==================== -->
+  <RP_Set_WalletFlow_Title>钱包流水</RP_Set_WalletFlow_Title>
+  <RP_Set_WalletFlow_Max>每人保留流水条数: {0} 条</RP_Set_WalletFlow_Max>
+
+  <!-- ==================== 设置页：财富托管 ==================== -->
+  <RP_Set_Escrow_Title>财富托管 (Wealth Escrow)</RP_Set_Escrow_Title>
+  <RP_Set_Escrow_Desc>RimPay 提供数字资产托管：被托管的资产不参与袭击威胁点计算，殖民地真实财富不变。数字国库中的白银已物理隐藏，无需托管。</RP_Set_Escrow_Desc>
+  <RP_Set_Escrow_Building>建筑财富托管</RP_Set_Escrow_Building>
+  <RP_Set_Escrow_BuildingDesc>殖民地建筑（含地板）财富托管为国家储备，不再计入袭击威胁点。</RP_Set_Escrow_BuildingDesc>
+  <RP_Set_Escrow_Equipment>随身装备托管</RP_Set_Escrow_Equipment>
+  <RP_Set_Escrow_EquipmentDesc>小人/动物随身携带的武器、衣物、驮载物品不计入袭击威胁点；不影响小人本体与机械体价值。</RP_Set_Escrow_EquipmentDesc>
+
+  <!-- ==================== 设置页：RimSim 联动 ==================== -->
+  <RP_Set_RimSim_Title>RimSimManagementFramework边缘模拟经营框架联动 (Shop Integration)</RP_Set_RimSim_Title>
+  <RP_Set_RimSim_Desc>需安装 RimSimManagementFramework边缘模拟经营框架。未安装时以下功能自动休眠（与模组加载顺序无关）。</RP_Set_RimSim_Desc>
+  <RP_Set_RimSim_Enable>启用边缘模拟经营框架商店联动</RP_Set_RimSim_Enable>
+  <RP_Set_RimSim_EnableDesc>结账折扣 + 店铺收入自动入数字国库。需安装 RimSimManagementFramework边缘模拟经营框架。</RP_Set_RimSim_EnableDesc>
+  <RP_Set_RimSim_TreasuryRatio>店铺收入入国库比例: {0}%</RP_Set_RimSim_TreasuryRatio>
+  <RP_Set_RimSim_DeviceDiscount>数码生态折扣 (佩戴 RimDigitalLife 数码设备): 顾客实付 -{0}%</RP_Set_RimSim_DeviceDiscount>
+  <RP_Set_RimSim_QuantumDiscount>量子网络档折扣 (有殖民者订阅量子网络): 顾客实付 -{0}%</RP_Set_RimSim_QuantumDiscount>
+
+  <!-- ==================== 设置页：RimMarket 联动 ==================== -->
+  <RP_Set_RimMarket_Title>RimMarket 边缘市场联动</RP_Set_RimMarket_Title>
+  <RP_Set_RimMarket_Desc>需安装 RimMarket 边缘市场。未安装时以下功能自动休眠（与模组加载顺序无关）。</RP_Set_RimMarket_Desc>
+  <RP_Set_RimMarket_Enable>启用边缘市场钱包支付联动</RP_Set_RimMarket_Enable>
+  <RP_Set_RimMarket_EnableDesc>小人在边缘市场消费时优先使用数字钱包余额，不足部分再用随身实体白银补足。</RP_Set_RimMarket_EnableDesc>
+
+  <!-- ==================== 设置页：NPC 数字钱包 ==================== -->
+  <RP_Set_NpcWallet_Title>NPC 数字钱包</RP_Set_NpcWallet_Title>
+  <RP_Set_NpcWallet_Desc>按派系科技等级给来访的非玩家派系小人随机生成数字钱包余额，供各消费联动场景使用。</RP_Set_NpcWallet_Desc>
+  <RP_Set_NpcWallet_Enable>启用 NPC 数字钱包</RP_Set_NpcWallet_Enable>
+  <RP_Set_NpcWallet_EnableDesc>每日结算时为当前地图上的外来访客类小人一次性开户发放随机初始金额，已有余额的小人不重复发放。</RP_Set_NpcWallet_EnableDesc>
+  <RP_Set_NpcWallet_Multiplier>钱包金额倍率: {0}×</RP_Set_NpcWallet_Multiplier>
+
+  <!-- ==================== 设置页：Bunnygirl 联动 ==================== -->
+  <RP_Set_Bunny_Title>Bunnygirl Race 赌场联动</RP_Set_Bunny_Title>
+  <RP_Set_Bunny_Desc>需安装 Bunnygirl Race。未安装时以下功能自动休眠（与模组加载顺序无关）。</RP_Set_Bunny_Desc>
+  <RP_Set_Bunny_Enable>启用赌场数字钱包联动</RP_Set_Bunny_Enable>
+  <RP_Set_Bunny_EnableDesc>兔娘小人的零花钱与赌场输赢改为记录到数字钱包，防止重复计资。</RP_Set_Bunny_EnableDesc>
+
+  <!-- ==================== 设置页：Hospitality 联动 ==================== -->
+  <RP_Set_Hospitality_Title>Hospitality 访客联动</RP_Set_Hospitality_Title>
+  <RP_Set_Hospitality_Desc>需安装 Hospitality 访客模组。未安装时以下功能自动休眠（与模组加载顺序无关）。</RP_Set_Hospitality_Desc>
+  <RP_Set_Hospitality_Enable>启用访客消费钱包联动</RP_Set_Hospitality_Enable>
+  <RP_Set_Hospitality_EnableDesc>访客住宿/购物/餐饮消费改为从数字钱包扣款，收入回流殖民地。</RP_Set_Hospitality_EnableDesc>
+
+  <!-- ==================== 设置页：RimStock 联动 ==================== -->
+  <RP_Set_RimStock_Title>RimStock 地球股市联动</RP_Set_RimStock_Title>
+  <RP_Set_RimStock_Desc>需安装 RimStock。未安装时以下功能自动休眠（与模组加载顺序无关）。RimStock 的券商市场称为「地球股市」，与 RimPay 自带的「环世界证券市场」是两个独立市场，互不相通。</RP_Set_RimStock_Desc>
+  <RP_Set_RimStock_Enable>启用地球股市入金联动</RP_Set_RimStock_Enable>
+  <RP_Set_RimStock_EnableDesc>在 RimStock 券商界面入金时，自动从 RimPay 数字国库划扣对应数字白银。</RP_Set_RimStock_EnableDesc>
+
+  <!-- ==================== AI 经济设置页 ==================== -->
+  <RP_AI_Title>AI 经济控制 (RimPay Economy AI)</RP_AI_Title>
+  <RP_AI_P2Promo1>[推荐] 建议注册并使用 Player2 软件，免费体验全部 AI 功能！</RP_AI_P2Promo1>
+  <RP_AI_P2Promo2>Player2 为本地免费桌面程序，无需 API Key；若已安装且正在运行，勾选 Player2 配置即可直接使用。</RP_AI_P2Promo2>
+  <RP_AI_P2Promo3>勾选的配置会按列表顺序从上到下依次尝试，失败或额度不足时自动切换下一个。</RP_AI_P2Promo3>
+  <RP_AI_EnableDesc>开启后，每日经济变量由 AI 随机控制；全部配置失败时自动回退到内置随机。</RP_AI_EnableDesc>
+  <RP_AI_Enable>启用 AI 控制经济</RP_AI_Enable>
+  <RP_AI_Interval>AI 刷新间隔: {0} 小时 (越短越活跃，注意 API 用量)</RP_AI_Interval>
+  <RP_AI_Providers>供应商配置 (勾选启用，顺序=尝试顺序):</RP_AI_Providers>
+  <RP_AI_LiveTitle>AI 经济实时状态 (Live Status)</RP_AI_LiveTitle>
+  <RP_AI_LiveDesc>实时显示 AI 当前生成并生效的经济数值，用于验证 AI 是否真正掌控经济。</RP_AI_LiveDesc>
+  <RP_AI_S_Toggle>AI 控制开关</RP_AI_S_Toggle>
+  <RP_AI_S_SalaryMult>工资倍率 (salaryMultiplier)</RP_AI_S_SalaryMult>
+  <RP_AI_S_SalaryMultVal>{0} × 每日工资</RP_AI_S_SalaryMultVal>
+  <RP_AI_S_RentMult>房租倍率 (rentMultiplier)</RP_AI_S_RentMult>
+  <RP_AI_S_RentMultVal>{0} × 每日房租</RP_AI_S_RentMultVal>
+  <RP_AI_S_InterestDelta>余额宝利率增量 (interestRateDelta)</RP_AI_S_InterestDelta>
+  <RP_AI_S_InterestDeltaVal>{0}% 加到基础利率</RP_AI_S_InterestDeltaVal>
+  <RP_AI_S_LoanMult>借贷利率倍率 (loanRateMultiplier)</RP_AI_S_LoanMult>
+  <RP_AI_S_LoanMultVal>{0} × 借贷/放贷利率</RP_AI_S_LoanMultVal>
+  <RP_AI_S_MealMult>餐费倍率 (mealFeeMultiplier)</RP_AI_S_MealMult>
+  <RP_AI_S_MealMultVal>{0} × 每顿餐费</RP_AI_S_MealMultVal>
+  <RP_AI_S_LootDelta>搜刮分成增量 (lootShareDelta)</RP_AI_S_LootDelta>
+  <RP_AI_S_LootDeltaVal>{0} 加进击杀者分成</RP_AI_S_LootDeltaVal>
+  <RP_AI_S_TradeMult>交易价格倍率 (tradePriceMultiplier)</RP_AI_S_TradeMult>
+  <RP_AI_S_TradeMultVal>{0} × 买卖价格</RP_AI_S_TradeMultVal>
+  <RP_AI_S_Tone>市场情绪 (marketTone)</RP_AI_S_Tone>
+  <RP_AI_S_Macro>宏观事件</RP_AI_S_Macro>
+  <RP_AI_S_MacroVal>{0} (剩余 {1} 天)</RP_AI_S_MacroVal>
+  <RP_AI_S_Event>AI 财经头条 (eventText)</RP_AI_S_Event>
+  <RP_AI_S_LastDay>最近请求日</RP_AI_S_LastDay>
+  <RP_AI_S_LastDayFmt>{0} (今日: {1})</RP_AI_S_LastDayFmt>
+  <RP_AI_S_HasResult>是否有 AI 结果</RP_AI_S_HasResult>
+  <RP_AI_S_Fails>连续失败次数</RP_AI_S_Fails>
+  <RP_AI_S_InFlight>请求进行中</RP_AI_S_InFlight>
+  <RP_AI_S_LastError>最近错误</RP_AI_S_LastError>
+  <RP_AI_ForceBtn>立即请求一次 AI 经济数据 (Force Request)</RP_AI_ForceBtn>
+  <RP_AI_ForceDesc>点击上方按钮可绕过「每日一次」限制，立即让 AI 生成一组新数值并显示在上面，用于验证连接与 AI 掌控。</RP_AI_ForceDesc>
+  <RP_AI_ArchiveTitle>AI 结果归档 (最近 10 次)</RP_AI_ArchiveTitle>
+  <RP_AI_ArchiveEmpty>(暂无归档，AI 成功返回后自动记录)</RP_AI_ArchiveEmpty>
+  <RP_AI_ArchiveLine>{0} | 薪×{1} 租×{2} 贷×{3} 餐×{4} 利{5} 价×{6} 搜{7} | {8} | {9}</RP_AI_ArchiveLine>
+  <RP_AI_ArchiveHeadline>  头条: {0}</RP_AI_ArchiveHeadline>
+  <RP_AI_LetterTitle>每日财经日报 (信封提醒)</RP_AI_LetterTitle>
+  <RP_AI_DailyLetter>开启每日财经日报信封</RP_AI_DailyLetter>
+  <RP_AI_DailyLetterDesc>若关闭，则不发送信封，仅保留结算消息。</RP_AI_DailyLetterDesc>
+  <RP_AI_RimTalkCast>AI 财经播报给 RimTalk 小人对话</RP_AI_RimTalkCast>
+  <RP_AI_RimTalkCastDesc>每日 AI 生成财经事件后，让一名小人通过 RimTalk 聊起这个话题。需已安装并启用 RimTalk。</RP_AI_RimTalkCastDesc>
+  <RP_AI_JsonTitle>AI 经济 JSON 模板 (JSON Template)</RP_AI_JsonTitle>
+  <RP_AI_JsonDesc>该 JSON 指示 AI 每日返回的经济变量，可自由编辑；改乱后可一键还原默认。</RP_AI_JsonDesc>
+  <RP_AI_JsonSave>保存 JSON 模板 (Save)</RP_AI_JsonSave>
+  <RP_AI_JsonSaved>[RimPay] JSON 模板已保存。</RP_AI_JsonSaved>
+  <RP_AI_JsonReset>还原默认 (Reset)</RP_AI_JsonReset>
+  <RP_AI_JsonResetDone>[RimPay] 已还原默认 JSON 模板。</RP_AI_JsonResetDone>
+  <RP_AI_TestingConn>正在测试中... (Testing...)</RP_AI_TestingConn>
+  <RP_AI_TestingBtn>正在测试中... (Testing...)</RP_AI_TestingBtn>
+  <RP_AI_AddConfig>添加供应商配置 (+)</RP_AI_AddConfig>
+  <RP_AI_CfgDetail>配置详情:</RP_AI_CfgDetail>
+  <RP_AI_CfgProvider>供应商:</RP_AI_CfgProvider>
+  <RP_AI_CfgP2Hint>Player2 本地服务：无需 API Key，安装并运行 Player2 即可。</RP_AI_CfgP2Hint>
+  <RP_AI_CfgLocalHint>本地模型：未安装 Ollama 前会自动失败并切换下一个配置。</RP_AI_CfgLocalHint>
+  <RP_AI_CfgEndpoint>端点 URL (留空则用供应商默认):</RP_AI_CfgEndpoint>
+  <RP_AI_CfgModel>模型名称 (留空则用供应商默认):</RP_AI_CfgModel>
+  <RP_AI_CfgEnable>启用此配置</RP_AI_CfgEnable>
+  <RP_AI_CfgTest>测试连接 (Test Connection)</RP_AI_CfgTest>
+
+  <!-- ==================== AI 状态提示 ==================== -->
+  <RP_AI_ErrNotEnabled>[RimPay AI] 请先在 AI 设置页勾选「启用 AI 控制经济」后再试。</RP_AI_ErrNotEnabled>
+  <RP_AI_ErrNoConfig>[RimPay AI] 未勾选任何供应商配置，无法请求。请先在下方勾选一个配置。</RP_AI_ErrNoConfig>
+  <RP_AI_ErrInFlight>[RimPay AI] 已有请求进行中，请稍候...</RP_AI_ErrInFlight>
+  <RP_AI_ForceRequested>[RimPay AI] 已发起强制请求，结果见上方状态面板与日志。</RP_AI_ForceRequested>
+  <RP_AI_SnapshotDay>第{0}.{1}日</RP_AI_SnapshotDay>
+  <RP_AI_SnapshotUnknownDay>未知日期</RP_AI_SnapshotUnknownDay>
+  <RP_AI_MacroNone>无宏观事件</RP_AI_MacroNone>
+  <RP_AI_FailCooldown>[RimPay AI] 连续失败{0}次，进入冷却({1}s)，经济回退本地随机</RP_AI_FailCooldown>
+  <RP_AI_Fail>[RimPay AI] 请求失败({0}次)，经济回退本地随机</RP_AI_Fail>
+
+  <!-- ==================== 通用词 ==================== -->
+  <RP_Common_On>已开启</RP_Common_On>
+  <RP_Common_Off>已关闭</RP_Common_Off>
+  <RP_Common_Yes>是</RP_Common_Yes>
+  <RP_Common_No>否</RP_Common_No>
+  <RP_Common_None>无</RP_Common_None>
+  <RP_Common_PendingAI>(暂无，需 AI 成功返回)</RP_Common_PendingAI>
+  <RP_Common_Cooldown>冷却中</RP_Common_Cooldown>
+
+  <!-- ==================== 市场情绪 ==================== -->
+  <RP_Tone_Bull>牛市</RP_Tone_Bull>
+  <RP_Tone_Bear>熊市</RP_Tone_Bear>
+  <RP_Tone_Neutral>中性</RP_Tone_Neutral>
+
+  <!-- ==================== 测试连接错误提示 ==================== -->
+  <RP_T_NoConfig>配置为空</RP_T_NoConfig>
+  <RP_T_NoEndpoint>未填写端点 URL</RP_T_NoEndpoint>
+  <RP_T_NoKey>未填写 API Key</RP_T_NoKey>
+  <RP_T_NoModel>未填写模型名称</RP_T_NoModel>
+  <RP_T_NoBody>无法构造请求体</RP_T_NoBody>
+  <RP_T_Timeout>连接超时 (20s) - 可能是网络问题或端点 URL 错误</RP_T_Timeout>
+  <RP_T_ErrPlayer2> — Player2 桌面程序未启动或未就绪，请确认 Player2 正在运行后再试</RP_T_ErrPlayer2>
+  <RP_T_ErrLocal> — 本地模型服务未启动（Ollama / LM Studio 未运行或未监听 11434 端口）</RP_T_ErrLocal>
+  <RP_T_ErrNoConn> — 无法连接服务器，请检查网络与端点 URL</RP_T_ErrNoConn>
+  <RP_T_Err400> — 请求格式错误：很可能是模型名称不对，请核对模型名</RP_T_Err400>
+  <RP_T_Err401> — 认证失败：API Key 无效或已过期</RP_T_Err401>
+  <RP_T_Err403> — 访问被拒绝：API Key 无权限或账户受限</RP_T_Err403>
+  <RP_T_Err404> — 端点不存在：端点 URL 可能写错</RP_T_Err404>
+  <RP_T_Err429> — 请求过频被限流，请稍后再试</RP_T_Err429>
+  <RP_T_Err5xx> — 服务器错误：API 供应商暂时故障，稍后再试</RP_T_Err5xx>
+  <RP_T_ServerResponse>服务器返回: {0}</RP_T_ServerResponse>
+  <RP_T_Ok>连接成功! 模型: {0} | AI 回复: {1}</RP_T_Ok>
+  <RP_T_ParseFail>已连接，但响应解析失败 (聊天功能可能仍可用)\n原始响应: {0}</RP_T_ParseFail>
+  <RP_T_NetworkError>网络错误: {0} - 请检查网络连接</RP_T_NetworkError>
+  <RP_T_Exception>异常 ({0}): {1}</RP_T_Exception>
+
+  <!-- ==================== 宏观事件 ==================== -->
+  <RP_Macro_ToneBull>大盘普涨</RP_Macro_ToneBull>
+  <RP_Macro_ToneBear>大盘承压</RP_Macro_ToneBear>
+  <RP_Macro_ToneNeutral>大盘震荡</RP_Macro_ToneNeutral>
+  <RP_Macro_BriefBoth>{0}：领涨 {1}，领跌 {2}</RP_Macro_BriefBoth>
+  <RP_Macro_BriefGainer>{0}：领涨 {1}</RP_Macro_BriefGainer>
+  <RP_Macro_BriefLoser>{0}：领跌 {1}</RP_Macro_BriefLoser>
+  <RP_Macro_Crash>市场崩盘</RP_Macro_Crash>
+  <RP_Macro_GoldRush>淘金热</RP_Macro_GoldRush>
+  <RP_Macro_Shortage>物资短缺</RP_Macro_Shortage>
+  <RP_Macro_TechBoom>科技繁荣</RP_Macro_TechBoom>
+  <RP_Macro_Unknown>未知事件</RP_Macro_Unknown>
+  <RP_Macro_CrashDesc>边缘股市遭遇恐慌性抛售！未来数日股价大幅下挫、波动剧烈，商人也趁机压价。</RP_Macro_CrashDesc>
+  <RP_Macro_GoldRushDesc>淘金热席卷边缘世界！敌人身上携带的数字白银大幅增加，击杀者分成也更丰厚。</RP_Macro_GoldRushDesc>
+  <RP_Macro_ShortageDesc>供应链紧张导致物价飞涨！餐费与生活成本上升，部分商品买卖价格明显波动。</RP_Macro_ShortageDesc>
+  <RP_Macro_TechBoomDesc>科技股暴涨！股市普涨、交易价格水涨船高，商人愿意出更高价收购你的货物。</RP_Macro_TechBoomDesc>
+  <RP_Macro_LetterTitle>边缘财经快讯：{0}</RP_Macro_LetterTitle>
+  <RP_Macro_LetterBodySuffix>（该宏观事件将持续 {0} 天，期间影响股市/交易/搜刮等经济环节。）</RP_Macro_LetterBodySuffix>
+  <RP_Macro_FeedTitle>【宏观快讯】{0}</RP_Macro_FeedTitle>
+  <RP_Macro_FeedTag>市场头条</RP_Macro_FeedTag>
+
+  <!-- ==================== 公司（27家） ==================== -->
+  <RP_Corp_iShen>iShen 集团</RP_Corp_iShen>
+  <RP_Corp_iShen_Desc>星系消费电子巨头，主营智能手机与移动终端</RP_Corp_iShen_Desc>
+  <RP_Corp_Macrosoft>Macrosoft 微硬</RP_Corp_Macrosoft>
+  <RP_Corp_Macrosoft_Desc>老牌软件与操作系统垄断服务商</RP_Corp_Macrosoft_Desc>
+  <RP_Corp_Nokirim>Nokirim 诺基林</RP_Corp_Nokirim>
+  <RP_Corp_Nokirim_Desc>工业级通信设备与军工防护外壳制造</RP_Corp_Nokirim_Desc>
+  <RP_Corp_DaMi>DaMi 科技</RP_Corp_DaMi>
+  <RP_Corp_DaMi_Desc>平价个人智能出行与电动平衡车研发</RP_Corp_DaMi_Desc>
+  <RP_Corp_BoosDead>BoosDead</RP_Corp_BoosDead>
+  <RP_Corp_BoosDead_Desc>低端山寨数码与劣质电子元件组装厂</RP_Corp_BoosDead_Desc>
+  <RP_Corp_Rimtendo>Rimtendo 任天缘</RP_Corp_Rimtendo>
+  <RP_Corp_Rimtendo_Desc>风靡边缘世界的掌机与卡带娱乐开发商</RP_Corp_Rimtendo_Desc>
+  <RP_Corp_RONY>RONY 缘尼</RP_Corp_RONY>
+  <RP_Corp_RONY_Desc>高端影音视听主机与影像传感器巨头</RP_Corp_RONY_Desc>
+  <RP_Corp_StarveMe>StarveMe 科技</RP_Corp_StarveMe>
+  <RP_Corp_StarveMe_Desc>深空应急合成食品与长保压缩营养膏</RP_Corp_StarveMe_Desc>
+  <RP_Corp_GreenSprout>GreenSprout 绿芽农业</RP_Corp_GreenSprout>
+  <RP_Corp_GreenSprout_Desc>大宗水培农作物与抗旱耐寒农产品种植</RP_Corp_GreenSprout_Desc>
+  <RP_Corp_MuffaloCorp>MuffaloCorp 耗牛畜牧</RP_Corp_MuffaloCorp>
+  <RP_Corp_MuffaloCorp_Desc>纯血耗牛繁育与保暖毛皮肉品联合体</RP_Corp_MuffaloCorp_Desc>
+  <RP_Corp_OrbitalBay>OrbitalBay 轨道淘客</RP_Corp_OrbitalBay>
+  <RP_Corp_OrbitalBay_Desc>星系轨道电商网购平台与货运直达</RP_Corp_OrbitalBay_Desc>
+  <RP_Corp_TuberNet>TuberNet 块茎传媒</RP_Corp_TuberNet>
+  <RP_Corp_TuberNet_Desc>流媒体与顶流自媒体孵化联盟</RP_Corp_TuberNet_Desc>
+  <RP_Corp_RimTribune>RimTribune 边缘先驱报</RP_Corp_RimTribune>
+  <RP_Corp_RimTribune_Desc>历史悠久的星系通讯社与中立财经新闻网</RP_Corp_RimTribune_Desc>
+  <RP_Corp_ApexArena>ApexArena 巅峰竞技</RP_Corp_ApexArena>
+  <RP_Corp_ApexArena_Desc>星际极限滑板竞速赛与角斗联赛娱乐</RP_Corp_ApexArena_Desc>
+  <RP_Corp_GlitterPharm>GlitterPharm 闪耀制药</RP_Corp_GlitterPharm>
+  <RP_Corp_GlitterPharm_Desc>闪耀世界高阶仿生体与全能抗生素研发</RP_Corp_GlitterPharm_Desc>
+  <RP_Corp_MedEx>MedEx 生物科技</RP_Corp_MedEx>
+  <RP_Corp_MedEx_Desc>异种基因重构与人造内脏培育工厂</RP_Corp_MedEx_Desc>
+  <RP_Corp_ApexArms>ApexArms 顶峰防务</RP_Corp_ApexArms>
+  <RP_Corp_ApexArms_Desc>行星重型近防炮塔与高斯电磁火器制造</RP_Corp_ApexArms_Desc>
+  <RP_Corp_PlasteelDyn>PlasteelDyn 玻璃钢重工</RP_Corp_PlasteelDyn>
+  <RP_Corp_PlasteelDyn_Desc>超合金复合动力装甲与高密度防护盾研制</RP_Corp_PlasteelDyn_Desc>
+  <RP_Corp_UranCorp>UranCorp 泛星系铀能</RP_Corp_UranCorp>
+  <RP_Corp_UranCorp_Desc>超临界核能聚变反应堆与深层地质采掘</RP_Corp_UranCorp_Desc>
+  <RP_Corp_DigitalSilverFund>数字白银杠杆基金</RP_Corp_DigitalSilverFund>
+  <RP_Corp_DigitalSilverFund_Desc>追踪大盘情绪的高杠杆投机衍生基金</RP_Corp_DigitalSilverFund_Desc>
+  <RP_Corp_StarCom>星链通信 (StarCom)</RP_Corp_StarCom>
+  <RP_Corp_StarCom_Desc>量子网络低轨星链覆盖通信商</RP_Corp_StarCom_Desc>
+  <RP_Corp_NebulaCloud>星云算力 (NebulaCloud)</RP_Corp_NebulaCloud>
+  <RP_Corp_NebulaCloud_Desc>超导云算力与 RimSeek 智算调度服务商</RP_Corp_NebulaCloud_Desc>
+  <RP_Corp_CartoBoard>卡带发行商 (CartoBoard)</RP_Corp_CartoBoard>
+  <RP_Corp_CartoBoard_Desc>数字娱乐内容发行与虚拟软件载体</RP_Corp_CartoBoard_Desc>
+  <RP_Corp_CyberBazaar>赛博百货 (CyberBazaar)</RP_Corp_CyberBazaar>
+  <RP_Corp_CyberBazaar_Desc>全星系虚拟网购与数字商品平台</RP_Corp_CyberBazaar_Desc>
+  <RP_Corp_MineScan>深矿雷达 (MineScan)</RP_Corp_MineScan>
+  <RP_Corp_MineScan_Desc>轨道重力梯度测绘与深层矿脉遥感云平台</RP_Corp_MineScan_Desc>
+  <RP_Corp_Faction_Desc>{0} (科技级别: {1})</RP_Corp_Faction_Desc>
+
+  <!-- ==================== 财经新闻（61键） ==================== -->
+  <RP_News_Tech_1>太阳耀斑导致多处数据中心离线，云端通信服务短暂中断引发抛盘。</RP_News_Tech_1>
+  <RP_News_Tech_2>微电子制造与纳米集成电路研发突破，数码芯片板块全面爆发。</RP_News_Tech_2>
+  <RP_News_Tech_3>廉价拼装电子元件在落后定居点大举铺货，薄利多销提振估值。</RP_News_Tech_3>
+  <RP_News_Tech_4>涉嫌芯片套壳组装与虚假宣传，遭消费者权益保护协会立案调查。</RP_News_Tech_4>
+  <RP_News_Tech_5>顶流主播直播带货热销！电动平衡车与智能出行系列卖爆断货。</RP_News_Tech_5>
+  <RP_News_Tech_6>平价代步平衡车在各定居点迅速普及，年轻拓荒群体形成抢购。</RP_News_Tech_6>
+  <RP_News_Tech_7>电机驱动控制器供应链延迟，部分型号交付周期拉长。</RP_News_Tech_7>
+  <RP_News_Tech_8>旗舰智能终端直播带货爆单，星系高端消费数码龙头地位稳固。</RP_News_Tech_8>
+  <RP_News_Tech_9>新一代智能手表与终端发布，生态订阅营收占比创新高。</RP_News_Tech_9>
+  <RP_News_Tech_10>硬件产品迭代放缓引发投资者观望，短线处于估值盘整。</RP_News_Tech_10>
+  <RP_News_Tech_11>数码终端生态协同优势显现，软件服务增值业务强劲。</RP_News_Tech_11>
+  <RP_News_Tech_12>核心芯片原料采购成本攀升，硬件毛利率面临阶段性压力。</RP_News_Tech_12>
+  <RP_News_Faction_1>对殖民地突袭失利惨遭反击，主力精锐受重创引发市场抛售。</RP_News_Faction_1>
+  <RP_News_Faction_2>与殖民地完成数千白银大宗物资交割，双边商贸景气度创季度新高。</RP_News_Faction_2>
+  <RP_News_Faction_3>与殖民地深化战略同盟，双边边境关税豁免获议会通过。</RP_News_Faction_3>
+  <RP_News_Faction_4>边境局势缓和预期升温，防务摩擦成本有所控制。</RP_News_Faction_4>
+  <RP_News_Faction_5>地缘外交摩擦升级，边境商道受阻引发商业预期恶化。</RP_News_Faction_5>
+  <RP_News_Faction_6>领地完成季节性赋税征缴，财政盈余超市场预期。</RP_News_Faction_6>
+  <RP_News_Faction_7>星际通胀与补给消耗高企，派系季度财报不及预期。</RP_News_Faction_7>
+  <RP_News_Quantum_1>强磁场星链风暴袭来！低轨中继通信链路大面积掉线，通信服务紧急维护。</RP_News_Quantum_1>
+  <RP_News_Quantum_2>赛博百货年中庆典开启，虚拟网购与数字资产交易量打破历史峰值。</RP_News_Quantum_2>
+  <RP_News_Quantum_3>重力梯度遥感雷达高精度校准完毕，探明超高品位富矿引发勘探狂潮。</RP_News_Quantum_3>
+  <RP_News_Quantum_4>算力并发量达到带宽上限导致网络拥堵，云端任务排队引发客户投诉。</RP_News_Quantum_4>
+  <RP_News_Quantum_5>量子加密信道扩容顺利交付，企业级安全通信协议获普遍采用。</RP_News_Quantum_5>
+  <RP_News_Quantum_6>微波中继天线阵列例行检修，区域网络吞吐量受到短期限制。</RP_News_Quantum_6>
+  <RP_News_Agri_1>极端恶劣天灾侵袭水培温室，主要粮食种植区发布大宗减产预警。</RP_News_Agri_1>
+  <RP_News_Agri_2>高抗逆性水培植株育种科研突破，大宗粮食现货量价齐升。</RP_News_Agri_2>
+  <RP_News_Agri_3>季节性农产丰产交割，深空储备粮订单超预期。</RP_News_Agri_3>
+  <RP_News_Agri_4>农用营养液原料涨价，水培农业利润空间受挤压。</RP_News_Agri_4>
+  <RP_News_Ranch_1>极寒寒流席卷大陆！高保暖纯血耗牛毛皮制品与肉品需求井喷。</RP_News_Ranch_1>
+  <RP_News_Ranch_2>天灾严寒与饲草短缺导致牲畜出栏受限，畜牧供应链承压。</RP_News_Ranch_2>
+  <RP_News_Ranch_3>纯血耗牛优良繁育率大幅提升，优质肉品订单排期饱满。</RP_News_Ranch_3>
+  <RP_News_Ranch_4>饲料运输周期延宕，牲畜屠宰加工利润略有收窄。</RP_News_Ranch_4>
+  <RP_News_Arms_1>战事爆发推升近防重火器紧急订购潮，军工防务全线走强！</RP_News_Arms_1>
+  <RP_News_Arms_2>高能电磁武器与复合护甲专利通过军方验证，防务采购订单排满。</RP_News_Arms_2>
+  <RP_News_Arms_3>定居点要塞化工程升级，阵地防御装备采购需求旺盛。</RP_News_Arms_3>
+  <RP_News_Arms_4>星系局部停火呼声渐高，消耗性弹药采购指标短期缩减。</RP_News_Arms_4>
+  <RP_News_Mining_1>地磁剧烈扰动导致深层地质勘探雷达失真，采矿工程进度受阻。</RP_News_Mining_1>
+  <RP_News_Mining_2>深层地热核裂变能源科研落地，重工业高能采矿全面提速。</RP_News_Mining_2>
+  <RP_News_Mining_3>高品位铀矿石现货紧俏，重工业能源需求带动开采估值。</RP_News_Mining_3>
+  <RP_News_Mining_4>大型采掘钻头损耗偏高，开采成本超预期导致短线震荡。</RP_News_Mining_4>
+  <RP_News_ECom_1>顶流主播单场带货成交额破纪录，跨星系轨道电商供应链全负荷运转！</RP_News_ECom_1>
+  <RP_News_ECom_2>赛博百货数字大促全面引爆，全星系线上零售成交单量破历史极值！</RP_News_ECom_2>
+  <RP_News_ECom_3>自营轨道货运穿梭机队完成扩容，次日达履约率提升至新高。</RP_News_ECom_3>
+  <RP_News_ECom_4>远距离星系货运能耗成本上涨，电商物流配送毛利承压。</RP_News_ECom_4>
+  <RP_News_Ent_1>主播正在火热开播，边缘娱乐互动软件在线活跃度达日内峰值。</RP_News_Ent_1>
+  <RP_News_Ent_2>年度现象级游戏掌机大作首发告捷，卡带与数字下载量双双破纪录。</RP_News_Ent_2>
+  <RP_News_Ent_3>缺乏爆款独占游戏大作支撑，硬件销售进入周期性淡季。</RP_News_Ent_3>
+  <RP_News_Food_1>全球干旱饥荒推升避险需求！StarveMe 应急长保合成代餐罐头遭全星系抢购。</RP_News_Food_1>
+  <RP_News_Food_2>快节奏拓荒代餐包销量走强，应急食品业务营收稳健。</RP_News_Food_2>
+  <RP_News_Food_3>普通食材产出充裕，高价压缩食品需求短期承压。</RP_News_Food_3>
+  <RP_News_Medical_1>高阶仿生神经修复与生化血清科研突破，机构全面上调目标评级。</RP_News_Medical_1>
+  <RP_News_Medical_2>全能抗生素与免疫增强试剂订单充裕，生物制药板块量价齐升。</RP_News_Medical_2>
+  <RP_News_Medical_3>新型基因药剂临床审批流程延后，短线遭遇谨慎资金抛盘。</RP_News_Medical_3>
+  <RP_News_Media_1>直播间弹幕热度爆表全网刷屏，流媒体广告赞助分成创历史新高！</RP_News_Media_1>
+  <RP_News_Media_2>深度揭秘调查独家报道引发全网热议，媒体受众订阅数爆发增长。</RP_News_Media_2>
+  <RP_News_Media_3>边缘虚假传言引发公关信任危机，部分大牌赞助商削减宣发预算。</RP_News_Media_3>
+  <RP_News_Sports_1>星际极限滑板竞速锦标赛收官，赛事联名周边与门票收入创佳绩。</RP_News_Sports_1>
+  <RP_News_Sports_2>主要参赛选手训练中遭遇骨折重伤退赛，观赛热度有所回落。</RP_News_Sports_2>
+  <RP_News_Finance_1>多头游资大举加杠杆抢筹，投机衍生基金日内放量强势拉抬！</RP_News_Finance_1>
+  <RP_News_Finance_2>高杠杆持仓盘遭遇集中爆仓清算，空方借势打压引发踩踏抛盘。</RP_News_Finance_2>
+  <RP_News_General_1>基本面保持健康，多方主力资金有序护盘买入。</RP_News_General_1>
+  <RP_News_General_2>获利盘选择高位离场套现，短线承压小幅回踩。</RP_News_General_2>
+  <RP_News_ShockBuy>神秘离岸财团大举建仓增持，主力资金强力买入拉抬股价。</RP_News_ShockBuy>
+  <RP_News_ShockShort>知名星际做空机构发布做空研报，质疑其季度报表存在营收水分。</RP_News_ShockShort>
+  	<RP_News_SignUp>[涨]</RP_News_SignUp>
+	<RP_News_SignDown>[跌]</RP_News_SignDown>
+	<RP_News_HistoryLine>第{0}.{1}日 {2} {3}% {4}</RP_News_HistoryLine>
+  <RP_News_VolatileDefault>受多空资金激烈博弈影响，日内振幅巨大。</RP_News_VolatileDefault>
+
+  <!-- ==================== 每日结算 ==================== -->
+  <RP_Settle_TxSummary>第{0}.{1}日  {2}{3} @银  {4}</RP_Settle_TxSummary>
+  <RP_Settle_DailyDone>【RimPay结算中心】已完成本日薪资与房租结算 (共 {0} 人)。\n发放薪水: {1} @银 | 回收房租: {2} @银 | 系统发放利息: {3} @银。</RP_Settle_DailyDone>
+  <RP_Settle_LendInterestIn>贷款利息到账: 从 {0} 收到 {1} @银 利息。</RP_Settle_LendInterestIn>
+  <RP_Settle_LendInterestOut>贷款利息支出: 向 {0} 支付 {1} @银 利息。</RP_Settle_LendInterestOut>
+  <RP_Settle_LendBadDebt>警告: 无法支付 {0} 的利息 {1} @银，关系恶化！</RP_Settle_LendBadDebt>
+
+  <!-- ==================== 每日财经日报 ==================== -->
+  <RP_Daily_LetterTitle>边缘财经日报</RP_Daily_LetterTitle>
+  <RP_Daily_Header>—— 边缘财经日报 · 第{0}.{1}日 ——</RP_Daily_Header>
+  <RP_Daily_TreasuryLine>国库收支：实体白银 {0} @银，云端国库 {1} @银。</RP_Daily_TreasuryLine>
+  <RP_Daily_MarketLine>股市行情：{0} 领涨 {1}%，{2} 领跌 {3}%。</RP_Daily_MarketLine>
+  <RP_Daily_MarketGood>  [利好聚焦] {0} —— {1}</RP_Daily_MarketGood>
+  <RP_Daily_MarketBad>  [利空预警] {0} —— {1}</RP_Daily_MarketBad>
+  <RP_Daily_LoanActive>借贷市场：在途放贷 {0} @银，在途借款 {1} @银。</RP_Daily_LoanActive>
+  <RP_Daily_LoanNone>借贷市场：今日无在途贷款与借款。</RP_Daily_LoanNone>
+  <RP_Daily_PayrollLine>薪酬发放：今日共发放工资 {0} @银，回收房租 {1} @银。</RP_Daily_PayrollLine>
+  <RP_Daily_AiHeadline>AI 财经头条：{0}</RP_Daily_AiHeadline>
+  <RP_Daily_Footer>— RimPay 数字经济拓展 · 边缘财经 —</RP_Daily_Footer>
+  <RP_Daily_None>无</RP_Daily_None>
+  <RP_Daily_YesterdayBill>昨日账单：收入 {0} @银 ({1}) ｜ 支出 {2} @银 ({3})。</RP_Daily_YesterdayBill>
+  <RP_Daily_TreasurySummary>国库流水：收入 {0} @银 ({1}) ｜ 支出 {2} @银 ({3})。</RP_Daily_TreasurySummary>
+
+  <!-- ==================== 记账原因（51个） ==================== -->
+  <RP_Reason_Payday>发薪</RP_Reason_Payday>
+  <RP_Reason_DailyWage>每日工资</RP_Reason_DailyWage>
+  <RP_Reason_LodgingRent>住宿房租</RP_Reason_LodgingRent>
+  <RP_Reason_RentIncome>房租</RP_Reason_RentIncome>
+  <RP_Reason_LodgingRentArrears>住宿房租(欠费)</RP_Reason_LodgingRentArrears>
+  <RP_Reason_RentArrears>房租(欠费)</RP_Reason_RentArrears>
+  <RP_Reason_FundInterest>基金利息</RP_Reason_FundInterest>
+  <RP_Reason_LendInterest>放贷利息</RP_Reason_LendInterest>
+  <RP_Reason_BorrowInterest>借款利息</RP_Reason_BorrowInterest>
+  <RP_Reason_ModPayment>模组扣款</RP_Reason_ModPayment>
+  <RP_Reason_TradeProfit>炒股收益</RP_Reason_TradeProfit>
+  <RP_Reason_TradeLoss>炒股亏损</RP_Reason_TradeLoss>
+  <RP_Reason_PocketMoneyTransfer>零花钱转入</RP_Reason_PocketMoneyTransfer>
+  <RP_Reason_CasinoSpending>赌场消费</RP_Reason_CasinoSpending>
+  <RP_Reason_CasinoWinnings>赌场赢钱</RP_Reason_CasinoWinnings>
+  <RP_Reason_GuestSpending>访客消费</RP_Reason_GuestSpending>
+  <RP_Reason_GuestFood>访客餐饮</RP_Reason_GuestFood>
+  <RP_Reason_GuestShopping>访客购物</RP_Reason_GuestShopping>
+  <RP_Reason_GuestLodging>访客住宿</RP_Reason_GuestLodging>
+  <RP_Reason_EdgeMarketSpending>边缘市场消费</RP_Reason_EdgeMarketSpending>
+  <RP_Reason_StoreIncome>店铺收入入账</RP_Reason_StoreIncome>
+  <RP_Reason_EarthStockDeposit>地球股市入金</RP_Reason_EarthStockDeposit>
+  <RP_Reason_PersonalSavings>个人积蓄</RP_Reason_PersonalSavings>
+  <RP_Reason_LendOut>放贷支出</RP_Reason_LendOut>
+  <RP_Reason_BorrowIn>借款到账</RP_Reason_BorrowIn>
+  <RP_Reason_LendTo>放贷给</RP_Reason_LendTo>
+  <RP_Reason_BorrowFrom>借款自</RP_Reason_BorrowFrom>
+  <RP_Reason_ReclaimLoan>收回放贷</RP_Reason_ReclaimLoan>
+  <RP_Reason_RepayLoan>偿还借款</RP_Reason_RepayLoan>
+  <RP_Reason_SilverDeposit>白银存入</RP_Reason_SilverDeposit>
+  <RP_Reason_SilverWithdraw>白银提取</RP_Reason_SilverWithdraw>
+  <RP_Reason_StockBuy>股票买入</RP_Reason_StockBuy>
+  <RP_Reason_StockSell>股票卖出</RP_Reason_StockSell>
+  <RP_Reason_GiveBonus>发放奖金</RP_Reason_GiveBonus>
+  <RP_Reason_PlayerBonus>玩家奖金</RP_Reason_PlayerBonus>
+  <RP_Reason_Confiscated>资金没收</RP_Reason_Confiscated>
+  <RP_Reason_ConfiscateIn>没收充公</RP_Reason_ConfiscateIn>
+  <RP_Reason_MealCost>餐费</RP_Reason_MealCost>
+  <RP_Reason_MealIncome>餐费收入</RP_Reason_MealIncome>
+  <RP_Reason_ReliefMeal>救济餐</RP_Reason_ReliefMeal>
+  <RP_Reason_MealRelief>救济餐收入</RP_Reason_MealRelief>
+  <RP_Reason_MedicalCost>诊疗费</RP_Reason_MedicalCost>
+  <RP_Reason_MedicalIncome>诊疗收入</RP_Reason_MedicalIncome>
+  <RP_Reason_MedicalCover>医保报销</RP_Reason_MedicalCover>
+  <RP_Reason_LootWallet>掠夺敌人钱包</RP_Reason_LootWallet>
+  <RP_Reason_LootTax>搜刮上缴</RP_Reason_LootTax>
+  <RP_Reason_TradePay>贸易扣款</RP_Reason_TradePay>
+
+  <!-- ==================== RimTuber 动态墙 ==================== -->
+  <RP_Tuber_StockGodTitle>【殖民地股神】{0} 爆赚离场</RP_Tuber_StockGodTitle>
+  <RP_Tuber_StockGodBody>{0} 今日凭借敏锐嗅觉成功抄底 {1} ({2})，单笔大赚 {3} @银！在殖民地引起热议。</RP_Tuber_StockGodBody>
+  <RP_Tuber_StockGodTag>股民高光</RP_Tuber_StockGodTag>
+  <RP_Tuber_RooftopTitle>【天台风很大】{0} 抄底被套牢</RP_Tuber_RooftopTitle>
+  <RP_Tuber_RooftopBody>{0} 高位追涨 {1} ({2})，单日暴跌割肉，损失 {3} @银... 今晚只能吃营养膏了。</RP_Tuber_RooftopBody>
+  <RP_Tuber_RooftopTag>理财翻车</RP_Tuber_RooftopTag>
+  <RP_Tuber_MarketAlert>【大盘异动】{0} 单日{1} {2}%</RP_Tuber_MarketAlert>
+  <RP_Tuber_MarketAlertBody>{0} 最新股价报 {1} @银。</RP_Tuber_MarketAlertBody>
+  <RP_Tuber_MarketTag>行情快报</RP_Tuber_MarketTag>
+  <RP_Tuber_Surge>暴涨飙升</RP_Tuber_Surge>
+  <RP_Tuber_FlashCrash>遭遇闪崩</RP_Tuber_FlashCrash>
+  <RP_Tuber_FinanceTag>边缘财经</RP_Tuber_FinanceTag>
+
+  <!-- ==================== RimStock 联动 ==================== -->
+  <RP_Int_EarthStockDepositPaid>本次地球股市入金已从数字国库划扣 {0} 数字白银。</RP_Int_EarthStockDepositPaid>
+
+  <!-- ==================== Gizmo ==================== -->
+  <RP_Gizmo_Treasury_Label>数字国库</RP_Gizmo_Treasury_Label>
+  <RP_Gizmo_Treasury_Desc>打开 RimPay 数字国库与殖民地财报总览。存取白银、查看全区资产与殖民者钱包。</RP_Gizmo_Treasury_Desc>
+  <RP_Gizmo_Wallet_Label>数字钱包: {0}</RP_Gizmo_Wallet_Label>
+  <RP_Gizmo_Wallet_Desc>打开 {0} 的 RimPay 数字钱包。\n查看收支流水、发放奖金或没收资金。</RP_Gizmo_Wallet_Desc>
+
+  <!-- ==================== 餐费/医疗/搜刮/贸易杂项 ==================== -->
+  <RP_Meal_DevLogPaid>[RimPay 餐费] {0} 用餐扣费 {1} @银 ({2})，钱包余额 {3}。</RP_Meal_DevLogPaid>
+  <RP_Meal_DevLogRelief>[RimPay 餐费] {0} 钱包不足，吃救济粮 (支付 {1} @银, 应付 {2})。</RP_Meal_DevLogRelief>
+  <RP_Medical_MoteCovered>诊疗费 {0} @银（医保报销 {1}）</RP_Medical_MoteCovered>
+  <RP_Medical_Mote>诊疗费 {0} @银</RP_Medical_Mote>
+  <RP_Loot_UnknownEnemy>一名敌人</RP_Loot_UnknownEnemy>
+  <RP_Loot_MsgKiller>从 {0} 身上搜刮到 {1} @银 的数字白银 ({2} 归 {3}，{4} 入数字国库)</RP_Loot_MsgKiller>
+  <RP_Loot_MsgTreasury>从 {0} 身上搜刮到 {1} @银 的数字白银，已全额缴入数字国库。</RP_Loot_MsgTreasury>
+  <RP_Trade_TreasuryPaid>本次交易从数字国库中无缝扣除了 {0} 数字白银。</RP_Trade_TreasuryPaid>
+  <RP_Trade_ShortPaid>交易支付不足：实付 {0} @银 / 应付 {1} @银，差额 {2} @银。</RP_Trade_ShortPaid>
+  <RP_Trade_LogShortPaid>[RimPay] 交易支付不足：应付 {0}，实体白银 {1}，国库余额 {2}，差额 {3}。</RP_Trade_LogShortPaid>
+
+  <!-- ==================== 窗口通用 ==================== -->
+  <RP_W_Settings>Mod 设置</RP_W_Settings>
+
+  <!-- ==================== 国库窗口 ==================== -->
+  <RP_W_Treasury_Title>RimPay 数字国库 — 殖民地财报总览</RP_W_Treasury_Title>
+  <RP_W_Treasury_Tab>数字国库</RP_W_Treasury_Tab>
+  <RP_W_Treasury_Asilver>物理白银</RP_W_Treasury_Asilver>
+  <RP_W_Treasury_CountedWealth>计入殖民地财富</RP_W_Treasury_CountedWealth>
+  <RP_W_Treasury_HiddenPhysically>已物理隐藏</RP_W_Treasury_HiddenPhysically>
+  <RP_W_Treasury_TotalLiquid>流动资产合计</RP_W_Treasury_TotalLiquid>
+  <RP_W_Treasury_EscrowBuilding>托管资产(建筑)</RP_W_Treasury_EscrowBuilding>
+  <RP_W_Treasury_EscrowEquip>托管资产(随身装备)</RP_W_Treasury_EscrowEquip>
+  <RP_W_Treasury_NotCountedRaid>不计入袭击威胁</RP_W_Treasury_NotCountedRaid>
+  <RP_W_Treasury_CountedRaid>计入袭击威胁</RP_W_Treasury_CountedRaid>
+  <RP_W_Treasury_SummaryLine>&lt;b&gt;全区收支汇总&lt;/b&gt;  每日薪资: {0}  |  殖民者钱包合计: {1}  |  数字国库: {2}  |  总数字资产: {3}  (单位: @银)</RP_W_Treasury_SummaryLine>
+  <RP_W_Treasury_Footnote>&lt;i&gt;单位: @银 (1 数字白银 = 1 物理白银)  |  物理白银计入殖民地财富计算，数字国库不计入  |  可以将白银存入数字国库压低殖民地财富值，减轻袭击力度    [v1.0.3]&lt;/i&gt;</RP_W_Treasury_Footnote>
+  <RP_W_Treasury_DepositWithdraw>存取白银</RP_W_Treasury_DepositWithdraw>
+  <RP_W_Treasury_DepositLabel>存入 (物理白银 → 数字国库):</RP_W_Treasury_DepositLabel>
+  <RP_W_Treasury_DepositBtn>存入</RP_W_Treasury_DepositBtn>
+  <RP_W_Treasury_All>全部</RP_W_Treasury_All>
+  <RP_W_Treasury_DepositDone>成功存入 {0} @银 至数字国库。</RP_W_Treasury_DepositDone>
+  <RP_W_Treasury_WithdrawLabel>提取 (数字国库 → 物理白银):</RP_W_Treasury_WithdrawLabel>
+  <RP_W_Treasury_WithdrawBtn>提取</RP_W_Treasury_WithdrawBtn>
+  <RP_W_Treasury_WithdrawDone>成功从数字国库提取 {0} @银。</RP_W_Treasury_WithdrawDone>
+  <RP_W_Treasury_DepositAvail>可存入实体白银: {0} @银  |  数字国库余额: {1} @银</RP_W_Treasury_DepositAvail>
+  <RP_W_Treasury_RosterTitle>殖民者财政名册</RP_W_Treasury_RosterTitle>
+  <RP_W_Treasury_RosterSummary>每日薪资合计: {0}  |  数字国库可支撑: {1} 天  (单位: @银)</RP_W_Treasury_RosterSummary>
+  <RP_W_Treasury_ColName>姓名</RP_W_Treasury_ColName>
+  <RP_W_Treasury_ColBalance>余额 @银</RP_W_Treasury_ColBalance>
+  <RP_W_Treasury_ColSalary>日薪 @银</RP_W_Treasury_ColSalary>
+  <RP_W_Treasury_ColType>类型</RP_W_Treasury_ColType>
+  <RP_W_Treasury_NoColonists>暂无殖民者。</RP_W_Treasury_NoColonists>
+  <RP_W_Treasury_CompLoadFail>游戏组件加载失败，无法显示国库数据。</RP_W_Treasury_CompLoadFail>
+  <RP_W_Treasury_Balance>数字国库余额: {0} @银</RP_W_Treasury_Balance>
+  <RP_W_Treasury_Tier_Auto>自动</RP_W_Treasury_Tier_Auto>
+  <RP_W_Treasury_Tier_Child>儿童</RP_W_Treasury_Tier_Child>
+  <RP_W_Treasury_Tier_Slave>奴隶</RP_W_Treasury_Tier_Slave>
+  <RP_W_Treasury_Tier_Novice>新手</RP_W_Treasury_Tier_Novice>
+  <RP_W_Treasury_Tier_Basic>基础工人</RP_W_Treasury_Tier_Basic>
+  <RP_W_Treasury_Tier_Skilled>熟练工</RP_W_Treasury_Tier_Skilled>
+  <RP_W_Treasury_Tier_Expert>专家</RP_W_Treasury_Tier_Expert>
+
+  <!-- ==================== 借贷窗口 ==================== -->
+  <RP_W_Loan_Tab>借贷中心</RP_W_Loan_Tab>
+  <RP_W_Loan_Title>RimPay 借贷中心</RP_W_Loan_Title>
+  <RP_W_Loan_ListHeader>放贷与借款列表 (利率基于派系好感度浮动):</RP_W_Loan_ListHeader>
+  <RP_W_Loan_ColFaction>派系名称</RP_W_Loan_ColFaction>
+  <RP_W_Loan_ColGoodwill>好感状态</RP_W_Loan_ColGoodwill>
+  <RP_W_Loan_ColRate>借贷利率/季</RP_W_Loan_ColRate>
+  <RP_W_Loan_ColLedger>当前总账</RP_W_Loan_ColLedger>
+  <RP_W_Loan_NoFactions>暂无可以借贷的派系。</RP_W_Loan_NoFactions>
+  <RP_W_Loan_Ally>盟友</RP_W_Loan_Ally>
+  <RP_W_Loan_Neutral>中立</RP_W_Loan_Neutral>
+  <RP_W_Loan_Cold>敌对</RP_W_Loan_Cold>
+  <RP_W_Loan_Relation>{0} ({1})</RP_W_Loan_Relation>
+  <RP_W_Loan_RateValue>{0}%</RP_W_Loan_RateValue>
+  <RP_W_Loan_NoDebt>无欠款</RP_W_Loan_NoDebt>
+  <RP_W_Loan_Lend>放贷</RP_W_Loan_Lend>
+  <RP_W_Loan_LendDone>成功向 {0} 放贷了 {1} @银，利率 {2}% / 季度。</RP_W_Loan_LendDone>
+  <RP_W_Loan_Borrow>借款</RP_W_Loan_Borrow>
+  <RP_W_Loan_BorrowDone>成功从 {0} 借款了 {1} @银，利率 {2}% / 季度。</RP_W_Loan_BorrowDone>
+  <RP_W_Loan_ActiveRecords>&lt;b&gt;当前有效的借贷记录:&lt;/b&gt;</RP_W_Loan_ActiveRecords>
+  <RP_W_Loan_NoRecords>  目前无任何未结算的贷款或借款。</RP_W_Loan_NoRecords>
+  <RP_W_Loan_RecordLine>  {0} {1} : &lt;color={2}&gt;{3}&lt;/color&gt; @银  (利率: {4}%/季 | 到期: 第{5}日)</RP_W_Loan_RecordLine>
+  <RP_W_Loan_Reclaim>收回本金</RP_W_Loan_Reclaim>
+  <RP_W_Loan_ReclaimDone>【RimPay借贷】已成功收回向 {0} 的放贷本金 {1} @银，本金已存入数字国库。</RP_W_Loan_ReclaimDone>
+  <RP_W_Loan_Repay>还清借款</RP_W_Loan_Repay>
+  <RP_W_Loan_RepayDone>【RimPay借贷】已成功还清向 {0} 的借款本金 {1} @银。</RP_W_Loan_RepayDone>
+  <RP_W_Loan_RepayNoFunds>数字国库余额不足以还清借款！</RP_W_Loan_RepayNoFunds>
+  <RP_W_Loan_LendTitle>向 {0} 放贷</RP_W_Loan_LendTitle>
+  <RP_W_Loan_BorrowTitle>从 {0} 借款</RP_W_Loan_BorrowTitle>
+  <RP_W_Loan_InputAmount>输入金额 (范围: 100 - {0} @银):</RP_W_Loan_InputAmount>
+  <RP_W_Loan_Cancel>取消</RP_W_Loan_Cancel>
+  <RP_W_Loan_Confirm>确认</RP_W_Loan_Confirm>
+  <RP_W_Loan_InvalidAmount>请输入有效的借贷金额 (不低于 100 且不超过上限)。</RP_W_Loan_InvalidAmount>
+
+  <!-- ==================== 证券窗口 ==================== -->
+  <RP_W_Stock_Tab>证券交易</RP_W_Stock_Tab>
+  <RP_W_Stock_Title>RimPay 证券交易中心</RP_W_Stock_Title>
+  <RP_W_Stock_BalanceHint>数字国库余额: {0} @银</RP_W_Stock_BalanceHint>
+  <RP_W_Stock_ColCode>代码</RP_W_Stock_ColCode>
+  <RP_W_Stock_ColName>名称</RP_W_Stock_ColName>
+  <RP_W_Stock_ColPrice>当前价</RP_W_Stock_ColPrice>
+  <RP_W_Stock_ColChange>今日涨跌</RP_W_Stock_ColChange>
+  <RP_W_Stock_ColHeld>持仓数</RP_W_Stock_ColHeld>
+  <RP_W_Stock_ColValue>当前市值</RP_W_Stock_ColValue>
+  <RP_W_Stock_ColProfit>盈亏</RP_W_Stock_ColProfit>
+  <RP_W_Stock_NoData>当前无股票数据可用。</RP_W_Stock_NoData>
+  <RP_W_Stock_TipSectors>行业板块: {0}  |  基础波动率: {1}%</RP_W_Stock_TipSectors>
+  <RP_W_Stock_TipFaction>所属派系: {0} (好感度: {1} / {2})</RP_W_Stock_TipFaction>
+  <RP_W_Stock_TipPrice>当前价格: {0} @银  |  今日涨跌: {1}</RP_W_Stock_TipPrice>
+  <RP_W_Stock_TipHeld>国库持仓: {0} 股  |  当前市值: {1} @银  |  持仓盈亏: {2} @银</RP_W_Stock_TipHeld>
+  <RP_W_Stock_TipHeadline>&lt;b&gt;【最新异动成因】&lt;/b&gt;\n{0}</RP_W_Stock_TipHeadline>
+  <RP_W_Stock_TipNoEvent>&lt;i&gt;【近期动态】大盘交易正常进行中，暂无突发事件。&lt;/i&gt;</RP_W_Stock_TipNoEvent>
+  <RP_W_Stock_Detail>详情</RP_W_Stock_Detail>
+  <RP_W_Stock_DetailTitle>{0}  {1}</RP_W_Stock_DetailTitle>
+  <RP_W_Stock_DetailInfo>当前价格: {0} @银  |  今日涨跌: {1}  |  国库持仓: {2} 股  |  盈亏: {3} @银</RP_W_Stock_DetailInfo>
+  <RP_W_Stock_DetailFaction>  |  好感度: {0} ({1})</RP_W_Stock_DetailFaction>
+  <RP_W_Stock_TradeTitle>&lt;b&gt;交易操作:&lt;/b&gt; (国库可用余额: {0} @银)</RP_W_Stock_TradeTitle>
+  <RP_W_Stock_Buy>买入</RP_W_Stock_Buy>
+  <RP_W_Stock_BuyDone>【RimPay证券】成功以每股 {0} @银 的价格购买了 {1} 股 {2}，共消耗 {3} @银。</RP_W_Stock_BuyDone>
+  <RP_W_Stock_BuyNoFunds>数字国库资金不足，无法购买该数量的股票！</RP_W_Stock_BuyNoFunds>
+  <RP_W_Stock_Sell>卖出</RP_W_Stock_Sell>
+  <RP_W_Stock_SellDone>【RimPay证券】成功以每股 {0} @银 的价格卖出了 {1} 股 {2}，获得 {3} @银。</RP_W_Stock_SellDone>
+  <RP_W_Stock_SellNoHeld>持仓数量不足，无法卖出该数额！</RP_W_Stock_SellNoHeld>
+  <RP_W_Stock_NewsTitle>近期市场异动与简讯流:</RP_W_Stock_NewsTitle>
+  <RP_W_Stock_NoNews>大盘交投平稳，暂无突发事件简讯。</RP_W_Stock_NoNews>
+  <RP_W_Stock_Back>返回</RP_W_Stock_Back>
+  <RP_W_Stock_NoHistory>历史数据不足，无法绘制K线。</RP_W_Stock_NoHistory>
+  <RP_W_Stock_ChartHigh>高 {0}</RP_W_Stock_ChartHigh>
+  <RP_W_Stock_ChartLow>低 {0}</RP_W_Stock_ChartLow>
+  <RP_W_Stock_Cat_Tech>科技数码</RP_W_Stock_Cat_Tech>
+  <RP_W_Stock_Cat_Entertainment>文化娱乐</RP_W_Stock_Cat_Entertainment>
+  <RP_W_Stock_Cat_Food>应急食品</RP_W_Stock_Cat_Food>
+  <RP_W_Stock_Cat_Agri>农业种植</RP_W_Stock_Cat_Agri>
+  <RP_W_Stock_Cat_Ranch>畜牧养殖</RP_W_Stock_Cat_Ranch>
+  <RP_W_Stock_Cat_ECom>轨道电商</RP_W_Stock_Cat_ECom>
+  <RP_W_Stock_Cat_Media>传媒资讯</RP_W_Stock_Cat_Media>
+  <RP_W_Stock_Cat_Sports>体育竞技</RP_W_Stock_Cat_Sports>
+  <RP_W_Stock_Cat_Medical>医药生物</RP_W_Stock_Cat_Medical>
+  <RP_W_Stock_Cat_Arms>军工防务</RP_W_Stock_Cat_Arms>
+  <RP_W_Stock_Cat_Mining>采矿能源</RP_W_Stock_Cat_Mining>
+  <RP_W_Stock_Cat_Finance>投机基金</RP_W_Stock_Cat_Finance>
+  <RP_W_Stock_Cat_Quantum>量子网络</RP_W_Stock_Cat_Quantum>
+  <RP_W_Stock_Cat_Faction>派系股票</RP_W_Stock_Cat_Faction>
+  <RP_W_Stock_Cat_Misc>其他板块</RP_W_Stock_Cat_Misc>
+
+  <!-- ==================== 钱包窗口 ==================== -->
+  <RP_W_Wallet_Title>{0} 的 RimPay 数字钱包</RP_W_Wallet_Title>
+  <RP_W_Wallet_TreasuryRef>数字国库余额参考: {0} @银</RP_W_Wallet_TreasuryRef>
+  <RP_W_Wallet_Balance>当前余额: {0} @银</RP_W_Wallet_Balance>
+  <RP_W_Wallet_RecordsTitle>&lt;b&gt;近期收支记录 (单位: @银):&lt;/b&gt;</RP_W_Wallet_RecordsTitle>
+  <RP_W_Wallet_NoRecords>暂无收支记录。</RP_W_Wallet_NoRecords>
+  <RP_W_Wallet_RecordLine>&lt;color={0}&gt;{1}&lt;/color&gt;</RP_W_Wallet_RecordLine>
+  <RP_W_Wallet_BonusTitle>&lt;b&gt;发放奖金 (从数字国库划拨):&lt;/b&gt;</RP_W_Wallet_BonusTitle>
+  <RP_W_Wallet_BonusBtn>发放</RP_W_Wallet_BonusBtn>
+  <RP_W_Wallet_BonusDone>已向 {0} 发放 {1} @银 奖金！</RP_W_Wallet_BonusDone>
+  <RP_W_Wallet_BonusNoFunds>数字国库余额不足，无法发放奖金！</RP_W_Wallet_BonusNoFunds>
+  <RP_W_Wallet_FineTitle>&lt;b&gt;没收资金 (充入数字国库):&lt;/b&gt;</RP_W_Wallet_FineTitle>
+  <RP_W_Wallet_FineBtn>没收</RP_W_Wallet_FineBtn>
+  <RP_W_Wallet_FineFullBtn>全部没收</RP_W_Wallet_FineFullBtn>
+  <RP_W_Wallet_FineNoFunds>{0} 身无分文，无可没收。</RP_W_Wallet_FineNoFunds>
+  <RP_W_Wallet_FineDone>已没收 {0} 的 {1} @银 充入数字国库！</RP_W_Wallet_FineDone>
+
+  <!-- ==================== 殖民地财报窗口 ==================== -->
+  <RP_W_Finance_Title>RimPay 殖民地财报总览</RP_W_Finance_Title>
+  <RP_W_Finance_AssetTitle>&lt;b&gt;资产总览:&lt;/b&gt;</RP_W_Finance_AssetTitle>
+  <RP_W_Finance_AssetPhysical>  物理白银 (计入财富): {0}</RP_W_Finance_AssetPhysical>
+  <RP_W_Finance_AssetTreasury>  数字国库 (不计入财富): {0}</RP_W_Finance_AssetTreasury>
+  <RP_W_Finance_AssetTotal>  流动资产合计: {0}</RP_W_Finance_AssetTotal>
+  <RP_W_Finance_RosterTitle>&lt;b&gt;殖民者财政名册 (单位: @银):&lt;/b&gt;</RP_W_Finance_RosterTitle>
+  <RP_W_Finance_NoColonists>暂无殖民者。</RP_W_Finance_NoColonists>
+  <RP_W_Finance_RosterLine>  {0}  —  余额: {1} @银  |  预估日薪: {2} @银</RP_W_Finance_RosterLine>
+  <RP_W_Finance_Footnote>&lt;i&gt;提示: 选中殖民者可在底部控制栏点击钱包图标, 查看该小人的收支流水。&lt;/i&gt;</RP_W_Finance_Footnote>
+</LanguageData>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<QuantumNet_RimSeek_HighSpeed.label>RimSeek assist (HighSpeed)</QuantumNet_RimSeek_HighSpeed.label>
+	<QuantumNet_RimSeek_HighSpeed.description>Connected to RimSeek AI via the HighSpeed plan. Overall work efficiency improved.</QuantumNet_RimSeek_HighSpeed.description>
+	<QuantumNet_RimSeek_Infinite.label>RimSeek deep cooperation</QuantumNet_RimSeek_Infinite.label>
+	<QuantumNet_RimSeek_Infinite.description>Connected to RimSeek deep cooperation via the Quantum Infinite plan. Work efficiency greatly improved with fewer distractions.</QuantumNet_RimSeek_Infinite.description>
+	<QuantumNet_RimSeek_Congested.label>RimSeek assist (congested)</QuantumNet_RimSeek_Congested.label>
+	<QuantumNet_RimSeek_Congested.description>Quantum Net is congested. RimSeek online tasks run degraded - slower and less effective.</QuantumNet_RimSeek_Congested.description>
+</LanguageData>

@@ -64,13 +64,14 @@ namespace RimDigitalLife_RimPay
             // 【情况 B】物理白银不足！需要动用数字国库
             int silverDeficit = totalSilverToPay - physicalSilverCount;
             GameComponent_RimPay comp = Current.Game.GetComponent<GameComponent_RimPay>();
-            
-            // 如果连国库也不够（理论上不可能，因为 CountHeldBy 已经挡住了），安全回退
-            if (comp == null || comp.CloudTreasuryBalance < silverDeficit)
-            {
-                Log.Error("[RimDigitalLife_RimPay] Fatal Error: Cloud Treasury balance insufficient during ResolveTrade fallback.");
-                return true;
-            }
+            int treasuryBalance = (comp != null) ? comp.CloudTreasuryBalance : 0;
+
+            // 国库可能不足（交易窗口开启期间余额被跨日结算/其他联动变动，或
+            // 其他 patch CountHeldBy 的模组抬高了支付上限）——
+            // 按可用资金"尽力支付"：物理白银全部 + 国库扣到能扣为止，
+            // 不再走原版（原版 TransferNoSplit 物理不足时必报 "nothing left"）
+            int treasuryPay = Math.Min(silverDeficit, Math.Max(0, treasuryBalance));
+            bool shortPaid = treasuryPay < silverDeficit;
 
             // 1. 先把手里所有的物理白银（thingsColony）全部交给商人
             if (physicalSilverCount > 0)
@@ -81,16 +82,27 @@ namespace RimDigitalLife_RimPay
                 });
             }
 
-            // 2. 从数字国库扣除欠缺的部分
-            comp.ModifyTreasury(-silverDeficit, "贸易扣款");
-            Messages.Message($"本次交易从数字国库中无缝扣除了 {silverDeficit} 数字白银。", MessageTypeDefOf.NeutralEvent, false);
+            // 2. 从数字国库扣除能扣的部分 + 为商人凭空生成等量白银（保证经济平衡）
+            if (treasuryPay > 0)
+            {
+                comp.ModifyTreasury(-treasuryPay, "RP_Reason_TradePay");
+                Messages.Message("RP_Trade_TreasuryPaid".Translate(treasuryPay), MessageTypeDefOf.NeutralEvent, false);
 
-            // 3. 为商人凭空生成这部分白银，否则商人卖了东西却没拿到钱（保证经济平衡）
-            Thing generatedSilver = ThingMaker.MakeThing(ThingDefOf.Silver);
-            generatedSilver.stackCount = silverDeficit;
-            TradeSession.trader.GiveSoldThingToTrader(generatedSilver, silverDeficit, TradeSession.playerNegotiator);
+                Thing generatedSilver = ThingMaker.MakeThing(ThingDefOf.Silver);
+                generatedSilver.stackCount = treasuryPay;
+                TradeSession.trader.GiveSoldThingToTrader(generatedSilver, treasuryPay, TradeSession.playerNegotiator);
+            }
 
-            // 拦截完成，跳过原版必将报错的 ResolveTrade
+            // 国库不足时的差额提示（玩家可见警告 + 日志留痕，不再 Fatal）
+            if (shortPaid)
+            {
+                int actualPaid = physicalSilverCount + treasuryPay;
+                int gap = totalSilverToPay - actualPaid;
+                Messages.Message("RP_Trade_ShortPaid".Translate(actualPaid, totalSilverToPay, gap), MessageTypeDefOf.NegativeEvent, false);
+                Log.Warning("RP_Trade_LogShortPaid".Translate(totalSilverToPay, physicalSilverCount, treasuryBalance, gap));
+            }
+
+            // 拦截完成，跳过原版 ResolveTrade
             return false;
         }
     }

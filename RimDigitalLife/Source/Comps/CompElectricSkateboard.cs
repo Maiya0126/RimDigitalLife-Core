@@ -87,7 +87,7 @@ namespace RimDigitalLife
                     if (Rand.Value < fallChance)
                     {
                         currentWearer.stances.stunner.StunFor(180, currentWearer, addBattleLog: false);
-                        MoteMaker.ThrowText(currentWearer.DrawPos + new Vector3(0, 0, 0.5f), currentWearer.Map, "哎呀，摔倒了！", Color.red);
+                        MoteMaker.ThrowText(currentWearer.DrawPos + new Vector3(0, 0, 0.5f), currentWearer.Map, "RDL_Mote_FellOff".Translate(), Color.red);
                         DamageInfo dinfo = new DamageInfo(DamageDefOf.Crush, 2f, 0f, -1f, this.parent);
                         currentWearer.TakeDamage(dinfo);
                     }

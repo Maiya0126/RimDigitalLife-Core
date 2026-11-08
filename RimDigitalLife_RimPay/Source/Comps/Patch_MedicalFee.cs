@@ -35,20 +35,20 @@ namespace RimDigitalLife_RimPay
 
             if (paidByWallet > 0)
             {
-                comp.ModifyBalance(patient, -paidByWallet, "诊疗费用");
-                comp.ModifyTreasury(paidByWallet, "诊疗收入");
+                comp.ModifyBalance(patient, -paidByWallet, "RP_Reason_MedicalCost");
+                comp.ModifyTreasury(paidByWallet, "RP_Reason_MedicalIncome");
             }
             if (coveredByTreasury > 0)
             {
-                comp.ModifyTreasury(-coveredByTreasury, "医保报销");
+                comp.ModifyTreasury(-coveredByTreasury, "RP_Reason_MedicalCover");
             }
 
             // 病人头顶气泡提示（直观感受经济流动）
             if (patient.Spawned && patient.Map != null)
             {
                 string msg = coveredByTreasury > 0
-                    ? $"诊疗费 {cost} @银（医保报销 {coveredByTreasury}）"
-                    : $"诊疗费 {cost} @银";
+                    ? "RP_Medical_MoteCovered".Translate(cost, coveredByTreasury)
+                    : "RP_Medical_Mote".Translate(cost);
                 MoteMaker.ThrowText(patient.DrawPos + new Vector3(0f, 0f, 0.5f), patient.Map, msg, new Color(0.4f, 0.9f, 1f));
             }
         }

@@ -58,7 +58,7 @@ namespace RimDigitalLife
                 // === 被抓 ===
                 pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named("RimDigital_CaughtSlacking"));
                 if (RimDigitalMod.settings.showMoteText)
-                    MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "被抓包!", Color.red);
+                    MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "RDL_Mote_Caught".Translate(), Color.red);
 
                 if (RimDigitalMod.settings.strictMode)
                 {
@@ -76,7 +76,7 @@ namespace RimDigitalLife
 
                 if (RimDigitalMod.settings.showMoteText)
                 {
-                    string slackText = Rand.Element("刷短视频...", "回个消息...", "看眼股票...", "偷个懒...");
+                    string slackText = Rand.Element("RDL_Mote_SlackVideo".Translate(), "RDL_Mote_SlackMessage".Translate(), "RDL_Mote_SlackStock".Translate(), "RDL_Mote_SlackIdle".Translate());
                     MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, slackText, Color.green);
                 }
             }

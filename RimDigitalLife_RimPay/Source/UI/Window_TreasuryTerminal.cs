@@ -34,20 +34,20 @@ namespace RimDigitalLife_RimPay
         public override void DoWindowContents(Rect inRect)
         {
             GameComponent_RimPay comp = Current.Game.GetComponent<GameComponent_RimPay>();
-            if (comp == null) { Widgets.Label(inRect, "组件加载失败，请重启游戏。"); return; }
+            if (comp == null) { Widgets.Label(inRect, "RP_W_Treasury_CompLoadFail".Translate()); return; }
 
             // 右上角：Mod 设置入口（三个 Tab 均可见）
             Rect settingsBtn = new Rect(inRect.xMax - 126f, inRect.y + 4f, 118f, 28f);
-            if (Widgets.ButtonText(settingsBtn, "设置 (Settings)"))
+            if (Widgets.ButtonText(settingsBtn, "RP_W_Settings".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_ModSettings(LoadedModManager.GetMod<RimPayMod>()));
             }
 
             // ===== 顶部原版 Tab 标签页 =====
             tabs.Clear();
-            tabs.Add(new TabRecord("数字国库", delegate { currentTab = 0; }, currentTab == 0));
-            tabs.Add(new TabRecord("借贷中心", delegate { currentTab = 1; }, currentTab == 1));
-            tabs.Add(new TabRecord("证券交易", delegate { currentTab = 2; }, currentTab == 2));
+            tabs.Add(new TabRecord("RP_W_Treasury_Tab".Translate(), delegate { currentTab = 0; }, currentTab == 0));
+            tabs.Add(new TabRecord("RP_W_Loan_Tab".Translate(), delegate { currentTab = 1; }, currentTab == 1));
+            tabs.Add(new TabRecord("RP_W_Stock_Tab".Translate(), delegate { currentTab = 2; }, currentTab == 2));
 
             Rect contentRect = new Rect(inRect.x, inRect.y + 40f, inRect.width, inRect.height - 40f);
 
@@ -71,7 +71,7 @@ namespace RimDigitalLife_RimPay
             outer.Begin(rect);
 
             Text.Font = GameFont.Medium;
-            outer.Label("RimPay 数字国库 — 殖民地财报总览");
+            outer.Label("RP_W_Treasury_Title".Translate());
             Text.Font = GameFont.Small;
             outer.GapLine();
 
@@ -85,22 +85,22 @@ namespace RimDigitalLife_RimPay
             Rect assetBar = outer.GetRect(44f);
             float colW = (assetBar.width - 20f) / 3f;
             DrawAssetBox(assetBar.x, assetBar.y, colW, assetBar.height,
-                "物理白银", physicalSilver.ToString("N0"), "计入殖民地财富", new Color(0.15f, 0.4f, 0.8f), 0.5f);
+                "RP_W_Treasury_Asilver".Translate(), physicalSilver.ToString("N0"), "RP_W_Treasury_CountedWealth".Translate(), new Color(0.15f, 0.4f, 0.8f), 0.5f);
             DrawAssetBox(assetBar.x + colW + 10f, assetBar.y, colW, assetBar.height,
-                "数字国库", treasury.ToString("N0"), "已物理隐藏", new Color(0.2f, 0.7f, 0.2f), 0.5f);
+                "RP_W_Treasury_Tab".Translate(), treasury.ToString("N0"), "RP_W_Treasury_HiddenPhysically".Translate(), new Color(0.2f, 0.7f, 0.2f), 0.5f);
             DrawAssetBox(assetBar.x + (colW + 10f) * 2f, assetBar.y, colW, assetBar.height,
-                "流动资产合计", total.ToString("N0"), "", new Color(0.7f, 0.5f, 0.1f), 0.5f);
+                "RP_W_Treasury_TotalLiquid".Translate(), total.ToString("N0"), "", new Color(0.7f, 0.5f, 0.1f), 0.5f);
 
             // 第二行：托管资产（后缀随设置开关动态变化），与第一行等高
             outer.Gap(6f);
             Rect escrowBar = outer.GetRect(44f);
             float escrowW = (escrowBar.width - 10f) / 2f;
-            string buildingSuffix = (RimPayMod.settings?.hideBuildingWealth ?? true) ? "不计入袭击威胁" : "计入袭击威胁";
-            string equipSuffix = (RimPayMod.settings?.hidePawnEquipmentWealth ?? true) ? "不计入袭击威胁" : "计入袭击威胁";
+            string buildingSuffix = (RimPayMod.settings?.hideBuildingWealth ?? true) ? "RP_W_Treasury_NotCountedRaid".Translate() : "RP_W_Treasury_CountedRaid".Translate();
+            string equipSuffix = (RimPayMod.settings?.hidePawnEquipmentWealth ?? true) ? "RP_W_Treasury_NotCountedRaid".Translate() : "RP_W_Treasury_CountedRaid".Translate();
             DrawAssetBox(escrowBar.x, escrowBar.y, escrowW, escrowBar.height,
-                "托管资产(建筑)", escrowedBuilding.ToString("N0"), buildingSuffix, new Color(0.6f, 0.4f, 0.85f), 0.5f);
+                "RP_W_Treasury_EscrowBuilding".Translate(), escrowedBuilding.ToString("N0"), buildingSuffix, new Color(0.6f, 0.4f, 0.85f), 0.5f);
             DrawAssetBox(escrowBar.x + escrowW + 10f, escrowBar.y, escrowW, escrowBar.height,
-                "托管资产(随身装备)", escrowedEquipment.ToString("N0"), equipSuffix, new Color(0.1f, 0.65f, 0.75f), 0.5f);
+                "RP_W_Treasury_EscrowEquip".Translate(), escrowedEquipment.ToString("N0"), equipSuffix, new Color(0.1f, 0.65f, 0.75f), 0.5f);
 
             outer.Gap(6f);
 
@@ -132,7 +132,7 @@ namespace RimDigitalLife_RimPay
             Listing_Standard summary = new Listing_Standard();
             summary.Begin(summaryRect);
             Text.Font = GameFont.Tiny;
-            summary.Label($"<b>全区收支汇总</b>  每日薪资: {totalPayroll}  |  殖民者钱包合计: {totalBalance}  |  数字国库: {treasury}  |  总数字资产: {totalBalance + treasury}  (单位: @银)");
+            summary.Label("RP_W_Treasury_SummaryLine".Translate(totalPayroll, totalBalance, treasury, totalBalance + treasury));
             Text.Font = GameFont.Small;
             summary.End();
 
@@ -149,7 +149,7 @@ namespace RimDigitalLife_RimPay
             // 底部提示
             outer.Gap(4f);
             Text.Font = GameFont.Tiny;
-            outer.Label("<i>单位: @银 (1 数字白银 = 1 物理白银)  |  物理白银计入殖民地财富计算，数字国库不计入  |  可以将白银存入数字国库压低殖民地财富值，减轻袭击力度    [v1.0.3]</i>");
+            outer.Label("RP_W_Treasury_Footnote".Translate());
             Text.Font = GameFont.Small;
 
             outer.End();
@@ -164,14 +164,14 @@ namespace RimDigitalLife_RimPay
             outer.Begin(rect);
 
             Text.Font = GameFont.Medium;
-            outer.Label("RimPay 借贷中心");
+            outer.Label("RP_W_Loan_Title".Translate());
             Text.Font = GameFont.Small;
             outer.GapLine();
 
-            outer.Label($"<b>数字国库余额: {comp.CloudTreasuryBalance} @银</b>");
+            outer.Label("RP_W_Treasury_Balance".Translate(comp.CloudTreasuryBalance));
             outer.Gap(6f);
 
-            outer.Label("放贷与借款列表 (利率基于派系好感度浮动):");
+            outer.Label("RP_W_Loan_ListHeader".Translate());
             outer.Gap(4f);
 
             // 1. 绘制表头 (在外部，保持固定不滚动)
@@ -179,10 +179,10 @@ namespace RimDigitalLife_RimPay
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = new Color(0.6f, 0.6f, 0.6f);
             Text.Font = GameFont.Tiny;
-            Widgets.Label(new Rect(headerRow.x + 4f, headerRow.y, 220f, headerRow.height), "派系名称");
-            Widgets.Label(new Rect(headerRow.x + 230f, headerRow.y, 100f, headerRow.height), "好感状态");
-            Widgets.Label(new Rect(headerRow.x + 340f, headerRow.y, 100f, headerRow.height), "借贷利率/季");
-            Widgets.Label(new Rect(headerRow.x + 450f, headerRow.y, 120f, headerRow.height), "当前总账");
+            Widgets.Label(new Rect(headerRow.x + 4f, headerRow.y, 220f, headerRow.height), "RP_W_Loan_ColFaction".Translate());
+            Widgets.Label(new Rect(headerRow.x + 230f, headerRow.y, 100f, headerRow.height), "RP_W_Loan_ColGoodwill".Translate());
+            Widgets.Label(new Rect(headerRow.x + 340f, headerRow.y, 100f, headerRow.height), "RP_W_Loan_ColRate".Translate());
+            Widgets.Label(new Rect(headerRow.x + 450f, headerRow.y, 120f, headerRow.height), "RP_W_Loan_ColLedger".Translate());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
@@ -199,7 +199,7 @@ namespace RimDigitalLife_RimPay
 
             if (factions.Count == 0)
             {
-                Widgets.Label(new Rect(viewRect.x + 4f, viewRect.y, viewRect.width, 24f), "暂无可以借贷的派系。");
+                Widgets.Label(new Rect(viewRect.x + 4f, viewRect.y, viewRect.width, 24f), "RP_W_Loan_NoFactions".Translate());
             }
             else
             {
@@ -223,13 +223,13 @@ namespace RimDigitalLife_RimPay
                     // 好感度状态变色
                     string goodwillStr = goodwill.ToString("F0");
                     Color fColor = Color.white;
-                    string relationLabel = "中立";
-                    if (goodwill >= 75) { fColor = Color.green; relationLabel = "盟友"; }
-                    else if (goodwill < 0) { fColor = Color.red; relationLabel = "冷漠"; }
+                    string relationLabel = "RP_W_Loan_Neutral".Translate();
+                    if (goodwill >= 75) { fColor = Color.green; relationLabel = "RP_W_Loan_Ally".Translate(); }
+                    else if (goodwill < 0) { fColor = Color.red; relationLabel = "RP_W_Loan_Cold".Translate(); }
 
                     // 当前借贷总账
                     int netDebt = comp.GetNetFactionDebt(f.loadID);
-                    string debtStr = netDebt == 0 ? "无欠款" : (netDebt > 0 ? $"+{netDebt}" : $"{netDebt}");
+                    string debtStr = netDebt == 0 ? (string)"RP_W_Loan_NoDebt".Translate() : (netDebt > 0 ? $"+{netDebt}" : $"{netDebt}");
                     Color debtColor = netDebt == 0 ? Color.white : (netDebt > 0 ? Color.green : Color.red);
 
                     Rect row = new Rect(viewRect.x, rowY, viewRect.width, 30f);
@@ -243,11 +243,11 @@ namespace RimDigitalLife_RimPay
 
                     // 第二列：好感 (100f)
                     GUI.color = fColor;
-                    Widgets.Label(new Rect(row.x + 230f, row.y, 100f, row.height), $"{relationLabel} ({goodwillStr})");
+                    Widgets.Label(new Rect(row.x + 230f, row.y, 100f, row.height), "RP_W_Loan_Relation".Translate(relationLabel, goodwillStr));
                     GUI.color = Color.white;
 
                     // 第三列：利率 (100f)
-                    Widgets.Label(new Rect(row.x + 340f, row.y, 100f, row.height), $"{rateStr}%");
+                    Widgets.Label(new Rect(row.x + 340f, row.y, 100f, row.height), "RP_W_Loan_RateValue".Translate(rateStr));
 
                     // 第四列：当前总账 (120f)
                     GUI.color = debtColor;
@@ -256,24 +256,24 @@ namespace RimDigitalLife_RimPay
 
                     // 操作按钮区 (放贷与借款)
                     Rect loanBtn = new Rect(row.x + row.width - 130f, row.y + 2f, 60f, row.height - 4f);
-                    if (Widgets.ButtonText(loanBtn, "放贷"))
+                    if (Widgets.ButtonText(loanBtn, "RP_W_Loan_Lend".Translate()))
                     {
                         Find.WindowStack.Add(new Window_LoanAdjustment(f, true, comp.CloudTreasuryBalance, delegate(int chosenAmount)
                         {
                             comp.AddLoan(f, chosenAmount, rate);
-                            comp.ModifyTreasury(-chosenAmount, "对外放贷");
-                            Messages.Message($"成功向 {f.Name} 放贷了 {chosenAmount} @银，利率 {rateStr}% / 季度。", MessageTypeDefOf.PositiveEvent, false);
+                            comp.ModifyTreasury(-chosenAmount, "RP_Reason_LendOut");
+                            Messages.Message("RP_W_Loan_LendDone".Translate(f.Name, chosenAmount, rateStr), MessageTypeDefOf.PositiveEvent, false);
                         }));
                     }
 
                     Rect borrowBtn = new Rect(loanBtn.xMax + 5f, row.y + 2f, 60f, row.height - 4f);
-                    if (Widgets.ButtonText(borrowBtn, "借款"))
+                    if (Widgets.ButtonText(borrowBtn, "RP_W_Loan_Borrow".Translate()))
                     {
                         Find.WindowStack.Add(new Window_LoanAdjustment(f, false, S_loan?.loanMaxBorrow ?? 5000, delegate(int chosenAmount)
                         {
                             comp.AddBorrow(f, chosenAmount, S_loan?.borrowRateBase ?? 0.12f); // 借款利率从设置读取
-                            comp.ModifyTreasury(chosenAmount, "对外借款");
-                            Messages.Message($"成功从 {f.Name} 借款了 {chosenAmount} @银，利率 {(S_loan?.borrowRateBase ?? 0.12f) * 100:F0}% / 季度。", MessageTypeDefOf.PositiveEvent, false);
+                            comp.ModifyTreasury(chosenAmount, "RP_Reason_BorrowIn");
+                            Messages.Message("RP_W_Loan_BorrowDone".Translate(f.Name, chosenAmount, ((S_loan?.borrowRateBase ?? 0.12f) * 100).ToString("F0")), MessageTypeDefOf.PositiveEvent, false);
                         }));
                     }
 
@@ -287,11 +287,11 @@ namespace RimDigitalLife_RimPay
 
             // 3. 借贷总账记录
             outer.Gap(8f);
-            outer.Label("<b>当前有效的借贷记录:</b>");
+            outer.Label("RP_W_Loan_ActiveRecords".Translate());
             List<LoanRecord> activeLoans = comp.GetActiveLoans();
             if (activeLoans.Count == 0)
             {
-                outer.Label("  目前无任何未结算的贷款或借款。");
+                outer.Label("RP_W_Loan_NoRecords".Translate());
             }
             else
             {
@@ -300,8 +300,8 @@ namespace RimDigitalLife_RimPay
                     Rect row = outer.GetRect(28f);
                     Widgets.DrawBoxSolid(row, new Color(0.15f, 0.15f, 0.15f, 0.2f));
 
-                    string actionStr = lr.isFromPlayer ? "放贷给" : "借款自";
-                    string text = $"  {actionStr} {lr.factionName} : <color={(lr.isFromPlayer ? "#7fd97f" : "#ff7f7f")}>{lr.amount}</color> @银  (利率: {lr.rate * 100:F0}%/季 | 到期: 第{lr.dueDay}日)";
+                    string actionStr = lr.isFromPlayer ? "RP_Reason_LendTo".Translate() : "RP_Reason_BorrowFrom".Translate();
+                    string text = "RP_W_Loan_RecordLine".Translate(actionStr, lr.factionName, (lr.isFromPlayer ? "#7fd97f" : "#ff7f7f"), lr.amount, lr.rate * 100, lr.dueDay);
                     Text.Anchor = TextAnchor.MiddleLeft;
                     Text.Font = GameFont.Tiny;
                     Widgets.Label(new Rect(row.x + 4f, row.y, row.width - 120f, row.height), text);
@@ -309,14 +309,14 @@ namespace RimDigitalLife_RimPay
                     Text.Anchor = TextAnchor.UpperLeft;
 
                     Rect actionBtn = new Rect(row.x + row.width - 110f, row.y + 1f, 100f, row.height - 2f);
-                    string btnLabel = lr.isFromPlayer ? "收回本金" : "还清借款";
+                    string btnLabel = lr.isFromPlayer ? "RP_W_Loan_Reclaim".Translate() : "RP_W_Loan_Repay".Translate();
                     if (Widgets.ButtonText(actionBtn, btnLabel))
                     {
                         if (lr.isFromPlayer)
                         {
                             // 收回放贷
-                            comp.ModifyTreasury(lr.amount, "收回放贷");
-                            Messages.Message($"【RimPay借贷】已成功收回向 {lr.factionName} 的放贷本金 {lr.amount} @银，本金已存入数字国库。", MessageTypeDefOf.PositiveEvent, false);
+                            comp.ModifyTreasury(lr.amount, "RP_Reason_ReclaimLoan");
+                            Messages.Message("RP_W_Loan_ReclaimDone".Translate(lr.factionName, lr.amount), MessageTypeDefOf.PositiveEvent, false);
                             lr.amount = 0; // 标记清除
                         }
                         else
@@ -324,13 +324,13 @@ namespace RimDigitalLife_RimPay
                             // 还清借款
                             if (comp.CloudTreasuryBalance >= lr.amount)
                             {
-                                comp.ModifyTreasury(-lr.amount, "还清借款");
-                                Messages.Message($"【RimPay借贷】已成功还清向 {lr.factionName} 的借款本金 {lr.amount} @银。", MessageTypeDefOf.PositiveEvent, false);
+                                comp.ModifyTreasury(-lr.amount, "RP_Reason_RepayLoan");
+                                Messages.Message("RP_W_Loan_RepayDone".Translate(lr.factionName, lr.amount), MessageTypeDefOf.PositiveEvent, false);
                                 lr.amount = 0; // 标记清除
                             }
                             else
                             {
-                                Messages.Message("数字国库余额不足以还清借款！", MessageTypeDefOf.RejectInput, false);
+                                Messages.Message("RP_W_Loan_RepayNoFunds".Translate(), MessageTypeDefOf.RejectInput, false);
                             }
                         }
                     }
@@ -349,11 +349,11 @@ namespace RimDigitalLife_RimPay
             outer.Begin(rect);
 
             Text.Font = GameFont.Medium;
-            outer.Label("RimPay 证券交易中心");
+            outer.Label("RP_W_Stock_Title".Translate());
             Text.Font = GameFont.Small;
             outer.GapLine();
 
-            outer.Label($"<b>数字国库余额: {comp.CloudTreasuryBalance} @银</b>  |  <i>双击或点击任意股票查看15天K线蜡烛图及批量交易</i>");
+            outer.Label("RP_W_Stock_BalanceHint".Translate(comp.CloudTreasuryBalance));
             outer.Gap(6f);
 
             // 1. 绘制表头 (在外部，保持固定不滚动)
@@ -361,13 +361,13 @@ namespace RimDigitalLife_RimPay
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = new Color(0.6f, 0.6f, 0.6f);
             Text.Font = GameFont.Tiny;
-            Widgets.Label(new Rect(headerRow.x + 4f, headerRow.y, 60f, headerRow.height), "代码");
-            Widgets.Label(new Rect(headerRow.x + 68f, headerRow.y, 180f, headerRow.height), "名称");
-            Widgets.Label(new Rect(headerRow.x + 252f, headerRow.y, 80f, headerRow.height), "当前价");
-            Widgets.Label(new Rect(headerRow.x + 336f, headerRow.y, 80f, headerRow.height), "今日涨跌");
-            Widgets.Label(new Rect(headerRow.x + 420f, headerRow.y, 70f, headerRow.height), "持仓数");
-            Widgets.Label(new Rect(headerRow.x + 494f, headerRow.y, 90f, headerRow.height), "当前市值");
-            Widgets.Label(new Rect(headerRow.x + 588f, headerRow.y, 90f, headerRow.height), "盈亏");
+            Widgets.Label(new Rect(headerRow.x + 4f, headerRow.y, 60f, headerRow.height), "RP_W_Stock_ColCode".Translate());
+            Widgets.Label(new Rect(headerRow.x + 68f, headerRow.y, 180f, headerRow.height), "RP_W_Stock_ColName".Translate());
+            Widgets.Label(new Rect(headerRow.x + 252f, headerRow.y, 80f, headerRow.height), "RP_W_Stock_ColPrice".Translate());
+            Widgets.Label(new Rect(headerRow.x + 336f, headerRow.y, 80f, headerRow.height), "RP_W_Stock_ColChange".Translate());
+            Widgets.Label(new Rect(headerRow.x + 420f, headerRow.y, 70f, headerRow.height), "RP_W_Stock_ColHeld".Translate());
+            Widgets.Label(new Rect(headerRow.x + 494f, headerRow.y, 90f, headerRow.height), "RP_W_Stock_ColValue".Translate());
+            Widgets.Label(new Rect(headerRow.x + 588f, headerRow.y, 90f, headerRow.height), "RP_W_Stock_ColProfit".Translate());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
@@ -381,7 +381,7 @@ namespace RimDigitalLife_RimPay
 
             if (stocks.Count == 0)
             {
-                Widgets.Label(new Rect(viewRect.x + 4f, viewRect.y, viewRect.width, 24f), "当前无股票数据可用。");
+                Widgets.Label(new Rect(viewRect.x + 4f, viewRect.y, viewRect.width, 24f), "RP_W_Stock_NoData".Translate());
             }
             else
             {
@@ -403,35 +403,35 @@ namespace RimDigitalLife_RimPay
                     if (Mouse.IsOver(row))
                     {
                         var sbTip = new System.Text.StringBuilder();
-                        sbTip.AppendLine($"<b>{s.code} · {s.name}</b>");
-                        sbTip.AppendLine($"行业板块: {GetCategoryLabel(s.category)}  |  基础波动率: {s.volatility * 100:F0}%");
+                        sbTip.AppendLine($"<b>{s.code} · {s.name.Translate()}</b>");
+                        sbTip.AppendLine("RP_W_Stock_TipSectors".Translate(GetCategoryLabel(s.category).Translate(), (s.volatility * 100).ToString("F0")));
                         if (!string.IsNullOrEmpty(s.desc))
                         {
-                            sbTip.AppendLine($"<i>{s.desc}</i>");
+                            sbTip.AppendLine($"<i>{s.desc.Translate()}</i>");
                         }
                         if (s.IsFactionStock)
                         {
                             Faction f = Find.FactionManager?.AllFactions?.FirstOrDefault(x => x.loadID == s.factionLoadID);
                             if (f != null)
                             {
-                                sbTip.AppendLine($"所属派系: {f.Name} (好感度: {f.PlayerGoodwill:+0;-0;0} / {f.PlayerRelationKind.GetLabel()})");
+                                sbTip.AppendLine("RP_W_Stock_TipFaction".Translate(f.Name, f.PlayerGoodwill.ToString("+0;-0;0"), f.PlayerRelationKind.GetLabel()));
                             }
                         }
                         sbTip.AppendLine();
-                        sbTip.AppendLine($"当前价格: {s.price:F2} @银  |  今日涨跌: {changeStr}");
+                        sbTip.AppendLine("RP_W_Stock_TipPrice".Translate(s.price.ToString("F2"), changeStr));
                         if (held > 0)
                         {
-                            sbTip.AppendLine($"国库持仓: {held} 股  |  当前市值: {marketValue} @银  |  持仓盈亏: {(profit >= 0 ? "+" : "")}{profit} @银");
+                            sbTip.AppendLine("RP_W_Stock_TipHeld".Translate(held, marketValue, (profit >= 0 ? "+" : "") + profit));
                         }
                         if (!string.IsNullOrEmpty(s.lastHeadline))
                         {
                             sbTip.AppendLine();
-                            sbTip.AppendLine($"<b>【最新异动成因】</b>\n{s.lastHeadline}");
+                            sbTip.AppendLine("RP_W_Stock_TipHeadline".Translate(s.lastHeadline.Translate()));
                         }
                         else
                         {
                             sbTip.AppendLine();
-                            sbTip.AppendLine("<i>【近期动态】大盘交易正常进行中，暂无突发事件。</i>");
+                            sbTip.AppendLine("RP_W_Stock_TipNoEvent".Translate());
                         }
                         TooltipHandler.TipRegion(row, sbTip.ToString().TrimEnd());
                     }
@@ -442,7 +442,7 @@ namespace RimDigitalLife_RimPay
                     // 1. 代码
                     Widgets.Label(new Rect(row.x + 4f, row.y, 60f, row.height), s.code);
                     // 2. 名称 (180f)
-                    Widgets.Label(new Rect(row.x + 68f, row.y, 180f, row.height), s.name);
+                    Widgets.Label(new Rect(row.x + 68f, row.y, 180f, row.height), s.name.Translate());
 
                     // 3. 当前价 & 今日涨跌 (红绿大盘变色)
                     GUI.color = changeColor;
@@ -469,7 +469,7 @@ namespace RimDigitalLife_RimPay
 
                     // 操作按钮：进入K线详情大弹窗进行买卖交易
                     Rect tradeBtn = new Rect(row.x + row.width - 100f, row.y + 2f, 90f, row.height - 4f);
-                    if (Widgets.ButtonText(tradeBtn, "详情K线"))
+                    if (Widgets.ButtonText(tradeBtn, "RP_W_Stock_Detail".Translate()))
                     {
                         Find.WindowStack.Add(new Window_StockDetail(s, comp));
                     }
@@ -522,53 +522,53 @@ namespace RimDigitalLife_RimPay
             list.Begin(rect);
             int physicalSilver = map.resourceCounter.GetCount(ThingDefOf.Silver);
             Text.Font = GameFont.Medium;
-            list.Label("存取白银");
+            list.Label("RP_W_Treasury_DepositWithdraw".Translate());
             Text.Font = GameFont.Small;
             list.GapLine();
-            list.Label("存入 (物理白银 → 数字国库):");
+            list.Label("RP_W_Treasury_DepositLabel".Translate());
             Rect depRow = list.GetRect(30f);
             Rect depInput = new Rect(depRow.x, depRow.y, depRow.width - 125f, depRow.height);
             Widgets.TextFieldNumeric(depInput, ref depositAmount, ref depositBuffer, 0, physicalSilver);
             Rect depAllBtn = new Rect(depInput.xMax + 5f, depRow.y, 55f, depRow.height);
-            if (Widgets.ButtonText(depAllBtn, "全部"))
+            if (Widgets.ButtonText(depAllBtn, "RP_W_Treasury_All".Translate()))
             {
                 depositAmount = physicalSilver; depositBuffer = depositAmount.ToString();
             }
             Rect depBtn = new Rect(depAllBtn.xMax + 5f, depRow.y, 60f, depRow.height);
-            if (ColoredButton(depBtn, "存入", new Color(0.15f, 0.55f, 0.2f)))
+            if (ColoredButton(depBtn, "RP_W_Treasury_DepositBtn".Translate(), new Color(0.15f, 0.55f, 0.2f)))
             {
                 if (depositAmount > 0 && depositAmount <= physicalSilver)
                 {
                     int removed = RemovePhysicalSilver(map, depositAmount);
-                    if (removed > 0) { comp.ModifyTreasury(removed, "白银存入"); Messages.Message($"成功存入 {removed} @银 至数字国库。", MessageTypeDefOf.PositiveEvent); depositAmount = 0; depositBuffer = "0"; }
+                    if (removed > 0) { comp.ModifyTreasury(removed, "RP_Reason_SilverDeposit"); Messages.Message("RP_W_Treasury_DepositDone".Translate(removed), MessageTypeDefOf.PositiveEvent); depositAmount = 0; depositBuffer = "0"; }
                 }
             }
             list.Gap(10f);
-            list.Label("提取 (数字国库 → 物理白银):");
+            list.Label("RP_W_Treasury_WithdrawLabel".Translate());
             Rect withRow = list.GetRect(30f);
             Rect withInput = new Rect(withRow.x, withRow.y, withRow.width - 125f, withRow.height);
             Widgets.TextFieldNumeric(withInput, ref withdrawAmount, ref withdrawBuffer, 0, comp.CloudTreasuryBalance);
             Rect withAllBtn = new Rect(withInput.xMax + 5f, withRow.y, 55f, withRow.height);
-            if (Widgets.ButtonText(withAllBtn, "全部"))
+            if (Widgets.ButtonText(withAllBtn, "RP_W_Treasury_All".Translate()))
             {
                 withdrawAmount = comp.CloudTreasuryBalance; withdrawBuffer = withdrawAmount.ToString();
             }
             Rect withBtn = new Rect(withAllBtn.xMax + 5f, withRow.y, 60f, withRow.height);
-            if (ColoredButton(withBtn, "提取", new Color(0.55f, 0.15f, 0.15f)))
+            if (ColoredButton(withBtn, "RP_W_Treasury_WithdrawBtn".Translate(), new Color(0.55f, 0.15f, 0.15f)))
             {
                 if (withdrawAmount > 0 && withdrawAmount <= comp.CloudTreasuryBalance)
                 {
-                    comp.ModifyTreasury(-withdrawAmount, "白银提取");
+                    comp.ModifyTreasury(-withdrawAmount, "RP_Reason_SilverWithdraw");
                     Thing silver = ThingMaker.MakeThing(ThingDefOf.Silver);
                     silver.stackCount = withdrawAmount;
                     IntVec3 pos = GetCommsConsolePos(map) ?? DropCellFinder.TradeDropSpot(map);
                     GenPlace.TryPlaceThing(silver, pos, map, ThingPlaceMode.Near);
-                    Messages.Message($"成功从数字国库提取 {withdrawAmount} @银。", MessageTypeDefOf.PositiveEvent);
+                    Messages.Message("RP_W_Treasury_WithdrawDone".Translate(withdrawAmount), MessageTypeDefOf.PositiveEvent);
                     withdrawAmount = 0; withdrawBuffer = "0";
                 }
             }
             list.Gap(10f);
-            list.Label($"<i>可存入: {physicalSilver} @银  |  数字国库: {comp.CloudTreasuryBalance} @银</i>");
+            list.Label("RP_W_Treasury_DepositAvail".Translate(physicalSilver, comp.CloudTreasuryBalance));
             list.End();
         }
 
@@ -580,18 +580,18 @@ namespace RimDigitalLife_RimPay
             float supportDays = totalDailyPayroll > 0 ? (float)comp.CloudTreasuryBalance / totalDailyPayroll : 0f;
 
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(rect.x, rect.y, rect.width, 24f), "殖民者财政名册");
+            Widgets.Label(new Rect(rect.x, rect.y, rect.width, 24f), "RP_W_Treasury_RosterTitle".Translate());
             Text.Font = GameFont.Tiny;
-            Widgets.Label(new Rect(rect.x, rect.y + 24f, rect.width, 24f), $"每日薪资合计: {totalDailyPayroll}  |  数字国库可支撑: {supportDays:F1} 天  (单位: @银)");
+            Widgets.Label(new Rect(rect.x, rect.y + 24f, rect.width, 24f), "RP_W_Treasury_RosterSummary".Translate(totalDailyPayroll, supportDays.ToString("F1")));
 
             float headerY = rect.y + 50f;
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = new Color(0.6f, 0.6f, 0.6f);
             Text.Font = GameFont.Tiny;
-            Widgets.Label(new Rect(rect.x + 4f, headerY, 100f, 20f), "姓名");
-            Widgets.Label(new Rect(rect.x + 100f, headerY, 70f, 20f), "余额 @银");
-            Widgets.Label(new Rect(rect.x + 170f, headerY, 70f, 20f), "日薪 @银");
-            Widgets.Label(new Rect(rect.x + 240f, headerY, rect.width - 244f, 20f), "类型");
+            Widgets.Label(new Rect(rect.x + 4f, headerY, 100f, 20f), "RP_W_Treasury_ColName".Translate());
+            Widgets.Label(new Rect(rect.x + 100f, headerY, 70f, 20f), "RP_W_Treasury_ColBalance".Translate());
+            Widgets.Label(new Rect(rect.x + 170f, headerY, 70f, 20f), "RP_W_Treasury_ColSalary".Translate());
+            Widgets.Label(new Rect(rect.x + 240f, headerY, rect.width - 244f, 20f), "RP_W_Treasury_ColType".Translate());
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
@@ -606,7 +606,7 @@ namespace RimDigitalLife_RimPay
 
             if (colonists.Count == 0)
             {
-                Widgets.Label(new Rect(rect.x + 4f, scrollY, rect.width - 8f, 20f), "暂无殖民者。");
+                Widgets.Label(new Rect(rect.x + 4f, scrollY, rect.width - 8f, 20f), "RP_W_Treasury_NoColonists".Translate());
             }
             else
             {
@@ -624,25 +624,25 @@ namespace RimDigitalLife_RimPay
                     Widgets.Label(new Rect(row.x + 100f, row.y, 70f, row.height), bal.ToString());
                     Widgets.Label(new Rect(row.x + 170f, row.y, 70f, row.height), salary.ToString());
 
-                    // 类型列：可点击
-                    Rect typeRect = new Rect(row.x + 240f, row.y, row.width - 244f, row.height);
-                    GUI.color = tierColor;
-                    Widgets.Label(typeRect, tier);
-                    GUI.color = Color.white;
+                // 类型列：可点击
+                Rect typeRect = new Rect(row.x + 240f, row.y, row.width - 244f, row.height);
+                GUI.color = tierColor;
+                Widgets.Label(typeRect, tier.Translate());
+                GUI.color = Color.white;
 
-                    if (Widgets.ButtonInvisible(typeRect))
+                if (Widgets.ButtonInvisible(typeRect))
+                {
+                    List<FloatMenuOption> opts = new List<FloatMenuOption>();
+                    string[] types = { "Auto", "Child", "Slave", "Novice", "Basic", "Skilled", "Expert" };
+                    foreach (string t in types)
                     {
-                        List<FloatMenuOption> opts = new List<FloatMenuOption>();
-                        string[] types = { "自动", "儿童", "奴隶", "初级", "基础", "熟练", "专家" };
-                        foreach (string t in types)
+                        opts.Add(new FloatMenuOption(("RP_W_Treasury_Tier_" + t).Translate(), delegate
                         {
-                            opts.Add(new FloatMenuOption(t, delegate
-                            {
-                                comp.SetPawnCustomType(p, t == "自动" ? null : t);
-                            }));
-                        }
-                        Find.WindowStack.Add(new FloatMenu(opts));
+                            comp.SetPawnCustomType(p, t == "Auto" ? null : t);
+                        }));
                     }
+                    Find.WindowStack.Add(new FloatMenu(opts));
+                }
                     Text.Anchor = TextAnchor.UpperLeft;
                     rowY += 26f;
                 }
@@ -656,38 +656,38 @@ namespace RimDigitalLife_RimPay
             string custom = comp.GetPawnCustomType(pawn);
             if (custom != null)
             {
-                if (custom == "儿童") color = new Color(0.6f, 0.6f, 0.15f);
-                else if (custom == "奴隶") color = new Color(0.8f, 0.4f, 0.0f);
-                else if (custom == "专家") color = Color.yellow;
-                else if (custom == "熟练") color = new Color(0.3f, 0.6f, 1f);
-                else if (custom == "基础") color = Color.white;
-                else if (custom == "初级") color = new Color(0.5f, 0.5f, 0.5f);
+                if (custom == "Child") color = new Color(0.6f, 0.6f, 0.15f);
+                else if (custom == "Slave") color = new Color(0.8f, 0.4f, 0.0f);
+                else if (custom == "Expert") color = Color.yellow;
+                else if (custom == "Skilled") color = new Color(0.3f, 0.6f, 1f);
+                else if (custom == "Basic") color = Color.white;
+                else if (custom == "Novice") color = new Color(0.5f, 0.5f, 0.5f);
                 else color = Color.white;
-                return custom;
+                return "RP_W_Treasury_Tier_" + custom;
             }
 
             if (pawn.DevelopmentalStage == DevelopmentalStage.Baby || pawn.DevelopmentalStage == DevelopmentalStage.Child)
-            { color = new Color(0.6f, 0.6f, 0.15f); return "儿童"; }
+            { color = new Color(0.6f, 0.6f, 0.15f); return "RP_W_Treasury_Tier_Child"; }
             if (pawn.IsSlaveOfColony)
-            { color = new Color(0.8f, 0.4f, 0.0f); return "奴隶"; }
+            { color = new Color(0.8f, 0.4f, 0.0f); return "RP_W_Treasury_Tier_Slave"; }
             int bestSkill = 0;
             if (pawn.skills != null)
                 foreach (var s in pawn.skills.skills) if (s.Level > bestSkill) bestSkill = s.Level;
-            if (bestSkill >= 15) { color = Color.yellow; return "专家"; }
-            if (bestSkill >= 10) { color = new Color(0.3f, 0.6f, 1f); return "熟练"; }
-            if (bestSkill >= 6) { color = Color.white; return "基础"; }
-            color = new Color(0.5f, 0.5f, 0.5f); return "初级";
+            if (bestSkill >= 15) { color = Color.yellow; return "RP_W_Treasury_Tier_Expert"; }
+            if (bestSkill >= 10) { color = new Color(0.3f, 0.6f, 1f); return "RP_W_Treasury_Tier_Skilled"; }
+            if (bestSkill >= 6) { color = Color.white; return "RP_W_Treasury_Tier_Basic"; }
+            color = new Color(0.5f, 0.5f, 0.5f); return "RP_W_Treasury_Tier_Novice";
         }
 
         private int GetSalary(GameComponent_RimPay comp, Pawn pawn)
         {
             string custom = comp.GetPawnCustomType(pawn);
-            if (custom == "专家") return 50;
-            if (custom == "熟练") return 30;
-            if (custom == "基础") return 20;
-            if (custom == "初级") return 10;
-            if (custom == "儿童") return 5;
-            if (custom == "奴隶") return 2;
+            if (custom == "Expert") return 50;
+            if (custom == "Skilled") return 30;
+            if (custom == "Basic") return 20;
+            if (custom == "Novice") return 10;
+            if (custom == "Child") return 5;
+            if (custom == "Slave") return 2;
 
             int salary = 10;
             if (pawn.DevelopmentalStage == DevelopmentalStage.Baby || pawn.DevelopmentalStage == DevelopmentalStage.Child) return 5;
@@ -705,21 +705,21 @@ namespace RimDigitalLife_RimPay
         {
             switch (cat)
             {
-                case "Tech": return "数码科技";
-                case "Entertainment": return "文化娱乐";
-                case "Food": return "食品合成";
-                case "Agri": return "大宗农业";
-                case "Ranch": return "畜牧养殖";
-                case "ECom": return "网络电商";
-                case "Media": return "自媒体互娱";
-                case "Sports": return "体育竞技";
-                case "Medical": return "生物制药";
-                case "Arms": return "军工防务";
-                case "Mining": return "采矿核能";
-                case "Finance": return "杠杆基金";
-                case "Quantum": return "量子网络运营商";
-                case "Faction": return "派系股票";
-                default: return "综合板块";
+                case "Tech": return "RP_W_Stock_Cat_Tech";
+                case "Entertainment": return "RP_W_Stock_Cat_Entertainment";
+                case "Food": return "RP_W_Stock_Cat_Food";
+                case "Agri": return "RP_W_Stock_Cat_Agri";
+                case "Ranch": return "RP_W_Stock_Cat_Ranch";
+                case "ECom": return "RP_W_Stock_Cat_ECom";
+                case "Media": return "RP_W_Stock_Cat_Media";
+                case "Sports": return "RP_W_Stock_Cat_Sports";
+                case "Medical": return "RP_W_Stock_Cat_Medical";
+                case "Arms": return "RP_W_Stock_Cat_Arms";
+                case "Mining": return "RP_W_Stock_Cat_Mining";
+                case "Finance": return "RP_W_Stock_Cat_Finance";
+                case "Quantum": return "RP_W_Stock_Cat_Quantum";
+                case "Faction": return "RP_W_Stock_Cat_Faction";
+                default: return "RP_W_Stock_Cat_Misc";
             }
         }
 

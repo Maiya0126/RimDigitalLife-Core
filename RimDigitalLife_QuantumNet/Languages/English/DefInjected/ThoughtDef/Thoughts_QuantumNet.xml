@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<QuantumNet_SupportStreamer.label>Supported the streamer</QuantumNet_SupportStreamer.label>
+	<QuantumNet_SupportStreamer.description>I just tipped my favorite streamer! Real money supporting the broadcast!</QuantumNet_SupportStreamer.description>
+	<QuantumNet_OnlineShopping.label>Got an online order</QuantumNet_OnlineShopping.label>
+	<QuantumNet_OnlineShopping.description>Bought myself a little something with my own money. Waiting for the delivery feels great!</QuantumNet_OnlineShopping.description>
+	<QuantumNet_HealthReminder.label>RimSeek health reminder</QuantumNet_HealthReminder.label>
+	<QuantumNet_HealthReminder.description>RimSeek sent a private health tip through my device when something was wrong. Feels nice to be cared for by an AI.</QuantumNet_HealthReminder.description>
+</LanguageData>

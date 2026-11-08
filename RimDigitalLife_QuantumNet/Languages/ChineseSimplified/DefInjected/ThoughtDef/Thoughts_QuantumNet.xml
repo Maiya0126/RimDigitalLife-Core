@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<QuantumNet_SupportStreamer.label>支持主播</QuantumNet_SupportStreamer.label>
+	<QuantumNet_SupportStreamer.description>我刚给喜欢的人打了赏！用真金白银表示了对主播的支持！</QuantumNet_SupportStreamer.description>
+	<QuantumNet_OnlineShopping.label>收到网购包裹</QuantumNet_OnlineShopping.label>
+	<QuantumNet_OnlineShopping.description>花自己的钱买了点小东西，等待快递送达的感觉太快乐了！</QuantumNet_OnlineShopping.description>
+	<QuantumNet_HealthReminder.label>RimSeek 健康提醒</QuantumNet_HealthReminder.label>
+	<QuantumNet_HealthReminder.description>健康状况异常时，RimSeek 通过随身设备发来了私人健康提醒，被 AI 关心的感觉不错。</QuantumNet_HealthReminder.description>
+</LanguageData>

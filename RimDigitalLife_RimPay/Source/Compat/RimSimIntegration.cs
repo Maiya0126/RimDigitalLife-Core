@@ -31,6 +31,8 @@ namespace RimDigitalLife_RimPay
         private static bool warnedNoSilver = false;
 
         // RimPayHarmony 静态构造时调用；本方法签名不含任何 RSMF 类型，缺 DLL 时 JIT 安全
+        // 实现说明：走纯 System.Reflection 定位类型/方法，再经 HarmonyMethod 包装 patch——
+        // 避免 net472 编译期绑定 Harmony 3.0（1.7）的 .NET 10 签名（CS1705），1.6/1.7 双版本共用。
         public static void TryInit(Harmony harmony)
         {
             if (initialized) return;
@@ -39,32 +41,58 @@ namespace RimDigitalLife_RimPay
                 if (ModLister.GetActiveModWithIdentifier(RimSimPackageId, true) == null) return;
 
                 // 字符串定位 RSMF 类型（未加载时返回 null，自动跳过，绝不炸主程序集）
-                Type modifyType = AccessTools.TypeByName("SimManagementLib.Api.SimShopCheckoutApi");
-                Type financeType = AccessTools.TypeByName("SimManagementLib.Api.SimShopFinanceApi");
+                Type modifyType = FindType("SimManagementLib.Api.SimShopCheckoutApi");
+                Type financeType = FindType("SimManagementLib.Api.SimShopFinanceApi");
                 if (modifyType == null || financeType == null)
                 {
-                    Verse.Log.Message("[RimPay] RimSimManagementFramework 程序集尚未加载，商店联动本次跳过。");
+                    Verse.Log.Message("[RimPay] RimSimManagementFramework assembly not loaded yet, store integration skipped.");
                     return;
                 }
 
-                MethodInfo modify = AccessTools.Method(modifyType, "ModifyPaidSilver");
-                MethodInfo commit = AccessTools.Method(financeType, "CommitCheckout");
+                MethodInfo modify = modifyType.GetMethod("ModifyPaidSilver", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+                MethodInfo commit = financeType.GetMethod("CommitCheckout", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
                 if (modify != null)
                 {
-                    harmony.Patch(modify, postfix: new HarmonyMethod(typeof(RimSimIntegration), nameof(ModifyPaidSilverPostfix)));
+                    PatchViaReflection(harmony, modify, nameof(ModifyPaidSilverPostfix));
                 }
                 if (commit != null)
                 {
-                    harmony.Patch(commit, postfix: new HarmonyMethod(typeof(RimSimIntegration), nameof(CommitCheckoutPostfix)));
+                    PatchViaReflection(harmony, commit, nameof(CommitCheckoutPostfix));
                 }
 
                 initialized = true;
-                Verse.Log.Message("[RimPay] RimSimManagementFramework边缘模拟经营框架 商店联动已启用（结账折扣 + 收入入国库）。");
+                Verse.Log.Message("[RimPay] RimSimManagementFramework store integration enabled (checkout discount + income to treasury).");
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[RimPay] RimSim 联动初始化失败: {ex.Message}");
+                Verse.Log.Warning($"[RimPay] RimSim integration init failed: {ex.Message}");
             }
+        }
+
+        // 纯反射调用 harmony.Patch(original, null, postfix, null, null)。
+        // 原因：Harmony 3.0（1.7）引用 System.Runtime 10，net472 编译期绑定其成员签名会 CS1705；
+        // 反射在运行时解析签名，1.6(Harmony 2.4)/1.7(Harmony 3.0) 双版本共用同一份程序集。
+        // 两代 Harmony 的 Patch(MethodBase, HarmonyMethod x4) 与 HarmonyMethod(MethodInfo) 签名一致，反射兼容。
+        private static void PatchViaReflection(Harmony harmony, MethodBase original, string postfixName)
+        {
+            MethodInfo postfix = typeof(RimSimIntegration).GetMethod(postfixName, BindingFlags.NonPublic | BindingFlags.Static);
+            if (postfix == null) return;
+            Type hmType = typeof(Harmony).Assembly.GetType("HarmonyLib.HarmonyMethod");
+            object hm = Activator.CreateInstance(hmType, new object[] { postfix });
+            harmony.GetType()
+                .GetMethod("Patch", new[] { typeof(MethodBase), hmType, hmType, hmType, hmType })
+                .Invoke(harmony, new object[] { original, null, hm, null, null });
+        }
+
+        // 跨程序集按全名找类型（等价 AccessTools.TypeByName，无 Harmony 编译期绑定）
+        private static Type FindType(string fullName)
+        {
+            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                Type t = asm.GetType(fullName, throwOnError: false);
+                if (t != null) return t;
+            }
+            return null;
         }
 
         // ======== 折扣：修改顾客实付（数字支付生态促销） ========
@@ -101,18 +129,18 @@ namespace RimDigitalLife_RimPay
                 int collected = CollectAndTransferSilver(register.Map, register.Position, 15f, target);
                 if (collected > 0)
                 {
-                    comp.ModifyTreasury(collected, "店铺收入入账");
+                    comp.ModifyTreasury(collected, "RP_Reason_StoreIncome".Translate());
                     comp.RecordStoreSale(collected);
                 }
                 else if (!warnedNoSilver)
                 {
                     warnedNoSilver = true;
-                    Verse.Log.Message("[RimPay] RimSim 联动：结账后未在收银机附近找到实体白银，本次未入国库（不会凭空造币）。");
+                    Verse.Log.Message("[RimPay] RimSim integration: no physical silver found near cash register after checkout, nothing sent to treasury this time (no coin minting).");
                 }
             }
             catch (Exception ex)
             {
-                Verse.Log.Warning($"[RimPay] RimSim 结账联动异常: {ex.Message}");
+                Verse.Log.Warning($"[RimPay] RimSim checkout integration exception: {ex.Message}");
             }
         }
 

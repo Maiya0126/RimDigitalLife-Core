@@ -29,8 +29,8 @@ namespace RimDigitalLife_RimPay
                 {
                     Find.WindowStack.Add(new Window_PawnWallet(__instance));
                 },
-                defaultLabel = $"数字钱包: {wallet}",
-                defaultDesc = $"打开 {__instance.LabelShort} 的 RimPay 数字钱包。\n查看收支流水、发放奖金或没收资金。",
+                defaultLabel = "RP_Gizmo_Wallet_Label".Translate(wallet),
+                defaultDesc = "RP_Gizmo_Wallet_Desc".Translate(__instance.LabelShort),
                 icon = ContentFinder<UnityEngine.Texture2D>.Get("UI/Icons/RimPay_Icon", false) ?? BaseContent.BadTex,
                 hotKey = KeyBindingDefOf.Misc2
             };

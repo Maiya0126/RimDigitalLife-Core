@@ -52,11 +52,11 @@ namespace RimDigitalLife_QuantumNet
         {
             if (!NetworkEventManager.HasActiveEvent)
             {
-                Messages.Message("[量子网络] 当前没有活动中的运营商事件。", MessageTypeDefOf.NeutralEvent, false);
+                Messages.Message("[QuantumNet] " + "QN_Dbg_NoEvent".Translate(), MessageTypeDefOf.NeutralEvent, false);
                 return;
             }
             NetworkEventManager.DebugEndEvent();
-            Messages.Message("[量子网络] 已结束当前运营商事件。", MessageTypeDefOf.NeutralEvent, false);
+            Messages.Message("[QuantumNet] " + "QN_Dbg_Ended".Translate(), MessageTypeDefOf.NeutralEvent, false);
         }
 
         [DebugAction("量子网络", "事件状态 (Event Status)")]
@@ -64,9 +64,9 @@ namespace RimDigitalLife_QuantumNet
         {
             string status = NetworkEventManager.HasActiveEvent
                 ? $"{NetworkEventManager.GetStatusText()} (ID: {NetworkEventManager.ActiveEventId})"
-                : "无活动事件";
-            Messages.Message("[量子网络] 运营商事件状态：" + status, MessageTypeDefOf.NeutralEvent, false);
-            Verse.Log.Message($"[量子网络] 事件状态: {status} | 下次事件 tick: {NetworkEventManager.NextEventTickDebug}");
+                : "QN_Dbg_NoActive".Translate();
+            Messages.Message("[QuantumNet] " + "QN_Dbg_Status".Translate(status), MessageTypeDefOf.NeutralEvent, false);
+            Verse.Log.Message($"[QuantumNet] status: {status} | next event tick: {NetworkEventManager.NextEventTickDebug}");
         }
 
         [DebugAction("量子网络", "测试跨地图通话 (Test Cross-Map Call)")]
@@ -77,12 +77,12 @@ namespace RimDigitalLife_QuantumNet
             Map home = Find.AnyPlayerHomeMap;
             if (home == null)
             {
-                Messages.Message("[量子网络] 没有玩家基地地图。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("[QuantumNet] " + "QN_Dbg_NoHomeMap".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             if (!RimTalkBridge.IsRimTalkAvailable)
             {
-                Messages.Message("[量子网络] RimTalk 未安装或不可用，无法测试跨地图通话。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("[QuantumNet] " + "QN_Dbg_NoRimTalk".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
 
@@ -99,7 +99,7 @@ namespace RimDigitalLife_QuantumNet
             }
             if (travelers.Count == 0)
             {
-                Messages.Message("[量子网络] 当前没有远征队（caravan），无法测试跨地图通话。请先派出一支远征队。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("[QuantumNet] " + "QN_Dbg_NoCaravan".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             caller = travelers.FirstOrDefault(p => comp.HasInfinitePlan(p)) ?? travelers[0];
@@ -109,7 +109,7 @@ namespace RimDigitalLife_QuantumNet
             Pawn recipient = bases.Any() ? bases.RandomElement() : caller;
 
             CrossMapCallManager.DebugTriggerCall(caller, recipient, home);
-            Messages.Message($"[量子网络] 已发起测试通话：[远征队·{caller.LabelShort} ➔ 基地·{recipient.LabelShort}]，查看日志与 RimTalk 气泡。", MessageTypeDefOf.NeutralEvent, false);
+            Messages.Message("[QuantumNet] " + "QN_Dbg_TestCall".Translate(caller.LabelShort, recipient.LabelShort), MessageTypeDefOf.NeutralEvent, false);
         }
     }
 }

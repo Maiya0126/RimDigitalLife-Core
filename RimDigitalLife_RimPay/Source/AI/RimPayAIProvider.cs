@@ -67,17 +67,17 @@ namespace RimDigitalLife_RimPay
             var S = RimPayMod.settings;
             if (S == null || !S.enableEconomyAI)
             {
-                Messages.Message("[RimPay AI] 请先在 AI 设置页勾选「启用 AI 控制经济」后再试。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("RP_AI_ErrNotEnabled".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             if (S.GetEnabledConfigs().Count == 0)
             {
-                Messages.Message("[RimPay AI] 未勾选任何供应商配置，无法请求。请先在下方勾选一个配置。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("RP_AI_ErrNoConfig".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             if (requestInFlight)
             {
-                Messages.Message("[RimPay AI] 已有请求进行中，请稍候...", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("RP_AI_ErrInFlight".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
 
@@ -88,7 +88,7 @@ namespace RimDigitalLife_RimPay
             lastNotifiedFailures = 0;
 
             RequestDailyEconomyIfNeeded();
-            Messages.Message("[RimPay AI] 已发起强制请求，结果见上方状态面板与日志。", MessageTypeDefOf.NeutralEvent, false);
+            Messages.Message("RP_AI_ForceRequested".Translate(), MessageTypeDefOf.NeutralEvent, false);
         }
 
         // 每日结算调用：若开启 AI 且到达间隔，异步尝试所有已启用的供应商配置
@@ -134,13 +134,13 @@ namespace RimDigitalLife_RimPay
                         {
                             success = true;
                             lastHttpErrorDetail = "";
-                            Verse.Log.Message($"[RimPay AI] 供应商[{i+1}/{enabled.Count}] {cfg.DisplayLabel} 成功");
+                            Verse.Log.Message($"[RimPay AI] Provider[{i+1}/{enabled.Count}] {cfg.DisplayLabel} succeeded");
                             break;
                         }
                         else
                         {
                             lastError = lastHttpErrorDetail;
-                            Verse.Log.Message($"[RimPay AI] 供应商[{i+1}/{enabled.Count}] {cfg.DisplayLabel} 失败 ({lastError})，尝试下一个");
+                            Verse.Log.Message($"[RimPay AI] Provider[{i+1}/{enabled.Count}] {cfg.DisplayLabel} failed ({lastError}), trying next");
                         }
                     }
 
@@ -159,7 +159,7 @@ namespace RimDigitalLife_RimPay
                             Map snapMap = Find.AnyPlayerHomeMap ?? Find.CurrentMap;
                             var snap = new EconomySnapshot
                             {
-                                dayLabel = snapMap != null ? $"第{GenLocalDate.Year(snapMap)}.{GenLocalDate.DayOfYear(snapMap)}日" : "未知日期",
+                                dayLabel = snapMap != null ? "RP_AI_SnapshotDay".Translate(GenLocalDate.Year(snapMap), GenLocalDate.DayOfYear(snapMap)) : "RP_AI_SnapshotUnknownDay".Translate(),
                                 salaryMult = salaryMultiplier,
                                 rentMult = rentMultiplier,
                                 loanMult = loanRateMultiplier,
@@ -168,7 +168,7 @@ namespace RimDigitalLife_RimPay
                                 tradeMult = tradePriceMultiplier,
                                 lootDelta = lootShareDelta,
                                 tone = marketTone,
-                                macro = string.IsNullOrEmpty(macroEvent) ? "无" : macroEvent,
+                                macro = string.IsNullOrEmpty(macroEvent) ? (string)"RP_AI_MacroNone".Translate() : macroEvent,
                                 evt = eventText
                             };
                             historyArchive.Insert(0, snap);
@@ -178,7 +178,7 @@ namespace RimDigitalLife_RimPay
 
                         if (!string.IsNullOrEmpty(eventText))
                         {
-                            Verse.Log.Message($"[RimPay AI] 经济变量已刷新 | marketTone={marketTone} | 宏观事件={macroEvent} | 事件: {eventText}");
+                            Verse.Log.Message($"[RimPay AI] Economy refreshed | marketTone={marketTone} | macroEvent={macroEvent} | event: {eventText}");
                         }
                         return;
                     }
@@ -205,23 +205,16 @@ namespace RimDigitalLife_RimPay
                         failureCooldownEnd = Time.time + cd;
                     }
 
-                    bool isCN = LanguageDatabase.activeLanguage?.FriendlyNameEnglish?.Contains("Chinese") ?? false;
-                    string failMsg = isCN
-                        ? $"[RimPay AI] 全部供应商失败 #{consecutiveFailures} | 最后错误: {lastError}"
-                        : $"[RimPay AI] All configs failed #{consecutiveFailures} | last error: {lastError}";
+                    string failMsg = $"[RimPay AI] All configs failed #{consecutiveFailures} | last error: {lastError}";
                     Verse.Log.Message(failMsg);
 
                     if (consecutiveFailures != lastNotifiedFailures)
                     {
                         lastNotifiedFailures = consecutiveFailures;
                         float remaining = Mathf.Max(0f, failureCooldownEnd - Time.time);
-                        string notify = isCN
-                            ? (consecutiveFailures >= 3
-                                ? $"[RimPay AI] 连续失败{consecutiveFailures}次，进入冷却({remaining:F0}s)，经济回退本地随机"
-                                : $"[RimPay AI] 请求失败({consecutiveFailures}次)，经济回退本地随机")
-                            : (consecutiveFailures >= 3
-                                ? $"[RimPay AI] Failed {consecutiveFailures}x, cooldown {remaining:F0}s, economy fallback to local random"
-                                : $"[RimPay AI] Request failed ({consecutiveFailures}), economy fallback to local random");
+                        string notify = consecutiveFailures >= 3
+                            ? (string)"RP_AI_FailCooldown".Translate(consecutiveFailures, Mathf.RoundToInt(remaining))
+                            : (string)"RP_AI_Fail".Translate(consecutiveFailures);
                         Messages.Message(notify,
                             consecutiveFailures >= 3 ? MessageTypeDefOf.NegativeEvent : MessageTypeDefOf.NeutralEvent,
                             false);
@@ -232,7 +225,7 @@ namespace RimDigitalLife_RimPay
                     requestInFlight = false;
                     lastRequestTime = Time.time;
                     consecutiveFailures++;
-                    Verse.Log.Message($"[RimPay AI] 请求异常: {ex.Message}\n{ex.StackTrace}");
+                    Verse.Log.Message($"[RimPay AI] Request exception: {ex.Message}\n{ex.StackTrace}");
                 }
             });
         }
@@ -314,26 +307,26 @@ namespace RimDigitalLife_RimPay
         // 返回人类可读结果字符串，供设置页直接显示。
         public static string TestConnection(RimPayProviderConfig cfg)
         {
-            if (cfg == null) return "[FAIL] 配置为空，请先添加并选中一个供应商配置";
+            if (cfg == null) return "[FAIL] " + "RP_T_NoConfig".Translate();
 
             string endpoint = cfg.GetEffectiveEndpoint();
             if (string.IsNullOrEmpty(endpoint))
-                return "[FAIL] 端点 URL 为空 - 请填写端点 URL（或选择供应商自动填充）";
+                return "[FAIL] " + "RP_T_NoEndpoint".Translate();
 
             string apiKey = cfg.GetEffectiveKey();
             if (cfg.provider.GetRequiresApiKey() && string.IsNullOrEmpty(apiKey))
-                return "[FAIL] API Key 为空 - 该供应商需要 API Key";
+                return "[FAIL] " + "RP_T_NoKey".Translate();
 
             string model = cfg.GetEffectiveModel();
             if (string.IsNullOrEmpty(model))
-                return "[FAIL] 模型名称为空 - 请填写模型名称（例如 deepseek-chat / gpt-4o-mini）";
+                return "[FAIL] " + "RP_T_NoModel".Translate();
 
             try
             {
                 string sys = "You are a test assistant. Reply with exactly: OK";
                 string user = "Test connection. Reply OK.";
                 string jsonBody = BuildRequestBody(model, sys, user);
-                if (string.IsNullOrEmpty(jsonBody)) return "[FAIL] 无法构造请求体";
+                if (string.IsNullOrEmpty(jsonBody)) return "[FAIL] " + "RP_T_NoBody".Translate();
 
                 using (var request = new UnityWebRequest(endpoint, "POST"))
                 {
@@ -355,7 +348,7 @@ namespace RimDigitalLife_RimPay
                         if (Time.realtimeSinceStartup - startWait > 20f)
                         {
                             request.Abort();
-                            return "[FAIL] 连接超时 (20s) - 可能是网络问题或端点 URL 错误";
+                            return "[FAIL] " + "RP_T_Timeout".Translate();
                         }
                     }
 
@@ -367,41 +360,41 @@ namespace RimDigitalLife_RimPay
                         if (code == 0)
                         {
                             if (cfg.provider == RimPayProvider.Player2)
-                                detail = " — Player2 桌面程序未启动或未就绪，请确认 Player2 正在运行后再试";
+                                detail = " — " + "RP_T_ErrPlayer2".Translate();
                             else if (cfg.provider == RimPayProvider.Local)
-                                detail = " — 本地模型服务未启动（Ollama / LM Studio 未运行或未监听 11434 端口）";
+                                detail = " — " + "RP_T_ErrLocal".Translate();
                             else
-                                detail = " — 无法连接服务器，请检查网络与端点 URL";
+                                detail = " — " + "RP_T_ErrNoConn".Translate();
                         }
-                        else if (code == 400) detail = " — 请求格式错误：很可能是模型名称不对，请核对模型名";
-                        else if (code == 401) detail = " — 认证失败：API Key 无效或已过期";
-                        else if (code == 403) detail = " — 访问被拒绝：API Key 无权限或账户受限";
-                        else if (code == 404) detail = " — 端点不存在：端点 URL 可能写错";
-                        else if (code == 429) detail = " — 请求过频被限流，请稍后再试";
-                        else if (code >= 500) detail = " — 服务器错误：API 供应商暂时故障，稍后再试";
+                        else if (code == 400) detail = " — " + "RP_T_Err400".Translate();
+                        else if (code == 401) detail = " — " + "RP_T_Err401".Translate();
+                        else if (code == 403) detail = " — " + "RP_T_Err403".Translate();
+                        else if (code == 404) detail = " — " + "RP_T_Err404".Translate();
+                        else if (code == 429) detail = " — " + "RP_T_Err429".Translate();
+                        else if (code >= 500) detail = " — " + "RP_T_Err5xx".Translate();
 
                         string errorHint = "";
                         if (!string.IsNullOrEmpty(errorBody) && errorBody.Length < 200)
-                            errorHint = $"\n服务器返回: {errorBody}";
+                            errorHint = "\n" + "RP_T_ServerResponse".Translate(errorBody);
 
                         return $"[FAIL] HTTP {code}{detail}{errorHint}";
                     }
 
                     string response = ParseResponse(request.downloadHandler.text);
                     if (!string.IsNullOrEmpty(response))
-                        return $"[OK] 连接成功! 模型: {model} | AI 回复: {response}";
+                        return "[OK] " + "RP_T_Ok".Translate(model, response);
 
                     string rawPreview = request.downloadHandler.text;
                     if (rawPreview.Length > 300) rawPreview = rawPreview.Substring(0, 300) + "...";
-                    return $"[OK] 已连接，但响应解析失败 (聊天功能可能仍可用)\n原始响应: {rawPreview}";
+                    return "[OK] " + "RP_T_ParseFail".Translate(rawPreview);
                 }
             }
             catch (Exception ex)
             {
                 string exType = ex.GetType().Name;
                 if (exType.Contains("Timeout") || exType.Contains("Socket"))
-                    return $"[FAIL] 网络错误: {ex.Message} - 请检查网络连接";
-                return $"[FAIL] 异常 ({exType}): {ex.Message}";
+                    return "[FAIL] " + "RP_T_NetworkError".Translate(ex.Message);
+                return "[FAIL] " + "RP_T_Exception".Translate(exType, ex.Message);
             }
         }
 
@@ -474,7 +467,7 @@ namespace RimDigitalLife_RimPay
             }
             catch (Exception ex)
             {
-                Verse.Log.Message($"[RimPay AI] JSON 解析失败: {ex.Message}");
+                Verse.Log.Message($"[RimPay AI] JSON parse failed: {ex.Message}");
                 return false;
             }
         }
