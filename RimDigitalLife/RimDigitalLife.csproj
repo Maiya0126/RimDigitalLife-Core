@@ -118,6 +118,9 @@
     <Compile Include="Source\Harmony\Patch_UIRootUpdate.cs" />
     <Compile Include="Source\Harmony\Patch_BionicCompatibility.cs" />
     <Compile Include="Source\Graphics\Graphic_SingleNoRotate.cs" />
+    <Compile Include="Source\Graphics\CompConsoleControllers.cs" />
+    <Compile Include="Source\Graphics\PlayFeedback.cs" />
+    <Compile Include="Source\Graphics\CompWatchDriver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About\About.xml" />
@@ -149,6 +152,31 @@
     <Content Include="Textures\Things\Building\RimboxSeriesX.png" />
     <Content Include="Textures\Things\Building\RimStation.png" />
     <Content Include="Textures\Things\Building\RimStationPro.png" />
+    <Content Include="Textures\Things\Building\RimboxSeriesX_east.png" />
+    <Content Include="Textures\Things\Building\RimboxSeriesX_north.png" />
+    <Content Include="Textures\Things\Building\RimboxSeriesX_south.png" />
+    <Content Include="Textures\Things\Building\RimboxSeriesX_west.png" />
+    <Content Include="Textures\Things\Building\RimboxSeriesX_Icon.png" />
+    <Content Include="Textures\Things\Building\RimStation_east.png" />
+    <Content Include="Textures\Things\Building\RimStation_north.png" />
+    <Content Include="Textures\Things\Building\RimStation_south.png" />
+    <Content Include="Textures\Things\Building\RimStation_west.png" />
+    <Content Include="Textures\Things\Building\RimStation_Icon.png" />
+    <Content Include="Textures\Things\Building\RiwitchDock_east.png" />
+    <Content Include="Textures\Things\Building\RiwitchDock_north.png" />
+    <Content Include="Textures\Things\Building\RiwitchDock_south.png" />
+    <Content Include="Textures\Things\Building\RiwitchDock_west.png" />
+    <Content Include="Textures\Things\Building\RiwitchDock_Icon.png" />
+    <Content Include="Textures\Things\Building\Controllers\Hands.png" />
+    <Content Include="Textures\Things\Building\Controllers\PS5.png" />
+    <Content Include="Textures\Things\Building\Controllers\Xbox.png" />
+    <Content Include="Textures\Things\Building\Controllers\Switch.png" />
+    <Content Include="Textures\Things\Building\Controllers\Rimbox360.png" />
+    <Content Include="Defs\ThingDefs_Misc\PlayFeedback_RDL.xml" />
+    <Content Include="Sounds\RDL\RDL_ControllerButtons01.wav" />
+    <Content Include="Sounds\RDL\RDL_ControllerButtons02.wav" />
+    <Content Include="Sounds\RDL\RDL_ControllerButtons03.wav" />
+    <Content Include="Sounds\RDL\RDL_ControllerButtons04.wav" />
     <Content Include="Textures\Things\Item\iShenPad.png" />
     <Content Include="Textures\Things\Item\iShenPhone.png" />
     <Content Include="Textures\Things\Item\iShenWatch.png" />
@@ -186,11 +214,12 @@ copy /Y "$(TargetDir)$(TargetName).dll" "%MODDIR%\1.7\Assemblies\"
 :: 暴力清空目标 Defs 文件夹 (防止旧文件残留)
 if exist "%MODDIR%\Defs" rmdir /S /Q "%MODDIR%\Defs"
 
-:: 重新复制 Defs / Textures / About / Languages
+:: 重新复制 Defs / Textures / About / Languages / Sounds
 xcopy /E /I /Y "$(ProjectDir)Defs" "%MODDIR%\Defs"
 xcopy /E /I /Y "$(ProjectDir)Textures" "%MODDIR%\Textures"
 xcopy /E /I /Y "$(ProjectDir)About" "%MODDIR%\About"
 xcopy /E /I /Y "$(ProjectDir)Languages" "%MODDIR%\Languages"
+xcopy /E /I /Y "$(ProjectDir)Sounds" "%MODDIR%\Sounds"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

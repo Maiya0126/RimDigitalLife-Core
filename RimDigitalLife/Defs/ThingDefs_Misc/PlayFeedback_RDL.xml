@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 玩主机摇摆动画（移植自 Game Night 获授权；驱动器为 RDL.AnimationWorker_RDLPlay） -->
+	<AnimationDef>
+		<defName>RDL_PlaySway</defName>
+		<durationTicks>173</durationTicks>
+		<loopMode>Loop</loopMode>
+		<keyframeParts>
+			<li>
+				<key>Root</key>
+				<value>
+					<workerType>RimDigitalLife.AnimationWorker_RDLPlay</workerType>
+					<pivot>(0.5,0.5)</pivot>
+				</value>
+			</li>
+		</keyframeParts>
+	</AnimationDef>
+
+	<!-- 手柄按键音效（移植自 Game Night 获授权） -->
+	<SoundDef>
+		<defName>RDL_ControllerButtons</defName>
+		<context>MapOnly</context>
+		<maxSimultaneous>3</maxSimultaneous>
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip"><clipPath>RDL/RDL_ControllerButtons01</clipPath></li>
+					<li Class="AudioGrain_Clip"><clipPath>RDL/RDL_ControllerButtons02</clipPath></li>
+					<li Class="AudioGrain_Clip"><clipPath>RDL/RDL_ControllerButtons03</clipPath></li>
+					<li Class="AudioGrain_Clip"><clipPath>RDL/RDL_ControllerButtons04</clipPath></li>
+				</grains>
+				<volumeRange>36~42</volumeRange>
+				<pitchRange>0.98~1.02</pitchRange>
+				<distRange>18~45</distRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+</Defs>

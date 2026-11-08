@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <Building_Rimtendo_Dock.label>Riwitch Dock</Building_Rimtendo_Dock.label>
+  <Building_Rimtendo_Dock.description>Rimtendo's docked console form: a Riwitch snapped into a charging dock, hooked up to the living-room screen via HDMI. Low power draw, zero compromise on fun - perfect for small living rooms and couch co-op with friends.</Building_Rimtendo_Dock.description>
+
   <Apparel_Nokirim.label>Nokirim</Apparel_Nokirim.label>
   <Apparel_Nokirim.description>An ancient communication artifact made by Nokirim.\n\nFeatures:\n- Basic communication\n- Physical defense (it is genuinely that tough)</Apparel_Nokirim.description>
 

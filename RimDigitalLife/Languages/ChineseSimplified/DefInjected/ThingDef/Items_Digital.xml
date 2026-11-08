@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <Building_Rimtendo_Dock.label>Riwitch 底座</Building_Rimtendo_Dock.label>
+  <Building_Rimtendo_Dock.description>Rimtendo (任天缘) 的底座主机形态：一台插在充电底座上的 Riwitch 通过视讯线连接客厅屏幕。功耗低但欢乐不减，适合小客厅和朋友开黑。</Building_Rimtendo_Dock.description>
+
   <Apparel_Nokirim.label>Nokirim</Apparel_Nokirim.label>
   <Apparel_Nokirim.description>Nokirim (诺基林) 生产的远古通讯神器。\n\n功能：\n- 基础通讯\n- 物理防御 (它真的很硬)</Apparel_Nokirim.description>
 
