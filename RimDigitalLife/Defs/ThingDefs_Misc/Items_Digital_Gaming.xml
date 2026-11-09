@@ -186,7 +186,7 @@
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="RimDigitalLife.CompProperties_ConsoleControllers"/>
-			<li Class="RimDigitalLife.CompWatchDriver"/>
+			<li Class="RimDigitalLife.CompProperties_WatchDriver"/>
 		</comps>
 		<building>
 			<joyKind>Gaming_Dexterity</joyKind>
