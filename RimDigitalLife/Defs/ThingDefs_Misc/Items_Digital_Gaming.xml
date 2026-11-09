@@ -260,6 +260,10 @@
 			<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
 				<platform>Xbox</platform>
 			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>2</glowRadius>
+				<glowColor>(0, 255, 0, 0)</glowColor>
+			</li>
 		</comps>
 		<modExtensions>
 			<li Class="RimDigitalLife.ConsoleControllerExtension">
@@ -293,12 +297,6 @@
 			<Steel>100</Steel>
 			<ComponentIndustrial>5</ComponentIndustrial>
 		</costList>
-		<comps Inherit="False">
-			<li Class="CompProperties_Glower">
-				<glowRadius>2</glowRadius>
-				<glowColor>(0, 255, 0, 0)</glowColor>
-			</li>
-		</comps>
 	</ThingDef>
 
 	<ThingDef ParentName="Building_ConsoleBase">
@@ -312,6 +310,10 @@
 		<comps>
 			<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
 				<platform>PS5</platform>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>2</glowRadius>
+				<glowColor>(0, 100, 255, 0)</glowColor>
 			</li>
 		</comps>
 		<modExtensions>
@@ -347,12 +349,6 @@
 			<Plasteel>10</Plasteel>
 			<ComponentIndustrial>5</ComponentIndustrial>
 		</costList>
-		<comps Inherit="False">
-			<li Class="CompProperties_Glower">
-				<glowRadius>2</glowRadius>
-				<glowColor>(0, 100, 255, 0)</glowColor>
-			</li>
-		</comps>
 	</ThingDef>
 
 <!-- RimStation Pro（暂缓：素材四向未定稿，Def 保留待恢复）-->
