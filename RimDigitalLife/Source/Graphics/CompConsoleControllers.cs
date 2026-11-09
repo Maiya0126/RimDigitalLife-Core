@@ -116,14 +116,14 @@ namespace RimDigitalLife
                 controller = GraphicDatabase.Get<Graphic_Single>(
                     "Things/Building/Controllers/" + platform,
                     ShaderDatabase.Cutout, new Vector2(HeldSize, HeldSize), Color.white);
-                if (controller == null || controller == BaseContent.BadTex)
+                if (controller == null)
                 {
                     Log.Warning($"[RimDigitalLife] 手柄贴图加载失败: Things/Building/Controllers/{platform}（检查玩家文件完整性）");
                 }
                 hands = GraphicDatabase.Get<Graphic_Single>(
                     "Things/Building/Controllers/Hands",
                     ShaderDatabase.Cutout, new Vector2(HeldSize, HeldSize), Color.white);
-                if (hands == null || hands == BaseContent.BadTex)
+                if (hands == null)
                 {
                     Log.Warning("[RimDigitalLife] 手掌蒙皮加载失败: Things/Building/Controllers/Hands（检查玩家文件完整性）");
                 }
