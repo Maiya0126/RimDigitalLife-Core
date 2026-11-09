@@ -185,7 +185,6 @@
 				<shortCircuitInRain>true</shortCircuitInRain>
 			</li>
 			<li Class="CompProperties_Flickable"/>
-			<li Class="RimDigitalLife.CompProperties_ConsoleControllers"/>
 			<li Class="RimDigitalLife.CompProperties_WatchDriver"/>
 		</comps>
 		<building>
