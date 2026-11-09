@@ -31,18 +31,15 @@
 
   <Apparel_Rimtendo_SwitchII.label>Riwitch 2</Apparel_Rimtendo_SwitchII.label>
   <Apparel_Rimtendo_SwitchII.description>Rimtendo (任天缘) 的次世代机型。掌机模式下拥有细腻的1080P画面，连接底座后更能输出惊人的4K分辨率。</Apparel_Rimtendo_SwitchII.description>
-
-
-  <Building_Macrosoft_360Console.label>Rimbox 360</Building_Macrosoft_360Console.label>
-  <Building_Macrosoft_360Console.description>Macrosoft (微硬) 出品的上一代主机游戏站。包含一台容易三红的主机和一台笨重的球形电视。</Building_Macrosoft_360Console.description>
+<!-- Building_Macrosoft_360Console. 暂缓（Def 已注释） -->
+<!-- Building_Macrosoft_360Console. 暂缓（Def 已注释） -->
 
   <Building_Macrosoft_SeriesX.label>Rimbox Series X</Building_Macrosoft_SeriesX.label>
   <Building_Macrosoft_SeriesX.description>Macrosoft (微硬) 现役最强主机游戏站。黑色巨塔主机搭配极简的宽屏显示器。</Building_Macrosoft_SeriesX.description>
 
   <Building_RONY_Station.label>RimStation</Building_RONY_Station.label>
   <Building_RONY_Station.description>RONY (缘尼) 公司的畅销主机游戏站。流线型的主机与曲面显示器相得益彰。</Building_RONY_Station.description>
-
-  <Building_RONY_StationPro.label>RimStation Pro</Building_RONY_StationPro.label>
-  <Building_RONY_StationPro.description>RONY (缘尼) 公司的终极游戏站。配备全息投影技术，无需物理屏幕即可享受极致画面。</Building_RONY_StationPro.description>
+<!-- Building_RONY_StationPro. 暂缓（Def 已注释） -->
+<!-- Building_RONY_StationPro. 暂缓（Def 已注释） -->
 
 </LanguageData>

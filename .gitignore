@@ -398,3 +398,7 @@ RimDigitalLife_QuantumNet/obj/
 # 本地工具脚本（不入库，仅本地保留）
 *.bat
 *.ps1
+
+
+# 暂停使用的主机贴图（Rimbox360/RimStationPro 四向素材未定稿，Def 已注释保留）
+RimDigitalLife/Textures/Things/Building/_disabled/

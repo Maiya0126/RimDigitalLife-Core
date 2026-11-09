@@ -31,18 +31,15 @@
 
   <Apparel_Rimtendo_SwitchII.label>Riwitch 2</Apparel_Rimtendo_SwitchII.label>
   <Apparel_Rimtendo_SwitchII.description>Rimtendo's next-generation model. It boasts detailed 1080P graphics in handheld mode and outputs stunning 4K resolution when docked.</Apparel_Rimtendo_SwitchII.description>
-
-
-  <Building_Macrosoft_360Console.label>Rimbox 360</Building_Macrosoft_360Console.label>
-  <Building_Macrosoft_360Console.description>A previous-generation game console station by Macrosoft. Includes a console prone to the "Red Ring of Death" and a bulky spherical TV.</Building_Macrosoft_360Console.description>
+<!-- Building_Macrosoft_360Console. 暂缓（Def 已注释） -->
+<!-- Building_Macrosoft_360Console. 暂缓（Def 已注释） -->
 
   <Building_Macrosoft_SeriesX.label>Rimbox Series X</Building_Macrosoft_SeriesX.label>
   <Building_Macrosoft_SeriesX.description>Macrosoft's most powerful active game console station. A black monolith console paired with a minimalist widescreen monitor.</Building_Macrosoft_SeriesX.description>
 
   <Building_RONY_Station.label>RimStation</Building_RONY_Station.label>
   <Building_RONY_Station.description>RONY's best-selling game console station. The streamlined console complements the curved monitor perfectly.</Building_RONY_Station.description>
-
-  <Building_RONY_StationPro.label>RimStation Pro</Building_RONY_StationPro.label>
-  <Building_RONY_StationPro.description>RONY's ultimate game station. Equipped with holographic projection technology, allowing for ultimate visuals without a physical screen.</Building_RONY_StationPro.description>
+<!-- Building_RONY_StationPro. 暂缓（Def 已注释） -->
+<!-- Building_RONY_StationPro. 暂缓（Def 已注释） -->
 
 </LanguageData>

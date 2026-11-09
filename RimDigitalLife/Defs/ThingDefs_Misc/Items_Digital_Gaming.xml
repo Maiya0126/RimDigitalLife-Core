@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
 	<ThingDef Name="Apparel_HandheldConsoleBase" ParentName="ApparelMakeableBase" Abstract="True">
@@ -197,53 +197,57 @@
 		</building>
 	</ThingDef>
 
-	<ThingDef ParentName="Building_ConsoleBase">
-		<defName>Building_Macrosoft_360Console</defName>
-		<label>Rimbox 360</label>
-		<description>Macrosoft (微硬) 出品的上一代主机游戏站。包含一台容易三红的主机和一台笨重的球形电视。</description>
-		<graphicData>
-			<texPath>Things/Building/Rimbox360</texPath>
-		</graphicData>
-		<comps>
-			<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
-				<platform>Rimbox360</platform>
-			</li>
-		</comps>
-		<modExtensions>
-			<li Class="RimDigitalLife.ConsoleControllerExtension">
-				<south>
-					<li>(-0.4001563,0,-0.0308073)</li>
-					<li>(0.4486600,0,-0.0308073)</li>
-				</south>
-				<east>
-					<li>(0.2773889,0,-0.3318100)</li>
-					<li>(0.2773889,0,0.2824083)</li>
-				</east>
-				<north>
-					<li>(-0.5092898,0,0.5451752)</li>
-					<li>(0.1515743,0,0.5451752)</li>
-				</north>
-				<west>
-					<li>(-0.2864402,0,-0.3243776)</li>
-					<li>(-0.2864402,0,0.2739641)</li>
-				</west>
-			</li>
-		</modExtensions>
-		<statBases>
-			<MaxHitPoints>80</MaxHitPoints>
-			<WorkToBuild>2000</WorkToBuild>
-			<JoyGainFactor>1.1</JoyGainFactor>
-			<MarketValue>200</MarketValue>
-			<Mass>20</Mass>
-		</statBases>
-		<costList>
-			<Steel>80</Steel>
-			<ComponentIndustrial>3</ComponentIndustrial>
-		</costList>
-		<researchPrerequisites>
-			<li>Electricity</li>
-		</researchPrerequisites>
-	</ThingDef>
+<!-- Rimbox 360（暂缓：素材四向未定稿，Def 保留待恢复）-->
+<!--
+		<ThingDef ParentName="Building_ConsoleBase">
+			<defName>Building_Macrosoft_360Console</defName>
+			<label>Rimbox 360</label>
+			<description>Macrosoft (微硬) 出品的上一代主机游戏站。包含一台容易三红的主机和一台笨重的球形电视。</description>
+			<graphicData>
+				<texPath>Things/Building/Rimbox360</texPath>
+			</graphicData>
+			<comps>
+				<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
+					<platform>Rimbox360</platform>
+				</li>
+			</comps>
+			<modExtensions>
+				<li Class="RimDigitalLife.ConsoleControllerExtension">
+					<south>
+						<li>(-0.4001563,0,-0.0308073)</li>
+						<li>(0.4486600,0,-0.0308073)</li>
+					</south>
+					<east>
+						<li>(0.2773889,0,-0.3318100)</li>
+						<li>(0.2773889,0,0.2824083)</li>
+					</east>
+					<north>
+						<li>(-0.5092898,0,0.5451752)</li>
+						<li>(0.1515743,0,0.5451752)</li>
+					</north>
+					<west>
+						<li>(-0.2864402,0,-0.3243776)</li>
+						<li>(-0.2864402,0,0.2739641)</li>
+					</west>
+				</li>
+			</modExtensions>
+			<statBases>
+				<MaxHitPoints>80</MaxHitPoints>
+				<WorkToBuild>2000</WorkToBuild>
+				<JoyGainFactor>1.1</JoyGainFactor>
+				<MarketValue>200</MarketValue>
+				<Mass>20</Mass>
+			</statBases>
+			<costList>
+				<Steel>80</Steel>
+				<ComponentIndustrial>3</ComponentIndustrial>
+			</costList>
+			<researchPrerequisites>
+				<li>Electricity</li>
+			</researchPrerequisites>
+		</ThingDef>
+	
+-->
 
 	<ThingDef ParentName="Building_ConsoleBase">
 		<defName>Building_Macrosoft_SeriesX</defName>
@@ -352,59 +356,63 @@
 		</comps>
 	</ThingDef>
 
-	<ThingDef ParentName="Building_ConsoleBase">
-		<defName>Building_RONY_StationPro</defName>
-		<label>RimStation Pro</label>
-		<description>RONY (缘尼) 公司的终极游戏站。配备全息投影技术，无需物理屏幕即可享受极致画面。</description>
-		<graphicData>
-			<texPath>Things/Building/RimStationPro</texPath>
-		</graphicData>
-		<comps>
-			<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
-				<platform>PS5</platform>
-			</li>
-		</comps>
-		<modExtensions>
-			<li Class="RimDigitalLife.ConsoleControllerExtension">
-				<south>
-					<li>(-0.3455895,0,-0.0308073)</li>
-					<li>(0.5153527,0,-0.0308073)</li>
-				</south>
-				<east>
-					<li>(0.2799479,0,-0.3414062)</li>
-					<li>(0.2799479,0,0.2640625)</li>
-				</east>
-				<north>
-					<li>(-0.5274787,0,0.5451752)</li>
-					<li>(0.1273224,0,0.5451752)</li>
-				</north>
-				<west>
-					<li>(-0.2959882,0,-0.3243776)</li>
-					<li>(-0.2959882,0,0.2739641)</li>
-				</west>
-			</li>
-		</modExtensions>
-		<statBases>
-			<MaxHitPoints>120</MaxHitPoints>
-			<WorkToBuild>5000</WorkToBuild>
-			<JoyGainFactor>1.7</JoyGainFactor>
-			<Beauty>50</Beauty>
-			<MarketValue>1200</MarketValue>
-			<Mass>25</Mass>
-		</statBases>
-		<costList>
-			<Steel>100</Steel>
-			<Plasteel>30</Plasteel>
-			<Gold>5</Gold>
-			<ComponentSpacer>2</ComponentSpacer>
-		</costList>
-		<comps Inherit="False">
-			<li Class="CompProperties_Glower">
-				<glowRadius>3</glowRadius>
-				<glowColor>(0, 50, 255, 0)</glowColor>
-			</li>
-		</comps>
-	</ThingDef>
+<!-- RimStation Pro（暂缓：素材四向未定稿，Def 保留待恢复）-->
+<!--
+		<ThingDef ParentName="Building_ConsoleBase">
+			<defName>Building_RONY_StationPro</defName>
+			<label>RimStation Pro</label>
+			<description>RONY (缘尼) 公司的终极游戏站。配备全息投影技术，无需物理屏幕即可享受极致画面。</description>
+			<graphicData>
+				<texPath>Things/Building/RimStationPro</texPath>
+			</graphicData>
+			<comps>
+				<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
+					<platform>PS5</platform>
+				</li>
+			</comps>
+			<modExtensions>
+				<li Class="RimDigitalLife.ConsoleControllerExtension">
+					<south>
+						<li>(-0.3455895,0,-0.0308073)</li>
+						<li>(0.5153527,0,-0.0308073)</li>
+					</south>
+					<east>
+						<li>(0.2799479,0,-0.3414062)</li>
+						<li>(0.2799479,0,0.2640625)</li>
+					</east>
+					<north>
+						<li>(-0.5274787,0,0.5451752)</li>
+						<li>(0.1273224,0,0.5451752)</li>
+					</north>
+					<west>
+						<li>(-0.2959882,0,-0.3243776)</li>
+						<li>(-0.2959882,0,0.2739641)</li>
+					</west>
+				</li>
+			</modExtensions>
+			<statBases>
+				<MaxHitPoints>120</MaxHitPoints>
+				<WorkToBuild>5000</WorkToBuild>
+				<JoyGainFactor>1.7</JoyGainFactor>
+				<Beauty>50</Beauty>
+				<MarketValue>1200</MarketValue>
+				<Mass>25</Mass>
+			</statBases>
+			<costList>
+				<Steel>100</Steel>
+				<Plasteel>30</Plasteel>
+				<Gold>5</Gold>
+				<ComponentSpacer>2</ComponentSpacer>
+			</costList>
+			<comps Inherit="False">
+				<li Class="CompProperties_Glower">
+					<glowRadius>3</glowRadius>
+					<glowColor>(0, 50, 255, 0)</glowColor>
+				</li>
+			</comps>
+		</ThingDef>
+	
+-->
 
 	<!-- Riwitch 底座主机（Rimtendo 产品线：手持 Riwitch → 客厅底座形态；贴图风格与 Game Night 获授权素材一致） -->
 	<ThingDef ParentName="Building_ConsoleBase">
@@ -465,10 +473,10 @@
 
 		<baseChance>3</baseChance>
 		<thingDefs>
-			<li>Building_Macrosoft_360Console</li>
+<!--			<li>Building_Macrosoft_360Console</li>-->
 			<li>Building_Macrosoft_SeriesX</li>
 			<li>Building_RONY_Station</li>
-			<li>Building_RONY_StationPro</li>
+<!--			<li>Building_RONY_StationPro</li>-->
 			<li>Building_Rimtendo_Dock</li>
 		</thingDefs>
 		<jobDef>Play_GamingDexterity</jobDef>
