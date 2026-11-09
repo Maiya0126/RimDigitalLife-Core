@@ -264,6 +264,11 @@
 				<glowRadius>2</glowRadius>
 				<glowColor>(0, 255, 0, 0)</glowColor>
 			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>200</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
+			</li>
 		</comps>
 		<modExtensions>
 			<li Class="RimDigitalLife.ConsoleControllerExtension">
@@ -314,6 +319,11 @@
 			<li Class="CompProperties_Glower">
 				<glowRadius>2</glowRadius>
 				<glowColor>(0, 100, 255, 0)</glowColor>
+			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>180</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
 			</li>
 		</comps>
 		<modExtensions>
@@ -421,6 +431,11 @@
 		<comps>
 			<li Class="RimDigitalLife.CompProperties_ConsoleControllers">
 				<platform>Switch</platform>
+			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>70</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
 			</li>
 		</comps>
 		<modExtensions>
