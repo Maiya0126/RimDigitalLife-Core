@@ -179,11 +179,6 @@
 			<li>MicroelectronicsBasics</li>
 		</researchPrerequisites>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<basePowerConsumption>150</basePowerConsumption>
-				<shortCircuitInRain>true</shortCircuitInRain>
-			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="RimDigitalLife.CompProperties_WatchDriver"/>
 		</comps>
